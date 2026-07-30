@@ -18,7 +18,7 @@ on:
   workflow_dispatch: {}    # permite rodar manualmente pela aba Actions
 
 env:
-  DOCS_SECTION: "content/github-cli/github-cli"
+  DOCS_SECTION: "content"
   DOCS_OUTPUT: "./github-docs"
 
 jobs:
