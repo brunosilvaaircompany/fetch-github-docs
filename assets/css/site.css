@@ -28,6 +28,7 @@ body {
   border-bottom: 1px solid var(--kb-border);
   background: rgba(13, 17, 23, 0.85);
   backdrop-filter: blur(12px);
+  gap: 20px;
 }
 
 .kb-logo {
