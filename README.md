@@ -1,6 +1,6 @@
 # copilot-knowledge-base
 
-Kit completo para times que treinam e usam **GitHub Copilot**: sincroniza automaticamente a documentação oficial do GitHub como Markdown limpo (pronto para o Copilot Spaces ou NotebookLM) e oferece templates prontos para criar treinamentos de 1 hora com slides e hands-on.
+Kit completo para times que treinam e usam **GitHub Copilot**: sincroniza automaticamente a documentação oficial do GitHub como Markdown limpo (pronto para o Copilot Spaces) e oferece templates prontos para criar treinamentos de 1 hora com slides e hands-on.
 
 🔗 **[Ver galeria de slides →](https://brunosilvaaircompany.github.io/copilot-knowledge-base/)**
 
