@@ -1,7 +1,7 @@
 # Copie este arquivo para dentro do seu proprio repositorio no caminho:
 #   .github/workflows/fetch-docs.yml
 #
-# Ele roda o script toda segunda-feira e faz commit automatico se a
+# Ele roda o script diariamente e faz commit automatico se a
 # secao escolhida da documentacao mudar no repositorio github/docs.
 # Assim, o repositorio que voce linkar no Copilot Spaces fica sempre
 # atualizado sem voce precisar rodar nada manualmente.
@@ -14,7 +14,7 @@ name: Atualizar documentacao do GitHub
 
 on:
   schedule:
-    - cron: "0 6 * * 1"  # toda segunda-feira as 06:00 UTC
+    - cron: "0 6 * * *"  # todo dia as 06:00 UTC
   workflow_dispatch: {}    # permite rodar manualmente pela aba Actions
 
 env:

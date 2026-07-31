@@ -32,7 +32,7 @@ slides/
 └── images/                     # Imagens dos slides
 
 .github/workflows/
-├── fetch-docs.yml              # Roda toda segunda-feira e sincroniza a doc
+├── fetch-docs.yml              # Roda diariamente e sincroniza a doc
 └── check-slides-freshness.yml  # Detecta slides desatualizados
 
 github-docs/                    # Markdown limpo gerado pelo kb_sync.py
@@ -100,9 +100,9 @@ python3 scripts/kb_sync.py --section content/webhooks,content/rest/webhooks
 
 > Se a API do GitHub atingir o rate limit, o script cai automaticamente para o tarball completo — nunca falha silenciosamente.
 
-### Automação semanal
+### Automação diária
 
-Copie `.github/workflows/fetch-docs.yml` para o seu repositório, ajuste a variável `DOCS_SECTION` e pronto: toda segunda-feira o workflow baixa a versão mais recente da documentação e faz commit se algo mudou. O link no Copilot Spaces fica sempre atualizado sem intervenção manual.
+Copie `.github/workflows/fetch-docs.yml` para o seu repositório, ajuste a variável `DOCS_SECTION` e pronto: diariamente o workflow baixa a versão mais recente da documentação e faz commit se algo mudou. O link no Copilot Spaces fica sempre atualizado sem intervenção manual.
 
 ### Limitações
 
