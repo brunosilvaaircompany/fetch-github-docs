@@ -135,17 +135,6 @@ body {
   color: var(--kb-amber);
 }
 
-.card-cta {
-  margin-left: auto;
-  color: var(--kb-accent);
-  font-weight: 600;
-  white-space: nowrap;
-}
-
-.card-cta-with-actions {
-  margin-left: 0;
-}
-
 .card-actions {
   margin-left: auto;
   display: inline-flex;

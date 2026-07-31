@@ -81,7 +81,6 @@
           <span class="tag green">60 min</span>
           <span class="tag">Reveal.js</span>
           <span class="tag">CLI</span>
-          <span class="card-cta">Abrir →</span>
         </div>
       </a>
 
@@ -100,7 +99,6 @@
         <div class="card-meta d-flex flex-items-center flex-wrap gap-2 pt-2">
           <span class="tag amber">Template</span>
           <span class="tag">Reveal.js</span>
-          <span class="card-cta">Ver template →</span>
         </div>
       </a>
 
@@ -185,14 +183,8 @@
          meta.appendChild(tag);
        });
 
-       const cta = document.createElement('span');
-       cta.className = 'card-cta';
-       cta.textContent = 'Abrir →';
-       meta.appendChild(cta);
-
        const deckId = String(deck.id || '');
        if (deckId.indexOf('path:') !== 0) {
-         cta.classList.add('card-cta-with-actions');
          const actionsWrap = document.createElement('span');
          actionsWrap.className = 'card-actions';
 
