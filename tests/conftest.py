@@ -28,3 +28,8 @@ def kb_sync_module():
 @pytest.fixture(scope="session")
 def freshness_module():
     return _load_script_module("check_slides_freshness.py", "freshness_test_module")
+
+
+@pytest.fixture(scope="session")
+def changelog_module():
+    return _load_script_module("fetch_changelog.py", "fetch_changelog_test_module")

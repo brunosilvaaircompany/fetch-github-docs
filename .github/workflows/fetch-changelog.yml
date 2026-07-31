@@ -6,7 +6,7 @@ on:
   workflow_dispatch: {}    # permite rodar manualmente pela aba Actions
 
 env:
-  CHANGELOG_OUTPUT: "./github-changelog/changelog.md"
+  CHANGELOG_OUTPUT: "./github-changelog"
 
 jobs:
   fetch:
@@ -31,7 +31,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add "$CHANGELOG_OUTPUT"
+          git add "$CHANGELOG_OUTPUT"/
           if git diff --staged --quiet; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
           else
@@ -44,23 +44,18 @@ jobs:
         id: extract
         if: steps.commit.outputs.changed == 'true'
         run: |
-          python3 - <<'PY'
-          import os, re
+          if [ -f "$CHANGELOG_OUTPUT/_index.md" ]; then
+            summary="$(head -n 30 "$CHANGELOG_OUTPUT/_index.md")"
+          else
+            summary="Sem novidades."
+          fi
 
-          with open(os.environ["CHANGELOG_OUTPUT"], encoding="utf-8") as f:
-              content = f.read()
-
-          # Extrai as primeiras 5 entradas do changelog (cada uma comeca com "## [")
-          entries = re.split(r'\n(?=## \[)', content)
-          # Descarta o cabecalho (primeira parte antes da primeira entrada)
-          body_entries = [e for e in entries if e.startswith("## [")][:5]
-          summary = "\n\n---\n\n".join(body_entries) or "Sem novidades."
-
-          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as f:
-              # GitHub Actions nao suporta multiline diretamente: usar delimitador
-              delimiter = "EOF_CHANGELOG"
-              f.write(f"summary<<{delimiter}\n{summary}\n{delimiter}\n")
-          PY
+          delimiter="EOF_CHANGELOG"
+          {
+            echo "summary<<$delimiter"
+            echo "$summary"
+            echo "$delimiter"
+          } >> "$GITHUB_OUTPUT"
 
       # Requer os secrets: MAIL_USERNAME, MAIL_PASSWORD, MAIL_TO
       # Configure em: Settings > Secrets and variables > Actions
@@ -84,8 +79,8 @@ jobs:
             ${{ steps.extract.outputs.summary }}
 
             ---
-            Veja o arquivo completo:
-            https://github.com/${{ github.repository }}/blob/main/github-changelog/changelog.md
+            Veja o indice por tema:
+            https://github.com/${{ github.repository }}/blob/main/github-changelog/_index.md
 
             Fonte: https://github.blog/changelog/
 
