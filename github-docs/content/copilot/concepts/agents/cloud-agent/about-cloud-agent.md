@@ -135,7 +135,6 @@ Copilot cloud agent has certain limitations in its software development workflow
 ### Limitations in Copilot cloud agent's compatibility with other features
 
 * **Copilot isn't able to comply with certain rules that may be configured for your repository**. If you have configured a ruleset or branch protection rule that isn't compatible with Copilot cloud agent, access to the agent will be blocked. For example, a rule that only allows specific commit authors can prevent Copilot cloud agent from creating or updating pull requests. If the rule is configured using rulesets, you can add Copilot as a bypass actor to enable access. See [Creating Rulesets For A Repository](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/creating-rulesets-for-a-repository#granting-bypass-permissions-for-your-branch-or-tag-ruleset).
-* **Copilot cloud agent doesn't account for content exclusions**. Content exclusions allow administrators to configure Copilot to ignore certain files. When using Copilot cloud agent, Copilot will not ignore these files, and will be able to see and update them. See [Exclude Content From Copilot](https://docs.github.com/en/copilot/how-tos/configure-content-exclusion/exclude-content-from-copilot).
 * **Copilot cloud agent only works with repositories hosted on GitHub**. If your repository is stored using a different code hosting platform, Copilot won't be able to work on it.
 
 ## Hands-on practice

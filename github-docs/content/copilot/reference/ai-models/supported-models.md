@@ -18,7 +18,7 @@ This table lists the AI models available in Copilot, along with their release st
 | Model name                                             | Provider  | Release status             |
 |--------------------------------------------------------|-----------|----------------------------|
 | {% for model in tables.copilot.model-release-status %} |
-| {{ model.name }}{% if model.name == 'GPT-5.4 nano' %}[^gpt54nano]{% endif %}{% if model.name == 'MAI-Code-1-Flash' %}[^mai-code-1-flash]{% endif %}{% if model.name == 'Claude Fable 5' %}[^claude-fable-5]{% endif %}| {{ model.provider }} | {{ model.release_status }} |
+| {{ model.name }}{% if model.name == 'GPT-5.4 nano' %}[^gpt54nano]{% if model.name == 'MAI-Code-1-Flash' %}[^mai-code-1-flash]{% if model.name == 'Claude Fable 5' %}[^claude-fable-5]| {{ model.provider }} | {{ model.release_status }} |
 | {% endfor %}                                           |
 
 {% endrowheaders %}
@@ -34,7 +34,7 @@ This table lists the supported AI models for Auto model selection. Available mod
 | Model | Copilot cloud agent | Copilot Chat | Copilot CLI | GitHub Copilot app |
 | --- | --- | --- | --- | --- |
 | {% for model in tables.copilot.auto-model-selection %} |
-| {{ model.name }} | {% if model.cloud_agent == true %}{% octicon "check" aria-label="Included" %}{% else %}{% octicon "x" aria-label="Not included" %}{% endif %} | {% if model.chat == true %}{% octicon "check" aria-label="Included" %}{% else %}{% octicon "x" aria-label="Not included" %}{% endif %} | {% if model.cli == true %}{% octicon "check" aria-label="Included" %}{% else %}{% octicon "x" aria-label="Not included" %}{% endif %} | {% if model.app == true %}{% octicon "check" aria-label="Included" %}{% else %}{% octicon "x" aria-label="Not included" %}{% endif %} |
+| {{ model.name }} | {% if model.cloud_agent == true %}{% octicon "check" aria-label="Included" %}{% octicon "x" aria-label="Not included" %} | {% if model.chat == true %}{% octicon "check" aria-label="Included" %}{% octicon "x" aria-label="Not included" %} | {% if model.cli == true %}{% octicon "check" aria-label="Included" %}{% octicon "x" aria-label="Not included" %} | {% if model.app == true %}{% octicon "check" aria-label="Included" %}{% octicon "x" aria-label="Not included" %} |
 | {% endfor %} |
 
 {% endrowheaders %}
@@ -97,7 +97,7 @@ The following table shows which models are available in each client.
 | Model | GitHub.com | Copilot CLI | Visual Studio Code | Visual Studio | Eclipse | Xcode | JetBrains IDEs |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | {% for model in tables.copilot.model-supported-clients %} |
-| {{ model.name }}{% if model.name == 'GPT-5.4 nano' %}[^gpt54nano]{% endif %} | {% if model.dotcom == true %}{% octicon "check" aria-label="Included" %}{% else %}{% octicon "x" aria-label="Not included" %}{% endif %} | {% if model.cli == true %}{% octicon "check" aria-label="Included" %}{% else %}{% octicon "x" aria-label="Not included" %}{% endif %} | {% if model.vscode == true %}{% octicon "check" aria-label="Included" %}{% else %}{% octicon "x" aria-label="Not included" %}{% endif %} | {% if model.vs == true %}{% octicon "check" aria-label="Included" %}{% else %}{% octicon "x" aria-label="Not included" %}{% endif %} | {% if model.eclipse == true %}{% octicon "check" aria-label="Included" %}{% else %}{% octicon "x" aria-label="Not included" %}{% endif %} | {% if model.xcode == true %}{% octicon "check" aria-label="Included" %}{% else %}{% octicon "x" aria-label="Not included" %}{% endif %} | {% if model.jetbrains == true %}{% octicon "check" aria-label="Included" %}{% else %}{% octicon "x" aria-label="Not included" %}{% endif %} |
+| {{ model.name }}{% if model.name == 'GPT-5.4 nano' %}[^gpt54nano] | {% if model.dotcom == true %}{% octicon "check" aria-label="Included" %}{% octicon "x" aria-label="Not included" %} | {% if model.cli == true %}{% octicon "check" aria-label="Included" %}{% octicon "x" aria-label="Not included" %} | {% if model.vscode == true %}{% octicon "check" aria-label="Included" %}{% octicon "x" aria-label="Not included" %} | {% if model.vs == true %}{% octicon "check" aria-label="Included" %}{% octicon "x" aria-label="Not included" %} | {% if model.eclipse == true %}{% octicon "check" aria-label="Included" %}{% octicon "x" aria-label="Not included" %} | {% if model.xcode == true %}{% octicon "check" aria-label="Included" %}{% octicon "x" aria-label="Not included" %} | {% if model.jetbrains == true %}{% octicon "check" aria-label="Included" %}{% octicon "x" aria-label="Not included" %} |
 | {% endfor %} |
 
 {% endrowheaders %}
@@ -152,7 +152,7 @@ The following table shows which AI models are available in each Copilot plan. Fo
 | Available models                               | Copilot Pro  | Copilot Pro+ | Copilot Max | Copilot Business | Copilot Enterprise |
 |---------------------------------------------------------|-------------------------------------------------|-----------------------------------------------------|------------------------------------------------|-----------------------------------------------------|-------------------------------------------------------|
 | {% for model in tables.copilot.model-supported-plans %} |
-| {{ model.name }}{% if model.name == 'GPT-5.4 nano' %}[^gpt54nano]{% endif %}{% if model.name == 'Claude Fable 5' %}[^claude-fable-5]{% endif %} | {% if model.pro == true %}{% octicon "check" aria-label="Included" %}{% else %}{% octicon "x" aria-label="Not included" %}{% endif %} | {% if model.pro_plus == true %}{% octicon "check" aria-label="Included" %}{% else %}{% octicon "x" aria-label="Not included" %}{% endif %} | {% if model.max == true %}{% octicon "check" aria-label="Included" %}{% else %}{% octicon "x" aria-label="Not included" %}{% endif %} | {% if model.business == true %}{% octicon "check" aria-label="Included" %}{% else %}{% octicon "x" aria-label="Not included" %}{% endif %} | {% if model.enterprise == true %}{% octicon "check" aria-label="Included" %}{% else %}{% octicon "x" aria-label="Not included" %}{% endif %} |
+| {{ model.name }}{% if model.name == 'GPT-5.4 nano' %}[^gpt54nano]{% if model.name == 'Claude Fable 5' %}[^claude-fable-5] | {% if model.pro == true %}{% octicon "check" aria-label="Included" %}{% octicon "x" aria-label="Not included" %} | {% if model.pro_plus == true %}{% octicon "check" aria-label="Included" %}{% octicon "x" aria-label="Not included" %} | {% if model.max == true %}{% octicon "check" aria-label="Included" %}{% octicon "x" aria-label="Not included" %} | {% if model.business == true %}{% octicon "check" aria-label="Included" %}{% octicon "x" aria-label="Not included" %} | {% if model.enterprise == true %}{% octicon "check" aria-label="Included" %}{% octicon "x" aria-label="Not included" %} |
 | {% endfor %}                                            |
 
 {% endrowheaders %}

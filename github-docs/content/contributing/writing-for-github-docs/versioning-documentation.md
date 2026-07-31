@@ -95,7 +95,7 @@ versions:
 
 ## Versioning with Liquid conditional operators
 
-We use the [Liquid template language](https://shopify.github.io/liquid/basics/introduction/) (specifically, [this Node.js port](https://github.com/harttle/liquidjs)) and a custom `{% raw %}{% ifversion ... %}{% endraw %}` tag to create versions of our documentation.
+We use the [Liquid template language](https://shopify.github.io/liquid/basics/introduction/) (specifically, [this Node.js port](https://github.com/harttle/liquidjs)) and a custom `{% raw %}{% endraw %}` tag to create versions of our documentation.
 
 If you define multiple products in the `versions` key within a page's YAML frontmatter, you can use the conditional operators `ifversion`/`else` (or `ifversion`/`elsif`/`else`) in the Markdown to control how the site renders content on the page for a particular product. For example, a feature may have more options on GitHub.com than on GitHub Enterprise Server, so you can version the content appropriately via the `versions` frontmatter, and use Liquid conditionals to describe the additional options for GitHub.com.
 
@@ -108,22 +108,22 @@ If you define multiple products in the `versions` key within a page's YAML front
 
 For versions that don't have numbered releases (like `fpt` and `ghec`), you have two options:
 
-* `{% raw %}{% ifversion ghec %}{% endraw %}`
-* `{% raw %}{% ifversion not ghec %}{% endraw %}`
+* `{% raw %}{% endraw %}`
+* `{% raw %}{% endraw %}`
 
 For versions that have numbered releases (currently only `ghes`), you can do the same for content that is either available in all of the releases or not available in any of the releases:
 
-* `{% raw %}{% ifversion ghes %}{% endraw %}`
-* `{% raw %}{% ifversion not ghes %}{% endraw %}`
+* `{% raw %}{% endraw %}`
+* `{% raw %}{% endraw %}`
 
 If you need to denote content that is only available (or not available) in certain releases, you can use the following operators:
 
 |Operator | Meaning| Example
 |--|--|--|
-|`=`| Equal to| `{% raw %}{% ifversion ghes = 3.0 %}{% endraw %}`
-|`>`| Newer than| `{% raw %}{% ifversion ghes > 3.0 %}{% endraw %}`
-|`<`| Older than| `{% raw %}{% ifversion ghes < 3.0 %}{% endraw %}`
-|`!=`| Not equal to| `{% raw %}{% ifversion ghes != 3.0 %}{% endraw %}` (don't use `not` in ranges)
+|`=`| Equal to| `{% raw %}{% endraw %}`
+|`>`| Newer than| `{% raw %}{% endraw %}`
+|`<`| Older than| `{% raw %}{% endraw %}`
+|`!=`| Not equal to| `{% raw %}{% endraw %}` (don't use `not` in ranges)
 
 The Liquid operators `==`, `>=`, and `<=` are not supported in the GitHub Docs.
 
@@ -201,7 +201,7 @@ The format and allowed values are the same as the frontmatter versions property.
 
 ### Liquid conditionals
 
-Now you can use `{% raw %}{% ifversion meow %} ... {% endif %}{% endraw %}` in content files!
+Now you can use `{% raw %} ... {% endraw %}` in content files!
 
 ### Frontmatter
 
@@ -248,19 +248,15 @@ Use versioning syntax within a sentence or paragraph to differentiate prose for 
 
 * Do use versioning syntax inline within paragraphs to avoid repeating sentences or entire paragraphs.
 
-  > You can do {% raw %}{% ifversion fpt %}something{% elsif ghec %}something else{% endif %}{% endraw %}.
+  > You can do {% raw %}something{% endraw %}.
 
 * Do use your judgment: for prose that would be complicated to write or read without lots of versioning syntax within a sentence or paragraph, consider repeating the entire paragraph in a version block for each relevant product.
 
-  > {% raw %}{% ifversion fpt %}
+  > {% raw %}
   >
   > If you use a Free, Pro, or Team plan, you can do something. Here's more information about the things you can do with a Free, Pro, or Team plan...
   >
-  > {% elsif ghec %}
-  >
-  > If you use GitHub Enterprise Cloud, you can do something else. Here's more information about the things you can do with GitHub Enterprise Cloud...
-  >
-  > {% endif %}{% endraw %}
+  > {% endraw %}
 
 ### Be explicit, not implicit
 

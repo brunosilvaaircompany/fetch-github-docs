@@ -683,8 +683,8 @@ Once your integration is updated, test your integration to verify that it works 
 
 Version `2022-11-28` is the first version of the GitHub Free, Pro & Team REST API after date-based versioning was introduced. This version does not include any breaking changes.
 
-{% endif %}
-{% endif %}
+
+
 
 
 {% if query.apiVersion == nil or "2026-03-10" <= query.apiVersion %}
@@ -1342,8 +1342,8 @@ Version `2022-11-28` is the first version of the GitHub Free, Pro & Team REST AP
 
 Version `2022-11-28` is the first version of the GitHub Enterprise Cloud REST API after date-based versioning was introduced. This version does not include any breaking changes.
 
-{% endif %}
-{% endif %}
+
+
 
 
 {% if query.apiVersion == nil or "2026-03-10" <= query.apiVersion %}
@@ -2014,6 +2014,3 @@ Version `2022-11-28` is the first version of the GitHub Enterprise Cloud REST AP
   - `POST /users/{username}/attestations/bulk-list`
 
   </details>
-
-
-{% endif %}

@@ -33,6 +33,8 @@ Once an index has been created for a repository, it can be used by:
 
 Copilot in Visual Studio Code can use semantic indexing for workspace files from repositories hosted outside GitHub, such as GitLab and local repositories. This feature uploads your data to GitHub to make it searchable.
 
+> [!NOTE] This feature is only available on GitHub.com. It is not available on GitHub Enterprise Server.
+
 This feature is controlled by policy and is disabled by default. For organizations and enterprises with Copilot Business or Copilot Enterprise, an enterprise owner or organization owner must explicitly set the `Semantic indexing for non-GitHub repositories` policy to **Enabled** before members can use it. If the policy remains **Unconfigured**, the feature stays unavailable. See:
 
 * [Manage Enterprise Policies](https://docs.github.com/en/copilot/how-tos/administer-copilot/manage-for-enterprise/manage-enterprise-policies)

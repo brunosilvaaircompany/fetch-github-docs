@@ -2,11 +2,12 @@
 
 With enterprise managed settings, enterprise owners can centrally define and distribute configuration settings to supported clients for users on your enterprise's Copilot plan, ensuring every member works within the same guardrails.
 
-Supported clients are:
+The following clients are supported, although not every client supports every property:
 
 * Copilot CLI
 * VS Code
 * The GitHub Copilot app
+* Copilot cloud agent
 
 These settings apply enterprise-wide, with no organization-level override. For each supported key, the `managed-settings.json` value takes precedence over any file-based configuration a user sets in their client.
 
@@ -20,9 +21,9 @@ For detailed information on the available properties and syntax, see [Enterprise
 
 There are multiple ways to deploy enterprise managed settings. Use the following guidelines to choose the right method for you. For any method, pilot on a small device group before broad deployment.
 
-* **Server-managed**: Default for most enterprises and best for review workflows and audit history
-* **MDM-managed**: Best when IT teams need device-group targeting through existing MDM tooling on macOS and Windows
-* **File-based**: Available on all platforms, and useful when server-managed and MDM-managed deployment are not available, including developer environments such as containers and Codespaces
+* **Server-managed**: Default for most enterprises and best for review workflows and audit history. Applies to all clients, including Copilot cloud agent.
+* **MDM-managed**: Best when IT teams need device-group targeting through existing MDM tooling on macOS and Windows. Local clients only.
+* **File-based**: Available on all platforms, and useful when server-managed and MDM-managed deployment are not available, including developer environments such as containers and Codespaces. Local clients only.
 
 There are additional considerations if you use a dedicated enterprise for Copilot Business. See [Guidance for dedicated Copilot Business enterprises](#guidance-for-dedicated-copilot-business-enterprises).
 

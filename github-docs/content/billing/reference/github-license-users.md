@@ -36,7 +36,7 @@ GitHub bills for each of the following accounts on GitHub Enterprise Cloud:
   * GitHub counts each outside collaborator once, even if the user account has access to multiple repositories in your organization.
 * Dormant users who are a member or owner of at least one organization in the enterprise
 
-If your enterprise does not use Enterprise Managed Users, you will also be billed for each of the following accounts:
+If your enterprise does not use Enterprise Managed Users or usage-based billing, you will also be billed for each of the following accounts. Under usage-based billing, pending invitations do not consume a license. See [Usage Based Licenses](https://docs.github.com/en/billing/concepts/enterprise-billing/usage-based-licenses).
 
 * Anyone with a pending invitation to become an organization owner or member
   * If the invited user already consumes an enterprise license, a pending organization invitation won't use an additional license—as long as the invitation is sent to their GitHub username or a verified email address on their account. 

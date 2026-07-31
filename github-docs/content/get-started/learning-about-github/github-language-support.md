@@ -19,26 +19,26 @@ Some features are supported for additional languages or package managers. If you
 ## Core languages supported in GitHub.com and GitHub Enterprise Cloud
 
 | Language{%- for featureEntry in tables.supported-code-languages.features %}{%- assign featureKey = featureEntry[0] %}{%- assign featureData = featureEntry[1] %}{%- if featureData.fptAndGhec %} | [{{ featureData.name }}]({{ featureData.link }}){%- endfor %} |
-|:----{%- for featureEntry in tables.supported-code-languages.features %}{%- assign featureData = featureEntry[1] %}{%- if featureData.fptAndGhec %}|:----:{%- endif %}{%- endfor %}|
+|:----{%- for featureEntry in tables.supported-code-languages.features %}{%- assign featureData = featureEntry[1] %}{%- if featureData.fptAndGhec %}|:----:{%- endfor %}|
 {%- for languageEntry in tables.supported-code-languages.languages %}
 {%- assign language = languageEntry[0] %}
 {%- assign languageData = languageEntry[1] %}
-| {{ language }}{%- for featureEntry in tables.supported-code-languages.features -%}{%- assign featureKey = featureEntry[0] -%}{%- assign featureData = featureEntry[1] -%}{%- if featureData.fptAndGhec -%}{%- assign supportLevel = languageData[featureKey] %} | {%- case supportLevel -%}{%- when "supported" %}✓{%- when "not-supported" %}✗{%- else %}{{ supportLevel }}{%- endcase -%}{%- endif -%}{%- endfor %} |
+| {{ language }}{%- for featureEntry in tables.supported-code-languages.features -%}{%- assign featureKey = featureEntry[0] -%}{%- assign featureData = featureEntry[1] -%}{%- if featureData.fptAndGhec -%}{%- assign supportLevel = languageData[featureKey] %} | {%- case supportLevel -%}{%- when "supported" %}✓{%- when "not-supported" %}✗{{ supportLevel }}{%- endcase -%}{%- endfor %} |
 {%- endfor %}
-{% endif %}
+
 
 
 
 ## Core languages supported in GitHub Enterprise Server
 
 | Language{%- for featureEntry in tables.supported-code-languages.features %}{%- assign featureKey = featureEntry[0] %}{%- assign featureData = featureEntry[1] %}{%- if featureData.ghes %} | [{{ featureData.name }}]({{ featureData.link }}){%- endfor %} |
-|:----{%- for featureEntry in tables.supported-code-languages.features %}{%- assign featureData = featureEntry[1] %}{%- if featureData.ghes %}|:----:{%- endif %}{%- endfor %}|
+|:----{%- for featureEntry in tables.supported-code-languages.features %}{%- assign featureData = featureEntry[1] %}{%- if featureData.ghes %}|:----:{%- endfor %}|
 {%- for languageEntry in tables.supported-code-languages.languages %}
 {%- assign language = languageEntry[0] %}
 {%- assign languageData = languageEntry[1] %}
-| {{ language }}{%- for featureEntry in tables.supported-code-languages.features -%}{%- assign featureKey = featureEntry[0] -%}{%- assign featureData = featureEntry[1] -%}{%- if featureData.ghes -%}{%- assign supportLevel = languageData[featureKey] %} | {%- case supportLevel -%}{%- when "supported" %}✓{%- when "not-supported" %}✗{%- else %}{{ supportLevel }}{%- endcase -%}{%- endif -%}{%- endfor %} |
+| {{ language }}{%- for featureEntry in tables.supported-code-languages.features -%}{%- assign featureKey = featureEntry[0] -%}{%- assign featureData = featureEntry[1] -%}{%- if featureData.ghes -%}{%- assign supportLevel = languageData[featureKey] %} | {%- case supportLevel -%}{%- when "supported" %}✓{%- when "not-supported" %}✗{{ supportLevel }}{%- endcase -%}{%- endfor %} |
 {%- endfor %}
-{% endif %}
+
 
 > [!NOTE]
 > The language support for GitHub Copilot varies depending on the volume and diversity of training data for that language.

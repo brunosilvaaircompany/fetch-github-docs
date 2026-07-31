@@ -33,7 +33,7 @@ Example row: | Agent mode | ✓ | ✓ | P | ✗ | ... |
 | Feature{%- for entry in tables.copilot.copilot-matrix.ides %} | {{ entry[0] }}{%- endfor %} |
 |:----{%- for entry in tables.copilot.copilot-matrix.ides %}|:----:{%- endfor %}|
 {%- for featureEntry in tables.copilot.copilot-matrix.ides["VS Code"].features %}
-| {{ featureEntry[0] }}{%- for ideEntry in tables.copilot.copilot-matrix.ides %}{%- assign latestVersion = ideEntry[1].versions | first %}{%- assign supportLevel = ideEntry[1].features[featureEntry[0]][latestVersion] %} | {%- case supportLevel -%}{%- when "supported" %}✓{%- when "preview" %}P{%- when "closing-down" %}C{%- else %}✗{%- endcase -%}{%- endfor %} |
+| {{ featureEntry[0] }}{%- for ideEntry in tables.copilot.copilot-matrix.ides %}{%- assign latestVersion = ideEntry[1].versions | first %}{%- assign supportLevel = ideEntry[1].features[featureEntry[0]][latestVersion] %} | {%- case supportLevel -%}{%- when "supported" %}✓{%- when "preview" %}P{%- when "closing-down" %}C✗{%- endcase -%}{%- endfor %} |
 {%- endfor %}
 
 {% endides %}
@@ -56,7 +56,7 @@ The following table shows supported Copilot features across recent versions of t
 | Feature{%- for version in groupVersions %} | {{ version }}{%- endfor %} |
 |:----{%- for version in groupVersions %}|:----:{%- endfor %}|
 {%- for featureEntry in ideEntry.features %}
-| {{ featureEntry[0] }}{%- for version in groupVersions %}{%- assign supportLevel = featureEntry[1][version] %} | {%- case supportLevel -%}{%- when "supported" %}✓{%- when "preview" %}P{%- when "closing-down" %}C{%- else %}✗{%- endcase -%}{%- endfor %} |
+| {{ featureEntry[0] }}{%- for version in groupVersions %}{%- assign supportLevel = featureEntry[1][version] %} | {%- case supportLevel -%}{%- when "supported" %}✓{%- when "preview" %}P{%- when "closing-down" %}C✗{%- endcase -%}{%- endfor %} |
 {%- endfor %}
 
 {% endfor %}
@@ -81,7 +81,7 @@ The following table shows supported Copilot features across recent versions of t
 | Feature{%- for version in groupVersions %} | {{ version }}{%- endfor %} |
 |:----{%- for version in groupVersions %}|:----:{%- endfor %}|
 {%- for featureEntry in ideEntry.features %}
-| {{ featureEntry[0] }}{%- for version in groupVersions %}{%- assign supportLevel = featureEntry[1][version] %} | {%- case supportLevel -%}{%- when "supported" %}✓{%- when "preview" %}P{%- when "closing-down" %}C{%- else %}✗{%- endcase -%}{%- endfor %} |
+| {{ featureEntry[0] }}{%- for version in groupVersions %}{%- assign supportLevel = featureEntry[1][version] %} | {%- case supportLevel -%}{%- when "supported" %}✓{%- when "preview" %}P{%- when "closing-down" %}C✗{%- endcase -%}{%- endfor %} |
 {%- endfor %}
 
 {% endfor %}
@@ -106,7 +106,7 @@ The following table shows supported Copilot features across recent versions of t
 | Feature{%- for version in groupVersions %} | {{ version }}{%- endfor %} |
 |:----{%- for version in groupVersions %}|:----:{%- endfor %}|
 {%- for featureEntry in ideEntry.features %}
-| {{ featureEntry[0] }}{%- for version in groupVersions %}{%- assign supportLevel = featureEntry[1][version] %} | {%- case supportLevel -%}{%- when "supported" %}✓{%- when "preview" %}P{%- when "closing-down" %}C{%- else %}✗{%- endcase -%}{%- endfor %} |
+| {{ featureEntry[0] }}{%- for version in groupVersions %}{%- assign supportLevel = featureEntry[1][version] %} | {%- case supportLevel -%}{%- when "supported" %}✓{%- when "preview" %}P{%- when "closing-down" %}C✗{%- endcase -%}{%- endfor %} |
 {%- endfor %}
 
 {% endfor %}
@@ -131,7 +131,7 @@ The following table shows supported Copilot features across recent versions of t
 | Feature{%- for version in groupVersions %} | {{ version }}{%- endfor %} |
 |:----{%- for version in groupVersions %}|:----:{%- endfor %}|
 {%- for featureEntry in ideEntry.features %}
-| {{ featureEntry[0] }}{%- for version in groupVersions %}{%- assign supportLevel = featureEntry[1][version] %} | {%- case supportLevel -%}{%- when "supported" %}✓{%- when "preview" %}P{%- when "closing-down" %}C{%- else %}✗{%- endcase -%}{%- endfor %} |
+| {{ featureEntry[0] }}{%- for version in groupVersions %}{%- assign supportLevel = featureEntry[1][version] %} | {%- case supportLevel -%}{%- when "supported" %}✓{%- when "preview" %}P{%- when "closing-down" %}C✗{%- endcase -%}{%- endfor %} |
 {%- endfor %}
 
 {% endfor %}
@@ -156,7 +156,7 @@ The following table shows supported Copilot features across recent versions of t
 | Feature{%- for version in groupVersions %} | {{ version }}{%- endfor %} |
 |:----{%- for version in groupVersions %}|:----:{%- endfor %}|
 {%- for featureEntry in ideEntry.features %}
-| {{ featureEntry[0] }}{%- for version in groupVersions %}{%- assign supportLevel = featureEntry[1][version] %} | {%- case supportLevel -%}{%- when "supported" %}✓{%- when "preview" %}P{%- when "closing-down" %}C{%- else %}✗{%- endcase -%}{%- endfor %} |
+| {{ featureEntry[0] }}{%- for version in groupVersions %}{%- assign supportLevel = featureEntry[1][version] %} | {%- case supportLevel -%}{%- when "supported" %}✓{%- when "preview" %}P{%- when "closing-down" %}C✗{%- endcase -%}{%- endfor %} |
 {%- endfor %}
 
 {% endfor %}
@@ -181,7 +181,7 @@ The following table shows supported Copilot features across recent versions of t
 | Feature{%- for version in groupVersions %} | {{ version }}{%- endfor %} |
 |:----{%- for version in groupVersions %}|:----:{%- endfor %}|
 {%- for featureEntry in ideEntry.features %}
-| {{ featureEntry[0] }}{%- for version in groupVersions %}{%- assign supportLevel = featureEntry[1][version] %} | {%- case supportLevel -%}{%- when "supported" %}✓{%- when "preview" %}P{%- when "closing-down" %}C{%- else %}✗{%- endcase -%}{%- endfor %} |
+| {{ featureEntry[0] }}{%- for version in groupVersions %}{%- assign supportLevel = featureEntry[1][version] %} | {%- case supportLevel -%}{%- when "supported" %}✓{%- when "preview" %}P{%- when "closing-down" %}C✗{%- endcase -%}{%- endfor %} |
 {%- endfor %}
 
 {% endfor %}

@@ -19,7 +19,6 @@ Some questions to ask are:
 
 The following Copilot policies don't apply to Copilot cloud agent:
 
-* Content exclusions
 * Custom models (providing your own LLM API keys)
 * Private MCP registries
 

@@ -2107,5 +2107,3 @@ This utility validates the OpenTelemetry Collector configuration file on {% data
 ```shell
 ghe-otelcol-validate
 ```
-
-{% endif %}

@@ -28,7 +28,7 @@ All prices are **per 1 million tokens**.
 | --- | --- | --- | --- | --- | ---: | ---: | ---: |
 | {% for entry in tables.copilot.models-and-pricing %}{% if entry.provider == "openai" %} |
 | {{ entry.model }} | {{ entry.release_status }} | {{ entry.category }} | {{ entry.tier }} | {{ entry.threshold }} | {{ entry.input }} | {{ entry.cached_input }} | {{ entry.output }} |
-| {% endif %}{% endfor %} |
+| {% endfor %} |
 
 ### Anthropic
 
@@ -38,7 +38,7 @@ Anthropic models include a cache write cost in addition to cached input.
 | --- | --- | --- | ---: | ---: | ---: | ---: |
 | {% for entry in tables.copilot.models-and-pricing %}{% if entry.provider == "anthropic" %} |
 | {{ entry.model }} | {{ entry.release_status }} | {{ entry.category }} | {{ entry.input }} | {{ entry.cached_input }} | {{ entry.cache_write }} | {{ entry.output }} |
-| {% endif %}{% endfor %} |
+| {% endfor %} |
 
 ### Google
 
@@ -48,7 +48,7 @@ Anthropic models include a cache write cost in addition to cached input.
 | --- | --- | --- | --- | --- | ---: | ---: | ---: |
 | {% for entry in tables.copilot.models-and-pricing %}{% if entry.provider == "google" %} |
 | {{ entry.model }} | {{ entry.release_status }} | {{ entry.category }} | {{ entry.tier }} | {{ entry.threshold }} | {{ entry.input }} | {{ entry.cached_input }} | {{ entry.output }} |
-| {% endif %}{% endfor %} |
+| {% endfor %} |
 
 ### Fine-tuned (GitHub)
 
@@ -56,7 +56,7 @@ Anthropic models include a cache write cost in addition to cached input.
 | --- | --- | --- | ---: | ---: | ---: |
 | {% for entry in tables.copilot.models-and-pricing %}{% if entry.provider == "github" %} |
 | {{ entry.model }} | {{ entry.release_status }} | {{ entry.category }} | {{ entry.input }} | {{ entry.cached_input }} | {{ entry.output }} |
-| {% endif %}{% endfor %} |
+| {% endfor %} |
 
 ### Microsoft
 
@@ -64,7 +64,7 @@ Anthropic models include a cache write cost in addition to cached input.
 | --- | --- | --- | ---: | ---: | ---: |
 | {% for entry in tables.copilot.models-and-pricing %}{% if entry.provider == "microsoft" %} |
 | {{ entry.model }} | {{ entry.release_status }} | {{ entry.category }} | {{ entry.input }} | {{ entry.cached_input }} | {{ entry.output }} |
-| {% endif %}{% endfor %} |
+| {% endfor %} |
 
 ### xAI
 
@@ -74,7 +74,7 @@ Anthropic models include a cache write cost in addition to cached input.
 | --- | --- | --- | --- | --- | ---: | ---: | ---: |
 | {% for entry in tables.copilot.models-and-pricing %}{% if entry.provider == "xai" %} |
 | {{ entry.model }} | {{ entry.release_status }} | {{ entry.category }} | {{ entry.tier }} | {{ entry.threshold }} | {{ entry.input }} | {{ entry.cached_input }} | {{ entry.output }} |
-| {% endif %}{% endfor %} |
+| {% endfor %} |
 
 ### Moonshot AI
 
@@ -82,7 +82,7 @@ Anthropic models include a cache write cost in addition to cached input.
 | --- | --- | --- | ---: | ---: | ---: |
 | {% for entry in tables.copilot.models-and-pricing %}{% if entry.provider == "moonshot_ai" %} |
 | {{ entry.model }} | {{ entry.release_status }} | {{ entry.category }} | {{ entry.input }} | {{ entry.cached_input }} | {{ entry.output }} |
-| {% endif %}{% endfor %} |
+| {% endfor %} |
 
 ## Code completions
 

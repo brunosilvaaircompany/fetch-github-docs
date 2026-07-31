@@ -79,12 +79,13 @@ Additionally:
 ## In summary
 
 * **Proration:** Applies when adding seats/licenses or upgrading plans. You pay only for the portion of the billing cycle remaining.
-* **Access:** Assignments and plan changes are effective immediately for affected users.
+* **Access:** Assignments and upgrades are effective immediately for affected users. Downgrades take effect at the end of the billing cycle.
 * **Removing or canceling:** No refunds are issued for unused time; access continues until the end of the cycle paid for, unless a seat/license is revoked.
 
 | Scenario                        | Plan                | When is billing affected? | Is proration applied? | When does access change? | Refund for unused time? |
 |----------------------------------|---------------------|--------------------------|----------------------|--------------------------|-------------------------|
-| Add seat/license                 | Copilot Business, Copilot Enterprise| Next bill             | Yes                  | Immediately              | N/A                     |
-| Remove seat/license              | Copilot Business, Copilot Enterprisee| Next bill             | N/A                  | Immediately              | No                      |
+| Add seat/license                 | Copilot Business, Copilot Enterprise| Immediately             | Yes                  | Immediately              | N/A                     |
+| Remove seat/license              | Copilot Business, Copilot Enterprise| End of cycle             | N/A                  | End of cycle (immediately if revoked) | No                      |
 | Cancel subscription              | All plans           | End of cycle            | N/A                  | End of cycle            | No                      |
-| Upgrade/downgrade/switch plan    | All plans           | Immediate                | Yes                  | Immediately              | N/A (proration instead) |
+| Upgrade plan    | All plans           | Immediate                | Yes                  | Immediately              | N/A (proration instead) |
+| Downgrade plan  | All plans           | End of cycle                | No                  | End of cycle              | No |
