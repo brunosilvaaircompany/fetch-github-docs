@@ -68,6 +68,12 @@
           <button class="filter-tag-btn btn btn-sm" data-filter="60 min">60 min</button>
           <button class="filter-tag-btn btn btn-sm" data-filter="template">Template</button>
         </div>
+        <button id="clear-filter-bar" class="clear-filter-bar-btn btn btn-sm" hidden aria-label="Limpar todos os filtros">
+          <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+            <path d="M3.72 3.72a.75.75 0 0 1 1.06 0L8 6.94l3.22-3.22a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l3.22 3.22a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-3.22 3.22a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L6.94 8 3.72 4.78a.75.75 0 0 1 0-1.06Z"/>
+          </svg>
+          Limpar filtros
+        </button>
       </div>
     </div>
     <div class="filter-status color-fg-muted f6 mb-3" id="filter-status" aria-live="polite"></div>
@@ -142,7 +148,8 @@
      const input      = document.getElementById('filter-input');
      const status     = document.getElementById('filter-status');
      const emptyState = document.getElementById('grid-empty');
-     const clearBtn   = document.getElementById('clear-filter');
+     const clearBtn    = document.getElementById('clear-filter');
+     const clearBarBtn = document.getElementById('clear-filter-bar');
      const tagsWrap   = document.querySelector('.filter-tags');
      const originsWrap = document.querySelector('.filter-origins');
 
@@ -414,6 +421,27 @@
        } else {
          status.textContent = '';
        }
+       if (clearBarBtn) { clearBarBtn.hidden = !anyFilter; }
+     }
+
+     function clearFilters() {
+       if (input) { input.value = ''; }
+       searchText   = '';
+       activeTag    = 'all';
+       activeOrigin = 'all';
+       if (originsWrap) {
+         const originBtns = Array.from(originsWrap.querySelectorAll('.filter-origin-btn'));
+         originBtns.forEach(function (b) { b.classList.remove('active'); });
+         const allOriginBtn = originsWrap.querySelector('[data-origin="all"]');
+         if (allOriginBtn) { allOriginBtn.classList.add('active'); }
+       }
+       if (tagsWrap) {
+         const tagBtns = Array.from(tagsWrap.querySelectorAll('.filter-tag-btn'));
+         tagBtns.forEach(function (b) { b.classList.remove('active'); });
+         const allTagBtn = tagsWrap.querySelector('[data-filter="all"]');
+         if (allTagBtn) { allTagBtn.classList.add('active'); }
+       }
+       applyFilter();
      }
 
       renderUserDeckCards();
@@ -469,29 +497,8 @@
         });
       }
 
-      if (clearBtn) {
-        clearBtn.addEventListener('click', function () {
-          input.value = '';
-          searchText  = '';
-          activeTag   = 'all';
-          activeOrigin = 'all';
-          if (originsWrap) {
-            const originBtns = Array.from(originsWrap.querySelectorAll('.filter-origin-btn'));
-            originBtns.forEach(function (b) { b.classList.remove('active'); });
-            const allOriginBtn = originsWrap.querySelector('[data-origin="all"]');
-            if (allOriginBtn) { allOriginBtn.classList.add('active'); }
-          }
-          if (tagsWrap) {
-            const currentButtons = Array.from(tagsWrap.querySelectorAll('.filter-tag-btn'));
-            currentButtons.forEach(function (b) { b.classList.remove('active'); });
-            const allButton = tagsWrap.querySelector('[data-filter="all"]');
-            if (allButton) {
-              allButton.classList.add('active');
-            }
-          }
-          applyFilter();
-        });
-      }
+      if (clearBtn)    { clearBtn.addEventListener('click', clearFilters); }
+      if (clearBarBtn) { clearBarBtn.addEventListener('click', clearFilters); }
 
       applyFilter();
     })();

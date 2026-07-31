@@ -205,6 +205,23 @@ body {
   margin-right: 2px;
 }
 
+.clear-filter-bar-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: auto;
+  color: var(--kb-muted) !important;
+  border-color: transparent !important;
+  background: transparent !important;
+  transition: color 0.14s ease, border-color 0.14s ease;
+}
+
+.clear-filter-bar-btn:hover {
+  color: var(--kb-danger) !important;
+  border-color: rgba(248, 81, 73, 0.5) !important;
+  background: rgba(248, 81, 73, 0.08) !important;
+}
+
 .filter-status {
   min-height: 1.2em;
 }
