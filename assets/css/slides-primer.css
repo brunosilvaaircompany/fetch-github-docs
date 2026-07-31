@@ -271,8 +271,10 @@
   min-width: 6em;
 }
 
-.icon-card .emoji {
-  font-size: 2.5em;
-  display: block;
-  margin-bottom: 0.2em;
+/* ── Overview mode (ESC): força todos os slides visíveis ── */
+.reveal.overview .slides section,
+.reveal.overview .slides section > section {
+  visibility: visible !important;
+  pointer-events: auto;
 }
+
