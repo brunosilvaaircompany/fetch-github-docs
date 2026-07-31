@@ -222,6 +222,9 @@
     }
 
     editableSlide = null;
+    if (lastCaretRange && (!slide || !slide.contains(lastCaretRange.commonAncestorContainer))) {
+      lastCaretRange = null;
+    }
     if (!inlineEditing || !slide) {
       updateStatus(getCurrentSlide());
       return;
@@ -1399,6 +1402,7 @@
 
     slidesRoot.addEventListener("keyup", captureCaretRange);
     slidesRoot.addEventListener("mouseup", captureCaretRange);
+    document.addEventListener("selectionchange", captureCaretRange);
 
     slidesRoot.addEventListener("click", (event) => {
       const clickedImage = event.target.closest("img");
