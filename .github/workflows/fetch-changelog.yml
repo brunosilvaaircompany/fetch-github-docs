@@ -1,0 +1,35 @@
+name: Atualizar GitHub Changelog
+
+on:
+  schedule:
+    - cron: "0 7 * * *"   # todo dia as 07:00 UTC
+  workflow_dispatch: {}    # permite rodar manualmente pela aba Actions
+
+env:
+  CHANGELOG_OUTPUT: "./github-changelog/changelog.md"
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar dependencias
+        run: pip install -r requirements.txt
+
+      - name: Baixar GitHub Changelog
+        run: python3 scripts/fetch_changelog.py --output "$CHANGELOG_OUTPUT"
+
+      - name: Commit se houver mudancas
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add "$CHANGELOG_OUTPUT"
+          git diff --staged --quiet || git commit -m "changelog: atualizar GitHub Changelog"
+          git push
