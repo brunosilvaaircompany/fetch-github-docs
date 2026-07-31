@@ -48,6 +48,17 @@ github-docs/                    # Markdown limpo gerado pelo kb_sync.py
 pip install -r requirements.txt
 ```
 
+### Estilos com Primer (Design System)
+
+Para manter as páginas estáticas alinhadas ao ecossistema GitHub, o repositório usa `@primer/css` como base visual:
+
+```bash
+npm install
+npm run build:css
+```
+
+Isso gera/atualiza o arquivo `assets/css/primer.css`, consumido por `index.html` e pelos slides em `slides/`.
+
 ### Executando os testes automatizados
 
 ```bash

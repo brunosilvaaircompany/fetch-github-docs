@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-color-mode="dark" data-dark-theme="dark" data-light-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -256,6 +256,9 @@
     }
     .step-card strong { color: var(--accent-light); }
   </style>
+  <link rel="stylesheet" href="../../assets/css/primer.css" />
+  <link rel="stylesheet" href="../../assets/css/slides-primer.css" />
+  <link rel="stylesheet" href="../../assets/css/slides-copilot-cli.css" />
 </head>
 <body>
 <div class="reveal">
@@ -844,6 +847,19 @@ copilot --allow-all --enable-all-github-mcp-tools</code></pre>
     progress: true,
     center: true,
     plugins: [ RevealHighlight ]
+  }).then(function () {
+    Reveal.on('overviewshown', function () {
+      document.querySelectorAll('.reveal .slides section').forEach(function (s) {
+        s.style.opacity = '1';
+        s.style.visibility = 'visible';
+      });
+    });
+    Reveal.on('overviewhidden', function () {
+      document.querySelectorAll('.reveal .slides section').forEach(function (s) {
+        s.style.opacity = '';
+        s.style.visibility = '';
+      });
+    });
   });
   if (typeof window.initSlideEditor === "function") {
     window.initSlideEditor(Reveal);

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-color-mode="dark" data-dark-theme="dark" data-light-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,237 +8,8 @@
   <!-- Reveal.js CDN -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reset.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css" />
-
-  <style>
-    /* =====================================================================
-       Tema GitHub Copilot
-       Paleta:
-         Background  : #0d1117  (GitHub dark)
-         Surface     : #161b22  (cards / sections)
-         Border      : #21262d
-         Accent      : #6e40c9  (Copilot purple)
-         Accent light: #a371f7
-         Text primary: #e6edf3
-         Text muted  : #8b949e
-         Success     : #3fb950  (green)
-         Warning     : #d29922  (amber)
-    ===================================================================== */
-
-    :root {
-      --bg:           #0d1117;
-      --surface:      #161b22;
-      --border:       #21262d;
-      --accent:       #6e40c9;
-      --accent-light: #a371f7;
-      --text:         #e6edf3;
-      --text-muted:   #8b949e;
-      --green:        #3fb950;
-      --amber:        #d29922;
-    }
-
-    .reveal-viewport { background: var(--bg); }
-
-    .reveal {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-      font-size: 36px;
-      color: var(--text);
-    }
-
-    /* ── Headings ── */
-    .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
-      color: var(--text);
-      font-weight: 700;
-      text-transform: none;
-      letter-spacing: -0.02em;
-      line-height: 1.2;
-    }
-    .reveal h1 { font-size: 2em; }
-    .reveal h2 { font-size: 1.4em; color: var(--accent-light); }
-    .reveal h3 { font-size: 1em; color: var(--text-muted); }
-
-    /* ── Accent bar on h2 ── */
-    .reveal h2::before {
-      content: "";
-      display: inline-block;
-      width: 4px;
-      height: 0.9em;
-      background: var(--accent);
-      border-radius: 2px;
-      margin-right: 0.4em;
-      vertical-align: middle;
-    }
-
-    /* ── Links ── */
-    .reveal a { color: var(--accent-light); text-decoration: underline; }
-    .reveal a:hover { color: #fff; }
-
-    /* ── Lists ── */
-    .reveal ul, .reveal ol { text-align: left; margin-left: 1em; }
-    .reveal li { margin: 0.3em 0; color: var(--text); }
-    .reveal ul li::marker { color: var(--accent); }
-
-    /* ── Code ── */
-    .reveal code {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 0.1em 0.35em;
-      font-size: 0.85em;
-      color: var(--accent-light);
-    }
-    .reveal pre {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      box-shadow: none;
-      width: 100%;
-    }
-    .reveal pre code {
-      background: transparent;
-      border: none;
-      padding: 0;
-      color: var(--text);
-      font-size: 0.72em;
-    }
-
-    /* ── Blockquote / tip ── */
-    .reveal blockquote {
-      background: var(--surface);
-      border-left: 4px solid var(--accent);
-      border-radius: 0 8px 8px 0;
-      padding: 0.6em 1em;
-      font-style: normal;
-      color: var(--text);
-      width: 90%;
-      margin: 0.8em auto;
-    }
-
-    /* ── Timebox badge ── */
-    .timebox {
-      display: inline-block;
-      background: var(--accent);
-      color: #fff;
-      border-radius: 20px;
-      padding: 0.15em 0.7em;
-      font-size: 0.55em;
-      font-weight: 600;
-      vertical-align: middle;
-      margin-left: 0.5em;
-      letter-spacing: 0.03em;
-    }
-
-    /* ── Progress / controls theme ── */
-    .reveal .progress { background: var(--border); }
-    .reveal .progress span { background: var(--accent); }
-    .reveal .controls { color: var(--accent-light); }
-
-    /* ── Cover slide ── */
-    .cover-logo {
-      margin-bottom: 0.4em;
-    }
-    .cover-logo img {
-      width: 96px;
-      height: 96px;
-      filter: invert(1);        /* branco sobre fundo escuro */
-    }
-    .cover-subtitle {
-      color: var(--text-muted);
-      font-size: 0.6em;
-      margin-top: 0.3em;
-    }
-    .cover-badge {
-      display: inline-block;
-      background: var(--accent);
-      color: #fff;
-      border-radius: 6px;
-      padding: 0.2em 0.8em;
-      font-size: 0.5em;
-      margin-top: 0.8em;
-    }
-
-    /* ── GitHub mark no rodapé ── */
-    .gh-footer {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.4em;
-      margin-top: 1em;
-      font-size: 0.4em;
-      color: var(--text-muted);
-    }
-    .gh-footer img {
-      width: 18px;
-      height: 18px;
-      filter: invert(0.6);
-    }
-
-    /* ── Octocat decorativa (octodex.github.com — © GitHub Inc.) ── */
-    .octocat {
-      position: absolute;
-      bottom: 0.5em;
-      right: 0.8em;
-      width: 90px;
-      height: 90px;
-      object-fit: contain;
-      opacity: 0.85;
-      border-radius: 8px;
-    }
-
-    /* ── Two-column layout ── */
-    .cols {
-      display: flex;
-      gap: 1.5em;
-      align-items: flex-start;
-      justify-content: center;
-      text-align: left;
-    }
-    .cols > div { flex: 1; }
-
-    /* ── Agenda table ── */
-    .agenda {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.65em;
-      text-align: left;
-    }
-    .agenda th {
-      background: var(--surface);
-      color: var(--accent-light);
-      padding: 0.5em 0.8em;
-      border-bottom: 2px solid var(--accent);
-    }
-    .agenda td {
-      padding: 0.45em 0.8em;
-      border-bottom: 1px solid var(--border);
-      color: var(--text);
-    }
-    .agenda tr:hover td { background: var(--surface); }
-    .agenda .min { color: var(--text-muted); }
-
-    /* ── Highlight colors ── */
-    .hl-purple { color: var(--accent-light); font-weight: 600; }
-    .hl-green  { color: var(--green); font-weight: 600; }
-    .hl-amber  { color: var(--amber); font-weight: 600; }
-
-    /* ── Icon row ── */
-    .icon-row {
-      display: flex;
-      justify-content: center;
-      gap: 1.5em;
-      margin-top: 0.6em;
-    }
-    .icon-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 0.6em 1em;
-      text-align: center;
-      font-size: 0.55em;
-      color: var(--text);
-      min-width: 6em;
-    }
-    .icon-card .emoji { font-size: 2.5em; display: block; margin-bottom: 0.2em; }
-  </style>
+  <link rel="stylesheet" href="../assets/css/primer.css" />
+  <link rel="stylesheet" href="../assets/css/slides-primer.css" />
 </head>
 <body>
 <div class="reveal">
@@ -633,6 +404,19 @@ HTTP 201 em Express.js + TypeScript</code></pre>
     highlight: {
       theme: "github-dark"
     }
+  }).then(function () {
+    Reveal.on('overviewshown', function () {
+      document.querySelectorAll('.reveal .slides section').forEach(function (s) {
+        s.style.opacity = '1';
+        s.style.visibility = 'visible';
+      });
+    });
+    Reveal.on('overviewhidden', function () {
+      document.querySelectorAll('.reveal .slides section').forEach(function (s) {
+        s.style.opacity = '';
+        s.style.visibility = '';
+      });
+    });
   });
   if (typeof window.initSlideEditor === "function") {
     window.initSlideEditor(Reveal);

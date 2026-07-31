@@ -1,0 +1,12 @@
+{
+  "name": "copilot-knowledge-base",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Static assets pipeline for Primer CSS in GitHub Pages content.",
+  "scripts": {
+    "build:css": "node scripts/build-primer-css.mjs"
+  },
+  "dependencies": {
+    "@primer/css": "^22.0.0"
+  }
+}

@@ -847,7 +847,7 @@
       }
       .slide-editor-status {
         border: 1px solid #30363d;
-        background: rgba(13, 17, 23, 0.9);
+        background: rgba(13, 17, 23, 0.94);
         color: #8b949e;
         border-radius: 999px;
         font-size: 12px;
@@ -855,7 +855,7 @@
       }
       .slide-editor-toolbar button {
         border: 1px solid #30363d;
-        background: #0d1117;
+        background: #161b22;
         color: #e6edf3;
         border-radius: 999px;
         font-size: 12px;
@@ -863,11 +863,11 @@
         cursor: pointer;
       }
       .slide-editor-toolbar button:hover {
-        border-color: #6e40c9;
+        border-color: #58a6ff;
       }
       .slide-editor-toolbar button.active {
-        border-color: #6e40c9;
-        color: #a371f7;
+        border-color: #58a6ff;
+        color: #58a6ff;
       }
       .slide-editor-gear-button {
         border: none !important;
@@ -882,8 +882,8 @@
         transform: scale(1.08);
       }
       .slide-editor-gear-visible {
-        color: #a371f7 !important;
-        text-shadow: 0 0 10px rgba(163, 113, 247, 0.45);
+        color: #58a6ff !important;
+        text-shadow: 0 0 10px rgba(88, 166, 255, 0.35);
       }
       .slide-editor-show-controls {
         position: fixed;
@@ -903,7 +903,7 @@
         top: 16px;
         z-index: 1201;
         border: 1px solid #30363d;
-        background: rgba(13, 17, 23, 0.92);
+        background: rgba(13, 17, 23, 0.95);
         color: #e6edf3;
         border-radius: 999px;
         width: 38px;
@@ -914,11 +914,11 @@
         cursor: pointer;
       }
       .slide-editor-home-button:hover {
-        border-color: #6e40c9;
-        color: #a371f7;
+        border-color: #58a6ff;
+        color: #58a6ff;
       }
       .slide-editor-inline-target {
-        outline: 2px dashed #6e40c9;
+        outline: 2px dashed #58a6ff;
         outline-offset: 6px;
         cursor: text;
       }
@@ -960,7 +960,7 @@
       .slide-editor-list-actions button,
       .slide-editor-panel-actions button {
         border: 1px solid #30363d;
-        background: #0d1117;
+        background: #161b22;
         color: #e6edf3;
         border-radius: 999px;
         font-size: 11px;
@@ -1061,7 +1061,7 @@
         height: 90px;
         object-fit: contain;
         background: #161b22;
-        border: 1px solid #21262d;
+        border: 1px solid #30363d;
         border-radius: 6px;
       }
       .slide-editor-image-name {
@@ -1397,6 +1397,18 @@
     imagePanel.appendChild(imageList);
     imagePanel.appendChild(imageFooter);
     document.body.appendChild(imagePanel);
+
+    document.querySelectorAll(".slide-editor-toolbar button, .slide-editor-code-panel button, .slide-editor-side-panel button").forEach((button) => {
+      if (!button.classList.contains("slide-editor-gear-button")) {
+        button.classList.add("btn", "btn-sm");
+      }
+      if (/excluir|fechar slide/i.test(button.textContent || "")) {
+        button.classList.add("btn-danger");
+      }
+    });
+    document.querySelectorAll(".slide-editor-code-panel textarea, .slide-editor-side-panel textarea, .slide-editor-side-panel input").forEach((field) => {
+      field.classList.add("form-control");
+    });
 
     slidesRoot.addEventListener("input", (event) => {
       if (!inlineEditing || !editableSlide) {

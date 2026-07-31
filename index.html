@@ -1,451 +1,42 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-color-mode="dark" data-dark-theme="dark" data-light-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Copilot Knowledge Base — Treinamentos</title>
-  <style>
-    :root {
-      --bg:           #0d1117;
-      --surface:      #161b22;
-      --border:       #21262d;
-      --accent:       #6e40c9;
-      --accent-light: #a371f7;
-      --text:         #e6edf3;
-      --text-muted:   #8b949e;
-      --green:        #3fb950;
-      --amber:        #d29922;
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-      min-height: 100vh;
-    }
-
-    /* ── Header ── */
-    header {
-      border-bottom: 1px solid var(--border);
-      padding: 24px 32px;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .logo {
-      width: 40px;
-      height: 40px;
-      background: var(--accent);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .logo svg { width: 24px; height: 24px; fill: #fff; }
-
-    header h1 {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--text);
-    }
-
-    header p {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-top: 2px;
-    }
-
-    /* ── Hero ── */
-    .hero {
-      text-align: center;
-      padding: 64px 32px 48px;
-      max-width: 760px;
-      margin: 0 auto;
-    }
-
-    .hero-badge {
-      display: inline-block;
-      background: rgba(110, 64, 201, 0.15);
-      border: 1px solid var(--accent);
-      color: var(--accent-light);
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      padding: 4px 12px;
-      border-radius: 20px;
-      margin-bottom: 20px;
-    }
-
-    .hero h2 {
-      font-size: 2.4rem;
-      font-weight: 800;
-      line-height: 1.15;
-      letter-spacing: -0.03em;
-      margin-bottom: 16px;
-    }
-
-    .hero h2 span { color: var(--accent-light); }
-
-    .hero p {
-      font-size: 1rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-      max-width: 560px;
-      margin: 0 auto;
-    }
-
-    /* ── Grid ── */
-    .grid-section {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 32px 80px;
-    }
-
-    .section-label {
-      font-size: 0.8rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--text-muted);
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .section-label::after {
-      content: "";
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 20px;
-    }
-
-    /* ── Card ── */
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 28px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .card:hover {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(110, 64, 201, 0.15);
-      transform: translateY(-2px);
-    }
-
-    .card-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 10px;
-      background: rgba(110, 64, 201, 0.2);
-      border: 1px solid rgba(163, 113, 247, 0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.3rem;
-    }
-
-    .card-title {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--text);
-      line-height: 1.3;
-    }
-
-    .card-desc {
-      font-size: 0.875rem;
-      color: var(--text-muted);
-      line-height: 1.5;
-      flex: 1;
-    }
-
-    .card-meta {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-      padding-top: 8px;
-      border-top: 1px solid var(--border);
-    }
-
-    .tag {
-      font-size: 0.72rem;
-      font-weight: 600;
-      padding: 3px 10px;
-      border-radius: 20px;
-      background: rgba(110, 64, 201, 0.15);
-      color: var(--accent-light);
-      border: 1px solid rgba(163, 113, 247, 0.2);
-    }
-
-    .tag.green {
-      background: rgba(63, 185, 80, 0.1);
-      color: var(--green);
-      border-color: rgba(63, 185, 80, 0.2);
-    }
-
-    .tag.amber {
-      background: rgba(210, 153, 34, 0.1);
-      color: var(--amber);
-      border-color: rgba(210, 153, 34, 0.2);
-    }
-
-    .card-cta {
-      margin-left: auto;
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--accent-light);
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    /* ── Template card (muted) ── */
-    .card.template {
-      border-style: dashed;
-      opacity: 0.75;
-    }
-
-    .card.template:hover { opacity: 1; }
-
-    /* ── Footer ── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 24px 32px;
-      text-align: center;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-
-    footer a { color: var(--accent-light); text-decoration: none; }
-    footer a:hover { text-decoration: underline; }
-
-    /* ── Filter bar ── */
-    .filter-bar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      align-items: center;
-      margin-bottom: 20px;
-    }
-
-    .filter-search-wrap {
-      position: relative;
-      flex: 1;
-      min-width: 220px;
-    }
-
-    .filter-search-icon {
-      position: absolute;
-      left: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 14px;
-      height: 14px;
-      color: var(--text-muted);
-      pointer-events: none;
-    }
-
-    .filter-input {
-      width: 100%;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: var(--text);
-      font-size: 0.875rem;
-      padding: 8px 12px 8px 34px;
-      outline: none;
-      transition: border-color 0.2s, box-shadow 0.2s;
-      appearance: none;
-    }
-
-    .filter-input::placeholder { color: var(--text-muted); }
-
-    .filter-input:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(110, 64, 201, 0.2);
-    }
-
-    /* remove native 'x' in Chrome/Safari */
-    .filter-input::-webkit-search-cancel-button { -webkit-appearance: none; }
-
-    .filter-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .filter-tag-btn {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      color: var(--text-muted);
-      cursor: pointer;
-      font-size: 0.78rem;
-      font-weight: 600;
-      padding: 5px 14px;
-      transition: background 0.15s, border-color 0.15s, color 0.15s;
-    }
-
-    .filter-tag-btn:hover {
-      border-color: var(--accent-light);
-      color: var(--text);
-    }
-
-    .filter-tag-btn.active {
-      background: rgba(110, 64, 201, 0.2);
-      border-color: var(--accent);
-      color: var(--accent-light);
-    }
-
-    .filter-status {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-bottom: 16px;
-      min-height: 1.2em;
-    }
-
-    /* ── Empty state ── */
-    .grid-empty[hidden] { display: none; }
-
-    .grid-empty {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-      padding: 48px 32px;
-      color: var(--text-muted);
-      text-align: center;
-    }
-
-    .grid-empty svg {
-      width: 40px;
-      height: 40px;
-      opacity: 0.4;
-    }
-
-    .grid-empty p { font-size: 0.9rem; }
-
-    .clear-filter-btn {
-      background: transparent;
-      border: 1px solid var(--accent);
-      border-radius: 20px;
-      color: var(--accent-light);
-      cursor: pointer;
-      font-size: 0.8rem;
-      font-weight: 600;
-      padding: 5px 16px;
-      transition: background 0.15s;
-    }
-
-    .clear-filter-btn:hover { background: rgba(110, 64, 201, 0.15); }
-
-    .deck-actions {
-      display: flex;
-      justify-content: flex-end;
-      margin-bottom: 12px;
-    }
-
-    .deck-action-btn {
-      background: rgba(110, 64, 201, 0.2);
-      border: 1px solid var(--accent);
-      border-radius: 20px;
-      color: var(--accent-light);
-      cursor: pointer;
-      font-size: 0.8rem;
-      font-weight: 700;
-      padding: 7px 16px;
-      transition: background 0.15s, transform 0.15s;
-    }
-
-    .deck-action-btn:hover {
-      background: rgba(110, 64, 201, 0.3);
-      transform: translateY(-1px);
-    }
-
-    .user-deck-badge {
-      background: rgba(63, 185, 80, 0.12);
-      color: var(--green);
-      border: 1px solid rgba(63, 185, 80, 0.28);
-    }
-
-    .deck-delete-btn {
-      border: 1px solid rgba(248, 81, 73, 0.5);
-      background: rgba(248, 81, 73, 0.08);
-      color: #f85149;
-      border-radius: 999px;
-      padding: 4px 10px;
-      cursor: pointer;
-      font-size: 0.72rem;
-      font-weight: 700;
-    }
-
-    .deck-delete-btn:hover {
-      background: rgba(248, 81, 73, 0.18);
-    }
-
-    .deck-duplicate-btn {
-      border: 1px solid var(--border);
-      background: transparent;
-      color: var(--text-muted);
-      border-radius: 999px;
-      padding: 4px 10px;
-      cursor: pointer;
-      font-size: 0.72rem;
-      font-weight: 700;
-    }
-
-    .deck-duplicate-btn:hover {
-      border-color: var(--accent-light);
-      color: var(--text);
-    }
-  </style>
+  <link rel="stylesheet" href="assets/css/primer.css" />
+  <link rel="stylesheet" href="assets/css/site.css" />
 </head>
-<body>
+<body class="color-bg-default color-fg-default">
 
-  <header>
-    <div class="logo">
-      <!-- Copilot icon -->
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/>
+  <header class="kb-header d-flex flex-items-center flex-wrap gap-3 px-4 py-3">
+    <div class="logo kb-logo color-bg-accent-emphasis d-flex flex-items-center flex-justify-center">
+      <!-- GitHub Copilot icon -->
+      <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M9.75 14a.75.75 0 0 1 .75.75v2.5a.75.75 0 0 1-1.5 0v-2.5A.75.75 0 0 1 9.75 14Zm4.5 0a.75.75 0 0 1 .75.75v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 .75-.75Z"/>
+        <path d="M12 2c2.214 0 4.248.657 5.747 1.756.136.099.268.204.397.312.584.235 1.077.546 1.474.952.85.869 1.132 2.037 1.132 3.368 0 .368-.014.733-.052 1.086l.633 1.478.043.022A4.75 4.75 0 0 1 23 15.75v2.25a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1-.75-.75v-2.25a3.25 3.25 0 0 0-3.25-3.25H7.25A3.25 3.25 0 0 0 4 15.75v2.25a.75.75 0 0 1-.75.75H1.75A.75.75 0 0 1 1 18v-2.25a4.75 4.75 0 0 1 2.626-4.248l.043-.022.633-1.478A9.954 9.954 0 0 1 4.25 8.39c0-1.331.282-2.499 1.132-3.368.397-.406.89-.717 1.474-.952.13-.108.261-.213.397-.312C8.752 2.657 10.786 2 12 2Z"/>
       </svg>
     </div>
-    <div>
-      <h1>Copilot Knowledge Base</h1>
-      <p>Kit de treinamentos GitHub Copilot para times</p>
+    <div class="kb-header-text">
+      <h1 class="h3">Copilot Knowledge Base</h1>
+      <p class="color-fg-muted f5">Kit de treinamentos GitHub Copilot para times</p>
     </div>
   </header>
 
-  <section class="hero">
-    <div class="hero-badge">Treinamentos disponíveis</div>
-    <h2>Slides prontos para<br/><span>GitHub Copilot</span></h2>
-    <p>Apresentações Reveal.js de 60 minutos, com teoria, hands-on e boas práticas — prontas para usar ou personalizar.</p>
+  <section class="hero kb-hero text-center px-4 pt-8 pb-6">
+    <div class="Label Label--accent mb-3">Treinamentos disponíveis</div>
+    <h2 class="kb-hero-title h1 mb-3">Slides prontos para<br/><span class="color-fg-accent">GitHub Copilot</span></h2>
+    <p class="color-fg-muted f4">Apresentações Reveal.js de 60 minutos, com teoria, hands-on e boas práticas — prontas para usar ou personalizar.</p>
   </section>
 
-  <main class="grid-section">
+  <main class="container-xl px-4 pb-8">
 
-    <div class="section-label">Apresentações</div>
-    <div class="deck-actions">
-      <button id="new-deck-btn" class="deck-action-btn" type="button">+ Novo deck</button>
+    <div class="d-flex flex-items-center color-fg-muted text-uppercase f6 mb-3">
+      <span>Apresentações</span>
+      <span class="ml-2 flex-auto border-bottom"></span>
+    </div>
+    <div class="deck-actions d-flex flex-justify-end mb-3">
+      <button id="new-deck-btn" class="deck-action-btn btn btn-primary" type="button">+ Novo deck</button>
     </div>
 
     <!-- ── Filter ── -->
@@ -456,78 +47,93 @@
         </svg>
         <input
           id="filter-input"
-          class="filter-input"
+          class="filter-input form-control width-full"
           type="search"
           placeholder="Buscar treinamento por título ou descrição…"
           aria-label="Buscar treinamentos"
           autocomplete="off"
         />
       </div>
-      <div class="filter-tags" role="group" aria-label="Filtrar por categoria">
-        <button class="filter-tag-btn active" data-filter="all">Todos</button>
-        <button class="filter-tag-btn" data-filter="cli">CLI</button>
-        <button class="filter-tag-btn" data-filter="reveal.js">Reveal.js</button>
-        <button class="filter-tag-btn" data-filter="60 min">60 min</button>
-        <button class="filter-tag-btn" data-filter="template">Template</button>
+      <div class="filter-controls">
+        <div class="filter-origins" role="group" aria-label="Filtrar por origem">
+          <span class="filter-group-label">Origem</span>
+          <button class="filter-origin-btn btn btn-sm active" data-origin="all">Todos</button>
+          <button class="filter-origin-btn btn btn-sm" data-origin="server">Servidor</button>
+          <button class="filter-origin-btn btn btn-sm" data-origin="local">Locais</button>
+        </div>
+        <div class="filter-tags" role="group" aria-label="Filtrar por categoria">
+          <span class="filter-group-label">Tópico</span>
+          <button class="filter-tag-btn btn btn-sm active" data-filter="all">Todos</button>
+          <button class="filter-tag-btn btn btn-sm" data-filter="cli">CLI</button>
+          <button class="filter-tag-btn btn btn-sm" data-filter="reveal.js">Reveal.js</button>
+          <button class="filter-tag-btn btn btn-sm" data-filter="60 min">60 min</button>
+          <button class="filter-tag-btn btn btn-sm" data-filter="template">Template</button>
+        </div>
+        <button id="clear-filter-bar" class="clear-filter-bar-btn btn btn-sm" hidden aria-label="Limpar todos os filtros">
+          <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+            <path d="M3.72 3.72a.75.75 0 0 1 1.06 0L8 6.94l3.22-3.22a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l3.22 3.22a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-3.22 3.22a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L6.94 8 3.72 4.78a.75.75 0 0 1 0-1.06Z"/>
+          </svg>
+          Limpar filtros
+        </button>
       </div>
     </div>
-    <div class="filter-status" id="filter-status" aria-live="polite"></div>
+    <div class="filter-status color-fg-muted f6 mb-3" id="filter-status" aria-live="polite"></div>
 
-    <div class="grid" id="slides-grid">
+    <div class="grid kb-grid" id="slides-grid">
 
       <!-- Copilot CLI -->
-      <a class="card" href="slides/copilot-cli/index.html"
+      <a class="card Box p-4 color-shadow-small" href="slides/copilot-cli/index.html"
+         data-origin="server"
          data-title="github copilot cli"
          data-desc="treinamento completo sobre o agente de terminal do copilot instalação autenticação criação de prs e customização com mcp"
          data-tags="cli reveal.js 60 min"
          data-source-path="slides/copilot-cli/index.html"
          data-static-title="GitHub Copilot CLI">
-        <div class="card-icon">⚡</div>
-        <div class="card-title">GitHub Copilot CLI</div>
-        <div class="card-desc">
+        <div class="card-icon d-flex flex-items-center flex-justify-center rounded-2 color-bg-subtle">⚡</div>
+        <div class="card-title h4">GitHub Copilot CLI</div>
+        <div class="card-desc f5">
           Treinamento completo sobre o agente de terminal do Copilot — instalação, autenticação, criação de PRs e customização com MCP.
         </div>
-        <div class="card-meta">
+        <div class="card-meta d-flex flex-items-center flex-wrap gap-2 pt-2">
           <span class="tag green">60 min</span>
           <span class="tag">Reveal.js</span>
           <span class="tag">CLI</span>
-          <span class="card-cta">Abrir →</span>
         </div>
       </a>
 
       <!-- Template -->
-      <a class="card template" href="slides/template.html"
+      <a class="card template Box p-4 color-shadow-small" href="slides/template.html"
+         data-origin="server"
          data-title="template de treinamento"
          data-desc="slide base com o tema github copilot copie para criar novas apresentações de 60 minutos com estrutura padronizada"
          data-tags="template reveal.js"
          data-source-path="slides/template.html"
          data-static-title="Template de Treinamento">
-        <div class="card-icon">📄</div>
-        <div class="card-title">Template de Treinamento</div>
-        <div class="card-desc">
+        <div class="card-icon d-flex flex-items-center flex-justify-center rounded-2 color-bg-subtle">📄</div>
+        <div class="card-title h4">Template de Treinamento</div>
+        <div class="card-desc f5">
           Slide base com o tema GitHub Copilot. Copie para criar novas apresentações de 60 minutos com estrutura padronizada.
         </div>
-        <div class="card-meta">
+        <div class="card-meta d-flex flex-items-center flex-wrap gap-2 pt-2">
           <span class="tag amber">Template</span>
           <span class="tag">Reveal.js</span>
-          <span class="card-cta">Ver template →</span>
         </div>
       </a>
 
     </div>
 
     <!-- empty-state message -->
-    <div class="grid-empty" id="grid-empty" hidden>
+    <div class="grid-empty text-center py-6" id="grid-empty" hidden>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
         <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
       </svg>
       <p>Nenhum treinamento encontrado para este filtro.</p>
-      <button id="clear-filter" class="clear-filter-btn">Limpar filtro</button>
+      <button id="clear-filter" class="clear-filter-btn btn btn-sm">Limpar filtro</button>
     </div>
 
   </main>
 
- <footer>
+ <footer class="border-top px-4 py-4 text-center color-fg-muted f6">
    Gerado automaticamente a partir de
    <a href="https://github.com/brunosilvaaircompany/copilot-knowledge-base" target="_blank">brunosilvaaircompany/copilot-knowledge-base</a>
    &nbsp;·&nbsp;
@@ -543,10 +149,13 @@
      const input      = document.getElementById('filter-input');
      const status     = document.getElementById('filter-status');
      const emptyState = document.getElementById('grid-empty');
-     const clearBtn   = document.getElementById('clear-filter');
+     const clearBtn    = document.getElementById('clear-filter');
+     const clearBarBtn = document.getElementById('clear-filter-bar');
      const tagsWrap   = document.querySelector('.filter-tags');
+     const originsWrap = document.querySelector('.filter-origins');
 
-     let activeTag  = 'all';
+     let activeTags = new Set(); // vazio = "Todos"
+     let activeOrigin = 'all';
      let searchText = '';
      let cards = [];
      const baseTags = ['cli', 'reveal.js', '60 min', 'template'];
@@ -559,28 +168,66 @@
        return String(tags || '');
      }
 
+     function bindOriginButtons() {
+       if (!originsWrap) { return; }
+       const buttons = Array.from(originsWrap.querySelectorAll('.filter-origin-btn'));
+       buttons.forEach(function (button) {
+         button.onclick = function () {
+           activeOrigin = button.dataset.origin || 'all';
+           buttons.forEach(function (b) { b.classList.remove('active'); });
+           button.classList.add('active');
+           applyFilter();
+         };
+       });
+     }
+
+     function bindFilterTagButtons() {
+       if (!tagsWrap) { return; }
+       const buttons = Array.from(tagsWrap.querySelectorAll('.filter-tag-btn'));
+       buttons.forEach(function (button) {
+         button.onclick = function () {
+           const value = button.dataset.filter || 'all';
+           if (value === 'all') {
+             activeTags.clear();
+           } else if (activeTags.has(value)) {
+             activeTags.delete(value);
+           } else {
+             activeTags.add(value);
+           }
+           // sincroniza classe active
+           buttons.forEach(function (b) {
+             const v = b.dataset.filter || 'all';
+             b.classList.toggle('active',
+               v === 'all' ? activeTags.size === 0 : activeTags.has(v));
+           });
+           applyFilter();
+         };
+       });
+     }
+
      function createDeckCard(deck) {
        const card = document.createElement('a');
-       card.className = 'card';
+       card.className = 'card Box p-4 color-shadow-small';
        card.href = store.buildDeckHref(deck);
        card.dataset.title = String(deck.title || '').toLowerCase();
        card.dataset.desc = String(deck.description || '').toLowerCase();
        card.dataset.tags = ('deck reveal.js ' + normalizeTags(deck.tags)).toLowerCase();
+       card.dataset.origin = 'local';
 
        const icon = document.createElement('div');
-       icon.className = 'card-icon';
+       icon.className = 'card-icon d-flex flex-items-center flex-justify-center rounded-2 color-bg-subtle';
        icon.textContent = '🧩';
 
        const title = document.createElement('div');
-       title.className = 'card-title';
+       title.className = 'card-title h4';
        title.textContent = deck.title || 'Novo deck';
 
        const description = document.createElement('div');
-       description.className = 'card-desc';
+       description.className = 'card-desc f5';
        description.textContent = deck.description || 'Deck personalizado salvo localmente no navegador.';
 
        const meta = document.createElement('div');
-       meta.className = 'card-meta';
+       meta.className = 'card-meta d-flex flex-items-center flex-wrap gap-2 pt-2';
 
        const userTag = document.createElement('span');
        userTag.className = 'tag user-deck-badge';
@@ -595,21 +242,14 @@
          meta.appendChild(tag);
        });
 
-       const cta = document.createElement('span');
-       cta.className = 'card-cta';
-       cta.textContent = 'Abrir →';
-       meta.appendChild(cta);
-
        const deckId = String(deck.id || '');
        if (deckId.indexOf('path:') !== 0) {
          const actionsWrap = document.createElement('span');
-         actionsWrap.style.marginLeft = 'auto';
-         actionsWrap.style.display = 'flex';
-         actionsWrap.style.gap = '6px';
+         actionsWrap.className = 'card-actions';
 
          const duplicateButton = document.createElement('button');
          duplicateButton.type = 'button';
-         duplicateButton.className = 'deck-duplicate-btn';
+         duplicateButton.className = 'deck-duplicate-btn btn btn-sm';
          duplicateButton.textContent = 'Duplicar';
          duplicateButton.addEventListener('click', function (event) {
            event.preventDefault();
@@ -625,7 +265,7 @@
 
          const deleteButton = document.createElement('button');
          deleteButton.type = 'button';
-         deleteButton.className = 'deck-delete-btn';
+         deleteButton.className = 'deck-delete-btn btn btn-sm';
          deleteButton.textContent = 'Excluir';
          deleteButton.addEventListener('click', function (event) {
            event.preventDefault();
@@ -659,6 +299,7 @@
      function renderUserDeckCards() {
        if (!store || !grid) {
          cards = Array.from(document.querySelectorAll('.grid .card'));
+         bindFilterTagButtons();
          return;
        }
 
@@ -698,19 +339,27 @@
        dynamicTags.sort();
 
        tagValues = ['all'].concat(baseTags, dynamicTags);
-       if (tagValues.indexOf(activeTag) < 0) {
-         activeTag = 'all';
-       }
+       // remove tags do Set que deixaram de existir
+       activeTags.forEach(function (t) {
+         if (tagValues.indexOf(t) < 0) { activeTags.delete(t); }
+       });
 
        tagsWrap.innerHTML = '';
+       const tagsLabel = document.createElement('span');
+       tagsLabel.className = 'filter-group-label';
+       tagsLabel.textContent = 'Tópico';
+       tagsWrap.appendChild(tagsLabel);
        tagValues.forEach(function (value) {
          const button = document.createElement('button');
          button.type = 'button';
-         button.className = 'filter-tag-btn' + (value === activeTag ? ' active' : '');
+         button.className = 'filter-tag-btn btn btn-sm' +
+           (value === 'all' && activeTags.size === 0 ? ' active' :
+            value !== 'all' && activeTags.has(value) ? ' active' : '');
          button.dataset.filter = value;
          button.textContent = value === 'all' ? 'Todos' : value;
          tagsWrap.appendChild(button);
        });
+       bindFilterTagButtons();
      }
 
      function createDeckFlow() {
@@ -756,33 +405,60 @@
        const total = cards.length;
 
        cards.forEach(function (card) {
-         const title = (card.dataset.title || '').toLowerCase();
-          const desc  = (card.dataset.desc  || '').toLowerCase();
-          const tags  = (card.dataset.tags  || '').toLowerCase();
+         const title  = (card.dataset.title  || '').toLowerCase();
+         const desc   = (card.dataset.desc   || '').toLowerCase();
+         const tags   = (card.dataset.tags   || '').toLowerCase();
+         const origin = card.dataset.origin  || '';
 
-          const matchesText = !searchText ||
-            title.includes(searchText) ||
-            desc.includes(searchText);
+         const matchesText = !searchText ||
+           title.includes(searchText) ||
+           desc.includes(searchText);
 
-          const matchesTag = activeTag === 'all' ||
-            tags.includes(activeTag);
+         const matchesTag = activeTags.size === 0 ||
+           Array.from(activeTags).some(function (t) { return tags.includes(t); });
 
-          const show = matchesText && matchesTag;
-          card.style.display = show ? '' : 'none';
-          if (show) visible++;
-        });
+         const matchesOrigin = activeOrigin === 'all' ||
+           origin === activeOrigin;
 
-        emptyState.hidden = visible > 0;
+         const show = matchesText && matchesTag && matchesOrigin;
+         card.classList.toggle('kb-hidden', !show);
+         if (show) visible++;
+       });
 
-        if (searchText || activeTag !== 'all') {
-          status.textContent = visible + ' de ' + total +
-            (visible === 1 ? ' treinamento encontrado' : ' treinamentos encontrados');
-        } else {
-          status.textContent = '';
-        }
-      }
+       emptyState.hidden = visible > 0;
+
+       const anyFilter = searchText || activeTags.size > 0 || activeOrigin !== 'all';
+       if (anyFilter) {
+         status.textContent = visible + ' de ' + total +
+           (visible === 1 ? ' treinamento encontrado' : ' treinamentos encontrados');
+       } else {
+         status.textContent = '';
+       }
+       if (clearBarBtn) { clearBarBtn.hidden = !anyFilter; }
+     }
+
+     function clearFilters() {
+       if (input) { input.value = ''; }
+       searchText   = '';
+       activeTags   = new Set();
+       activeOrigin = 'all';
+       if (originsWrap) {
+         const originBtns = Array.from(originsWrap.querySelectorAll('.filter-origin-btn'));
+         originBtns.forEach(function (b) { b.classList.remove('active'); });
+         const allOriginBtn = originsWrap.querySelector('[data-origin="all"]');
+         if (allOriginBtn) { allOriginBtn.classList.add('active'); }
+       }
+       if (tagsWrap) {
+         const tagBtns = Array.from(tagsWrap.querySelectorAll('.filter-tag-btn'));
+         tagBtns.forEach(function (b) { b.classList.remove('active'); });
+         const allTagBtn = tagsWrap.querySelector('[data-filter="all"]');
+         if (allTagBtn) { allTagBtn.classList.add('active'); }
+       }
+       applyFilter();
+     }
 
       renderUserDeckCards();
+      bindOriginButtons();
 
       // inject Duplicar into static (built-in) cards
       Array.from(grid.querySelectorAll('[data-source-path]')).forEach(function (card) {
@@ -797,7 +473,7 @@
         var staticTitle = card.dataset.staticTitle || card.querySelector('.card-title').textContent || 'Deck';
         var dupBtn = document.createElement('button');
         dupBtn.type = 'button';
-        dupBtn.className = 'deck-duplicate-btn';
+        dupBtn.className = 'deck-duplicate-btn btn btn-sm';
         dupBtn.textContent = 'Duplicar';
         dupBtn.style.marginLeft = 'auto';
         dupBtn.addEventListener('click', function (event) {
@@ -827,39 +503,17 @@
         newDeckBtn.addEventListener('click', createDeckFlow);
       }
 
-      input.addEventListener('input', function () {
-        searchText = input.value.trim().toLowerCase();
-        applyFilter();
-      });
-
-      if (tagsWrap) {
-        tagsWrap.addEventListener('click', function (event) {
-          const btn = event.target.closest('.filter-tag-btn');
-          if (!btn) {
-            return;
-          }
-          activeTag = btn.dataset.filter;
-          const currentButtons = Array.from(tagsWrap.querySelectorAll('.filter-tag-btn'));
-          currentButtons.forEach(function (b) { b.classList.remove('active'); });
-          btn.classList.add('active');
+      if (input) {
+        input.addEventListener('input', function () {
+          searchText = input.value.trim().toLowerCase();
           applyFilter();
         });
       }
 
-      clearBtn.addEventListener('click', function () {
-        input.value = '';
-        searchText  = '';
-        activeTag   = 'all';
-        if (tagsWrap) {
-          const currentButtons = Array.from(tagsWrap.querySelectorAll('.filter-tag-btn'));
-          currentButtons.forEach(function (b) { b.classList.remove('active'); });
-          const allButton = tagsWrap.querySelector('[data-filter="all"]');
-          if (allButton) {
-            allButton.classList.add('active');
-          }
-        }
-        applyFilter();
-      });
+      if (clearBtn)    { clearBtn.addEventListener('click', clearFilters); }
+      if (clearBarBtn) { clearBarBtn.addEventListener('click', clearFilters); }
+
+      applyFilter();
     })();
   </script>
 
