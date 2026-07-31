@@ -27,6 +27,7 @@
   let cssButton = null;
   let hideControlsButton = null;
   let showControlsButton = null;
+  let backToHomeButton = null;
 
   function getEditableStyleTag() {
     const styles = Array.from(document.head.querySelectorAll("style"));
@@ -40,6 +41,17 @@
     createdStyle.textContent = "/* Edite este CSS com o botao Editar CSS */";
     document.head.appendChild(createdStyle);
     return createdStyle;
+  }
+
+  function getHomePagePath() {
+    const pathname = window.location.pathname || "/";
+    const marker = "/slides/";
+    const markerIndex = pathname.indexOf(marker);
+    if (markerIndex >= 0) {
+      const prefix = pathname.slice(0, markerIndex);
+      return `${prefix}/index.html`;
+    }
+    return "/index.html";
   }
 
   function getLeafSlides() {
@@ -421,6 +433,23 @@
       .slide-editor-show-controls.show {
         display: inline-block;
       }
+      .slide-editor-home-button {
+        position: fixed;
+        left: 16px;
+        top: 16px;
+        z-index: 1201;
+        border: 1px solid #30363d;
+        background: rgba(13, 17, 23, 0.92);
+        color: #e6edf3;
+        border-radius: 999px;
+        font-size: 12px;
+        padding: 8px 12px;
+        cursor: pointer;
+      }
+      .slide-editor-home-button:hover {
+        border-color: #6e40c9;
+        color: #a371f7;
+      }
       .slide-editor-inline-target {
         outline: 2px dashed #6e40c9;
         outline-offset: 6px;
@@ -483,6 +512,17 @@
       }
     `;
     document.head.appendChild(style);
+
+    backToHomeButton = document.createElement("button");
+    backToHomeButton.type = "button";
+    backToHomeButton.className = "slide-editor-home-button";
+    backToHomeButton.textContent = "Fechar apresentação";
+    backToHomeButton.setAttribute("aria-label", "Fechar apresentação e voltar para a página inicial");
+    backToHomeButton.setAttribute(UI_ATTR, "true");
+    backToHomeButton.addEventListener("click", () => {
+      window.location.assign(getHomePagePath());
+    });
+    document.body.appendChild(backToHomeButton);
 
     const toolbar = document.createElement("div");
     toolbar.className = "slide-editor-toolbar";
