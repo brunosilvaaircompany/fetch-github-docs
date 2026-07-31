@@ -13,9 +13,9 @@
   let reveal = null;
   let saveTimer = null;
   let storageEnabled = true;
-  let textarea = null;
+  let inlineEditing = false;
+  let editableSlide = null;
   let statusText = null;
-  let panel = null;
   let toggleButton = null;
 
   function getLeafSlides() {
@@ -94,23 +94,42 @@
     return `Slide ${horizontal}.${vertical}`;
   }
 
-  function syncEditorFromCurrentSlide() {
-    if (!textarea || !statusText) {
+  function updateStatus(slide) {
+    if (!statusText) {
       return;
     }
-    const slide = getCurrentSlide();
     if (!slide) {
-      textarea.value = "";
       statusText.textContent = "Sem slide selecionado";
       return;
     }
-    textarea.value = slide.innerHTML.trim();
-    statusText.textContent = currentSlideLabel(slide);
+    statusText.textContent = inlineEditing
+      ? `${currentSlideLabel(slide)} - edicao de texto ativa`
+      : currentSlideLabel(slide);
+  }
+
+  function setEditableSlide(slide) {
+    if (editableSlide) {
+      editableSlide.removeAttribute("contenteditable");
+      editableSlide.removeAttribute("spellcheck");
+      editableSlide.classList.remove("slide-editor-inline-target");
+    }
+
+    editableSlide = null;
+    if (!inlineEditing || !slide) {
+      updateStatus(getCurrentSlide());
+      return;
+    }
+
+    editableSlide = slide;
+    editableSlide.setAttribute("contenteditable", "true");
+    editableSlide.setAttribute("spellcheck", "true");
+    editableSlide.classList.add("slide-editor-inline-target");
+    updateStatus(slide);
   }
 
   function createSlideElement() {
     const section = document.createElement("section");
-    section.innerHTML = "<h2>Novo slide</h2><p>Edite este conteudo no painel lateral.</p>";
+    section.innerHTML = "<h2>Novo slide</h2><p>Clique em 'Editar texto' para editar diretamente neste slide.</p>";
     return section;
   }
 
@@ -123,7 +142,7 @@
     current.parentElement.insertBefore(section, current.nextSibling);
     syncRevealLayout();
     goToSlide(section);
-    syncEditorFromCurrentSlide();
+    setEditableSlide(section);
     queueSave();
   }
 
@@ -136,7 +155,7 @@
     current.parentElement.insertBefore(clone, current.nextSibling);
     syncRevealLayout();
     goToSlide(clone);
-    syncEditorFromCurrentSlide();
+    setEditableSlide(clone);
     queueSave();
   }
 
@@ -176,7 +195,7 @@
         goToSlide(firstSlide);
       }
     }
-    syncEditorFromCurrentSlide();
+    setEditableSlide(getCurrentSlide());
     queueSave();
   }
 
@@ -192,7 +211,7 @@
     if (firstSlide) {
       goToSlide(firstSlide);
     }
-    syncEditorFromCurrentSlide();
+    setEditableSlide(firstSlide);
   }
 
   function exportSlides() {
@@ -234,6 +253,14 @@
         flex-wrap: wrap;
         max-width: 78vw;
       }
+      .slide-editor-status {
+        border: 1px solid #30363d;
+        background: rgba(13, 17, 23, 0.9);
+        color: #8b949e;
+        border-radius: 999px;
+        font-size: 12px;
+        padding: 8px 12px;
+      }
       .slide-editor-toolbar button {
         border: 1px solid #30363d;
         background: #0d1117;
@@ -246,47 +273,10 @@
       .slide-editor-toolbar button:hover {
         border-color: #6e40c9;
       }
-      .slide-editor-panel {
-        position: fixed;
-        top: 64px;
-        right: 16px;
-        width: min(520px, 88vw);
-        height: min(72vh, 560px);
-        z-index: 1200;
-        border: 1px solid #30363d;
-        border-radius: 10px;
-        background: #0d1117;
-        display: none;
-        flex-direction: column;
-        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
-      }
-      .slide-editor-panel.open {
-        display: flex;
-      }
-      .slide-editor-panel header {
-        border-bottom: 1px solid #21262d;
-        padding: 10px 12px;
-        font-size: 12px;
-        color: #8b949e;
-      }
-      .slide-editor-panel textarea {
-        flex: 1;
-        width: 100%;
-        resize: none;
-        border: 0;
-        outline: 0;
-        padding: 12px;
-        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
-        font-size: 12px;
-        line-height: 1.5;
-        color: #e6edf3;
-        background: #0d1117;
-      }
-      .slide-editor-panel footer {
-        border-top: 1px solid #21262d;
-        padding: 8px 12px;
-        color: #8b949e;
-        font-size: 11px;
+      .slide-editor-inline-target {
+        outline: 2px dashed #6e40c9;
+        outline-offset: 6px;
+        cursor: text;
       }
     `;
     document.head.appendChild(style);
@@ -296,17 +286,12 @@
     toolbar.setAttribute(UI_ATTR, "true");
 
     toggleButton = document.createElement("button");
-    toggleButton.textContent = "Editar slide";
+    toggleButton.textContent = "Editar texto";
     toggleButton.type = "button";
     toggleButton.addEventListener("click", () => {
-      if (!panel) {
-        return;
-      }
-      const open = panel.classList.toggle("open");
-      toggleButton.textContent = open ? "Fechar editor" : "Editar slide";
-      if (open) {
-        syncEditorFromCurrentSlide();
-      }
+      inlineEditing = !inlineEditing;
+      toggleButton.textContent = inlineEditing ? "Parar edicao" : "Editar texto";
+      setEditableSlide(getCurrentSlide());
     });
 
     const addButton = document.createElement("button");
@@ -334,6 +319,10 @@
     resetButton.type = "button";
     resetButton.addEventListener("click", resetSlides);
 
+    statusText = document.createElement("span");
+    statusText.className = "slide-editor-status";
+
+    toolbar.appendChild(statusText);
     toolbar.appendChild(toggleButton);
     toolbar.appendChild(addButton);
     toolbar.appendChild(duplicateButton);
@@ -342,44 +331,38 @@
     toolbar.appendChild(resetButton);
     document.body.appendChild(toolbar);
 
-    panel = document.createElement("div");
-    panel.className = "slide-editor-panel";
-    panel.setAttribute(UI_ATTR, "true");
-
-    const header = document.createElement("header");
-    statusText = document.createElement("span");
-    statusText.textContent = "Slide atual";
-    header.appendChild(statusText);
-
-    textarea = document.createElement("textarea");
-    textarea.setAttribute("aria-label", "Editor de HTML do slide atual");
-    textarea.addEventListener("input", () => {
-      const current = getCurrentSlide();
-      if (!current) {
+    slidesRoot.addEventListener("input", (event) => {
+      if (!inlineEditing || !editableSlide) {
         return;
       }
-      current.innerHTML = textarea.value;
+      if (!editableSlide.contains(event.target)) {
+        return;
+      }
       syncRevealLayout();
       queueSave();
     });
 
-    const footer = document.createElement("footer");
-    footer.textContent = "As alteracoes sao salvas automaticamente no navegador.";
+    slidesRoot.addEventListener("click", (event) => {
+      if (!inlineEditing) {
+        return;
+      }
+      const link = event.target.closest("a");
+      if (link) {
+        event.preventDefault();
+      }
+    }, true);
 
-    panel.appendChild(header);
-    panel.appendChild(textarea);
-    panel.appendChild(footer);
-    document.body.appendChild(panel);
+    updateStatus(getCurrentSlide());
   }
 
   window.initSlideEditor = function initSlideEditor(revealInstance) {
     reveal = revealInstance || null;
     if (reveal && typeof reveal.on === "function") {
       reveal.on("slidechanged", () => {
-        syncEditorFromCurrentSlide();
+        setEditableSlide(getCurrentSlide());
       });
     }
-    syncEditorFromCurrentSlide();
+    setEditableSlide(getCurrentSlide());
   };
 
   applySavedSlides();

@@ -144,7 +144,7 @@ Estrutura padrão de 60 minutos:
 
 Os decks em `slides/` agora incluem um modo de edição embutido no próprio HTML:
 
-- **Editar slide**: abre o painel lateral para editar o HTML do slide atual.
+- **Editar texto**: ativa a edição inline no slide atual, direto na apresentação.
 - **+ Slide**: adiciona um novo slide após o slide atual.
 - **Duplicar**: cria uma cópia do slide atual.
 - **Fechar slide**: remove o slide atual da apresentação.
