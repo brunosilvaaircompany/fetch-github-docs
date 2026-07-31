@@ -153,7 +153,7 @@
      const tagsWrap   = document.querySelector('.filter-tags');
      const originsWrap = document.querySelector('.filter-origins');
 
-     let activeTag  = 'all';
+     let activeTags = new Set(); // vazio = "Todos"
      let activeOrigin = 'all';
      let searchText = '';
      let cards = [];
@@ -181,15 +181,24 @@
      }
 
      function bindFilterTagButtons() {
-       if (!tagsWrap) {
-         return;
-       }
+       if (!tagsWrap) { return; }
        const buttons = Array.from(tagsWrap.querySelectorAll('.filter-tag-btn'));
        buttons.forEach(function (button) {
          button.onclick = function () {
-           activeTag = button.dataset.filter || 'all';
-           buttons.forEach(function (b) { b.classList.remove('active'); });
-           button.classList.add('active');
+           const value = button.dataset.filter || 'all';
+           if (value === 'all') {
+             activeTags.clear();
+           } else if (activeTags.has(value)) {
+             activeTags.delete(value);
+           } else {
+             activeTags.add(value);
+           }
+           // sincroniza classe active
+           buttons.forEach(function (b) {
+             const v = b.dataset.filter || 'all';
+             b.classList.toggle('active',
+               v === 'all' ? activeTags.size === 0 : activeTags.has(v));
+           });
            applyFilter();
          };
        });
@@ -329,9 +338,10 @@
        dynamicTags.sort();
 
        tagValues = ['all'].concat(baseTags, dynamicTags);
-       if (tagValues.indexOf(activeTag) < 0) {
-         activeTag = 'all';
-       }
+       // remove tags do Set que deixaram de existir
+       activeTags.forEach(function (t) {
+         if (tagValues.indexOf(t) < 0) { activeTags.delete(t); }
+       });
 
        tagsWrap.innerHTML = '';
        const tagsLabel = document.createElement('span');
@@ -341,7 +351,9 @@
        tagValues.forEach(function (value) {
          const button = document.createElement('button');
          button.type = 'button';
-         button.className = 'filter-tag-btn btn btn-sm' + (value === activeTag ? ' active' : '');
+         button.className = 'filter-tag-btn btn btn-sm' +
+           (value === 'all' && activeTags.size === 0 ? ' active' :
+            value !== 'all' && activeTags.has(value) ? ' active' : '');
          button.dataset.filter = value;
          button.textContent = value === 'all' ? 'Todos' : value;
          tagsWrap.appendChild(button);
@@ -401,8 +413,8 @@
            title.includes(searchText) ||
            desc.includes(searchText);
 
-         const matchesTag = activeTag === 'all' ||
-           tags.includes(activeTag);
+         const matchesTag = activeTags.size === 0 ||
+           Array.from(activeTags).some(function (t) { return tags.includes(t); });
 
          const matchesOrigin = activeOrigin === 'all' ||
            origin === activeOrigin;
@@ -414,7 +426,7 @@
 
        emptyState.hidden = visible > 0;
 
-       const anyFilter = searchText || activeTag !== 'all' || activeOrigin !== 'all';
+       const anyFilter = searchText || activeTags.size > 0 || activeOrigin !== 'all';
        if (anyFilter) {
          status.textContent = visible + ' de ' + total +
            (visible === 1 ? ' treinamento encontrado' : ' treinamentos encontrados');
@@ -427,7 +439,7 @@
      function clearFilters() {
        if (input) { input.value = ''; }
        searchText   = '';
-       activeTag    = 'all';
+       activeTags   = new Set();
        activeOrigin = 'all';
        if (originsWrap) {
          const originBtns = Array.from(originsWrap.querySelectorAll('.filter-origin-btn'));
