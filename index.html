@@ -53,12 +53,21 @@
           autocomplete="off"
         />
       </div>
-      <div class="filter-tags" role="group" aria-label="Filtrar por categoria">
-        <button class="filter-tag-btn btn btn-sm active" data-filter="all">Todos</button>
-        <button class="filter-tag-btn btn btn-sm" data-filter="cli">CLI</button>
-        <button class="filter-tag-btn btn btn-sm" data-filter="reveal.js">Reveal.js</button>
-        <button class="filter-tag-btn btn btn-sm" data-filter="60 min">60 min</button>
-        <button class="filter-tag-btn btn btn-sm" data-filter="template">Template</button>
+      <div class="filter-controls">
+        <div class="filter-origins" role="group" aria-label="Filtrar por origem">
+          <span class="filter-group-label">Origem</span>
+          <button class="filter-origin-btn btn btn-sm active" data-origin="all">Todos</button>
+          <button class="filter-origin-btn btn btn-sm" data-origin="server">Servidor</button>
+          <button class="filter-origin-btn btn btn-sm" data-origin="local">Locais</button>
+        </div>
+        <div class="filter-tags" role="group" aria-label="Filtrar por categoria">
+          <span class="filter-group-label">Tópico</span>
+          <button class="filter-tag-btn btn btn-sm active" data-filter="all">Todos</button>
+          <button class="filter-tag-btn btn btn-sm" data-filter="cli">CLI</button>
+          <button class="filter-tag-btn btn btn-sm" data-filter="reveal.js">Reveal.js</button>
+          <button class="filter-tag-btn btn btn-sm" data-filter="60 min">60 min</button>
+          <button class="filter-tag-btn btn btn-sm" data-filter="template">Template</button>
+        </div>
       </div>
     </div>
     <div class="filter-status color-fg-muted f6 mb-3" id="filter-status" aria-live="polite"></div>
@@ -67,6 +76,7 @@
 
       <!-- Copilot CLI -->
       <a class="card Box p-4 color-shadow-small" href="slides/copilot-cli/index.html"
+         data-origin="server"
          data-title="github copilot cli"
          data-desc="treinamento completo sobre o agente de terminal do copilot instalação autenticação criação de prs e customização com mcp"
          data-tags="cli reveal.js 60 min"
@@ -86,6 +96,7 @@
 
       <!-- Template -->
       <a class="card template Box p-4 color-shadow-small" href="slides/template.html"
+         data-origin="server"
          data-title="template de treinamento"
          data-desc="slide base com o tema github copilot copie para criar novas apresentações de 60 minutos com estrutura padronizada"
          data-tags="template reveal.js"
@@ -133,8 +144,10 @@
      const emptyState = document.getElementById('grid-empty');
      const clearBtn   = document.getElementById('clear-filter');
      const tagsWrap   = document.querySelector('.filter-tags');
+     const originsWrap = document.querySelector('.filter-origins');
 
      let activeTag  = 'all';
+     let activeOrigin = 'all';
      let searchText = '';
      let cards = [];
      const baseTags = ['cli', 'reveal.js', '60 min', 'template'];
@@ -145,6 +158,19 @@
          return tags.filter(Boolean).join(' ');
        }
        return String(tags || '');
+     }
+
+     function bindOriginButtons() {
+       if (!originsWrap) { return; }
+       const buttons = Array.from(originsWrap.querySelectorAll('.filter-origin-btn'));
+       buttons.forEach(function (button) {
+         button.onclick = function () {
+           activeOrigin = button.dataset.origin || 'all';
+           buttons.forEach(function (b) { b.classList.remove('active'); });
+           button.classList.add('active');
+           applyFilter();
+         };
+       });
      }
 
      function bindFilterTagButtons() {
@@ -169,6 +195,7 @@
        card.dataset.title = String(deck.title || '').toLowerCase();
        card.dataset.desc = String(deck.description || '').toLowerCase();
        card.dataset.tags = ('deck reveal.js ' + normalizeTags(deck.tags)).toLowerCase();
+       card.dataset.origin = 'local';
 
        const icon = document.createElement('div');
        icon.className = 'card-icon d-flex flex-items-center flex-justify-center rounded-2 color-bg-subtle';
@@ -300,6 +327,10 @@
        }
 
        tagsWrap.innerHTML = '';
+       const tagsLabel = document.createElement('span');
+       tagsLabel.className = 'filter-group-label';
+       tagsLabel.textContent = 'Tópico';
+       tagsWrap.appendChild(tagsLabel);
        tagValues.forEach(function (value) {
          const button = document.createElement('button');
          button.type = 'button';
@@ -354,33 +385,39 @@
        const total = cards.length;
 
        cards.forEach(function (card) {
-         const title = (card.dataset.title || '').toLowerCase();
-          const desc  = (card.dataset.desc  || '').toLowerCase();
-          const tags  = (card.dataset.tags  || '').toLowerCase();
+         const title  = (card.dataset.title  || '').toLowerCase();
+         const desc   = (card.dataset.desc   || '').toLowerCase();
+         const tags   = (card.dataset.tags   || '').toLowerCase();
+         const origin = card.dataset.origin  || '';
 
-          const matchesText = !searchText ||
-            title.includes(searchText) ||
-            desc.includes(searchText);
+         const matchesText = !searchText ||
+           title.includes(searchText) ||
+           desc.includes(searchText);
 
-          const matchesTag = activeTag === 'all' ||
-            tags.includes(activeTag);
+         const matchesTag = activeTag === 'all' ||
+           tags.includes(activeTag);
 
-          const show = matchesText && matchesTag;
-          card.classList.toggle('kb-hidden', !show);
-          if (show) visible++;
-        });
+         const matchesOrigin = activeOrigin === 'all' ||
+           origin === activeOrigin;
 
-        emptyState.hidden = visible > 0;
+         const show = matchesText && matchesTag && matchesOrigin;
+         card.classList.toggle('kb-hidden', !show);
+         if (show) visible++;
+       });
 
-        if (searchText || activeTag !== 'all') {
-          status.textContent = visible + ' de ' + total +
-            (visible === 1 ? ' treinamento encontrado' : ' treinamentos encontrados');
-        } else {
-          status.textContent = '';
-        }
-      }
+       emptyState.hidden = visible > 0;
+
+       const anyFilter = searchText || activeTag !== 'all' || activeOrigin !== 'all';
+       if (anyFilter) {
+         status.textContent = visible + ' de ' + total +
+           (visible === 1 ? ' treinamento encontrado' : ' treinamentos encontrados');
+       } else {
+         status.textContent = '';
+       }
+     }
 
       renderUserDeckCards();
+      bindOriginButtons();
 
       // inject Duplicar into static (built-in) cards
       Array.from(grid.querySelectorAll('[data-source-path]')).forEach(function (card) {
@@ -437,6 +474,13 @@
           input.value = '';
           searchText  = '';
           activeTag   = 'all';
+          activeOrigin = 'all';
+          if (originsWrap) {
+            const originBtns = Array.from(originsWrap.querySelectorAll('.filter-origin-btn'));
+            originBtns.forEach(function (b) { b.classList.remove('active'); });
+            const allOriginBtn = originsWrap.querySelector('[data-origin="all"]');
+            if (allOriginBtn) { allOriginBtn.classList.add('active'); }
+          }
           if (tagsWrap) {
             const currentButtons = Array.from(tagsWrap.querySelectorAll('.filter-tag-btn'));
             currentButtons.forEach(function (b) { b.classList.remove('active'); });
