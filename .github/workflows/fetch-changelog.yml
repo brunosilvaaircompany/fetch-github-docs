@@ -27,9 +27,64 @@ jobs:
         run: python3 scripts/fetch_changelog.py --output "$CHANGELOG_OUTPUT"
 
       - name: Commit se houver mudancas
+        id: commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add "$CHANGELOG_OUTPUT"
-          git diff --staged --quiet || git commit -m "changelog: atualizar GitHub Changelog"
-          git push
+          if git diff --staged --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            git commit -m "changelog: atualizar GitHub Changelog"
+            git push
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Extrair novos itens para o e-mail
+        id: extract
+        if: steps.commit.outputs.changed == 'true'
+        run: |
+          python3 - <<'PY'
+          import os, re
+
+          with open(os.environ["CHANGELOG_OUTPUT"], encoding="utf-8") as f:
+              content = f.read()
+
+          # Extrai as primeiras 5 entradas do changelog (cada uma comeca com "## [")
+          entries = re.split(r'\n(?=## \[)', content)
+          # Descarta o cabecalho (primeira parte antes da primeira entrada)
+          body_entries = [e for e in entries if e.startswith("## [")][:5]
+          summary = "\n\n---\n\n".join(body_entries) or "Sem novidades."
+
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as f:
+              # GitHub Actions nao suporta multiline diretamente: usar delimitador
+              delimiter = "EOF_CHANGELOG"
+              f.write(f"summary<<{delimiter}\n{summary}\n{delimiter}\n")
+          PY
+
+      # Requer os secrets: MAIL_USERNAME, MAIL_PASSWORD, MAIL_TO
+      # Configure em: Settings > Secrets and variables > Actions
+      - name: Enviar e-mail com novidades
+        if: steps.commit.outputs.changed == 'true'
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          to: ${{ secrets.MAIL_TO }}
+          from: GitHub Changelog <${{ secrets.MAIL_USERNAME }}>
+          subject: "🆕 GitHub Changelog atualizado — ${{ github.run_id }}"
+          body: |
+            Olá!
+
+            O GitHub Changelog foi atualizado. Aqui estão as novidades mais recentes:
+
+            ${{ steps.extract.outputs.summary }}
+
+            ---
+            Veja o arquivo completo:
+            https://github.com/${{ github.repository }}/blob/main/github-changelog/changelog.md
+
+            Fonte: https://github.blog/changelog/
