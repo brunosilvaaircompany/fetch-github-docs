@@ -151,26 +151,26 @@
 
      function createDeckCard(deck) {
        const card = document.createElement('a');
-       card.className = 'card';
+       card.className = 'card Box p-4 color-shadow-small d-flex flex-column gap-3';
        card.href = store.buildDeckHref(deck);
        card.dataset.title = String(deck.title || '').toLowerCase();
        card.dataset.desc = String(deck.description || '').toLowerCase();
        card.dataset.tags = ('deck reveal.js ' + normalizeTags(deck.tags)).toLowerCase();
 
        const icon = document.createElement('div');
-       icon.className = 'card-icon';
+       icon.className = 'card-icon d-flex flex-items-center flex-justify-center rounded-2 color-bg-subtle';
        icon.textContent = '🧩';
 
        const title = document.createElement('div');
-       title.className = 'card-title';
+       title.className = 'card-title h4';
        title.textContent = deck.title || 'Novo deck';
 
        const description = document.createElement('div');
-       description.className = 'card-desc';
+       description.className = 'card-desc f5';
        description.textContent = deck.description || 'Deck personalizado salvo localmente no navegador.';
 
        const meta = document.createElement('div');
-       meta.className = 'card-meta';
+       meta.className = 'card-meta d-flex flex-items-center flex-wrap gap-2 pt-2';
 
        const userTag = document.createElement('span');
        userTag.className = 'tag user-deck-badge';
@@ -192,10 +192,9 @@
 
        const deckId = String(deck.id || '');
        if (deckId.indexOf('path:') !== 0) {
+         cta.classList.add('card-cta-with-actions');
          const actionsWrap = document.createElement('span');
-         actionsWrap.style.marginLeft = 'auto';
-         actionsWrap.style.display = 'flex';
-         actionsWrap.style.gap = '6px';
+         actionsWrap.className = 'card-actions';
 
          const duplicateButton = document.createElement('button');
          duplicateButton.type = 'button';

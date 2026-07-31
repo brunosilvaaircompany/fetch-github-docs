@@ -85,8 +85,15 @@ body {
 .card-icon {
   width: 46px;
   height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
   border: 1px solid var(--kb-border);
   background: rgba(48, 54, 61, 0.7);
+  font-size: 20px;
+  line-height: 1;
+  flex-shrink: 0;
 }
 
 .card-title {
@@ -99,6 +106,10 @@ body {
 }
 
 .card-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
   border-top: 1px solid var(--kb-border);
 }
 
@@ -128,6 +139,18 @@ body {
   margin-left: auto;
   color: var(--kb-accent);
   font-weight: 600;
+  white-space: nowrap;
+}
+
+.card-cta-with-actions {
+  margin-left: 0;
+}
+
+.card-actions {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .filter-bar {
@@ -215,6 +238,10 @@ body {
 
 .deck-duplicate-btn,
 .deck-delete-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 28px;
   white-space: nowrap;
 }
 
