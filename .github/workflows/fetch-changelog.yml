@@ -64,8 +64,21 @@ jobs:
 
       # Requer os secrets: MAIL_USERNAME, MAIL_PASSWORD, MAIL_TO
       # Configure em: Settings > Secrets and variables > Actions
+      - name: Verificar configuracao de e-mail
+        id: check-mail
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
+          MAIL_TO: ${{ secrets.MAIL_TO }}
+        run: |
+          if [ -n "$MAIL_USERNAME" ] && [ -n "$MAIL_TO" ]; then
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Enviar e-mail com novidades
-        if: steps.commit.outputs.changed == 'true' && secrets.MAIL_USERNAME != '' && secrets.MAIL_TO != ''
+        if: steps.commit.outputs.changed == 'true' && steps.check-mail.outputs.configured == 'true'
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp.gmail.com
@@ -90,6 +103,6 @@ jobs:
             Fonte: https://github.blog/changelog/
 
       - name: Avisar secrets de e-mail ausentes
-        if: steps.commit.outputs.changed == 'true' && (secrets.MAIL_USERNAME == '' || secrets.MAIL_TO == '')
+        if: steps.commit.outputs.changed == 'true' && steps.check-mail.outputs.configured == 'false'
         run: |
           echo "Nao foi enviado e-mail porque faltam secrets MAIL_USERNAME e/ou MAIL_TO configurados." >> "$GITHUB_STEP_SUMMARY"
