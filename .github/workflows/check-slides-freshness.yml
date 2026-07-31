@@ -92,8 +92,25 @@ jobs:
             -f body="$body" \
             --jq '.data.createDiscussion.discussion.url' >> "$GITHUB_STEP_SUMMARY"
 
+      - name: Verificar configuracao de e-mail SMTP
+        id: check-smtp
+        if: steps.freshness.outputs.exit_code == '2'
+        env:
+          SMTP_SERVER: ${{ secrets.SMTP_SERVER }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          ALERT_EMAIL_TO: ${{ secrets.ALERT_EMAIL_TO }}
+          ALERT_EMAIL_FROM: ${{ secrets.ALERT_EMAIL_FROM }}
+        run: |
+          if [ -n "$SMTP_SERVER" ] && [ -n "$SMTP_PORT" ] && [ -n "$SMTP_USERNAME" ] && [ -n "$SMTP_PASSWORD" ] && [ -n "$ALERT_EMAIL_TO" ] && [ -n "$ALERT_EMAIL_FROM" ]; then
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Enviar e-mail de alerta
-        if: steps.freshness.outputs.exit_code == '2' && secrets.SMTP_SERVER != '' && secrets.SMTP_PORT != '' && secrets.SMTP_USERNAME != '' && secrets.SMTP_PASSWORD != '' && secrets.ALERT_EMAIL_TO != '' && secrets.ALERT_EMAIL_FROM != ''
+        if: steps.freshness.outputs.exit_code == '2' && steps.check-smtp.outputs.configured == 'true'
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: ${{ secrets.SMTP_SERVER }}
@@ -110,6 +127,6 @@ jobs:
           attachments: slides/.freshness-summary.md
 
       - name: Avisar secrets de e-mail ausentes
-        if: steps.freshness.outputs.exit_code == '2' && (secrets.SMTP_SERVER == '' || secrets.SMTP_PORT == '' || secrets.SMTP_USERNAME == '' || secrets.SMTP_PASSWORD == '' || secrets.ALERT_EMAIL_TO == '' || secrets.ALERT_EMAIL_FROM == '')
+        if: steps.freshness.outputs.exit_code == '2' && steps.check-smtp.outputs.configured == 'false'
         run: |
           echo "Nao foi enviado e-mail porque faltam secrets SMTP/ALERT_EMAIL_* configurados." >> "$GITHUB_STEP_SUMMARY"
