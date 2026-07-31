@@ -273,8 +273,10 @@ class LiquidResolver:
             out.append(text[pos:open_match.start()])
             extracted = cls._extract_first_ifversion_branch(text, open_match)
             if extracted is None:
-                out.append(text[open_match.start():])
-                break
+                # No matching endif found (e.g. tag inside a code fence).
+                # Skip past this opening tag and continue scanning.
+                pos = open_match.end()
+                continue
             branch, next_pos = extracted
             out.append(branch)
             pos = next_pos
@@ -309,6 +311,9 @@ class LiquidResolver:
             if out == prev_ifversion:
                 break
             prev_ifversion = out
+        # Strip any orphaned ifversion-family tags that could not be resolved
+        # (e.g. partial examples inside code fences that have no matching endif).
+        out = self.IF_TAG_RE.sub("", out)
         out = self.CALLOUT_START_RE.sub("> **Nota:**", out)
         out = self.CALLOUT_END_RE.sub("", out)
 
