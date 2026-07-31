@@ -14,6 +14,18 @@ permissions:
   discussions: write
 
 jobs:
+  # This noop job ensures the workflow always reports success (not failure) when
+  # the main 'check' job is skipped because the parent workflow did not succeed.
+  # Without it, GitHub marks an all-skipped workflow as conclusion=failure.
+  skip-notice:
+    if: github.event_name == 'workflow_run' && github.event.workflow_run.conclusion != 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Informar motivo do skip
+        run: |
+          echo "O workflow pai ('Atualizar documentacao do GitHub') terminou com status '${{ github.event.workflow_run.conclusion }}'."
+          echo "A verificacao de freshness dos slides sera ignorada nesta execucao."
+
   check:
     if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
