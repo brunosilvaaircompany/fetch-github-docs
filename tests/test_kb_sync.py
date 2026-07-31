@@ -211,3 +211,85 @@ def test_validation_does_not_block_generic_liquid_if_tags(kb_sync_module, tmp_pa
 
     violations = kb_sync_module.validate_output_has_no_templates(str(output_dir))
     assert violations == []
+
+
+def test_liquid_resolver_preserves_tags_inside_code_blocks(kb_sync_module, tmp_path):
+    """Liquid tags inside fenced code blocks must not be resolved."""
+    (tmp_path / "data" / "variables").mkdir(parents=True, exist_ok=True)
+    (tmp_path / "data" / "reusables").mkdir(parents=True, exist_ok=True)
+    (tmp_path / "data" / "variables" / "product.yml").write_text(
+        "name: GitHub Copilot\n", encoding="utf-8"
+    )
+
+    resolver = kb_sync_module.LiquidResolver(str(tmp_path))
+    source = (
+        "Outside: {% data variables.product.name %}\n"
+        "{% ifversion fpt %}primary{% endif %}\n"
+        "```\n"
+        "Example: {%- ifversion fpt %}\n"
+        "{% data variables.product.name %}\n"
+        "```\n"
+        "After block.\n"
+    )
+    resolved = resolver.resolve(source)
+
+    # Tags outside code blocks should be resolved
+    assert "GitHub Copilot" in resolved
+    assert "primary" in resolved
+    assert "{% ifversion fpt %}" not in resolved.split("```")[0]
+
+    # Tags inside the fenced code block must be preserved as-is
+    code_block = resolved.split("```")[1]
+    assert "{%- ifversion fpt %}" in code_block
+    assert "{% data variables.product.name %}" in code_block
+
+    # Content after the block should remain
+    assert "After block." in resolved
+
+
+def test_validation_ignores_liquid_tags_inside_code_blocks(kb_sync_module, tmp_path):
+    """validate_output_has_no_templates must not flag Liquid tags inside fenced code blocks."""
+    output_dir = tmp_path / "output"
+    readme = output_dir / "content" / "README.md"
+    readme.parent.mkdir(parents=True, exist_ok=True)
+    readme.write_text(
+        "# Contributing guide\n\n"
+        "Example of a versioned table row:\n\n"
+        "```\n"
+        "Row for all versions | B1 | C1{%- ifversion fpt %}\n"
+        "Row for FPT only | B2 | C2\n"
+        "```\n\n"
+        "Use the tag above only in appropriate contexts.\n",
+        encoding="utf-8",
+    )
+
+    violations = kb_sync_module.validate_output_has_no_templates(str(output_dir))
+    assert violations == [], f"Expected no violations, got: {violations}"
+
+
+def test_run_validate_clean_passes_when_template_only_in_code_block(
+    kb_sync_module, tmp_path, monkeypatch
+):
+    """--validate-clean must succeed when unresolvable Liquid tags are inside code blocks."""
+    monkeypatch.chdir(tmp_path)
+    output_dir = tmp_path / "output"
+
+    tar_bytes = build_tarball(
+        {
+            "docs-main/content/demo/README.md": (
+                "# Demo Contributing Guide\n\n"
+                "Example usage:\n\n"
+                "```\n"
+                "{%- ifversion fpt %}\n"
+                "Only on GitHub.com\n"
+                "```\n\n"
+                "End of guide.\n"
+            ),
+            "docs-main/data/variables/product.yml": "name: GitHub Copilot\n",
+            "docs-main/data/reusables/tips/intro.md": "Always test your changes.\n",
+        }
+    )
+    monkeypatch.setattr(kb_sync_module, "download_repo_tarball", lambda *_: tar_bytes)
+
+    # Should not raise even though the code block contains an ifversion tag
+    kb_sync_module.run(["content/demo"], str(output_dir), keep_raw=False, validate_clean=True)
