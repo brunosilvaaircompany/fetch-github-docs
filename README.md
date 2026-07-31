@@ -101,6 +101,37 @@ Spaces sempre reflete a documentação atualizada, sem esforço manual.
   pastas), os caminhos de `--section` podem precisar de ajuste — rode
   `--list` ou `--search` de novo para confirmar.
 
+## Template de apresentação (60 minutos com hands-on)
+
+A pasta `slides/` inclui dois arquivos de template prontos para criar
+treinamentos de **1 hora** sobre GitHub Copilot:
+
+| Arquivo | Descrição |
+|---|---|
+| `slides/template.md` | Guia de conteúdo para o instrutor — agenda, timebox, orientações por bloco |
+| `slides/template.html` | Apresentação **Reveal.js** com tema GitHub Copilot — pronto para abrir no navegador |
+
+A estrutura cobre seis blocos:
+
+| Bloco | Horário | Duração |
+|---|---|---|
+| ⚡ Abertura & Alinhamento | 00:00 – 05:00 | 5 min |
+| 📖 Teoria, Conceitos & Casos de Uso | 05:00 – 15:00 | 10 min |
+| 🛠️ Preparação do Ambiente | 15:00 – 20:00 | 5 min |
+| 💻 Hands-on / Demonstração Prática | 20:00 – 50:00 | 30 min |
+| ✅ Boas Práticas | 50:00 – 55:00 | 5 min |
+| 🎯 Encerramento & Q&A | 55:00 – 60:00 | 5 min |
+
+### Como usar o template HTML
+
+1. Copie `slides/template.html` para um novo arquivo (ex: `slides/copilot-mcp.html`).
+2. Substitua os marcadores `[...]` pelos dados do treinamento (tema, instrutor, links).
+3. Abra o arquivo no navegador — não precisa de servidor local.
+4. Adicione imagens em `slides/images/` e referencie com caminho relativo (`images/nome.png`).
+5. Registre o novo slide em `slides/slide-sources.yml` para ativar o monitoramento de desatualização.
+
+---
+
 ## Automação para detectar slides HTML desatualizados
 
 Este repositório também inclui um fluxo para detectar quando seus

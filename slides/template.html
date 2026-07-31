@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Treinamento GitHub Copilot — 60 minutos</title>
+
+  <!-- Reveal.js CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reset.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css" />
+
+  <style>
+    /* =====================================================================
+       Tema GitHub Copilot
+       Paleta:
+         Background  : #0d1117  (GitHub dark)
+         Surface     : #161b22  (cards / sections)
+         Border      : #21262d
+         Accent      : #6e40c9  (Copilot purple)
+         Accent light: #a371f7
+         Text primary: #e6edf3
+         Text muted  : #8b949e
+         Success     : #3fb950  (green)
+         Warning     : #d29922  (amber)
+    ===================================================================== */
+
+    :root {
+      --bg:           #0d1117;
+      --surface:      #161b22;
+      --border:       #21262d;
+      --accent:       #6e40c9;
+      --accent-light: #a371f7;
+      --text:         #e6edf3;
+      --text-muted:   #8b949e;
+      --green:        #3fb950;
+      --amber:        #d29922;
+    }
+
+    .reveal-viewport { background: var(--bg); }
+
+    .reveal {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 36px;
+      color: var(--text);
+    }
+
+    /* ── Headings ── */
+    .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+      color: var(--text);
+      font-weight: 700;
+      text-transform: none;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+    .reveal h1 { font-size: 2em; }
+    .reveal h2 { font-size: 1.4em; color: var(--accent-light); }
+    .reveal h3 { font-size: 1em; color: var(--text-muted); }
+
+    /* ── Accent bar on h2 ── */
+    .reveal h2::before {
+      content: "";
+      display: inline-block;
+      width: 4px;
+      height: 0.9em;
+      background: var(--accent);
+      border-radius: 2px;
+      margin-right: 0.4em;
+      vertical-align: middle;
+    }
+
+    /* ── Links ── */
+    .reveal a { color: var(--accent-light); text-decoration: underline; }
+    .reveal a:hover { color: #fff; }
+
+    /* ── Lists ── */
+    .reveal ul, .reveal ol { text-align: left; margin-left: 1em; }
+    .reveal li { margin: 0.3em 0; color: var(--text); }
+    .reveal ul li::marker { color: var(--accent); }
+
+    /* ── Code ── */
+    .reveal code {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.1em 0.35em;
+      font-size: 0.85em;
+      color: var(--accent-light);
+    }
+    .reveal pre {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      box-shadow: none;
+      width: 100%;
+    }
+    .reveal pre code {
+      background: transparent;
+      border: none;
+      padding: 0;
+      color: var(--text);
+      font-size: 0.72em;
+    }
+
+    /* ── Blockquote / tip ── */
+    .reveal blockquote {
+      background: var(--surface);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      padding: 0.6em 1em;
+      font-style: normal;
+      color: var(--text);
+      width: 90%;
+      margin: 0.8em auto;
+    }
+
+    /* ── Timebox badge ── */
+    .timebox {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 20px;
+      padding: 0.15em 0.7em;
+      font-size: 0.55em;
+      font-weight: 600;
+      vertical-align: middle;
+      margin-left: 0.5em;
+      letter-spacing: 0.03em;
+    }
+
+    /* ── Progress / controls theme ── */
+    .reveal .progress { background: var(--border); }
+    .reveal .progress span { background: var(--accent); }
+    .reveal .controls { color: var(--accent-light); }
+
+    /* ── Cover slide ── */
+    .cover-logo {
+      margin-bottom: 0.4em;
+    }
+    .cover-logo img {
+      width: 96px;
+      height: 96px;
+      filter: invert(1);        /* branco sobre fundo escuro */
+    }
+    .cover-subtitle {
+      color: var(--text-muted);
+      font-size: 0.6em;
+      margin-top: 0.3em;
+    }
+    .cover-badge {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 6px;
+      padding: 0.2em 0.8em;
+      font-size: 0.5em;
+      margin-top: 0.8em;
+    }
+
+    /* ── GitHub mark no rodapé ── */
+    .gh-footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4em;
+      margin-top: 1em;
+      font-size: 0.4em;
+      color: var(--text-muted);
+    }
+    .gh-footer img {
+      width: 18px;
+      height: 18px;
+      filter: invert(0.6);
+    }
+
+    /* ── Octocat decorativa (octodex.github.com — © GitHub Inc.) ── */
+    .octocat {
+      position: absolute;
+      bottom: 0.5em;
+      right: 0.8em;
+      width: 90px;
+      height: 90px;
+      object-fit: contain;
+      opacity: 0.85;
+      border-radius: 8px;
+    }
+
+    /* ── Two-column layout ── */
+    .cols {
+      display: flex;
+      gap: 1.5em;
+      align-items: flex-start;
+      justify-content: center;
+      text-align: left;
+    }
+    .cols > div { flex: 1; }
+
+    /* ── Agenda table ── */
+    .agenda {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.65em;
+      text-align: left;
+    }
+    .agenda th {
+      background: var(--surface);
+      color: var(--accent-light);
+      padding: 0.5em 0.8em;
+      border-bottom: 2px solid var(--accent);
+    }
+    .agenda td {
+      padding: 0.45em 0.8em;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+    }
+    .agenda tr:hover td { background: var(--surface); }
+    .agenda .min { color: var(--text-muted); }
+
+    /* ── Highlight colors ── */
+    .hl-purple { color: var(--accent-light); font-weight: 600; }
+    .hl-green  { color: var(--green); font-weight: 600; }
+    .hl-amber  { color: var(--amber); font-weight: 600; }
+
+    /* ── Icon row ── */
+    .icon-row {
+      display: flex;
+      justify-content: center;
+      gap: 1.5em;
+      margin-top: 0.6em;
+    }
+    .icon-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.6em 1em;
+      text-align: center;
+      font-size: 0.55em;
+      color: var(--text);
+      min-width: 6em;
+    }
+    .icon-card .emoji { font-size: 2.5em; display: block; margin-bottom: 0.2em; }
+  </style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+  <!-- ===================================================================
+       SLIDE 1 — CAPA
+  ==================================================================== -->
+  <section>
+    <div class="cover-logo">
+      <img src="images/copilot-48.svg" alt="GitHub Copilot" />
+    </div>
+    <h1>GitHub Copilot</h1>
+    <p class="cover-subtitle">Treinamento prático — 60 minutos</p>
+    <!-- Substitua pelo tema do treinamento -->
+    <p style="font-size:0.75em; color:var(--accent-light); margin-top:0.6em;">
+      <strong>[Tema do Treinamento]</strong>
+    </p>
+    <span class="cover-badge">Hands-on</span>
+    <p style="margin-top:1em; font-size:0.45em; color:var(--text-muted);">
+      [Nome do instrutor] &nbsp;·&nbsp; [Data] &nbsp;·&nbsp; [Organização]
+    </p>
+    <div class="gh-footer">
+      <img src="images/mark-github-24.svg" alt="GitHub" />
+      GitHub Copilot
+    </div>
+    <!--
+      Octocat decorativa (© GitHub Inc. — octodex.github.com)
+      Sugestoes para treinamentos de Copilot/AI:
+        Neurocats (AI/neural): https://octodex.github.com/images/neurocats_FULL.png
+        Codercat (coding):     https://octodex.github.com/images/codercat.jpg
+        Original Mona:         https://octodex.github.com/images/original.png
+
+      Descomente e substitua a URL pela Octocat desejada:
+    -->
+    <!-- <img class="octocat" src="https://octodex.github.com/images/neurocats_FULL.png" alt="Neurocats — GitHub Octocat" /> -->
+  </section>
+
+  <!-- ===================================================================
+       SLIDE 2 — AGENDA
+  ==================================================================== -->
+  <section>
+    <h2>Agenda <span class="timebox">60 min</span></h2>
+    <table class="agenda">
+      <thead>
+        <tr>
+          <th>Horário</th>
+          <th>Bloco</th>
+          <th class="min">Duração</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>00:00 – 05:00</td>
+          <td>⚡ Abertura &amp; Alinhamento</td>
+          <td class="min">5 min</td>
+        </tr>
+        <tr>
+          <td>05:00 – 15:00</td>
+          <td>📖 Teoria, Conceitos &amp; Casos de Uso</td>
+          <td class="min">10 min</td>
+        </tr>
+        <tr>
+          <td>15:00 – 20:00</td>
+          <td>🛠️ Preparação do Ambiente</td>
+          <td class="min">5 min</td>
+        </tr>
+        <tr>
+          <td>20:00 – 50:00</td>
+          <td>💻 Hands-on / Demonstração Prática</td>
+          <td class="min">30 min</td>
+        </tr>
+        <tr>
+          <td>50:00 – 55:00</td>
+          <td>✅ Boas Práticas</td>
+          <td class="min">5 min</td>
+        </tr>
+        <tr>
+          <td>55:00 – 60:00</td>
+          <td>🎯 Encerramento &amp; Q&amp;A</td>
+          <td class="min">5 min</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ===================================================================
+       BLOCO 1 — ABERTURA (00:00 – 05:00)
+  ==================================================================== -->
+  <section>
+    <section>
+      <h2>⚡ Abertura <span class="timebox">00:00 – 05:00</span></h2>
+      <ul>
+        <li>Boas-vindas à equipe 👋</li>
+        <li>Recapitulação do encontro anterior <span class="hl-purple">(quando aplicável)</span></li>
+        <li>Apresentação do tema de hoje</li>
+      </ul>
+      <blockquote>
+        ⏱️ Devido ao tempo limitado, o foco é <strong>acompanhar a demonstração</strong>.<br/>
+        Os exercícios podem ser reproduzidos depois com a gravação e a documentação.
+      </blockquote>
+    </section>
+  </section>
+
+  <!-- ===================================================================
+       BLOCO 2 — TEORIA (05:00 – 15:00)
+  ==================================================================== -->
+  <section>
+    <section>
+      <h2>📖 O que é? <span class="timebox">05:00 – 15:00</span></h2>
+      <!-- Substitua pelo nome do recurso -->
+      <h3>[Nome do recurso / ferramenta]</h3>
+      <ul>
+        <li>Descrição objetiva do recurso</li>
+        <li>Como se encaixa no fluxo de desenvolvimento</li>
+        <li>Relação com o GitHub Copilot</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>💡 Por que usar?</h2>
+      <div class="icon-row">
+        <div class="icon-card">
+          <span class="emoji">⚡</span>Acelera<br/>desenvolvimento
+        </div>
+        <div class="icon-card">
+          <span class="emoji">🤖</span>Reduz<br/>trabalho manual
+        </div>
+        <div class="icon-card">
+          <span class="emoji">🎯</span>Mais contexto<br/>ao Copilot
+        </div>
+        <div class="icon-card">
+          <span class="emoji">📈</span>Aumenta<br/>produtividade
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>🏆 Casos de Uso</h2>
+      <div class="cols">
+        <div>
+          <ul>
+            <li>Refatoração de código</li>
+            <li>Automação de testes</li>
+            <li>Criação de queries SQL</li>
+          </ul>
+        </div>
+        <div>
+          <ul>
+            <li>Desenvolvimento de APIs</li>
+            <li>Geração de documentação</li>
+            <li>Correção de bugs</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>📚 Documentação Oficial</h2>
+      <ul>
+        <li><a href="#">Repositório oficial</a></li>
+        <li><a href="#">Documentação</a></li>
+        <li><a href="https://docs.github.com/pt/copilot">GitHub Docs — Copilot</a></li>
+        <li><a href="#">Changelog</a></li>
+        <li><a href="#">Materiais de referência</a></li>
+      </ul>
+    </section>
+  </section>
+
+  <!-- ===================================================================
+       BLOCO 3 — PREPARAÇÃO DO AMBIENTE (15:00 – 20:00)
+  ==================================================================== -->
+  <section>
+    <section>
+      <h2>🛠️ Preparação do Ambiente <span class="timebox">15:00 – 20:00</span></h2>
+      <h3>Repositório do treinamento</h3>
+      <ul>
+        <li>Apresentar o repositório utilizado</li>
+        <li>Explicar o propósito e a estrutura</li>
+      </ul>
+      <blockquote>
+        💡 Exemplos: <strong>GitHub Skills</strong>, repositórios de demonstração, projetos internos
+      </blockquote>
+    </section>
+
+    <section>
+      <h2>🔀 Fork &amp; Clone</h2>
+      <pre><code class="language-bash"># 1. Faça o fork no GitHub
+# 2. Clone localmente
+git clone https://github.com/&lt;seu-usuario&gt;/&lt;repositorio&gt;.git
+cd &lt;repositorio&gt;</code></pre>
+    </section>
+
+    <section>
+      <h2>✅ Validação do Ambiente</h2>
+      <div class="cols">
+        <div>
+          <p><strong>Opção A — Codespaces</strong></p>
+          <ul>
+            <li>Abrir no GitHub Codespaces</li>
+            <li>Copilot já disponível</li>
+          </ul>
+        </div>
+        <div>
+          <p><strong>Opção B — Local</strong></p>
+          <ul>
+            <li>Abrir no VS Code</li>
+            <li>Extensão GitHub Copilot</li>
+          </ul>
+        </div>
+      </div>
+      <p style="margin-top:0.8em; font-size:0.6em; color:var(--text-muted);">
+        Verifique: acesso ao Copilot · permissões · extensões instaladas
+      </p>
+    </section>
+  </section>
+
+  <!-- ===================================================================
+       BLOCO 4 — HANDS-ON (20:00 – 50:00)
+  ==================================================================== -->
+  <section>
+    <section>
+      <h2>💻 Hands-on <span class="timebox">20:00 – 50:00</span></h2>
+      <h3>Demonstração passo a passo</h3>
+      <div class="icon-row">
+        <div class="icon-card">
+          <span class="emoji">💬</span>Chat
+        </div>
+        <div class="icon-card">
+          <span class="emoji">⌨️</span>Inline<br/>Editor
+        </div>
+        <div class="icon-card">
+          <span class="emoji">🖥️</span>Terminal
+        </div>
+        <div class="icon-card">
+          <span class="emoji">🤖</span>Agentes
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>🎯 Engenharia de Prompt</h2>
+      <div class="cols">
+        <div>
+          <p><span class="hl-amber">Genérico ❌</span></p>
+          <pre><code>Crie um endpoint REST</code></pre>
+        </div>
+        <div>
+          <p><span class="hl-green">Específico ✅</span></p>
+          <pre><code>Crie um endpoint REST POST /users
+com validação de e-mail e retorno
+HTTP 201 em Express.js + TypeScript</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>🧠 Human in the Loop</h2>
+      <ul>
+        <li>O Copilot é um <strong>assistente</strong>, não substitui o desenvolvedor</li>
+        <li>Todo código gerado deve ser <span class="hl-purple">revisado</span></li>
+        <li>Pull Requests precisam de validação humana</li>
+        <li>Sugestões da IA requerem análise crítica</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>🔄 Lidando com Imprevistos</h2>
+      <ul>
+        <li>Ajuste o prompt — adicione mais contexto</li>
+        <li>Limpe o histórico do chat quando necessário</li>
+        <li>Use <code>#arquivo</code> para referenciar contexto específico</li>
+        <li>Demonstre como guiar a IA até a resposta esperada</li>
+      </ul>
+    </section>
+  </section>
+
+  <!-- ===================================================================
+       BLOCO 5 — BOAS PRÁTICAS (50:00 – 55:00)
+  ==================================================================== -->
+  <section>
+    <section>
+      <h2>✅ Boas Práticas <span class="timebox">50:00 – 55:00</span></h2>
+      <h3>Economia de Contexto / Tokens</h3>
+      <ul>
+        <li>Feche arquivos que não são relevantes para a tarefa</li>
+        <li>Limpe conversas antigas antes de iniciar novo contexto</li>
+        <li>Prefira autocomplete para tarefas simples</li>
+        <li>Reduzir contexto = respostas mais precisas e rápidas</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>📌 Contexto Específico</h2>
+      <ul>
+        <li>Referencie arquivos com <code>#</code> no chat</li>
+        <li>
+          Use <code>.github/copilot-instructions.md</code> para
+          <span class="hl-purple">instruções persistentes do projeto</span>
+        </li>
+        <li>Configure instruções de linguagem, padrões e restrições</li>
+      </ul>
+      <pre><code class="language-markdown"># .github/copilot-instructions.md
+- Use TypeScript com strict mode habilitado
+- Siga o padrão REST para APIs
+- Documente funções públicas com JSDoc</code></pre>
+    </section>
+  </section>
+
+  <!-- ===================================================================
+       BLOCO 6 — ENCERRAMENTO (55:00 – 60:00)
+  ==================================================================== -->
+  <section>
+    <section>
+      <h2>🎯 Encerramento <span class="timebox">55:00 – 60:00</span></h2>
+      <h3>Resumo dos aprendizados</h3>
+      <ul>
+        <li>Principal conceito abordado hoje: <span class="hl-purple">[recap]</span></li>
+        <li>Ganho de produtividade demonstrado</li>
+        <li>Próximos passos práticos</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>❓ Q&amp;A</h2>
+      <div class="icon-row">
+        <div class="icon-card">
+          <span class="emoji">💬</span>Chat
+        </div>
+        <div class="icon-card">
+          <span class="emoji">🎤</span>Microfone
+        </div>
+        <div class="icon-card">
+          <span class="emoji">📝</span>Comentários
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>🚀 Próximos Passos</h2>
+      <ul>
+        <li>📹 Gravação disponível em: <span class="hl-purple">[link]</span></li>
+        <li>📄 Documentação em: <span class="hl-purple">[link]</span></li>
+        <li>📅 Próximo encontro: <span class="hl-purple">[tema]</span></li>
+        <li>💬 Suporte: <span class="hl-purple">[canal]</span></li>
+      </ul>
+      <p style="margin-top:1em; font-size:0.65em; color:var(--text-muted);">
+        Obrigado pela participação! 🙏
+      </p>
+    </section>
+  </section>
+
+  <!-- ===================================================================
+       SLIDE FINAL — AGRADECIMENTO
+  ==================================================================== -->
+  <section>
+    <div class="cover-logo">
+      <img src="images/copilot-48.svg" alt="GitHub Copilot" />
+    </div>
+    <h1>Obrigado!</h1>
+    <p class="cover-subtitle">GitHub Copilot — Treinamento de 60 minutos</p>
+    <p style="font-size:0.5em; color:var(--text-muted); margin-top:1em;">
+      [Nome do instrutor] &nbsp;·&nbsp; [Contato / LinkedIn / GitHub]
+    </p>
+    <div class="gh-footer">
+      <img src="images/mark-github-24.svg" alt="GitHub" />
+      GitHub Copilot
+    </div>
+    <!-- <img class="octocat" src="https://octodex.github.com/images/neurocats_FULL.png" alt="Neurocats — GitHub Octocat" /> -->
+  </section>
+
+</div><!-- /.slides -->
+</div><!-- /.reveal -->
+
+<!-- Reveal.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/highlight/highlight.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/notes/notes.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    slideNumber: "c/t",
+    progress: true,
+    controls: true,
+    center: true,
+    transition: "fade",
+    transitionSpeed: "fast",
+    backgroundTransition: "fade",
+    plugins: [ RevealHighlight, RevealNotes ],
+    highlight: {
+      theme: "github-dark"
+    }
+  });
+</script>
+</body>
+</html>
