@@ -303,6 +303,7 @@ def main() -> int:
         hands_on_hashes: dict[str, str] = {}
         changed_hands_on_sources: list[SourceChange] = []
         hands_on_stale = False
+        ho_ok = False  # True only when digest succeeded without errors
 
         if raw_hands_on is not None:
             if not isinstance(raw_hands_on, list) or not raw_hands_on:
@@ -319,6 +320,7 @@ def main() -> int:
                     if ho_errors:
                         errors.extend([f"{slide_path} (hands_on): {msg}" for msg in ho_errors])
                     else:
+                        ho_ok = True
                         current_ho_hash = combined_hash(hands_on_hashes)
                         prev_ho_hash = prev_entry.get("hands_on_source_hash")
                         prev_ho_hashes = prev_entry.get("hands_on_source_hashes", {})
@@ -367,7 +369,7 @@ def main() -> int:
             "source_hashes": source_hashes,
             "checked_at": now_iso,
         }
-        if raw_hands_on is not None and hands_on_hashes:
+        if raw_hands_on is not None and ho_ok and hands_on_hashes:
             next_state_entry["hands_on_source_hash"] = combined_hash(hands_on_hashes)
             next_state_entry["hands_on_source_hashes"] = hands_on_hashes
         next_state["slides"][slide_path] = next_state_entry
