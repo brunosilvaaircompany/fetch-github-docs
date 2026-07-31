@@ -376,3 +376,39 @@ The number of available IP addresses in the assigned ranges does not restrict th
 
 1. To assign static IP addresses to the runner, under "Networking," check **Assign unique & static public IP address ranges for this runner**.
 1. Click **Save**.
+
+
+
+## Azure Storage firewall considerations
+
+### Virtual machines and storage accounts in the same region
+
+If you use Azure Storage accounts protected by network rules, be aware that traffic from larger runners' VMs to storage accounts in the same Azure region uses private Azure IP addresses rather than the larger runners' public IP range.
+
+As a result, Azure Storage firewall rules that rely only on runner public IP allowlists might not work as expected. This can cause connectivity failures that appear as 403 (AuthorizationFailure) responses, with an error message similar to:
+
+```text
+The request may be blocked by network rules of storage account. Please check network rule set using 'az storage account show -n accountname --query networkRuleSet'.
+  If you want to change the default action to apply when no rule matches, please use 'az storage account update'.
+```
+
+For more information see the Microsoft documentation for [Guidelines and limitations for the Azure Storage firewall](https://learn.microsoft.com/en-us/azure/storage/common/storage-network-security-limitations) and [Configure network routing preference for Azure Storage](https://learn.microsoft.com/en-us/azure/storage/common/configure-network-routing-preference?tabs=azure-portal&source=docs).
+
+> [!NOTE]
+> We don't recommend configuring Azure Storage firewall network rules for larger runners unless you use either `static public IP ranges` or an `Azure VNet`.
+> Public IP ranges can be dynamic, so allowlist-based rules may break and cause intermittent connectivity failures.
+> See [Larger Runners](https://docs.github.com/en/actions/reference/runners/larger-runners#networking-for-larger-runners)
+
+### Use Static IP Ranges and Service Endpoints
+
+One option for safely enabling Storage Account network rules is to use runners with static IPs and request support for configuring Azure Storage service endpoints for the virtual network hosting those static IPs. See [Azure virtual network service endpoints](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-service-endpoints-overview) for more information.
+
+Contact GitHub Support to set up this configuration through the [GitHub Support portal](https://support.github.com/).
+
+### Configure Azure VNET
+
+Another option to safely connect to Azure Storage accounts is to enable Azure VNET with GitHub-hosted runners.
+
+* [About Azure Private Networking For GitHub Hosted Runners In Your Organization](https://docs.github.com/en/organizations/managing-organization-settings/about-azure-private-networking-for-github-hosted-runners-in-your-organization)
+
+* [About Azure Private Networking For GitHub Hosted Runners In Your Enterprise](https://docs.github.com/en/admin/configuring-settings/configuring-private-networking-for-hosted-compute-products/about-azure-private-networking-for-github-hosted-runners-in-your-enterprise)

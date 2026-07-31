@@ -36,7 +36,6 @@ Feature, model, and privacy settings for users are set according to the **least 
 | Copilot CLI | Least restrictive organization | [Agents](https://docs.github.com/en/copilot/responsible-use/agents) |
 | GitHub Copilot app | Least restrictive organization | [GitHub Copilot App](https://docs.github.com/en/copilot/concepts/agents/github-copilot-app) |
 | Editor preview features | Least restrictive organization | [GitHub Pre Release License Terms](https://docs.github.com/en/free-pro-team@latest/site-policy/github-terms/github-pre-release-license-terms) |
-| GitHub Models, one policy per model | Least restrictive organization | [Manage Models At Scale](https://docs.github.com/en/github-models/github-models-at-scale/manage-models-at-scale) |
 | MCP servers in Copilot | Least restrictive organization | [Configure MCP Servers](https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/configure-mcp-servers) |
 | Copilot-generated commit messages | Least restrictive organization | [Chat](https://docs.github.com/en/copilot/responsible-use/chat) |
 

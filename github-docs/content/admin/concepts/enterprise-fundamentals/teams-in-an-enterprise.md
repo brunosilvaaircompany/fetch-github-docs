@@ -39,10 +39,13 @@ To simplify administration at scale, GitHub recommends using enterprise teams fo
 
 You may need to create organization teams if the functionality you need is not covered by enterprise teams. The limitations listed below reflect the current capabilities of enterprise teams and may change over time.
 
+## What can enterprise teams do?
+
 Enterprise teams can:
 
 
 * Receive **Copilot Business licenses** directly from the enterprise.
+* Be granted access to specific Copilot models (opt-in preview).
 
 * Be assigned **predefined and custom enterprise roles**, giving members access to enterprise settings.
 * Be **added to organizations**, where organization administrators can grant the team additional access and permissions.
@@ -54,7 +57,7 @@ Enterprise teams can:
 
 
 
-To @-mention an enterprise team, or request a review from the team, use the team's slug in the format `@/ent:TEAM-SLUG`. GitHub generates the slug from the team's name and adds the `ent:` prefix, so an enterprise team named `Platform SRE` has the slug `ent:platform-sre`. 
+To @-mention an enterprise team, or request a review from the team, use the team's slug in the format `@/ent:TEAM-SLUG`. GitHub generates the slug from the team's name and adds the `ent:` prefix, so an enterprise team named `Platform SRE` has the slug `ent:platform-sre`.
 
 To mention the team from an organization it is assigned to, such as `octo-org`, use `@octo-org/ent:platform-sre`. You can mention an enterprise team from any organization the team is assigned to.
 
