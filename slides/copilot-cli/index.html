@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GitHub Copilot CLI — Treinamento 60 minutos</title>
+
+  <!-- Reveal.js CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reset.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css" />
+
+  <style>
+    /* =====================================================================
+       Tema GitHub Copilot
+       Paleta:
+         Background  : #0d1117  (GitHub dark)
+         Surface     : #161b22  (cards / sections)
+         Border      : #21262d
+         Accent      : #6e40c9  (Copilot purple)
+         Accent light: #a371f7
+         Text primary: #e6edf3
+         Text muted  : #8b949e
+         Success     : #3fb950  (green)
+         Warning     : #d29922  (amber)
+    ===================================================================== */
+
+    :root {
+      --bg:           #0d1117;
+      --surface:      #161b22;
+      --border:       #21262d;
+      --accent:       #6e40c9;
+      --accent-light: #a371f7;
+      --text:         #e6edf3;
+      --text-muted:   #8b949e;
+      --green:        #3fb950;
+      --amber:        #d29922;
+    }
+
+    .reveal-viewport { background: var(--bg); }
+
+    .reveal {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 36px;
+      color: var(--text);
+    }
+
+    /* ── Headings ── */
+    .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+      color: var(--text);
+      font-weight: 700;
+      text-transform: none;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+    .reveal h1 { font-size: 2em; }
+    .reveal h2 { font-size: 1.4em; color: var(--accent-light); }
+    .reveal h3 { font-size: 1em; color: var(--text-muted); }
+
+    /* ── Accent bar on h2 ── */
+    .reveal h2::before {
+      content: "";
+      display: inline-block;
+      width: 4px;
+      height: 0.9em;
+      background: var(--accent);
+      border-radius: 2px;
+      margin-right: 0.4em;
+      vertical-align: middle;
+    }
+
+    /* ── Links ── */
+    .reveal a { color: var(--accent-light); text-decoration: underline; }
+    .reveal a:hover { color: #fff; }
+
+    /* ── Lists ── */
+    .reveal ul, .reveal ol { text-align: left; margin-left: 1em; }
+    .reveal li { margin: 0.3em 0; color: var(--text); }
+    .reveal ul li::marker { color: var(--accent); }
+
+    /* ── Code ── */
+    .reveal code {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.1em 0.35em;
+      font-size: 0.85em;
+      color: var(--accent-light);
+    }
+    .reveal pre {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      box-shadow: none;
+      width: 100%;
+    }
+    .reveal pre code {
+      background: transparent;
+      border: none;
+      padding: 0;
+      color: var(--text);
+      font-size: 0.72em;
+    }
+
+    /* ── Blockquote / tip ── */
+    .reveal blockquote {
+      background: var(--surface);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      padding: 0.6em 1em;
+      font-style: normal;
+      color: var(--text);
+      width: 90%;
+      margin: 0.8em auto;
+    }
+
+    /* ── Timebox badge ── */
+    .timebox {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 20px;
+      padding: 0.15em 0.7em;
+      font-size: 0.55em;
+      font-weight: 600;
+      vertical-align: middle;
+      margin-left: 0.5em;
+      letter-spacing: 0.03em;
+    }
+
+    /* ── Progress / controls theme ── */
+    .reveal .progress { background: var(--border); }
+    .reveal .progress span { background: var(--accent); }
+    .reveal .controls { color: var(--accent-light); }
+
+    /* ── Cover slide ── */
+    .cover-logo {
+      margin-bottom: 0.4em;
+    }
+    .cover-logo img {
+      width: 96px;
+      height: 96px;
+      filter: invert(1);
+    }
+    .cover-subtitle {
+      color: var(--text-muted);
+      font-size: 0.6em;
+      margin-top: 0.3em;
+    }
+    .cover-badge {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 6px;
+      padding: 0.2em 0.8em;
+      font-size: 0.5em;
+      margin-top: 0.8em;
+    }
+
+    /* ── GitHub mark no rodapé ── */
+    .gh-footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4em;
+      margin-top: 1em;
+      font-size: 0.4em;
+      color: var(--text-muted);
+    }
+    .gh-footer img {
+      width: 18px;
+      height: 18px;
+      filter: invert(0.6);
+    }
+
+    /* ── Two-column layout ── */
+    .cols {
+      display: flex;
+      gap: 1.5em;
+      align-items: flex-start;
+      justify-content: center;
+      text-align: left;
+    }
+    .cols > div { flex: 1; }
+
+    /* ── Agenda table ── */
+    .agenda {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.65em;
+      text-align: left;
+    }
+    .agenda th {
+      background: var(--surface);
+      color: var(--accent-light);
+      padding: 0.5em 0.8em;
+      border-bottom: 2px solid var(--accent);
+    }
+    .agenda td {
+      padding: 0.45em 0.8em;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+    }
+    .agenda tr:hover td { background: var(--surface); }
+    .agenda .min { color: var(--text-muted); }
+
+    /* ── Highlight colors ── */
+    .hl-purple { color: var(--accent-light); font-weight: 600; }
+    .hl-green  { color: var(--green); font-weight: 600; }
+    .hl-amber  { color: var(--amber); font-weight: 600; }
+
+    /* ── Icon row ── */
+    .icon-row {
+      display: flex;
+      justify-content: center;
+      gap: 1.5em;
+      margin-top: 0.6em;
+    }
+    .icon-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.6em 1em;
+      text-align: center;
+      font-size: 0.55em;
+      color: var(--text);
+      min-width: 6em;
+    }
+    .icon-card .emoji { font-size: 2.5em; display: block; margin-bottom: 0.2em; }
+
+    /* ── Step card ── */
+    .step-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.8em;
+      margin-top: 0.6em;
+      font-size: 0.58em;
+    }
+    .step-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.7em 1em;
+      text-align: left;
+    }
+    .step-card .step-num {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 50%;
+      width: 1.6em;
+      height: 1.6em;
+      line-height: 1.6em;
+      text-align: center;
+      font-weight: 700;
+      margin-bottom: 0.3em;
+    }
+    .step-card strong { color: var(--accent-light); }
+  </style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+  <!-- ===================================================================
+       SLIDE 1 — CAPA
+  ==================================================================== -->
+  <section>
+    <div class="cover-logo">
+      <img src="../images/copilot-48.svg" alt="GitHub Copilot" />
+    </div>
+    <h1>GitHub Copilot CLI</h1>
+    <p class="cover-subtitle">Do terminal ao código — com IA</p>
+    <span class="cover-badge">Hands-on · 60 minutos</span>
+    <div class="gh-footer">
+      <img src="../images/mark-github-24.svg" alt="GitHub" />
+      GitHub Copilot
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       SLIDE 2 — AGENDA
+  ==================================================================== -->
+  <section>
+    <h2>Agenda <span class="timebox">60 min</span></h2>
+    <table class="agenda">
+      <thead>
+        <tr>
+          <th>Horário</th>
+          <th>Bloco</th>
+          <th class="min">Duração</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>00:00 – 05:00</td>
+          <td>⚡ Abertura &amp; Alinhamento</td>
+          <td class="min">5 min</td>
+        </tr>
+        <tr>
+          <td>05:00 – 15:00</td>
+          <td>📖 Teoria: O que é o Copilot CLI?</td>
+          <td class="min">10 min</td>
+        </tr>
+        <tr>
+          <td>15:00 – 20:00</td>
+          <td>🛠️ Preparação do Ambiente</td>
+          <td class="min">5 min</td>
+        </tr>
+        <tr>
+          <td>20:00 – 50:00</td>
+          <td>💻 Hands-on: GitHub Skills (4 Steps)</td>
+          <td class="min">30 min</td>
+        </tr>
+        <tr>
+          <td>50:00 – 55:00</td>
+          <td>✅ Boas Práticas</td>
+          <td class="min">5 min</td>
+        </tr>
+        <tr>
+          <td>55:00 – 60:00</td>
+          <td>🎯 Encerramento &amp; Q&amp;A</td>
+          <td class="min">5 min</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ===================================================================
+       SLIDE 3 — REGRAS DO JOGO
+  ==================================================================== -->
+  <section>
+    <h2>⏱️ Regras do jogo <span class="timebox">00:00 – 05:00</span></h2>
+    <ul>
+      <li>Foco em <strong>acompanhar a demonstração</strong> ao vivo</li>
+      <li>Exercício disponível para reprodução posterior</li>
+      <li>Gravação + documentação serão compartilhadas</li>
+      <li>Perguntas: <span class="hl-purple">via chat ou microfone no final</span></li>
+    </ul>
+    <blockquote>
+      🔗 Repositório do exercício:<br/>
+      <a href="https://github.com/skills/create-applications-with-the-copilot-cli" target="_blank">
+        github.com/skills/create-applications-with-the-copilot-cli
+      </a>
+    </blockquote>
+  </section>
+
+  <!-- ===================================================================
+       BLOCO 2 — TEORIA (05:00 – 15:00)
+  ==================================================================== -->
+  <section>
+
+    <!-- Slide 4 — O que é -->
+    <section>
+      <h2>💡 O que é o GitHub Copilot CLI? <span class="timebox">05:00 – 15:00</span></h2>
+      <p style="font-size:0.7em; color:var(--text-muted); margin-bottom:0.6em;">
+        Ferramenta standalone que traz o poder do Copilot diretamente para o terminal — sem trocar de contexto.
+      </p>
+      <div class="cols">
+        <div>
+          <ul style="font-size:0.65em;">
+            <li><code>git</code> → gerencia repositórios locais/remotos</li>
+            <li><code>gh</code> → interage com a plataforma GitHub</li>
+            <li><code>copilot</code> → <span class="hl-purple">IA conversacional no terminal</span></li>
+          </ul>
+        </div>
+        <div>
+          <pre><code class="language-bash"># Instalação
+npm install -g @github/copilot
+
+# Pré-requisitos:
+# Node.js 22+
+# Assinatura Copilot (Free funciona!)</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 5 — Capacidades -->
+    <section>
+      <h2>🚀 Principais capacidades</h2>
+      <div class="cols">
+        <div>
+          <ul style="font-size:0.65em;">
+            <li><span class="hl-green">✅</span> Sugere comandos com IA (OpenAI, Google)</li>
+            <li><span class="hl-green">✅</span> Gera código e scripts no terminal</li>
+            <li><span class="hl-green">✅</span> Gerencia issues e PRs via linguagem natural</li>
+            <li><span class="hl-green">✅</span> Suporta imagens (paste / drag-and-drop)</li>
+          </ul>
+        </div>
+        <div>
+          <ul style="font-size:0.65em;">
+            <li><span class="hl-green">✅</span> Integra MCP (Model Context Protocol)</li>
+            <li><span class="hl-green">✅</span> Cria agentes customizados (<code>.github/agents/</code>)</li>
+            <li><span class="hl-green">✅</span> Delega tarefas ao Coding Agent (<code>/delegate</code>)</li>
+            <li><span class="hl-green">✅</span> Modo headless: <code>copilot -p "prompt"</code></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 6 — Slash commands -->
+    <section>
+      <h2>⌨️ Slash commands essenciais</h2>
+      <div class="cols">
+        <div>
+          <pre><code>/login          → autenticar com o GitHub
+/session        → detalhes da sessão atual
+/context        → visualizar uso de tokens
+/usage          → estatísticas de requests
+/share gist     → salvar sessão como Gist
+/delegate       → delegar ao Coding Agent
+/exit           → encerrar a sessão</code></pre>
+        </div>
+        <div>
+          <p style="font-size:0.6em; color:var(--text-muted);">Atalhos rápidos</p>
+          <ul style="font-size:0.6em;">
+            <li><code>@arquivo</code> → incluir arquivo no contexto</li>
+            <li><code>!comando</code> → executar shell diretamente</li>
+            <li><kbd>Ctrl+L</kbd> → limpar tela</li>
+            <li><kbd>Shift+Tab</kbd> → alternar para Plan Mode</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 7 — Casos de uso -->
+    <section>
+      <h2>🏗️ Casos de uso no dia a dia</h2>
+      <div class="cols">
+        <div>
+          <ul style="font-size:0.65em;">
+            <li>Criar issues a partir de templates sem abrir o browser</li>
+            <li>Gerar código baseado em imagens + descrição</li>
+            <li>Escrever e rodar testes automatizados</li>
+            <li>Criar branches, commits e PRs pelo chat</li>
+          </ul>
+        </div>
+        <div>
+          <ul style="font-size:0.65em;">
+            <li>Delegar tarefas complexas ao Coding Agent</li>
+            <li>Documentar código sem sair do terminal</li>
+            <li>Automatizar workflows com modo headless (<code>-p</code>)</li>
+            <li>Compartilhar sessões como Gist (<code>/share gist</code>)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 8 — Documentação -->
+    <section>
+      <h2>📚 Documentação oficial</h2>
+      <ul style="font-size:0.65em;">
+        <li>
+          📖 Instalação:<br/>
+          <a href="https://docs.github.com/copilot/how-tos/set-up/install-copilot-cli" target="_blank">
+            docs.github.com/copilot/how-tos/set-up/install-copilot-cli
+          </a>
+        </li>
+        <li>
+          📖 Como usar:<br/>
+          <a href="https://docs.github.com/en/copilot/how-tos/use-copilot-agents/use-copilot-cli" target="_blank">
+            docs.github.com/en/copilot/…/use-copilot-cli
+          </a>
+        </li>
+        <li>
+          📰 Blog GitHub CLI 101:<br/>
+          <a href="https://github.blog/ai-and-ml/github-copilot-cli-101" target="_blank">
+            github.blog/ai-and-ml/github-copilot-cli-101
+          </a>
+        </li>
+        <li>
+          📋 Changelog (versão mais recente: <span class="hl-purple">1.0.76 — 29/07/2026</span>):<br/>
+          <a href="https://github.com/github/copilot-cli/blob/main/changelog.md" target="_blank">
+            github.com/github/copilot-cli/blob/main/changelog.md
+          </a>
+        </li>
+      </ul>
+    </section>
+
+  </section>
+
+  <!-- ===================================================================
+       BLOCO 3 — PREPARAÇÃO DO AMBIENTE (15:00 – 20:00)
+  ==================================================================== -->
+  <section>
+
+    <!-- Slide 9 — Repositório -->
+    <section>
+      <h2>📂 Repositório do treinamento <span class="timebox">15:00 – 20:00</span></h2>
+      <h3>GitHub Skills — Exercício oficial</h3>
+      <blockquote>
+        <a href="https://github.com/skills/create-applications-with-the-copilot-cli" target="_blank">
+          github.com/skills/create-applications-with-the-copilot-cli
+        </a>
+      </blockquote>
+      <p style="font-size:0.65em; margin-top:0.8em;">O que vamos construir:</p>
+      <ul style="font-size:0.65em;">
+        <li>App <strong>calculadora em Node.js</strong></li>
+        <li>Gerenciamento de issues pelo terminal</li>
+        <li>PR com revisão do Copilot e merge</li>
+        <li>Todo o ciclo sem sair do terminal! 🚀</li>
+      </ul>
+      <p style="font-size:0.5em; color:var(--text-muted); margin-top:0.8em;">
+        ⭐ 128 estrelas · 🍴 80 forks · ✅ Oficialmente mantido pelo GitHub
+      </p>
+    </section>
+
+    <!-- Slide 10 — Como começar -->
+    <section>
+      <h2>🚀 Como começar</h2>
+      <ol style="font-size:0.65em;">
+        <li>Acesse <a href="https://github.com/skills/create-applications-with-the-copilot-cli" target="_blank">github.com/skills/create-applications-with-the-copilot-cli</a></li>
+        <li>Clique em <strong>"Copy Exercise"</strong> (botão verde)<br/>
+          → Escolha sua conta pessoal · Crie como repositório público</li>
+        <li>Aguarde ~20 segundos e atualize a página<br/>
+          → A Mona (bot) prepara o primeiro exercício automaticamente</li>
+        <li>Abra no <strong>GitHub Codespaces</strong><br/>
+          → Botão "Open in GitHub Codespaces" no exercício<br/>
+          → Configurações padrão estão OK ✅</li>
+        <li><span class="hl-purple">Foco no terminal</span> — é tudo CLI aqui!</li>
+      </ol>
+    </section>
+
+    <!-- Slide 11 — Instalar e autenticar -->
+    <section>
+      <h2>⚙️ Setup no Codespace</h2>
+      <pre><code class="language-bash"># Instalar o Copilot CLI
+npm install -g @github/copilot
+
+# Verificar instalação
+copilot --version
+
+# Iniciar sessão com todos os recursos
+copilot --enable-all-github-mcp-tools
+
+# Autenticar (dentro da sessão Copilot)
+/login</code></pre>
+      <blockquote>
+        ⚠️ <strong>Atenção:</strong> Se reiniciar o Codespace, autentique novamente com
+        <code>/login</code> ou <code>!gh auth login</code>
+      </blockquote>
+    </section>
+
+  </section>
+
+  <!-- ===================================================================
+       BLOCO 4 — HANDS-ON (20:00 – 50:00)
+  ==================================================================== -->
+  <section>
+
+    <!-- Slide 12 — Visão geral dos 4 Steps -->
+    <section>
+      <h2>🗺️ Visão geral dos 4 Steps <span class="timebox">20:00 – 50:00</span></h2>
+      <div class="step-grid">
+        <div class="step-card">
+          <span class="step-num">1</span><br/>
+          <strong>Instalar &amp; criar Issue</strong><br/>
+          Criar a issue do projeto usando template via CLI
+        </div>
+        <div class="step-card">
+          <span class="step-num">2</span><br/>
+          <strong>Gerar código com IA + imagem</strong><br/>
+          Criar a calculadora Node.js com contexto visual
+        </div>
+        <div class="step-card">
+          <span class="step-num">3</span><br/>
+          <strong>Expandir funcionalidades</strong><br/>
+          Adicionar operações e testes automatizados
+        </div>
+        <div class="step-card">
+          <span class="step-num">4</span><br/>
+          <strong>PR + Review + Merge</strong><br/>
+          Criar PR, solicitar review do Copilot e fazer merge
+        </div>
+      </div>
+      <p style="font-size:0.5em; color:var(--text-muted); margin-top:0.8em;">Tempo total: ~30 minutos de demonstração ao vivo</p>
+    </section>
+
+    <!-- Slide 13 — Step 1 -->
+    <section>
+      <h2>📋 Step 1 — Instalação + Issue via Copilot CLI</h2>
+      <p style="font-size:0.6em; color:var(--text-muted);">Prompt para criar a issue:</p>
+      <pre><code>"Create a GitHub issue for a Node.js CLI calculator app
+ using .github/ISSUE_TEMPLATE/feature_request.md template.
+ I want to request a feature for basic arithmetic operations:
+ addition, subtraction, multiplication, division.
+ The calculator should be in calculator.js
+ Create the issue directly using gh CLI commands."</code></pre>
+      <ul style="font-size:0.62em; margin-top:0.6em;">
+        <li><span class="hl-green">✅</span> Copilot lê o template, preenche e cria a issue automaticamente</li>
+        <li><span class="hl-amber">⚠️</span> Confirme o uso do <code>gh issue</code> quando solicitado</li>
+      </ul>
+    </section>
+
+    <!-- Slide 14 — Step 2 -->
+    <section>
+      <h2>💻 Step 2 — Código com imagem + issue</h2>
+      <pre><code class="language-bash"># Iniciar com todas as permissões habilitadas
+copilot --allow-all --enable-all-github-mcp-tools</code></pre>
+      <p style="font-size:0.6em; color:var(--text-muted); margin-top:0.6em;">Prompt com imagem no contexto:</p>
+      <pre><code>"@images/js-calculator.png help me create a Node.js CLI
+ calculator app based on the four basic math operations
+ in this image and outlined in the latest issue.
+ Create the code in the 'src' directory."</code></pre>
+      <ul style="font-size:0.6em; margin-top:0.5em;">
+        <li>Depois: criar testes, rodar e validar</li>
+        <li>Ao final: commit + push via prompt natural</li>
+        <li>💡 Use <kbd>Ctrl+O</kbd> para ver o output dos testes!</li>
+      </ul>
+    </section>
+
+    <!-- Slide 15 — Step 3 -->
+    <section>
+      <h2>➕ Step 3 — Expandir funcionalidades</h2>
+      <p style="font-size:0.62em; color:var(--text-muted);">Nova issue para expandir: Modulo, Exponentiation, Square Root</p>
+      <pre><code>"Add these functions to my existing calculator.js:
+ 1. modulo(a, b)
+ 2. power(base, exponent)
+ 3. squareRoot(n) - with error handling for negative numbers"</code></pre>
+      <div class="cols" style="margin-top:0.6em;">
+        <div>
+          <p style="font-size:0.6em;"><strong>Testes a expandir:</strong></p>
+          <ul style="font-size:0.6em;">
+            <li><code>src/tests/calculator.test.js</code></li>
+            <li>Edge case: divisão por zero</li>
+            <li>Edge case: raiz de número negativo</li>
+          </ul>
+        </div>
+        <div>
+          <blockquote style="font-size:0.6em;">
+            💡 Dica: Use <code>/share gist</code> para salvar sua sessão!
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 16 — Step 4 -->
+    <section>
+      <h2>🔀 Step 4 — PR + Code Review + Merge</h2>
+      <div style="font-size:0.62em;">
+        <p><strong>Criar o PR:</strong></p>
+        <pre><code>"Create a pull request from the current branch with title
+ 'Add calculator enhancements'. Add @copilot as reviewer
+ and request a review. List the PR link when created."</code></pre>
+        <p style="margin-top:0.5em;"><strong>Vincular issues &amp; fazer merge:</strong></p>
+        <pre><code>"Link the PR to both issues so they close automatically."
+"Merge the pull request and close the attached issues."
+"List the closed issues to confirm both are closed."</code></pre>
+      </div>
+      <blockquote style="font-size:0.6em;">
+        ✅ Todo o ciclo <strong>issue → código → PR → merge</strong> sem sair do terminal!
+      </blockquote>
+    </section>
+
+    <!-- Slide 17 — Human in the Loop -->
+    <section>
+      <h2>🧠 Human in the Loop — Sempre!</h2>
+      <p style="font-size:0.65em; color:var(--text-muted);">O Copilot é um <strong>assistente</strong>, não um substituto.</p>
+      <div class="cols">
+        <div>
+          <ul style="font-size:0.62em;">
+            <li><span class="hl-green">✅</span> Revise todo código gerado antes de aceitar</li>
+            <li><span class="hl-green">✅</span> Valide os testes — eles devem fazer sentido</li>
+            <li><span class="hl-green">✅</span> Leia as mensagens de commit antes de confirmar</li>
+            <li><span class="hl-green">✅</span> Analise o PR antes do merge</li>
+            <li><span class="hl-green">✅</span> Questione sugestões que pareçam incorretas</li>
+          </ul>
+        </div>
+        <div>
+          <p style="font-size:0.6em;"><strong>Como corrigir quando a IA erra:</strong></p>
+          <ul style="font-size:0.58em;">
+            <li>Ajuste o prompt com mais contexto</li>
+            <li>Forneça exemplos (imagens, arquivos com <code>@</code>)</li>
+            <li>Limpe o histórico com <code>/clear</code></li>
+            <li>Use <code>!</code> para comandos shell diretos</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </section>
+
+  <!-- ===================================================================
+       BLOCO 5 — BOAS PRÁTICAS (50:00 – 55:00)
+  ==================================================================== -->
+  <section>
+
+    <!-- Slide 18 — Tokens -->
+    <section>
+      <h2>💰 Economia de contexto e tokens <span class="timebox">50:00 – 55:00</span></h2>
+      <div class="cols">
+        <div>
+          <p><span class="hl-amber">❌ Evite:</span></p>
+          <ul style="font-size:0.62em;">
+            <li>Manter arquivos desnecessários abertos</li>
+            <li>Sessões longas com muito histórico</li>
+            <li>Usar <code>--allow-all</code> em produção</li>
+          </ul>
+        </div>
+        <div>
+          <p><span class="hl-green">✅ Faça:</span></p>
+          <ul style="font-size:0.62em;">
+            <li>Use <code>/context</code> para monitorar tokens</li>
+            <li>Use <code>/usage</code> para acompanhar requests premium</li>
+            <li>Prefira autocomplete para tarefas simples</li>
+            <li>Inicie nova sessão com <code>/clear</code> ao mudar de tarefa</li>
+            <li>Use <code>copilot -p "prompt"</code> para automações</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 19 — Contexto e personalização -->
+    <section>
+      <h2>🎯 Contexto específico e personalização</h2>
+      <div class="cols">
+        <div>
+          <p style="font-size:0.62em;"><strong>Referencie arquivos diretamente:</strong></p>
+          <pre><code>@src/calculator.js  → inclui o arquivo
+@images/calc.png    → inclui imagem</code></pre>
+          <p style="font-size:0.62em; margin-top:0.6em;"><strong>Flags úteis:</strong></p>
+          <pre><code>--enable-all-github-mcp-tools
+--allow-all    # use com cuidado!
+-p "prompt"    # modo headless</code></pre>
+        </div>
+        <div>
+          <p style="font-size:0.62em;"><strong>Personalize o projeto:</strong></p>
+          <pre><code class="language-markdown"># .github/copilot-instructions.md
+- Use TypeScript com strict mode
+- Siga o padrão REST para APIs
+- Documente funções com JSDoc</code></pre>
+          <ul style="font-size:0.58em; margin-top:0.4em;">
+            <li><code>.github/agents/</code> → agentes customizados</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </section>
+
+  <!-- ===================================================================
+       BLOCO 6 — ENCERRAMENTO (55:00 – 60:00)
+  ==================================================================== -->
+  <section>
+
+    <!-- Slide 20 — Resumo -->
+    <section>
+      <h2>🏆 O que fizemos hoje <span class="timebox">55:00 – 60:00</span></h2>
+      <div class="cols">
+        <div>
+          <ul style="font-size:0.62em;">
+            <li><span class="hl-green">✅</span> Instalamos o Copilot CLI</li>
+            <li><span class="hl-green">✅</span> Criamos issues via linguagem natural + template</li>
+            <li><span class="hl-green">✅</span> Geramos código Node.js usando imagem como contexto</li>
+          </ul>
+        </div>
+        <div>
+          <ul style="font-size:0.62em;">
+            <li><span class="hl-green">✅</span> Escrevemos e rodamos testes automatizados</li>
+            <li><span class="hl-green">✅</span> Expandimos funcionalidades iterativamente</li>
+            <li><span class="hl-green">✅</span> Criamos PR com review do Copilot e fizemos merge</li>
+          </ul>
+        </div>
+      </div>
+      <blockquote style="margin-top:0.8em; font-size:0.65em;">
+        🚀 Todo o ciclo de desenvolvimento <strong>sem sair do terminal!</strong>
+      </blockquote>
+    </section>
+
+    <!-- Slide 21 — Q&A -->
+    <section>
+      <h2>❓ Perguntas e Respostas</h2>
+      <div class="icon-row" style="margin-bottom:0.8em;">
+        <div class="icon-card">
+          <span class="emoji">💬</span>Via chat
+        </div>
+        <div class="icon-card">
+          <span class="emoji">🎙️</span>Via microfone
+        </div>
+      </div>
+      <p style="font-size:0.6em; color:var(--text-muted);">Dúvidas técnicas frequentes:</p>
+      <ul style="font-size:0.58em;">
+        <li>
+          <em>"O Copilot pediu confirmação, o que faço?"</em><br/>
+          → Responda <code>yes</code> para aprovar <code>gh issue</code> / <code>git config</code>
+        </li>
+        <li>
+          <em>"A autenticação falhou"</em><br/>
+          → Execute <code>/login</code> dentro da sessão Copilot
+        </li>
+        <li>
+          <em>"O Codespace expirou"</em><br/>
+          → Execute: <code>copilot --allow-all</code> + <code>/login</code> novamente
+        </li>
+      </ul>
+    </section>
+
+    <!-- Slide 22 — Próximos passos -->
+    <section>
+      <h2>🚀 Continue praticando!</h2>
+      <ul style="font-size:0.65em;">
+        <li>
+          📂 Repositório do exercício:<br/>
+          <a href="https://github.com/skills/create-applications-with-the-copilot-cli" target="_blank">
+            github.com/skills/create-applications-with-the-copilot-cli
+          </a>
+        </li>
+        <li>
+          📚 Documentação oficial:<br/>
+          <a href="https://docs.github.com/copilot" target="_blank">docs.github.com/copilot</a>
+        </li>
+        <li>
+          📦 Repositório do Copilot CLI:<br/>
+          <a href="https://github.com/github/copilot-cli" target="_blank">github.com/github/copilot-cli</a>
+        </li>
+        <li>🔄 Próximo encontro: <span class="hl-purple">[tema do próximo treinamento]</span></li>
+        <li>💬 Canais de suporte: <span class="hl-purple">[Slack / Teams / e-mail]</span></li>
+      </ul>
+      <p style="margin-top:0.8em; font-size:0.6em; color:var(--text-muted);">
+        Obrigado(a) pela participação! 🎉
+      </p>
+      <div class="gh-footer">
+        <img src="../images/mark-github-24.svg" alt="GitHub" />
+        GitHub Copilot
+      </div>
+    </section>
+
+  </section>
+
+</div>
+</div>
+
+<!-- Reveal.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/highlight/highlight.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    slideNumber: 'c/t',
+    transition: 'slide',
+    backgroundTransition: 'fade',
+    controls: true,
+    progress: true,
+    center: true,
+    plugins: [ RevealHighlight ]
+  });
+</script>
+</body>
+</html>

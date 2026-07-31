@@ -1,4 +1,24 @@
-slides: []
+slides:
+  - slide: slides/copilot-cli/index.html
+    sources:
+      # Bloco 2 — Teoria: O que é o Copilot CLI
+      - path: github-docs/content/copilot/concepts/agents/copilot-cli/about-copilot-cli.md
+      # Bloco 3 — Preparação do ambiente: instalação e autenticação
+      - path: github-docs/content/copilot/how-tos/copilot-cli/set-up-copilot-cli/install-copilot-cli.md
+      - path: github-docs/content/copilot/how-tos/copilot-cli/set-up-copilot-cli/authenticate-copilot-cli.md
+      - path: github-docs/content/copilot/how-tos/copilot-cli/set-up-copilot-cli/configure-copilot-cli.md
+      # Bloco 4 — Hands-on: como usar o CLI
+      - path: github-docs/content/copilot/how-tos/copilot-cli/cli-getting-started.md
+      - path: github-docs/content/copilot/how-tos/copilot-cli/use-copilot-cli/overview.md
+      - path: github-docs/content/copilot/how-tos/copilot-cli/use-copilot-cli/manage-pull-requests.md
+      - path: github-docs/content/copilot/how-tos/copilot-cli/use-copilot-cli/delegate-tasks-to-cca.md
+      - path: github-docs/content/copilot/how-tos/copilot-cli/use-copilot-cli/allowing-tools.md
+      - path: github-docs/content/copilot/how-tos/copilot-cli/use-copilot-cli/agentic-code-review.md
+      # Bloco 5 — Boas práticas
+      - path: github-docs/content/copilot/how-tos/copilot-cli/cli-best-practices.md
+      - path: github-docs/content/copilot/how-tos/copilot-cli/customize-copilot/add-custom-instructions.md
+      - path: github-docs/content/copilot/how-tos/copilot-cli/customize-copilot/add-mcp-servers.md
+      - path: github-docs/content/copilot/how-tos/copilot-cli/customize-copilot/create-custom-agents-for-cli.md
 
 # Exemplo de configuracao:
 # slides:
@@ -13,3 +33,15 @@ slides: []
 #         selectors:
 #           regex_patterns:
 #             - "(?i)code suggestions?"
+#     # Campo opcional: fontes do hands-on vinculado a este slide.
+#     # Quando presente, o sistema verifica se o conteudo do hands-on
+#     # foi alterado. Se sim, o slide e marcado como desatualizado com
+#     # o motivo "hands-on alterado", indicando que o slide de
+#     # apresentacao precisa ser revisado.
+#     hands_on:
+#       - path: github-docs/content/copilot/hands-on/exercicio-copilot-chat.md
+#         selectors:
+#           headings:
+#             - Exercicio 1
+#             - Exercicio 2
+#       - path: github-docs/content/copilot/hands-on/exercicio-agente.md

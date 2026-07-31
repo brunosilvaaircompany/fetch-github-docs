@@ -1,5 +1,7 @@
 # Managing the availability of models in an organization
 
+> [!IMPORTANT] If your enterprise has opted in to the **enterprise teams model access** preview, your organization will not be able to access model settings. See [Manage Availability Of Default Models](https://docs.github.com/en/copilot/how-tos/administer-copilot/manage-for-enterprise/manage-availability-of-default-models).
+
 ## Which models can I configure?
 
 If your organization is part of an enterprise, the enterprise owner controls which Copilot models are available and how they can be configured at the organization level.

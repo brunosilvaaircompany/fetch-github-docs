@@ -4,6 +4,7 @@ To simplify administration at scale, you can create enterprise teams. Enterprise
 
 
 * Receive **Copilot Business licenses** directly from the enterprise.
+* Be granted access to specific Copilot models (opt-in preview).
 
 * Be assigned **predefined and custom enterprise roles**, giving members access to enterprise settings.
 * Be **added to organizations**, where organization administrators can grant the team additional access and permissions.

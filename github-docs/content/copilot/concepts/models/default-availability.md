@@ -4,7 +4,7 @@ On Copilot Business and Copilot Enterprise plans, the **Default availability for
 
 
 
-To give you time to prepare, this policy can be configured but **does not currently affect model availability**. On August 26, 2026, new GA models and existing unconfigured GA models will automatically follow the default set in the policy. These are models that you have not explicitly chosen a setting for. They will be labeled as "inherits default" in the UI.
+To give you time to prepare, this policy can be configured but **does not currently affect model availability**. On August 26, 2026, new GA models and existing unconfigured GA models will automatically follow the default set in the policy. These are models that you have not explicitly chosen a setting for. They will be relabeled as "inherits default" in the UI.
 
 To prepare for this change, you can disable the policy or explicitly disable models you don't want to be enabled.
 
@@ -19,7 +19,7 @@ New and existing unconfigured models will follow the default set in the policy. 
 
 
 * At the enterprise level, models that have not been added to the models list on the models configuration page.
-* At the organization level, models that have been made "optional" by an enterprise administrator, and that an organization owner has not explicitly enabled or disabled.
+* At the organization level, models that have been made "optional" by an enterprise administrator, and that an organization owner has not explicitly enabled or disabled. (**Does not apply** if you are opted in to the enterprise teams model access preview.)
 
 When a new model is released, it is unconfigured by default.
 

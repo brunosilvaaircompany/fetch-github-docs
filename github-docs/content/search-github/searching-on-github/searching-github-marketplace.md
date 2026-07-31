@@ -27,9 +27,6 @@ Anytime you search across all of GitHub, you can filter the results to see match
 
 ## Further reading
 
-
-* [Searching GitHub Models](https://docs.github.com/en/search-github/searching-on-github/searching-github-models)
-
 * [Find And Customize Actions](https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/find-and-customize-actions)
 * [Installing A GitHub App From GitHub Marketplace For Your Personal Account](https://docs.github.com/en/apps/using-github-apps/installing-a-github-app-from-github-marketplace-for-your-personal-account)
 * [Installing A GitHub App From GitHub Marketplace For Your Organizations](https://docs.github.com/en/apps/using-github-apps/installing-a-github-app-from-github-marketplace-for-your-organizations)

@@ -62,7 +62,6 @@ Each plan comes with an allowance of GitHub AI Credits. For more information, in
 | Copilot Chat in GitHub Mobile | {% octicon "check" aria-label="Included" %} | {% octicon "check" aria-label="Included" %} | {% octicon "check" aria-label="Included" %} | {% octicon "check" aria-label="Included" %} | {% octicon "check" aria-label="Included" %} | {% octicon "check" aria-label="Included" %} | {% octicon "check" aria-label="Included" %} |
 | Copilot Chat in GitHub | {% octicon "check" aria-label="Included" %} | {% octicon "check" aria-label="Included" %} | {% octicon "check" aria-label="Included" %} | {% octicon "check" aria-label="Included" %} | {% octicon "check" aria-label="Included" %} | {% octicon "check" aria-label="Included" %} | {% octicon "check" aria-label="Included" %} |
 | Copilot Chat in Windows Terminal | {% octicon "check" aria-label="Included" %} | {% octicon "check" aria-label="Included" %} |{% octicon "check" aria-label="Included" %} | {% octicon "check" aria-label="Included" %} | {% octicon "check" aria-label="Included" %} | {% octicon "check" aria-label="Included" %} | {% octicon "check" aria-label="Included" %} |
-| Increased GitHub Models rate limits[^3] | {% octicon "x" aria-label="Not included" %} | {% octicon "x" aria-label="Not included" %} | {% octicon "x" aria-label="Not included" %} | {% octicon "check" aria-label="Included" %} | {% octicon "check" aria-label="Included" %} | {% octicon "check" aria-label="Included" %} | {% octicon "check" aria-label="Included" %} |
 | Copilot Chat skills in IDEs[^5] | {% octicon "x" aria-label="Not included" %} | {% octicon "check" aria-label="Included" %} | {% octicon "check" aria-label="Included" %} | {% octicon "check" aria-label="Included" %} | {% octicon "check" aria-label="Included" %} | {% octicon "check" aria-label="Included" %} | {% octicon "check" aria-label="Included" %} |
 
 {% endrowheaders %}
@@ -128,7 +127,6 @@ Each plan comes with an allowance of GitHub AI Credits. For more information, in
 [^1]: Includes base credits and flex allotment. See [Usage Based Billing For Individuals](https://docs.github.com/en/copilot/concepts/billing/usage-based-billing-for-individuals#how-do-ai-credits-work).
 [^2]: Copilot Chat in IDEs is available in Visual Studio Code, Visual Studio, JetBrains IDEs, Eclipse, and Xcode.
 [^3]: Response times may vary during periods of high usage.
-[^4]: For details about the increased rate limits, see [Prototyping With Ai Models](https://docs.github.com/en/github-models/use-github-models/prototyping-with-ai-models).
 [^5]: Copilot Chat skills in IDEs is available in Visual Studio Code and Visual Studio.
 [^6]: Inline suggestions in IDEs is available in Visual Studio Code, Visual Studio, JetBrains IDEs, Azure Data Studio, Xcode, Vim/Neovim, and Eclipse.
 
