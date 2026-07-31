@@ -28,3 +28,8 @@ def kb_sync_module():
 @pytest.fixture(scope="session")
 def freshness_module():
     return _load_script_module("check_slides_freshness.py", "freshness_test_module")
+
+
+@pytest.fixture(scope="session")
+def wiki_sync_module():
+    return _load_script_module("generate_content_sync_wiki.py", "wiki_sync_test_module")

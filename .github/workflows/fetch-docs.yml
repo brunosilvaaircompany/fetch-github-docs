@@ -39,6 +39,28 @@ jobs:
       - name: Baixar e limpar documentacao
         run: python3 scripts/kb_sync.py --section "$DOCS_SECTION" --output "$DOCS_OUTPUT"
 
+      - name: Mapear mudancas em github-docs/content
+        id: content_changes
+        run: |
+          git --no-pager diff --name-status -- "$DOCS_OUTPUT/content" > .content-changes.txt
+          count="$(wc -l < .content-changes.txt | tr -d ' ')"
+          echo "count=$count" >> "$GITHUB_OUTPUT"
+          if [ "$count" -gt 0 ]; then
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Atualizar pagina base para Wiki
+        if: steps.content_changes.outputs.has_changes == 'true'
+        run: |
+          python3 scripts/generate_content_sync_wiki.py \
+            --changes-file .content-changes.txt \
+            --output "$DOCS_OUTPUT/content-sync-log.md" \
+            --workflow-run-url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
+            --source-sha "${{ github.sha }}" \
+            --docs-section "$DOCS_SECTION"
+
       - name: Commit se houver mudancas
         run: |
           git config user.name "github-actions[bot]"

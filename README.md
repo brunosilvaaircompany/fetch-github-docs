@@ -20,7 +20,8 @@ index.html                      # GitHub Pages — galeria de slides
 
 scripts/
 ├── kb_sync.py                  # Sync de documentação
-└── check_slides_freshness.py   # Verificação de slides desatualizados
+├── check_slides_freshness.py   # Verificação de slides desatualizados
+└── generate_content_sync_wiki.py # Gera página-base de atualizações para Wiki
 
 slides/
 ├── template.md                 # Guia de conteúdo para o instrutor
@@ -101,6 +102,8 @@ python3 scripts/kb_sync.py --section content/webhooks,content/rest/webhooks
 ### Automação semanal
 
 Copie `.github/workflows/fetch-docs.yml` para o seu repositório, ajuste a variável `DOCS_SECTION` e pronto: toda segunda-feira o workflow baixa a versão mais recente da documentação e faz commit se algo mudou. O link no Copilot Spaces fica sempre atualizado sem intervenção manual.
+
+Quando houver alterações em `github-docs/content`, o workflow também atualiza `github-docs/content-sync-log.md`, com entradas prontas para uma página Wiki operacional (o que mudou, áreas impactadas e checklist pós-sync).
 
 ### Limitações
 
