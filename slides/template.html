@@ -134,8 +134,12 @@
 
     /* ── Cover slide ── */
     .cover-logo {
-      font-size: 3.5em;
-      margin-bottom: 0.2em;
+      margin-bottom: 0.4em;
+    }
+    .cover-logo img {
+      width: 96px;
+      height: 96px;
+      filter: invert(1);        /* branco sobre fundo escuro */
     }
     .cover-subtitle {
       color: var(--text-muted);
@@ -150,6 +154,22 @@
       padding: 0.2em 0.8em;
       font-size: 0.5em;
       margin-top: 0.8em;
+    }
+
+    /* ── GitHub mark no rodapé ── */
+    .gh-footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4em;
+      margin-top: 1em;
+      font-size: 0.4em;
+      color: var(--text-muted);
+    }
+    .gh-footer img {
+      width: 18px;
+      height: 18px;
+      filter: invert(0.6);
     }
 
     /* ── Two-column layout ── */
@@ -216,7 +236,9 @@
        SLIDE 1 — CAPA
   ==================================================================== -->
   <section>
-    <div class="cover-logo">🤖</div>
+    <div class="cover-logo">
+      <img src="images/copilot-48.svg" alt="GitHub Copilot" />
+    </div>
     <h1>GitHub Copilot</h1>
     <p class="cover-subtitle">Treinamento prático — 60 minutos</p>
     <!-- Substitua pelo tema do treinamento -->
@@ -227,6 +249,10 @@
     <p style="margin-top:1em; font-size:0.45em; color:var(--text-muted);">
       [Nome do instrutor] &nbsp;·&nbsp; [Data] &nbsp;·&nbsp; [Organização]
     </p>
+    <div class="gh-footer">
+      <img src="images/mark-github-24.svg" alt="GitHub" />
+      GitHub Copilot
+    </div>
   </section>
 
   <!-- ===================================================================
@@ -547,12 +573,18 @@ HTTP 201 em Express.js + TypeScript</code></pre>
        SLIDE FINAL — AGRADECIMENTO
   ==================================================================== -->
   <section>
-    <div class="cover-logo">🤖</div>
+    <div class="cover-logo">
+      <img src="images/copilot-48.svg" alt="GitHub Copilot" />
+    </div>
     <h1>Obrigado!</h1>
     <p class="cover-subtitle">GitHub Copilot — Treinamento de 60 minutos</p>
     <p style="font-size:0.5em; color:var(--text-muted); margin-top:1em;">
       [Nome do instrutor] &nbsp;·&nbsp; [Contato / LinkedIn / GitHub]
     </p>
+    <div class="gh-footer">
+      <img src="images/mark-github-24.svg" alt="GitHub" />
+      GitHub Copilot
+    </div>
   </section>
 
 </div><!-- /.slides -->
