@@ -479,7 +479,9 @@
       <a class="card" href="slides/copilot-cli/index.html"
          data-title="github copilot cli"
          data-desc="treinamento completo sobre o agente de terminal do copilot instalação autenticação criação de prs e customização com mcp"
-         data-tags="cli reveal.js 60 min">
+         data-tags="cli reveal.js 60 min"
+         data-source-path="slides/copilot-cli/index.html"
+         data-static-title="GitHub Copilot CLI">
         <div class="card-icon">⚡</div>
         <div class="card-title">GitHub Copilot CLI</div>
         <div class="card-desc">
@@ -497,7 +499,9 @@
       <a class="card template" href="slides/template.html"
          data-title="template de treinamento"
          data-desc="slide base com o tema github copilot copie para criar novas apresentações de 60 minutos com estrutura padronizada"
-         data-tags="template reveal.js">
+         data-tags="template reveal.js"
+         data-source-path="slides/template.html"
+         data-static-title="Template de Treinamento">
         <div class="card-icon">📄</div>
         <div class="card-title">Template de Treinamento</div>
         <div class="card-desc">
@@ -779,6 +783,45 @@
       }
 
       renderUserDeckCards();
+
+      // inject Duplicar into static (built-in) cards
+      Array.from(grid.querySelectorAll('[data-source-path]')).forEach(function (card) {
+        if (card.dataset.userDeck === 'true') {
+          return;
+        }
+        var meta = card.querySelector('.card-meta');
+        if (!meta || meta.querySelector('.deck-duplicate-btn')) {
+          return;
+        }
+        var sourcePath = card.dataset.sourcePath || '';
+        var staticTitle = card.dataset.staticTitle || card.querySelector('.card-title').textContent || 'Deck';
+        var dupBtn = document.createElement('button');
+        dupBtn.type = 'button';
+        dupBtn.className = 'deck-duplicate-btn';
+        dupBtn.textContent = 'Duplicar';
+        dupBtn.style.marginLeft = 'auto';
+        dupBtn.addEventListener('click', function (event) {
+          event.preventDefault();
+          event.stopPropagation();
+          if (!store) {
+            window.alert('Modulo de armazenamento indisponivel.');
+            return;
+          }
+          var created = store.createDeck({
+            sourcePath: sourcePath,
+            title: 'Copia de ' + staticTitle,
+            description: '',
+            tags: []
+          });
+          if (!created) {
+            window.alert('Nao foi possivel duplicar o deck.');
+            return;
+          }
+          renderUserDeckCards();
+          applyFilter();
+        });
+        meta.appendChild(dupBtn);
+      });
 
       if (newDeckBtn) {
         newDeckBtn.addEventListener('click', createDeckFlow);
