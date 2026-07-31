@@ -184,6 +184,7 @@ class LiquidResolver:
     CODETABS_WRAP_RE = re.compile(r"\{%-?\s*codetabs\s*-?%\}|\{%-?\s*endcodetabs\s*-?%\}")
     CODETAB_START_RE = re.compile(r"\{%-?\s*codetab\s+([\w.\-]+)\s*-?%\}")
     CODETAB_END_RE = re.compile(r"\{%-?\s*endcodetab\s*-?%\}")
+    _FENCED_CODE_RE = re.compile(r"```[^\n]*\n.*?```", re.DOTALL)
 
     def __init__(self, workdir: str):
         self.reusables_dir = os.path.join(workdir, "data/reusables")
@@ -285,6 +286,17 @@ class LiquidResolver:
         if _depth > 6:
             return text
 
+        # Protect fenced code blocks so that Liquid tags inside them (e.g. usage
+        # examples in contributing guides) are not resolved or flagged.
+        _stashed: list[str] = []
+
+        def _stash(m: re.Match) -> str:
+            idx = len(_stashed)
+            _stashed.append(m.group(0))
+            return f"\x00CODEBLOCK{idx:06d}\x00"
+
+        out = self._FENCED_CODE_RE.sub(_stash, text)
+
         def repl(m):
             path = m.group(1)
             if path.startswith("variables."):
@@ -295,7 +307,6 @@ class LiquidResolver:
                 return val if val else m.group(0)
             return m.group(0)
 
-        out = text
         prev = None
         for _ in range(4):
             out = self.TAG_RE.sub(repl, out)
@@ -317,6 +328,11 @@ class LiquidResolver:
             lambda m: f"\n#### {self._humanize_lang(m.group(1))}\n", out
         )
         out = self.CODETAB_END_RE.sub("", out)
+
+        # Restore protected code blocks
+        for idx, block in enumerate(_stashed):
+            out = out.replace(f"\x00CODEBLOCK{idx:06d}\x00", block)
+
         return out
 
     _LANG_NAMES = {
@@ -393,6 +409,9 @@ def _is_allowed_template_reference(rel_path: str) -> bool:
     return any(fragment in normalized for fragment in ALLOWED_TEMPLATE_REFERENCE_PATH_FRAGMENTS)
 
 
+_FENCED_CODE_STRIP_RE = re.compile(r"```[^\n]*\n.*?```", re.DOTALL)
+
+
 def validate_output_has_no_templates(output_dir: str) -> list[tuple[str, str]]:
     violations = []
     for root, _dirs, files in os.walk(output_dir):
@@ -405,8 +424,11 @@ def validate_output_has_no_templates(output_dir: str) -> list[tuple[str, str]]:
                 continue
             with open(fpath, encoding="utf-8") as f:
                 content = f.read()
+            # Strip fenced code blocks before scanning: tags inside code blocks
+            # are intentional examples and should not be flagged as violations.
+            content_outside_code = _FENCED_CODE_STRIP_RE.sub("", content)
             for pattern in DISALLOWED_TEMPLATE_PATTERNS:
-                match = pattern.search(content)
+                match = pattern.search(content_outside_code)
                 if match:
                     violations.append((rel_path.replace("\\", "/"), match.group(0)))
                     break

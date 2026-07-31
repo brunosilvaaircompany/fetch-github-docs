@@ -1,4 +1,25 @@
 {
   "version": 1,
-  "slides": {}
+  "slides": {
+    "slides/copilot-cli/index.html": {
+      "source_hash": "65b2965a5c60875edc35c6dfab885ffdf68899ffed4f82440a9fb1873d524284",
+      "source_hashes": {
+        "github-docs/content/copilot/concepts/agents/copilot-cli/about-copilot-cli.md": "8563a7e522d6975763ae17ca93b0f6fecc21d972c5dfce30914e250d060da853",
+        "github-docs/content/copilot/how-tos/copilot-cli/set-up-copilot-cli/install-copilot-cli.md": "806a4013b0a3b7c001b8567a7186e3227158cfacfecccaf4ba22008d92e3c252",
+        "github-docs/content/copilot/how-tos/copilot-cli/set-up-copilot-cli/authenticate-copilot-cli.md": "4283805f158608cb4f5266fc6034ac58100665d244077c39beae922a16c54cd1",
+        "github-docs/content/copilot/how-tos/copilot-cli/set-up-copilot-cli/configure-copilot-cli.md": "fdc6ae3163eb5db84d667b87f0df0212c98e9c493883d040a42aad8086fc872c",
+        "github-docs/content/copilot/how-tos/copilot-cli/cli-getting-started.md": "e22e28fef40c7dbe9073837478501055491f5e2d05b00149206eb4283ffc7fbb",
+        "github-docs/content/copilot/how-tos/copilot-cli/use-copilot-cli/overview.md": "20a40817859050073ac0c2cc991e37d28e78baae39f46f4b5065a9801b1b6b84",
+        "github-docs/content/copilot/how-tos/copilot-cli/use-copilot-cli/manage-pull-requests.md": "8ecfd3e391db719fea95149f20d184bc2cd82335a9e336b3a9901625f6f25c4b",
+        "github-docs/content/copilot/how-tos/copilot-cli/use-copilot-cli/delegate-tasks-to-cca.md": "9c4d003cec791738cf66486e56391c17701408483f0be577a94cb30a277e4ab6",
+        "github-docs/content/copilot/how-tos/copilot-cli/use-copilot-cli/allowing-tools.md": "d55ac30d90b8307406c9a0a7b8a8e4adac6cedc70682e7d0ba87899cb71ce999",
+        "github-docs/content/copilot/how-tos/copilot-cli/use-copilot-cli/agentic-code-review.md": "a3771a567e59d9c78c0a20eea7120a3d9b3042bb7c249f5490eeb9d2af75161e",
+        "github-docs/content/copilot/how-tos/copilot-cli/cli-best-practices.md": "2966b09453989549449a4a65b3455bfe00945f3add17348534e6bc96d24cea02",
+        "github-docs/content/copilot/how-tos/copilot-cli/customize-copilot/add-custom-instructions.md": "c4cf57e3af4c567a85b3aba1e1af2f2731f0d890842d33bd2f50ff24c4a0ce39",
+        "github-docs/content/copilot/how-tos/copilot-cli/customize-copilot/add-mcp-servers.md": "309b534210afbd4a7e6a6a3ab97dffb1580eb3d672a32b155c75f3ca8f70d7a2",
+        "github-docs/content/copilot/how-tos/copilot-cli/customize-copilot/create-custom-agents-for-cli.md": "a062283f800c9d48e64c03fea05d0b925f5df95816ce8c57ca31d26e245d6d8f"
+      },
+      "checked_at": "2026-07-31T15:00:09.742541+00:00"
+    }
+  }
 }
