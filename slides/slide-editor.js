@@ -28,6 +28,8 @@
 
   if (typeof activeDeck.slidesHtml === "string" && activeDeck.slidesHtml.trim().length > 0) {
     slidesRoot.innerHTML = activeDeck.slidesHtml;
+    slidesRoot.querySelectorAll(".slide-editor-image-target").forEach(el => el.classList.remove("slide-editor-image-target"));
+    slidesRoot.querySelectorAll(".slide-editor-inline-target").forEach(el => el.classList.remove("slide-editor-inline-target"));
   }
   if (editableStyleTag && typeof activeDeck.cssText === "string" && activeDeck.cssText.trim().length > 0) {
     editableStyleTag.textContent = activeDeck.cssText;
@@ -112,6 +114,13 @@
     }
   }
 
+  function getSanitizedSlidesHtml() {
+    const clone = slidesRoot.cloneNode(true);
+    clone.querySelectorAll(".slide-editor-image-target").forEach(el => el.classList.remove("slide-editor-image-target"));
+    clone.querySelectorAll(".slide-editor-inline-target").forEach(el => el.classList.remove("slide-editor-inline-target"));
+    return clone.innerHTML;
+  }
+
   function saveSlidesNow() {
     if (!storageEnabled) {
       return;
@@ -119,7 +128,7 @@
     try {
       const saved = store.updateDeckContent(activeDeck.id, {
         sourcePath: pathKey,
-        slidesHtml: slidesRoot.innerHTML,
+        slidesHtml: getSanitizedSlidesHtml(),
         cssText: editableStyleTag ? editableStyleTag.textContent : ""
       });
       if (!saved) {
@@ -242,6 +251,7 @@
     toggleButton.textContent = inlineEditing ? "Parar edicao" : "Editar slide";
     if (!inlineEditing) {
       lastCaretRange = null;
+      setSelectedImage(null);
     }
     setEditableSlide(getCurrentSlide());
   }
