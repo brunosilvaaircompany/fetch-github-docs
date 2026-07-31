@@ -1,0 +1,272 @@
+:root {
+  --bg: #ffffff;
+  --surface: #f6f8fa;
+  --border: #d0d7de;
+  --accent: #0969da;
+  --accent-light: #0969da;
+  --text: #1f2328;
+  --text-muted: #59636e;
+  --green: #1a7f37;
+  --amber: #9a6700;
+}
+
+.reveal-viewport {
+  background: var(--bg);
+}
+
+.reveal {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 36px;
+  color: var(--text);
+}
+
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4 {
+  color: var(--text);
+  font-weight: 700;
+  text-transform: none;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.reveal h1 {
+  font-size: 2em;
+}
+
+.reveal h2 {
+  font-size: 1.4em;
+  color: var(--accent-light);
+}
+
+.reveal h3 {
+  font-size: 1em;
+  color: var(--text-muted);
+}
+
+.reveal h2::before {
+  content: "";
+  display: inline-block;
+  width: 4px;
+  height: 0.9em;
+  background: var(--accent);
+  border-radius: 2px;
+  margin-right: 0.4em;
+  vertical-align: middle;
+}
+
+.reveal a {
+  color: var(--accent-light);
+  text-decoration: underline;
+}
+
+.reveal a:hover {
+  color: #0550ae;
+}
+
+.reveal ul,
+.reveal ol {
+  text-align: left;
+  margin-left: 1em;
+}
+
+.reveal li {
+  margin: 0.3em 0;
+  color: var(--text);
+}
+
+.reveal ul li::marker {
+  color: var(--accent);
+}
+
+.reveal code {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.1em 0.35em;
+  font-size: 0.85em;
+  color: var(--accent-light);
+}
+
+.reveal pre {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: none;
+  width: 100%;
+}
+
+.reveal pre code {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: var(--text);
+  font-size: 0.72em;
+}
+
+.reveal blockquote {
+  background: var(--surface);
+  border-left: 4px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+  padding: 0.6em 1em;
+  font-style: normal;
+  color: var(--text);
+  width: 90%;
+  margin: 0.8em auto;
+}
+
+.timebox {
+  display: inline-block;
+  background: var(--accent);
+  color: #ffffff;
+  border-radius: 20px;
+  padding: 0.15em 0.7em;
+  font-size: 0.55em;
+  font-weight: 600;
+  vertical-align: middle;
+  margin-left: 0.5em;
+  letter-spacing: 0.03em;
+}
+
+.reveal .progress {
+  background: var(--border);
+}
+
+.reveal .progress span {
+  background: var(--accent);
+}
+
+.reveal .controls {
+  color: var(--accent-light);
+}
+
+.cover-logo {
+  margin-bottom: 0.4em;
+}
+
+.cover-logo img {
+  width: 96px;
+  height: 96px;
+}
+
+.cover-subtitle {
+  color: var(--text-muted);
+  font-size: 0.6em;
+  margin-top: 0.3em;
+}
+
+.cover-badge {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 6px;
+  padding: 0.2em 0.8em;
+  font-size: 0.5em;
+  margin-top: 0.8em;
+}
+
+.gh-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4em;
+  margin-top: 1em;
+  font-size: 0.4em;
+  color: var(--text-muted);
+}
+
+.gh-footer img {
+  width: 18px;
+  height: 18px;
+}
+
+.octocat {
+  position: absolute;
+  bottom: 0.5em;
+  right: 0.8em;
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  opacity: 0.85;
+  border-radius: 8px;
+}
+
+.cols {
+  display: flex;
+  gap: 1.5em;
+  align-items: flex-start;
+  justify-content: center;
+  text-align: left;
+}
+
+.cols > div {
+  flex: 1;
+}
+
+.agenda {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.65em;
+  text-align: left;
+}
+
+.agenda th {
+  background: var(--surface);
+  color: var(--accent-light);
+  padding: 0.5em 0.8em;
+  border-bottom: 2px solid var(--accent);
+}
+
+.agenda td {
+  padding: 0.45em 0.8em;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+}
+
+.agenda tr:hover td {
+  background: var(--surface);
+}
+
+.agenda .min {
+  color: var(--text-muted);
+}
+
+.hl-purple {
+  color: var(--accent-light);
+  font-weight: 600;
+}
+
+.hl-green {
+  color: var(--green);
+  font-weight: 600;
+}
+
+.hl-amber {
+  color: var(--amber);
+  font-weight: 600;
+}
+
+.icon-row {
+  display: flex;
+  justify-content: center;
+  gap: 1.5em;
+  margin-top: 0.6em;
+}
+
+.icon-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.6em 1em;
+  text-align: center;
+  font-size: 0.55em;
+  color: var(--text);
+  min-width: 6em;
+}
+
+.icon-card .emoji {
+  font-size: 2.5em;
+  display: block;
+  margin-bottom: 0.2em;
+}
