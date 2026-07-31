@@ -2,21 +2,43 @@
   "use strict";
 
   const slidesRoot = document.querySelector(".reveal .slides");
-  if (!slidesRoot) {
+  if (!slidesRoot || !window.SlideDeckStore) {
     return;
   }
 
+  const store = window.SlideDeckStore;
   const UI_ATTR = "data-slide-editor-ui";
-  const storageKey = `slide-editor:${window.location.pathname}`;
   const baselineSlidesHtml = slidesRoot.innerHTML;
   const editableStyleTag = getEditableStyleTag();
   const baselineCssText = editableStyleTag ? editableStyleTag.textContent : "";
+  const pathKey = store.getCurrentPathKey(window.location.pathname);
+  const queryDeckId = new URLSearchParams(window.location.search).get("deck");
+
+  let activeDeck = store.ensureDeckForCurrentPath({
+    pathname: window.location.pathname,
+    pathKey,
+    deckId: queryDeckId,
+    baselineSlidesHtml,
+    baselineCssText
+  });
+
+  if (!activeDeck) {
+    return;
+  }
+
+  if (typeof activeDeck.slidesHtml === "string" && activeDeck.slidesHtml.trim().length > 0) {
+    slidesRoot.innerHTML = activeDeck.slidesHtml;
+  }
+  if (editableStyleTag && typeof activeDeck.cssText === "string" && activeDeck.cssText.trim().length > 0) {
+    editableStyleTag.textContent = activeDeck.cssText;
+  }
 
   let reveal = null;
   let saveTimer = null;
   let storageEnabled = true;
   let inlineEditing = false;
   let editableSlide = null;
+  let selectedImageElement = null;
   let codeMode = null;
   let codePanel = null;
   let codeTextarea = null;
@@ -28,6 +50,17 @@
   let hideControlsButton = null;
   let showControlsButton = null;
   let backToHomeButton = null;
+  let templatePanel = null;
+  let templateList = null;
+  let templateNameInput = null;
+  let templateDescriptionInput = null;
+  let templateHtmlTextarea = null;
+  let selectedTemplateId = "";
+  let imagePanel = null;
+  let imageList = null;
+  let imageUploadInput = null;
+  let imagesButton = null;
+  let templatesButton = null;
 
   function getEditableStyleTag() {
     const styles = Array.from(document.head.querySelectorAll("style"));
@@ -71,20 +104,30 @@
     return getLeafSlides()[0] || null;
   }
 
+  function refreshDeckFromStore() {
+    const updated = store.getDeckById(activeDeck.id);
+    if (updated) {
+      activeDeck = updated;
+    }
+  }
+
   function saveSlidesNow() {
     if (!storageEnabled) {
       return;
     }
     try {
-      const payload = JSON.stringify({
-        version: 2,
+      const saved = store.updateDeckContent(activeDeck.id, {
+        sourcePath: pathKey,
         slidesHtml: slidesRoot.innerHTML,
         cssText: editableStyleTag ? editableStyleTag.textContent : ""
       });
-      window.localStorage.setItem(storageKey, payload);
+      if (!saved) {
+        throw new Error("Deck nao encontrado para salvar.");
+      }
+      activeDeck = saved;
     } catch (error) {
       storageEnabled = false;
-      console.error("Slide editor: failed to persist slides in localStorage.", error);
+      console.error("Slide editor: failed to persist deck state in localStorage.", error);
       window.alert("Nao foi possivel salvar no navegador. Verifique as permissoes de armazenamento local.");
     }
   }
@@ -135,6 +178,18 @@
     return `Slide ${horizontal}.${vertical}`;
   }
 
+  function setSelectedImage(imageElement) {
+    if (selectedImageElement) {
+      selectedImageElement.classList.remove("slide-editor-image-target");
+    }
+    selectedImageElement = null;
+    if (!imageElement) {
+      return;
+    }
+    selectedImageElement = imageElement;
+    selectedImageElement.classList.add("slide-editor-image-target");
+  }
+
   function updateStatus(slide) {
     if (!statusText) {
       return;
@@ -143,17 +198,19 @@
       statusText.textContent = "Sem slide selecionado";
       return;
     }
+
+    const deckTitle = activeDeck && activeDeck.title ? activeDeck.title : "Deck";
+    let modeLabel = "";
     if (codeMode === "html") {
-      statusText.textContent = `${currentSlideLabel(slide)} - edicao de HTML ativa`;
-      return;
+      modeLabel = " - edicao de HTML ativa";
+    } else if (codeMode === "css") {
+      modeLabel = " - edicao de CSS ativa";
+    } else if (inlineEditing) {
+      modeLabel = " - edicao de texto ativa";
+    } else if (selectedImageElement) {
+      modeLabel = " - imagem selecionada";
     }
-    if (codeMode === "css") {
-      statusText.textContent = "Edicao de CSS ativa";
-      return;
-    }
-    statusText.textContent = inlineEditing
-      ? `${currentSlideLabel(slide)} - edicao de texto ativa`
-      : currentSlideLabel(slide);
+    statusText.textContent = `${deckTitle} - ${currentSlideLabel(slide)}${modeLabel}`;
   }
 
   function setEditableSlide(slide) {
@@ -187,6 +244,8 @@
       return;
     }
 
+    closeTemplatePanel();
+    closeImagePanel();
     setInlineEditing(false);
     codeMode = mode;
     codePanel.classList.add("open");
@@ -223,6 +282,8 @@
     hideControlsButton.parentElement.classList.add("hidden");
     showControlsButton.classList.add("show");
     closeCodeEditor();
+    closeTemplatePanel();
+    closeImagePanel();
     setInlineEditing(false);
   }
 
@@ -234,9 +295,9 @@
     showControlsButton.classList.remove("show");
   }
 
-  function createSlideElement() {
+  function createSlideElement(customHtml) {
     const section = document.createElement("section");
-    section.innerHTML = "<h2>Novo slide</h2><p>Clique em 'Editar texto' para editar diretamente neste slide.</p>";
+    section.innerHTML = customHtml || "<h2>Novo slide</h2><p>Clique em 'Editar texto' para editar diretamente neste slide.</p>";
     return section;
   }
 
@@ -245,7 +306,20 @@
     if (!current || !current.parentElement) {
       return;
     }
-    const section = createSlideElement();
+    const section = createSlideElement("");
+    current.parentElement.insertBefore(section, current.nextSibling);
+    syncRevealLayout();
+    goToSlide(section);
+    setEditableSlide(section);
+    queueSave();
+  }
+
+  function insertSlideFromTemplate(html) {
+    const current = getCurrentSlide();
+    if (!current || !current.parentElement) {
+      return;
+    }
+    const section = createSlideElement(html);
     current.parentElement.insertBefore(section, current.nextSibling);
     syncRevealLayout();
     goToSlide(section);
@@ -307,7 +381,7 @@
   }
 
   function resetSlides() {
-    const shouldReset = window.confirm("Restaurar os slides para a versao original deste arquivo?");
+    const shouldReset = window.confirm("Restaurar apenas o deck atual para o template inicial desta pagina?");
     if (!shouldReset) {
       return;
     }
@@ -315,14 +389,17 @@
     if (editableStyleTag) {
       editableStyleTag.textContent = baselineCssText;
     }
-    window.localStorage.removeItem(storageKey);
     syncRevealLayout();
     const firstSlide = getLeafSlides()[0] || null;
     if (firstSlide) {
       goToSlide(firstSlide);
     }
+    setSelectedImage(null);
     setEditableSlide(firstSlide);
     closeCodeEditor();
+    closeTemplatePanel();
+    closeImagePanel();
+    saveSlidesNow();
   }
 
   function exportSlides() {
@@ -330,7 +407,11 @@
     const nodes = Array.from(clone.querySelectorAll(`[${UI_ATTR}]`));
     nodes.forEach((node) => node.remove());
 
-    const deckName = (window.location.pathname.split("/").filter(Boolean).pop() || "slides").replace(".html", "");
+    const deckTitleSlug = String(activeDeck.title || "deck")
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+    const deckName = deckTitleSlug || "deck";
     const html = `<!DOCTYPE html>\n${clone.outerHTML}`;
     const blob = new Blob([html], { type: "text/html;charset=utf-8" });
     const objectUrl = window.URL.createObjectURL(blob);
@@ -343,25 +424,364 @@
     window.URL.revokeObjectURL(objectUrl);
   }
 
-  function applySavedState() {
-    const raw = window.localStorage.getItem(storageKey);
-    if (!raw || raw.trim().length === 0) {
+  function editDeckMetadata() {
+    refreshDeckFromStore();
+    const title = window.prompt("Titulo do deck:", activeDeck.title || "");
+    if (title === null) {
+      return;
+    }
+    const description = window.prompt("Descricao do deck:", activeDeck.description || "");
+    if (description === null) {
+      return;
+    }
+    const tags = window.prompt("Tags do deck (separadas por virgula):", (activeDeck.tags || []).join(", "));
+    if (tags === null) {
       return;
     }
 
-    try {
-      const parsed = JSON.parse(raw);
-      if (parsed && typeof parsed.slidesHtml === "string" && parsed.slidesHtml.trim().length > 0) {
-        slidesRoot.innerHTML = parsed.slidesHtml;
-      }
-      if (editableStyleTag && typeof parsed.cssText === "string") {
-        editableStyleTag.textContent = parsed.cssText;
-      }
-    } catch (_error) {
-      if (raw.trim().length > 0) {
-        slidesRoot.innerHTML = raw;
-      }
+    const updated = store.updateDeckMeta(activeDeck.id, {
+      title: title,
+      description: description,
+      tags: tags,
+      sourcePath: pathKey
+    });
+    if (!updated) {
+      window.alert("Nao foi possivel atualizar os metadados do deck.");
+      return;
     }
+    activeDeck = updated;
+    if (backToHomeButton) {
+      backToHomeButton.title = `Voltar para galeria (${activeDeck.title})`;
+    }
+    updateStatus(getCurrentSlide());
+    window.alert("Metadados do deck atualizados.");
+  }
+
+  function deleteCurrentDeck() {
+    refreshDeckFromStore();
+    const canDelete = !String(activeDeck.id || "").startsWith("path:");
+    if (!canDelete) {
+      window.alert("Este deck base nao pode ser excluido. Crie um novo deck pela galeria para gerenciar exclusao.");
+      return;
+    }
+
+    const shouldDelete = window.confirm(`Excluir o deck "${activeDeck.title}"?`);
+    if (!shouldDelete) {
+      return;
+    }
+    const deleted = store.deleteDeck(activeDeck.id);
+    if (!deleted) {
+      window.alert("Nao foi possivel excluir o deck.");
+      return;
+    }
+    window.location.assign(getHomePagePath());
+  }
+
+  function closeTemplatePanel() {
+    if (!templatePanel) {
+      return;
+    }
+    templatePanel.classList.remove("open");
+    if (templatesButton) {
+      templatesButton.classList.remove("active");
+    }
+  }
+
+  function openTemplatePanel() {
+    if (!templatePanel) {
+      return;
+    }
+    closeCodeEditor();
+    closeImagePanel();
+    templatePanel.classList.add("open");
+    if (templatesButton) {
+      templatesButton.classList.add("active");
+    }
+    renderTemplateList();
+  }
+
+  function closeImagePanel() {
+    if (!imagePanel) {
+      return;
+    }
+    imagePanel.classList.remove("open");
+    if (imagesButton) {
+      imagesButton.classList.remove("active");
+    }
+  }
+
+  function openImagePanel() {
+    if (!imagePanel) {
+      return;
+    }
+    closeCodeEditor();
+    closeTemplatePanel();
+    imagePanel.classList.add("open");
+    if (imagesButton) {
+      imagesButton.classList.add("active");
+    }
+    renderImageList();
+  }
+
+  function selectTemplate(templateId) {
+    const templates = store.listTemplates();
+    const selected = templates.find((template) => template.id === templateId);
+    if (!selected) {
+      selectedTemplateId = "";
+      templateNameInput.value = "";
+      templateDescriptionInput.value = "";
+      templateHtmlTextarea.value = "";
+      renderTemplateList();
+      return;
+    }
+
+    selectedTemplateId = selected.id;
+    templateNameInput.value = selected.name || "";
+    templateDescriptionInput.value = selected.description || "";
+    templateHtmlTextarea.value = selected.html || "";
+    renderTemplateList();
+  }
+
+  function createTemplateFromCurrentSlide() {
+    const current = getCurrentSlide();
+    if (!current) {
+      window.alert("Sem slide selecionado.");
+      return;
+    }
+    const name = window.prompt("Nome do template:", "Novo template");
+    if (name === null) {
+      return;
+    }
+    const description = window.prompt("Descricao do template:", "Template criado a partir do slide atual");
+    if (description === null) {
+      return;
+    }
+    const created = store.createTemplate({
+      name: name,
+      description: description,
+      html: current.innerHTML.trim()
+    });
+    if (!created) {
+      window.alert("Nao foi possivel criar o template.");
+      return;
+    }
+    selectTemplate(created.id);
+  }
+
+  function saveTemplateFromPanel() {
+    const name = String(templateNameInput.value || "").trim();
+    const html = String(templateHtmlTextarea.value || "").trim();
+    if (name.length === 0) {
+      window.alert("Informe um nome para o template.");
+      return;
+    }
+    if (html.length === 0) {
+      window.alert("Informe o HTML do template.");
+      return;
+    }
+
+    const description = String(templateDescriptionInput.value || "").trim();
+    const current = selectedTemplateId ? store.listTemplates().find((template) => template.id === selectedTemplateId) : null;
+    let result = null;
+
+    if (current && !current.builtin) {
+      result = store.updateTemplate(current.id, {
+        name,
+        description,
+        html
+      });
+    } else {
+      result = store.createTemplate({
+        name,
+        description,
+        html
+      });
+    }
+
+    if (!result) {
+      window.alert("Nao foi possivel salvar o template.");
+      return;
+    }
+    selectTemplate(result.id);
+  }
+
+  function deleteSelectedTemplate() {
+    if (!selectedTemplateId) {
+      return;
+    }
+    const current = store.listTemplates().find((template) => template.id === selectedTemplateId);
+    if (!current) {
+      return;
+    }
+    if (current.builtin) {
+      window.alert("Templates padrao nao podem ser excluidos.");
+      return;
+    }
+    const shouldDelete = window.confirm(`Excluir o template "${current.name}"?`);
+    if (!shouldDelete) {
+      return;
+    }
+    const deleted = store.deleteTemplate(current.id);
+    if (!deleted) {
+      window.alert("Nao foi possivel excluir o template.");
+      return;
+    }
+    selectedTemplateId = "";
+    templateNameInput.value = "";
+    templateDescriptionInput.value = "";
+    templateHtmlTextarea.value = "";
+    renderTemplateList();
+  }
+
+  function renderTemplateList() {
+    if (!templateList) {
+      return;
+    }
+    const templates = store.listTemplates();
+    templateList.innerHTML = "";
+
+    templates.forEach((template) => {
+      const row = document.createElement("div");
+      row.className = "slide-editor-list-row";
+
+      const title = document.createElement("div");
+      title.className = "slide-editor-list-title";
+      title.textContent = template.builtin ? `${template.name} (padrao)` : template.name;
+
+      const description = document.createElement("div");
+      description.className = "slide-editor-list-description";
+      description.textContent = template.description || "Sem descricao";
+
+      const actions = document.createElement("div");
+      actions.className = "slide-editor-list-actions";
+
+      const insertButton = document.createElement("button");
+      insertButton.type = "button";
+      insertButton.textContent = "Inserir";
+      insertButton.addEventListener("click", () => {
+        insertSlideFromTemplate(template.html);
+        closeTemplatePanel();
+      });
+
+      const editButton = document.createElement("button");
+      editButton.type = "button";
+      editButton.textContent = "Editar";
+      editButton.className = selectedTemplateId === template.id ? "active" : "";
+      editButton.addEventListener("click", () => {
+        selectTemplate(template.id);
+      });
+
+      actions.appendChild(insertButton);
+      actions.appendChild(editButton);
+      row.appendChild(title);
+      row.appendChild(description);
+      row.appendChild(actions);
+      templateList.appendChild(row);
+    });
+  }
+
+  function applyImageToSelectedSlide(asset) {
+    const current = getCurrentSlide();
+    if (!current) {
+      window.alert("Sem slide selecionado.");
+      return;
+    }
+
+    let target = selectedImageElement;
+    if (!target || !current.contains(target)) {
+      target = current.querySelector("img");
+    }
+    if (!target) {
+      target = document.createElement("img");
+      target.alt = asset.name || "Imagem";
+      target.style.maxWidth = "56%";
+      target.style.marginTop = "14px";
+      current.appendChild(target);
+    }
+    target.src = asset.src;
+    if (!target.alt || target.alt.trim().length === 0) {
+      target.alt = asset.name || "Imagem";
+    }
+
+    setSelectedImage(target);
+    syncRevealLayout();
+    queueSave();
+  }
+
+  function renderImageList() {
+    if (!imageList) {
+      return;
+    }
+    imageList.innerHTML = "";
+    const assets = store.listImageLibrary(window.location.pathname);
+    assets.forEach((asset) => {
+      const card = document.createElement("div");
+      card.className = "slide-editor-image-card";
+
+      const preview = document.createElement("img");
+      preview.src = asset.src;
+      preview.alt = asset.name;
+      preview.className = "slide-editor-image-preview";
+
+      const name = document.createElement("div");
+      name.className = "slide-editor-image-name";
+      name.textContent = asset.name;
+
+      const actions = document.createElement("div");
+      actions.className = "slide-editor-list-actions";
+
+      const useButton = document.createElement("button");
+      useButton.type = "button";
+      useButton.textContent = "Usar";
+      useButton.addEventListener("click", () => {
+        applyImageToSelectedSlide(asset);
+      });
+
+      actions.appendChild(useButton);
+
+      if (asset.kind === "upload") {
+        const deleteButton = document.createElement("button");
+        deleteButton.type = "button";
+        deleteButton.textContent = "Excluir";
+        deleteButton.addEventListener("click", () => {
+          const shouldDelete = window.confirm(`Excluir upload "${asset.name}"?`);
+          if (!shouldDelete) {
+            return;
+          }
+          store.deleteUploadImage(asset.id);
+          renderImageList();
+        });
+        actions.appendChild(deleteButton);
+      }
+
+      card.appendChild(preview);
+      card.appendChild(name);
+      card.appendChild(actions);
+      imageList.appendChild(card);
+    });
+  }
+
+  function handleImageUpload(event) {
+    const files = event.target && event.target.files ? Array.from(event.target.files) : [];
+    if (files.length === 0) {
+      return;
+    }
+    files.forEach((file) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        if (typeof reader.result !== "string") {
+          return;
+        }
+        const created = store.addUploadImage(file.name, reader.result);
+        if (!created) {
+          window.alert(`Falha ao salvar upload: ${file.name}`);
+          return;
+        }
+        renderImageList();
+      };
+      reader.readAsDataURL(file);
+    });
+    event.target.value = "";
   }
 
   function buildUi() {
@@ -376,7 +796,7 @@
         display: flex;
         gap: 8px;
         flex-wrap: wrap;
-        max-width: 78vw;
+        max-width: 88vw;
       }
       .slide-editor-toolbar.hidden {
         display: none;
@@ -458,12 +878,17 @@
         outline-offset: 6px;
         cursor: text;
       }
-      .slide-editor-code-panel {
+      .slide-editor-image-target {
+        outline: 2px dashed #3fb950;
+        outline-offset: 4px;
+      }
+      .slide-editor-code-panel,
+      .slide-editor-side-panel {
         position: fixed;
         top: 64px;
         right: 16px;
-        width: min(620px, 92vw);
-        height: min(72vh, 620px);
+        width: min(660px, 94vw);
+        height: min(76vh, 700px);
         z-index: 1200;
         border: 1px solid #30363d;
         border-radius: 10px;
@@ -472,10 +897,12 @@
         flex-direction: column;
         box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
       }
-      .slide-editor-code-panel.open {
+      .slide-editor-code-panel.open,
+      .slide-editor-side-panel.open {
         display: flex;
       }
-      .slide-editor-code-panel header {
+      .slide-editor-code-panel header,
+      .slide-editor-side-panel header {
         border-bottom: 1px solid #21262d;
         padding: 10px 12px;
         font-size: 12px;
@@ -485,7 +912,10 @@
         align-items: center;
         gap: 8px;
       }
-      .slide-editor-code-panel header button {
+      .slide-editor-code-panel header button,
+      .slide-editor-side-panel header button,
+      .slide-editor-list-actions button,
+      .slide-editor-panel-actions button {
         border: 1px solid #30363d;
         background: #0d1117;
         color: #e6edf3;
@@ -494,24 +924,116 @@
         padding: 6px 10px;
         cursor: pointer;
       }
-      .slide-editor-code-panel textarea {
-        flex: 1;
+      .slide-editor-code-panel textarea,
+      .slide-editor-side-panel textarea,
+      .slide-editor-side-panel input {
         width: 100%;
-        resize: none;
-        border: 0;
+        border: 1px solid #30363d;
+        border-radius: 8px;
         outline: 0;
-        padding: 12px;
+        padding: 10px;
         font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
         font-size: 12px;
         line-height: 1.5;
         color: #e6edf3;
         background: #0d1117;
       }
-      .slide-editor-code-panel footer {
+      .slide-editor-code-panel textarea {
+        flex: 1;
+        resize: none;
+        border: 0;
+        border-radius: 0;
+      }
+      .slide-editor-code-panel footer,
+      .slide-editor-side-panel footer {
         border-top: 1px solid #21262d;
         padding: 8px 12px;
         color: #8b949e;
         font-size: 11px;
+      }
+      .slide-editor-side-panel .panel-body {
+        display: grid;
+        grid-template-columns: minmax(260px, 1fr) minmax(280px, 1fr);
+        gap: 12px;
+        padding: 12px;
+        overflow: auto;
+      }
+      .slide-editor-list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .slide-editor-list-row {
+        border: 1px solid #30363d;
+        border-radius: 8px;
+        padding: 8px;
+      }
+      .slide-editor-list-title {
+        font-size: 12px;
+        color: #e6edf3;
+        margin-bottom: 4px;
+        font-weight: 700;
+      }
+      .slide-editor-list-description {
+        font-size: 11px;
+        color: #8b949e;
+        margin-bottom: 8px;
+      }
+      .slide-editor-list-actions {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+      .slide-editor-form {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .slide-editor-form textarea {
+        min-height: 190px;
+        resize: vertical;
+      }
+      .slide-editor-panel-actions {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .slide-editor-image-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 8px;
+        padding: 12px;
+        overflow: auto;
+      }
+      .slide-editor-image-card {
+        border: 1px solid #30363d;
+        border-radius: 8px;
+        padding: 8px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .slide-editor-image-preview {
+        width: 100%;
+        height: 90px;
+        object-fit: contain;
+        background: #161b22;
+        border: 1px solid #21262d;
+        border-radius: 6px;
+      }
+      .slide-editor-image-name {
+        font-size: 11px;
+        color: #8b949e;
+        word-break: break-word;
+      }
+      .slide-editor-upload-wrap {
+        padding: 12px;
+        border-bottom: 1px solid #21262d;
+      }
+      @media (max-width: 940px) {
+        .slide-editor-side-panel .panel-body {
+          grid-template-columns: 1fr;
+        }
       }
     `;
     document.head.appendChild(style);
@@ -520,7 +1042,7 @@
     backToHomeButton.type = "button";
     backToHomeButton.className = "slide-editor-home-button";
     backToHomeButton.textContent = "✕";
-    backToHomeButton.title = "Fechar apresentação";
+    backToHomeButton.title = `Voltar para galeria (${activeDeck.title})`;
     backToHomeButton.setAttribute("aria-label", "Fechar apresentação e voltar para a página inicial");
     backToHomeButton.setAttribute(UI_ATTR, "true");
     backToHomeButton.addEventListener("click", () => {
@@ -532,11 +1054,16 @@
     toolbar.className = "slide-editor-toolbar";
     toolbar.setAttribute(UI_ATTR, "true");
 
+    statusText = document.createElement("span");
+    statusText.className = "slide-editor-status";
+
     toggleButton = document.createElement("button");
     toggleButton.textContent = "Editar texto";
     toggleButton.type = "button";
     toggleButton.addEventListener("click", () => {
       closeCodeEditor();
+      closeTemplatePanel();
+      closeImagePanel();
       setInlineEditing(!inlineEditing);
     });
 
@@ -544,6 +1071,17 @@
     addButton.textContent = "+ Slide";
     addButton.type = "button";
     addButton.addEventListener("click", addSlide);
+
+    templatesButton = document.createElement("button");
+    templatesButton.textContent = "Templates";
+    templatesButton.type = "button";
+    templatesButton.addEventListener("click", () => {
+      if (templatePanel && templatePanel.classList.contains("open")) {
+        closeTemplatePanel();
+      } else {
+        openTemplatePanel();
+      }
+    });
 
     const duplicateButton = document.createElement("button");
     duplicateButton.textContent = "Duplicar";
@@ -554,6 +1092,17 @@
     closeButton.textContent = "Fechar slide";
     closeButton.type = "button";
     closeButton.addEventListener("click", closeCurrentSlide);
+
+    imagesButton = document.createElement("button");
+    imagesButton.textContent = "Imagens";
+    imagesButton.type = "button";
+    imagesButton.addEventListener("click", () => {
+      if (imagePanel && imagePanel.classList.contains("open")) {
+        closeImagePanel();
+      } else {
+        openImagePanel();
+      }
+    });
 
     htmlButton = document.createElement("button");
     htmlButton.textContent = "Editar HTML";
@@ -577,13 +1126,23 @@
       openCodeEditor("css");
     });
 
+    const deckButton = document.createElement("button");
+    deckButton.textContent = "Deck";
+    deckButton.type = "button";
+    deckButton.addEventListener("click", editDeckMetadata);
+
+    const removeDeckButton = document.createElement("button");
+    removeDeckButton.textContent = "Excluir deck";
+    removeDeckButton.type = "button";
+    removeDeckButton.addEventListener("click", deleteCurrentDeck);
+
     const exportButton = document.createElement("button");
     exportButton.textContent = "Exportar HTML";
     exportButton.type = "button";
     exportButton.addEventListener("click", exportSlides);
 
     const resetButton = document.createElement("button");
-    resetButton.textContent = "Resetar";
+    resetButton.textContent = "Resetar deck";
     resetButton.type = "button";
     resetButton.addEventListener("click", resetSlides);
 
@@ -595,16 +1154,17 @@
     hideControlsButton.type = "button";
     hideControlsButton.addEventListener("click", hideControls);
 
-    statusText = document.createElement("span");
-    statusText.className = "slide-editor-status";
-
     toolbar.appendChild(statusText);
     toolbar.appendChild(toggleButton);
     toolbar.appendChild(addButton);
+    toolbar.appendChild(templatesButton);
     toolbar.appendChild(duplicateButton);
     toolbar.appendChild(closeButton);
+    toolbar.appendChild(imagesButton);
     toolbar.appendChild(htmlButton);
     toolbar.appendChild(cssButton);
+    toolbar.appendChild(deckButton);
+    toolbar.appendChild(removeDeckButton);
     toolbar.appendChild(exportButton);
     toolbar.appendChild(resetButton);
     toolbar.appendChild(hideControlsButton);
@@ -651,12 +1211,149 @@
     });
 
     const panelFooter = document.createElement("footer");
-    panelFooter.textContent = "As alteracoes de HTML/CSS sao salvas automaticamente no navegador.";
+    panelFooter.textContent = "As alteracoes de HTML/CSS sao salvas automaticamente no deck atual.";
 
     codePanel.appendChild(panelHeader);
     codePanel.appendChild(codeTextarea);
     codePanel.appendChild(panelFooter);
     document.body.appendChild(codePanel);
+
+    templatePanel = document.createElement("div");
+    templatePanel.className = "slide-editor-side-panel";
+    templatePanel.setAttribute(UI_ATTR, "true");
+
+    const templateHeader = document.createElement("header");
+    const templateHeaderTitle = document.createElement("span");
+    templateHeaderTitle.textContent = "Templates de pagina";
+    const templateCloseButton = document.createElement("button");
+    templateCloseButton.type = "button";
+    templateCloseButton.textContent = "Fechar";
+    templateCloseButton.addEventListener("click", closeTemplatePanel);
+    templateHeader.appendChild(templateHeaderTitle);
+    templateHeader.appendChild(templateCloseButton);
+
+    const templateBody = document.createElement("div");
+    templateBody.className = "panel-body";
+
+    templateList = document.createElement("div");
+    templateList.className = "slide-editor-list";
+
+    const templateForm = document.createElement("div");
+    templateForm.className = "slide-editor-form";
+
+    templateNameInput = document.createElement("input");
+    templateNameInput.type = "text";
+    templateNameInput.placeholder = "Nome do template";
+
+    templateDescriptionInput = document.createElement("input");
+    templateDescriptionInput.type = "text";
+    templateDescriptionInput.placeholder = "Descricao";
+
+    templateHtmlTextarea = document.createElement("textarea");
+    templateHtmlTextarea.placeholder = "HTML da pagina template";
+
+    const templateActions = document.createElement("div");
+    templateActions.className = "slide-editor-panel-actions";
+
+    const templateSaveButton = document.createElement("button");
+    templateSaveButton.type = "button";
+    templateSaveButton.textContent = "Salvar template";
+    templateSaveButton.addEventListener("click", saveTemplateFromPanel);
+
+    const templateNewButton = document.createElement("button");
+    templateNewButton.type = "button";
+    templateNewButton.textContent = "Novo";
+    templateNewButton.addEventListener("click", () => {
+      selectedTemplateId = "";
+      templateNameInput.value = "";
+      templateDescriptionInput.value = "";
+      templateHtmlTextarea.value = "";
+      renderTemplateList();
+    });
+
+    const templateFromSlideButton = document.createElement("button");
+    templateFromSlideButton.type = "button";
+    templateFromSlideButton.textContent = "Salvar slide atual";
+    templateFromSlideButton.addEventListener("click", createTemplateFromCurrentSlide);
+
+    const templateDeleteButton = document.createElement("button");
+    templateDeleteButton.type = "button";
+    templateDeleteButton.textContent = "Excluir";
+    templateDeleteButton.addEventListener("click", deleteSelectedTemplate);
+
+    const templateInsertButton = document.createElement("button");
+    templateInsertButton.type = "button";
+    templateInsertButton.textContent = "Inserir no deck";
+    templateInsertButton.addEventListener("click", () => {
+      if (!selectedTemplateId) {
+        window.alert("Selecione um template.");
+        return;
+      }
+      const template = store.listTemplates().find((item) => item.id === selectedTemplateId);
+      if (!template) {
+        window.alert("Template nao encontrado.");
+        return;
+      }
+      insertSlideFromTemplate(template.html || "");
+      closeTemplatePanel();
+    });
+
+    templateActions.appendChild(templateSaveButton);
+    templateActions.appendChild(templateNewButton);
+    templateActions.appendChild(templateFromSlideButton);
+    templateActions.appendChild(templateDeleteButton);
+    templateActions.appendChild(templateInsertButton);
+
+    templateForm.appendChild(templateNameInput);
+    templateForm.appendChild(templateDescriptionInput);
+    templateForm.appendChild(templateHtmlTextarea);
+    templateForm.appendChild(templateActions);
+
+    templateBody.appendChild(templateList);
+    templateBody.appendChild(templateForm);
+
+    const templateFooter = document.createElement("footer");
+    templateFooter.textContent = "Templates padrao sao somente leitura. Para editar, selecione e salve como novo template.";
+
+    templatePanel.appendChild(templateHeader);
+    templatePanel.appendChild(templateBody);
+    templatePanel.appendChild(templateFooter);
+    document.body.appendChild(templatePanel);
+
+    imagePanel = document.createElement("div");
+    imagePanel.className = "slide-editor-side-panel";
+    imagePanel.setAttribute(UI_ATTR, "true");
+
+    const imageHeader = document.createElement("header");
+    const imageTitle = document.createElement("span");
+    imageTitle.textContent = "Biblioteca de imagens";
+    const imageCloseButton = document.createElement("button");
+    imageCloseButton.type = "button";
+    imageCloseButton.textContent = "Fechar";
+    imageCloseButton.addEventListener("click", closeImagePanel);
+    imageHeader.appendChild(imageTitle);
+    imageHeader.appendChild(imageCloseButton);
+
+    const uploadWrap = document.createElement("div");
+    uploadWrap.className = "slide-editor-upload-wrap";
+    imageUploadInput = document.createElement("input");
+    imageUploadInput.type = "file";
+    imageUploadInput.accept = "image/*";
+    imageUploadInput.multiple = true;
+    imageUploadInput.addEventListener("change", handleImageUpload);
+    uploadWrap.appendChild(imageUploadInput);
+
+    imageList = document.createElement("div");
+    imageList.className = "slide-editor-image-list";
+
+    const imageFooter = document.createElement("footer");
+    imageFooter.textContent = "Clique em uma imagem no slide para substitui-la, ou insira no slide atual.";
+
+    imagePanel.appendChild(imageHeader);
+    imagePanel.appendChild(uploadWrap);
+    imagePanel.appendChild(imageList);
+    imagePanel.appendChild(imageFooter);
+    document.body.appendChild(imagePanel);
 
     slidesRoot.addEventListener("input", (event) => {
       if (!inlineEditing || !editableSlide) {
@@ -670,6 +1367,11 @@
     });
 
     slidesRoot.addEventListener("click", (event) => {
+      const clickedImage = event.target.closest("img");
+      if (clickedImage && slidesRoot.contains(clickedImage)) {
+        setSelectedImage(clickedImage);
+        updateStatus(getCurrentSlide());
+      }
       if (!inlineEditing) {
         return;
       }
@@ -682,6 +1384,10 @@
     document.addEventListener("keydown", (event) => {
       if (event.key === "Escape" && codePanel && codePanel.classList.contains("open")) {
         closeCodeEditor();
+      } else if (event.key === "Escape" && templatePanel && templatePanel.classList.contains("open")) {
+        closeTemplatePanel();
+      } else if (event.key === "Escape" && imagePanel && imagePanel.classList.contains("open")) {
+        closeImagePanel();
       }
     });
 
@@ -697,11 +1403,13 @@
           const current = getCurrentSlide();
           codeTextarea.value = current ? current.innerHTML.trim() : "";
         }
+        if (selectedImageElement && !document.contains(selectedImageElement)) {
+          setSelectedImage(null);
+        }
       });
     }
     setEditableSlide(getCurrentSlide());
   };
 
-  applySavedState();
   buildUi();
 })();

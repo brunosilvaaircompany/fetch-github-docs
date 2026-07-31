@@ -144,17 +144,24 @@ Estrutura padrão de 60 minutos:
 
 Os decks em `slides/` agora incluem um modo de edição embutido no próprio HTML:
 
+- **Novo deck (na galeria inicial)**: cria um deck local com template inicial, título, descrição e tags.
+- **Deck**: altera os metadados (título, descrição e tags) do deck atual.
+- **Excluir deck**: remove um deck salvo localmente (decks base não são excluídos).
 - **Editar texto**: ativa a edição inline no slide atual, direto na apresentação.
 - **Editar HTML**: abre o editor de HTML do slide atual.
 - **Editar CSS**: abre o editor de CSS da apresentação.
 - **+ Slide**: adiciona um novo slide após o slide atual.
+- **Templates**: insere páginas prontas e permite cadastrar templates do usuário.
+- **Imagens**: abre biblioteca unificada (imagens do repositório + uploads locais) para trocar/inserir imagens.
 - **Duplicar**: cria uma cópia do slide atual.
 - **Fechar slide**: remove o slide atual da apresentação.
 - **Exportar HTML**: baixa um arquivo `.html` com as alterações aplicadas.
-- **Resetar**: restaura o deck para a versão original do arquivo.
+- **Resetar deck**: restaura somente o deck atual para o template inicial da página.
 - **Esconder botões**: oculta os controles de edição (com botão para mostrar novamente).
 
-As alterações de conteúdo, HTML e CSS são salvas automaticamente no `localStorage` do navegador (por deck e por dispositivo). Para compartilhar mudanças com outras pessoas, use **Exportar HTML** e versione o arquivo exportado no repositório.
+As alterações de conteúdo, HTML, CSS, templates personalizados e uploads de imagem são salvas automaticamente no `localStorage` do navegador (por deck e por dispositivo). Para compartilhar mudanças com outras pessoas, use **Exportar HTML** e versione o arquivo exportado no repositório.
+
+> Limitação: o armazenamento é local ao navegador/dispositivo e sujeito à cota de storage do browser.
 
 ---
 
