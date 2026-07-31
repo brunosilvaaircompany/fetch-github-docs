@@ -13,16 +13,29 @@ Diretório para imagens das apresentações.
 
 Fonte: [github/primer/octicons](https://github.com/primer/octicons) — licença MIT.
 
-## Assets proprietários (não incluídos)
+## Assets proprietários — links externos (não incluídos no repositório)
 
-Para logos oficiais do GitHub Copilot com tema de cor, mascotes e brand assets,
-utilize links externos para os recursos oficiais:
+As imagens do Octodex são **© GitHub Inc.** e não devem ser redistribuídas.
+Use links externos diretamente no HTML:
 
-- **Octocat**: `https://octodex.github.com/images/original.png`
-- **Brand assets**: `https://brand.github.com`
+```html
+<img class="octocat"
+     src="https://octodex.github.com/images/neurocats_FULL.png"
+     alt="Neurocats — GitHub Octocat" />
+```
 
-Esses assets são © GitHub Inc. e só podem ser usados conforme as
-[diretrizes de marca do GitHub](https://brand.github.com/foundations/logo#legal).
+Sugestoes para treinamentos de Copilot e IA:
+
+| Octocat | URL | Por que usar |
+|---|---|---|
+| **Neurocats** | `https://octodex.github.com/images/neurocats_FULL.png` | Tematica de IA/neural — perfeita para Copilot |
+| **Codercat** | `https://octodex.github.com/images/codercat.jpg` | Tematica de coding |
+| **Original Mona** | `https://octodex.github.com/images/original.png` | Classica, reconhecivel |
+
+O `template.html` ja inclui o elemento `.octocat` comentado na capa e no slide final.
+Para ativar, descomente a linha `<!-- <img class="octocat" ... /> -->` e substitua pela URL desejada.
+
+Referencia: [octodex.github.com](https://octodex.github.com) — [diretrizes de marca GitHub](https://brand.github.com/foundations/logo#legal)
 
 ## Adicionando novas imagens
 
