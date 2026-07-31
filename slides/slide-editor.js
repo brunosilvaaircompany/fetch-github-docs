@@ -393,18 +393,29 @@
         border-color: #6e40c9;
         color: #a371f7;
       }
+      .slide-editor-gear-button {
+        border: none !important;
+        background: transparent !important;
+        padding: 2px 6px !important;
+        font-size: 22px !important;
+        line-height: 1;
+        min-width: auto;
+      }
+      .slide-editor-gear-button:hover {
+        border-color: transparent !important;
+        transform: scale(1.08);
+      }
+      .slide-editor-gear-visible {
+        color: #a371f7 !important;
+        text-shadow: 0 0 10px rgba(163, 113, 247, 0.45);
+      }
       .slide-editor-show-controls {
         position: fixed;
         right: 16px;
         top: 16px;
         z-index: 1201;
         display: none;
-        border: 1px solid #30363d;
-        background: #0d1117;
-        color: #e6edf3;
-        border-radius: 999px;
-        font-size: 12px;
-        padding: 8px 12px;
+        color: rgba(230, 237, 243, 0.65);
         cursor: pointer;
       }
       .slide-editor-show-controls.show {
@@ -536,6 +547,7 @@
     hideControlsButton.textContent = "⚙";
     hideControlsButton.title = "Esconder botoes";
     hideControlsButton.setAttribute("aria-label", "Esconder botoes");
+    hideControlsButton.className = "slide-editor-gear-button slide-editor-gear-visible";
     hideControlsButton.type = "button";
     hideControlsButton.addEventListener("click", hideControls);
 
@@ -556,8 +568,10 @@
 
     showControlsButton = document.createElement("button");
     showControlsButton.type = "button";
-    showControlsButton.textContent = "Mostrar botoes";
-    showControlsButton.className = "slide-editor-show-controls";
+    showControlsButton.textContent = "⚙";
+    showControlsButton.title = "Mostrar botoes";
+    showControlsButton.setAttribute("aria-label", "Mostrar botoes");
+    showControlsButton.className = "slide-editor-show-controls slide-editor-gear-button";
     showControlsButton.setAttribute(UI_ATTR, "true");
     showControlsButton.addEventListener("click", showControls);
     document.body.appendChild(showControlsButton);
