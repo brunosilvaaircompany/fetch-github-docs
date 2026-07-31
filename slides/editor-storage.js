@@ -610,11 +610,13 @@
     return repo.concat(uploads);
   }
 
-  function buildDeckHref(deck) {
+  function buildDeckHref(deck, options) {
     const item = normalizeDeck(deck);
+    const settings = options || {};
     const base = item.sourcePath || DEFAULT_DECK_SOURCE;
     const separator = base.indexOf("?") >= 0 ? "&" : "?";
-    return `${base}${separator}deck=${encodeURIComponent(item.id)}`;
+    const saveParam = settings.saveToComputer ? "&save=computer" : "";
+    return `${base}${separator}deck=${encodeURIComponent(item.id)}${saveParam}`;
   }
 
   window.SlideDeckStore = {

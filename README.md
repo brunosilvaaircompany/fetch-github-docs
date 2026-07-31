@@ -155,7 +155,7 @@ Estrutura padrão de 60 minutos:
 
 Os decks em `slides/` agora incluem um modo de edição embutido no próprio HTML:
 
-- **Novo deck (na galeria inicial)**: cria um deck local com template inicial, título, descrição e tags.
+- **Novo deck (na galeria inicial)**: cria um deck com template inicial, título, descrição e tags, abre o editor e baixa uma cópia `.html` no computador.
 - **Deck**: altera os metadados (título, descrição e tags) do deck atual.
 - **Excluir deck**: remove um deck salvo localmente (decks base não são excluídos).
 - **Editar slide**: ativa a edição inline no slide atual, direto na apresentação.
@@ -166,13 +166,13 @@ Os decks em `slides/` agora incluem um modo de edição embutido no próprio HTM
 - **Imagens**: abre biblioteca unificada (imagens do repositório + uploads locais); a inserção no slide exige **Editar slide** ativo e usa a posição atual do cursor.
 - **Duplicar**: cria uma cópia do slide atual.
 - **Fechar slide**: remove o slide atual da apresentação.
-- **Exportar HTML**: baixa um arquivo `.html` com as alterações aplicadas.
+- **Salvar no computador**: baixa um arquivo `.html` com as alterações mais recentes aplicadas.
 - **Resetar deck**: restaura somente o deck atual para o template inicial da página.
 - **Esconder botões**: oculta os controles de edição (com botão para mostrar novamente).
 
-As alterações de conteúdo, HTML, CSS, templates personalizados e uploads de imagem são salvas automaticamente no `localStorage` do navegador (por deck e por dispositivo). Para compartilhar mudanças com outras pessoas, use **Exportar HTML** e versione o arquivo exportado no repositório.
+As alterações de conteúdo, HTML, CSS, templates personalizados e uploads de imagem continuam sendo salvas automaticamente no `localStorage` do navegador (por deck e por dispositivo). Ao criar ou duplicar um deck, o navegador também baixa uma cópia `.html` para o computador. Depois de novas edições, use **Salvar no computador** para baixar a versão atualizada e, se quiser compartilhar as mudanças, versione esse arquivo no repositório.
 
-> Limitação: o armazenamento é local ao navegador/dispositivo e sujeito à cota de storage do browser.
+> O navegador escolhe a pasta de downloads ou solicita o destino conforme a configuração do usuário. A aplicação não sobrescreve silenciosamente arquivos existentes, garantindo o mesmo comportamento em Windows, macOS e Linux.
 
 ---
 

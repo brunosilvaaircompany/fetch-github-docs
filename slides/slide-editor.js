@@ -8,6 +8,8 @@
 
   const store = window.SlideDeckStore;
   const UI_ATTR = "data-slide-editor-ui";
+  const INITIAL_SAVE_PARAM = "save";
+  const INITIAL_SAVE_VALUE = "computer";
   const baselineSlidesHtml = slidesRoot.innerHTML;
   const editableStyleTag = getEditableStyleTag();
   const baselineCssText = editableStyleTag ? editableStyleTag.textContent : "";
@@ -430,26 +432,78 @@
     saveSlidesNow();
   }
 
-  function exportSlides() {
+  function getDeckFileName() {
+    let fileName = String(activeDeck.title || "deck");
+    if (typeof fileName.normalize === "function") {
+      fileName = fileName.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    }
+    fileName = fileName
+      .toLowerCase()
+      .replace(/[<>:"/\\|?*\u0000-\u001f]+/g, "-")
+      .replace(/[^a-z0-9._-]+/g, "-")
+      .replace(/^[.\s-]+|[.\s-]+$/g, "")
+      .slice(0, 100);
+
+    if (!fileName) {
+      fileName = "deck";
+    }
+    if (/^(con|prn|aux|nul|com[1-9]|lpt[1-9])(?:\.|$)/i.test(fileName)) {
+      fileName = `deck-${fileName}`;
+    }
+    return `${fileName}.html`;
+  }
+
+  function buildPortableDeckHtml() {
     const clone = document.documentElement.cloneNode(true);
     const nodes = Array.from(clone.querySelectorAll(`[${UI_ATTR}]`));
     nodes.forEach((node) => node.remove());
 
-    const deckTitleSlug = String(activeDeck.title || "deck")
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/^-+|-+$/g, "");
-    const deckName = deckTitleSlug || "deck";
-    const html = `<!DOCTYPE html>\n${clone.outerHTML}`;
+    const head = clone.querySelector("head");
+    if (head && !head.querySelector("base")) {
+      const base = document.createElement("base");
+      base.href = document.baseURI;
+      head.insertBefore(base, head.firstChild);
+    }
+
+    clone.querySelectorAll(".slide-editor-image-target").forEach((node) => {
+      node.classList.remove("slide-editor-image-target");
+    });
+    clone.querySelectorAll(".slide-editor-inline-target").forEach((node) => {
+      node.classList.remove("slide-editor-inline-target");
+      node.removeAttribute("contenteditable");
+      node.removeAttribute("spellcheck");
+    });
+
+    return `<!DOCTYPE html>\n${clone.outerHTML}`;
+  }
+
+  function saveDeckToComputer() {
+    saveSlidesNow();
+    refreshDeckFromStore();
+
+    const html = buildPortableDeckHtml();
     const blob = new Blob([html], { type: "text/html;charset=utf-8" });
     const objectUrl = window.URL.createObjectURL(blob);
     const anchor = document.createElement("a");
     anchor.href = objectUrl;
-    anchor.download = `${deckName}-editado.html`;
+    anchor.download = getDeckFileName();
     document.body.appendChild(anchor);
     anchor.click();
     document.body.removeChild(anchor);
-    window.URL.revokeObjectURL(objectUrl);
+    window.setTimeout(() => {
+      window.URL.revokeObjectURL(objectUrl);
+    }, 0);
+  }
+
+  function saveNewDeckToComputerOnce() {
+    const url = new URL(window.location.href);
+    if (url.searchParams.get(INITIAL_SAVE_PARAM) !== INITIAL_SAVE_VALUE) {
+      return;
+    }
+
+    url.searchParams.delete(INITIAL_SAVE_PARAM);
+    window.history.replaceState(null, "", `${url.pathname}${url.search}${url.hash}`);
+    saveDeckToComputer();
   }
 
   function editDeckMetadata() {
@@ -1180,9 +1234,9 @@
     removeDeckButton.addEventListener("click", deleteCurrentDeck);
 
     const exportButton = document.createElement("button");
-    exportButton.textContent = "Exportar HTML";
+    exportButton.textContent = "Salvar no computador";
     exportButton.type = "button";
-    exportButton.addEventListener("click", exportSlides);
+    exportButton.addEventListener("click", saveDeckToComputer);
 
     const resetButton = document.createElement("button");
     resetButton.textContent = "Resetar deck";
@@ -1469,6 +1523,7 @@
       });
     }
     setEditableSlide(getCurrentSlide());
+    saveNewDeckToComputerOnce();
   };
 
   buildUi();

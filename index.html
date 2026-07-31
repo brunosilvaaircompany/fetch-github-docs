@@ -140,7 +140,7 @@
    Documentação sincronizada diariamente de
    <a href="https://docs.github.com" target="_blank">docs.github.com</a>
  </footer>
- <script src="slides/editor-storage.js?v=deck-v1"></script>
+ <script src="slides/editor-storage.js?v=deck-v2"></script>
  <script>
    (function () {
      const store      = window.SlideDeckStore || null;
@@ -224,7 +224,7 @@
 
        const description = document.createElement('div');
        description.className = 'card-desc f5';
-       description.textContent = deck.description || 'Deck personalizado salvo localmente no navegador.';
+       description.textContent = deck.description || 'Deck personalizado com autosave no navegador e copia HTML no computador.';
 
        const meta = document.createElement('div');
        meta.className = 'card-meta d-flex flex-items-center flex-wrap gap-2 pt-2';
@@ -259,8 +259,7 @@
              window.alert('Nao foi possivel duplicar o deck.');
              return;
            }
-           renderUserDeckCards();
-           applyFilter();
+           window.location.assign(store.buildDeckHref(duplicated, { saveToComputer: true }));
          });
 
          const deleteButton = document.createElement('button');
@@ -390,7 +389,7 @@
          window.alert('Nao foi possivel criar o deck.');
          return;
        }
-       window.location.assign(store.buildDeckHref(created));
+       window.location.assign(store.buildDeckHref(created, { saveToComputer: true }));
      }
 
      function ensureCards() {
@@ -493,8 +492,7 @@
             window.alert('Nao foi possivel duplicar o deck.');
             return;
           }
-          renderUserDeckCards();
-          applyFilter();
+          window.location.assign(store.buildDeckHref(created, { saveToComputer: true }));
         });
         meta.appendChild(dupBtn);
       });
