@@ -90,6 +90,13 @@ body {
   transition: border-color 0.16s ease, box-shadow 0.16s ease, transform 0.12s ease;
 }
 
+.card:hover,
+.card:focus,
+.card:active,
+.card:focus-visible {
+  text-decoration: none;
+}
+
 .card:hover {
   border-color: rgba(88, 166, 255, 0.75);
   box-shadow: 0 0 0 1px rgba(88, 166, 255, 0.28), 0 10px 26px rgba(1, 4, 9, 0.6);
