@@ -847,6 +847,19 @@ copilot --allow-all --enable-all-github-mcp-tools</code></pre>
     progress: true,
     center: true,
     plugins: [ RevealHighlight ]
+  }).then(function () {
+    Reveal.on('overviewshown', function () {
+      document.querySelectorAll('.reveal .slides section').forEach(function (s) {
+        s.style.opacity = '1';
+        s.style.visibility = 'visible';
+      });
+    });
+    Reveal.on('overviewhidden', function () {
+      document.querySelectorAll('.reveal .slides section').forEach(function (s) {
+        s.style.opacity = '';
+        s.style.visibility = '';
+      });
+    });
   });
   if (typeof window.initSlideEditor === "function") {
     window.initSlideEditor(Reveal);
