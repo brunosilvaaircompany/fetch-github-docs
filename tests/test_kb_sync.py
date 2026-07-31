@@ -2,6 +2,8 @@ import io
 import tarfile
 from pathlib import Path
 
+import pytest
+
 
 def build_tarball(path_to_content: dict[str, str]) -> bytes:
     buffer = io.BytesIO()
@@ -65,6 +67,7 @@ def test_extract_paths_extracts_only_matching_prefix(kb_sync_module, tmp_path):
 def test_liquid_resolver_replaces_supported_tags(kb_sync_module, tmp_path):
     (tmp_path / "data" / "variables").mkdir(parents=True, exist_ok=True)
     (tmp_path / "data" / "reusables" / "tips").mkdir(parents=True, exist_ok=True)
+    (tmp_path / "data" / "reusables" / "advanced-security").mkdir(parents=True, exist_ok=True)
 
     (tmp_path / "data" / "variables" / "product.yml").write_text(
         "name: GitHub Copilot CLI\n", encoding="utf-8"
@@ -72,12 +75,16 @@ def test_liquid_resolver_replaces_supported_tags(kb_sync_module, tmp_path):
     (tmp_path / "data" / "reusables" / "tips" / "intro.md").write_text(
         "Use {% data variables.product.name %} every day.\n", encoding="utf-8"
     )
+    (tmp_path / "data" / "reusables" / "advanced-security" / "ghas-products-bullets.md").write_text(
+        "- Secret scanning\n", encoding="utf-8"
+    )
 
     resolver = kb_sync_module.LiquidResolver(str(tmp_path))
     source = """
 {% data variables.product.name %}
 {% data reusables.tips.intro %}
-{% ifversion fpt %}primary{% else %}secondary{% endif %}
+{% data reusables.advanced-security.ghas-products-bullets+ghas %}
+{% ifversion fpt %}primary{% elsif ghes %}secondary{% else %}third{% endif %}
 {% note %}Heads up{% endnote %}
 {% codetabs %}
 {% codetab typescript %}
@@ -88,8 +95,13 @@ console.log("ok")
     resolved = resolver.resolve(source)
     assert "GitHub Copilot CLI" in resolved
     assert "Use GitHub Copilot CLI every day." in resolved
+    assert "- Secret scanning" in resolved
     assert "primary" in resolved
     assert "secondary" not in resolved
+    assert "third" not in resolved
+    assert "{% ifversion" not in resolved
+    assert "{% elsif" not in resolved
+    assert "{% endif" not in resolved
     assert "> **Nota:**Heads up" in resolved
     assert "#### TypeScript" in resolved
 
@@ -139,3 +151,50 @@ def test_run_generates_clean_markdown_and_skips_empty_indexes(kb_sync_module, tm
     assert "Always test your changes." in content
     assert not skipped_index.exists()
     assert not (tmp_path / ".gh_docs_cache").exists()
+
+
+def test_run_validate_clean_fails_when_template_remains(kb_sync_module, tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    output_dir = tmp_path / "output"
+
+    tar_bytes = build_tarball(
+        {
+            "docs-main/content/demo/page.md": (
+                "---\n"
+                "title: Demo Page\n"
+                "---\n"
+                "{% data reusables.unknown.item %}\n"
+            ),
+            "docs-main/data/variables/product.yml": "name: GitHub Copilot\n",
+            "docs-main/data/reusables/tips/intro.md": "Always test your changes.\n",
+        }
+    )
+    monkeypatch.setattr(kb_sync_module, "download_repo_tarball", lambda *_: tar_bytes)
+
+    with pytest.raises(RuntimeError, match="validacao de templates falhou"):
+        kb_sync_module.run(["content/demo"], str(output_dir), keep_raw=False, validate_clean=True)
+
+
+def test_validation_allows_reference_docs_but_blocks_other_templates(kb_sync_module, tmp_path):
+    output_dir = tmp_path / "output"
+    allowed_file = (
+        output_dir
+        / "content"
+        / "contributing"
+        / "writing-for-github-docs"
+        / "creating-reusable-content.md"
+    )
+    blocked_file = output_dir / "content" / "copilot" / "concepts" / "context" / "mcp.md"
+    allowed_file.parent.mkdir(parents=True, exist_ok=True)
+    blocked_file.parent.mkdir(parents=True, exist_ok=True)
+
+    allowed_file.write_text(
+        "Example: {% data reusables.notifications.sample %}\n", encoding="utf-8"
+    )
+    blocked_file.write_text(
+        "This should fail: {% ifversion ghec %}x{% endif %}\n", encoding="utf-8"
+    )
+
+    violations = kb_sync_module.validate_output_has_no_templates(str(output_dir))
+    assert len(violations) == 1
+    assert violations[0][0].endswith("content/copilot/concepts/context/mcp.md")
