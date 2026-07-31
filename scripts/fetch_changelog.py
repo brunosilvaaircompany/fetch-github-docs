@@ -3,11 +3,11 @@
 fetch_changelog.py
 
 Busca o feed RSS do GitHub Changelog (https://github.blog/changelog/feed/)
-e salva as entradas como um arquivo Markdown estruturado.
+e salva as entradas em arquivos Markdown por tema.
 
 USO:
     python3 scripts/fetch_changelog.py
-    python3 scripts/fetch_changelog.py --output ./github-changelog/changelog.md
+    python3 scripts/fetch_changelog.py --output ./github-changelog
     python3 scripts/fetch_changelog.py --max-entries 50
 
 DEPENDENCIAS:
@@ -28,6 +28,16 @@ except ImportError:
 
 
 RSS_URL = "https://github.blog/changelog/feed/"
+STATUS_TAGS = {
+    "release",
+    "improvement",
+    "retired",
+    "beta",
+    "deprecated",
+    "generally available",
+    "public preview",
+    "private preview",
+}
 
 
 def fetch_feed(url: str) -> bytes:
@@ -182,7 +192,56 @@ def entries_to_markdown(entries: list[dict]) -> str:
     return "\n".join(lines)
 
 
-def run(output_path: str, max_entries: int | None):
+def _slugify(text: str) -> str:
+    slug = text.lower().replace("&", "and")
+    slug = re.sub(r"[^a-z0-9]+", "-", slug)
+    slug = re.sub(r"-{2,}", "-", slug).strip("-")
+    return slug
+
+
+def _topic_slug(entry: dict) -> str:
+    for category in entry.get("categories", []):
+        normalized = category.lower().strip()
+        if normalized in STATUS_TAGS:
+            continue
+        slug = _slugify(normalized)
+        if slug:
+            return slug
+    return "outros"
+
+
+def write_category_files(entries: list[dict], output_dir: str) -> dict[str, int]:
+    grouped: dict[str, list[dict]] = {}
+    for entry in entries:
+        slug = _topic_slug(entry)
+        grouped.setdefault(slug, []).append(entry)
+
+    os.makedirs(output_dir, exist_ok=True)
+    counts: dict[str, int] = {}
+    for slug, group_entries in grouped.items():
+        output_path = os.path.join(output_dir, f"{slug}.md")
+        with open(output_path, "w", encoding="utf-8") as f:
+            f.write(entries_to_markdown(group_entries))
+        counts[slug] = len(group_entries)
+
+    index_lines = [
+        "# GitHub Changelog por tema",
+        "",
+        "## Indice",
+        "",
+    ]
+    for slug, count in sorted(counts.items()):
+        label = "entrada" if count == 1 else "entradas"
+        index_lines.append(f"- [{slug}]({slug}.md): {count} {label}")
+    index_lines.append("")
+
+    with open(os.path.join(output_dir, "_index.md"), "w", encoding="utf-8") as f:
+        f.write("\n".join(index_lines))
+
+    return counts
+
+
+def run(output_dir: str, max_entries: int | None):
     data = fetch_feed(RSS_URL)
     entries = parse_feed(data)
 
@@ -191,21 +250,19 @@ def run(output_path: str, max_entries: int | None):
 
     print(f"Encontradas {len(entries)} entradas no feed")
 
-    md = entries_to_markdown(entries)
-
-    os.makedirs(os.path.dirname(output_path) or ".", exist_ok=True)
-    with open(output_path, "w", encoding="utf-8") as f:
-        f.write(md)
-
-    print(f"Changelog salvo em: {output_path}")
+    counts = write_category_files(entries, output_dir)
+    print(f"Arquivos gerados em: {output_dir}")
+    print(f"Temas gerados: {len(counts)}")
+    for slug, count in sorted(counts.items()):
+        print(f"- {slug}: {count}")
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Baixa o GitHub Changelog via RSS e salva como Markdown")
+    parser = argparse.ArgumentParser(description="Baixa o GitHub Changelog via RSS e salva por tema em Markdown")
     parser.add_argument(
         "--output",
-        default="./github-changelog/changelog.md",
-        help="Caminho do arquivo Markdown de saida (padrao: ./github-changelog/changelog.md)",
+        default="./github-changelog",
+        help="Diretorio de saida dos arquivos Markdown (padrao: ./github-changelog)",
     )
     parser.add_argument(
         "--max-entries",
