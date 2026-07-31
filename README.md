@@ -1,117 +1,114 @@
-# fetch-github-docs
+# copilot-knowledge-base
 
-Automatiza o download de **qualquer seção** da documentação do GitHub
-(`docs.github.com`), direto da fonte (repositório público
-[`github/docs`](https://github.com/github/docs)), já resolvendo os
-templates internos usados pelo site (`{% data reusables... %}`,
-`{% ifversion %}`, `[AUTOTITLE]`, front matter YAML) — o resultado é
-Markdown limpo, pronto para uso no **GitHub Copilot Spaces**,
-NotebookLM, ou qualquer outra ferramenta de estudo.
+Kit completo para times que treinam e usam **GitHub Copilot**: sincroniza automaticamente a documentação oficial do GitHub como Markdown limpo (pronto para o Copilot Spaces ou NotebookLM) e oferece templates prontos para criar treinamentos de 1 hora com slides e hands-on.
 
-## Instalação
+## O que este repositório entrega
+
+| Pilar | O que faz |
+|---|---|
+| 📥 **Sync de documentação** | Baixa qualquer seção de `docs.github.com`, resolve os templates Liquid internos e entrega arquivos `.md` limpos |
+| 🎨 **Templates de treinamento** | Slides Reveal.js e guia de instrutor para treinamentos de 60 min sobre GitHub Copilot |
+| 🔔 **Detecção de desatualização** | Alerta automaticamente quando os slides ficam defasados em relação à documentação sincronizada |
+
+## Estrutura
+
+```
+scripts/
+├── kb_sync.py                  # Sync de documentação
+└── check_slides_freshness.py   # Verificação de slides desatualizados
+
+slides/
+├── template.md                 # Guia de conteúdo para o instrutor
+├── template.html               # Apresentação Reveal.js (tema Copilot)
+├── slide-sources.yml           # Mapeamento slide ↔ fontes Markdown
+└── images/                     # Imagens dos slides
+
+.github/workflows/
+├── fetch-docs.yml              # Roda toda segunda-feira e sincroniza a doc
+└── check-slides-freshness.yml  # Detecta slides desatualizados
+
+github-docs/                    # Markdown limpo gerado pelo kb_sync.py
+```
+
+---
+
+## Pilar 1 — Sincronização de documentação
+
+### Instalação
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## Uso básico
+### Descobrindo o caminho de uma seção
 
-`--section` é obrigatório — você sempre informa qual parte da doc quer baixar:
-
-```bash
-python3 fetch_github_docs.py --section content/github-cli/github-cli
-```
-
-Isso cria a pasta `./github-docs/github-cli/` com os arquivos `.md`
-limpos dessa seção (o nome da subpasta é sempre a última parte do
-caminho de `--section`). Se você passar mais de uma seção, cada uma
-ganha sua própria subpasta dentro de `./github-docs/`.
-
-O download é **recursivo**: se a seção tiver subpastas (ex:
-`content/copilot/how-tos/copilot-sdk/setup/`,
-`.../features/`, etc), todas são baixadas e a estrutura de pastas
-original é preservada dentro da saída.
-
-## Descobrindo o caminho de uma seção
-
-O desafio de usar `--section` é saber o caminho exato dentro do
-repositório. Para isso, use os modos de descoberta (não exigem `--section`):
+Antes de baixar, use os modos de descoberta para encontrar o caminho exato:
 
 ```bash
-# Ver as categorias de nível superior da documentação do GitHub
-python3 fetch_github_docs.py --list
+# Listar categorias de nível superior
+python3 scripts/kb_sync.py --list
 
-# Buscar uma seção específica por palavra-chave (ex: "webhooks", "codespaces")
-python3 fetch_github_docs.py --search webhooks
+# Buscar por palavra-chave
+python3 scripts/kb_sync.py --search webhooks
 ```
 
-O `--search` devolve o caminho pronto para copiar e colar em `--section`.
+O `--search` devolve o caminho pronto para copiar em `--section`.
 
-## Opções
+### Baixando uma seção
 
 ```bash
-# Baixar mais de uma seção de uma vez (separadas por vírgula)
-python3 fetch_github_docs.py --section content/webhooks,content/rest/webhooks
-
-# Escolher outra pasta de saída
-python3 fetch_github_docs.py --section content/codespaces --output ./minha-pasta
-
-# Manter os arquivos brutos baixados (útil para depurar)
-python3 fetch_github_docs.py --section content/codespaces --keep-raw
+python3 scripts/kb_sync.py --section content/github-cli/github-cli
 ```
 
-Esses dois modos de descoberta consultam a API do GitHub primeiro
-(mais rápido); se ela estiver com limite de requisições atingido, o
-script cai automaticamente para o download do tarball completo do
-repositório (mais lento, mas nunca falha por rate limit).
+Isso cria `./github-docs/github-cli/` com os arquivos `.md` limpos. O download é **recursivo** — subpastas são preservadas. Várias seções de uma vez:
 
-## Automatizar de verdade (rodar sozinho, sem você lembrar)
+```bash
+python3 scripts/kb_sync.py --section content/webhooks,content/rest/webhooks
+```
 
-Se você criar um repositório no GitHub só pra guardar esses arquivos
-(e depois linkar esse repositório no Copilot Spaces), copie o arquivo
-`.github/workflows/fetch-docs.yml` para dentro do seu repo, no mesmo
-caminho, e ajuste a variável `DOCS_SECTION` no topo do arquivo para a
-seção que você quer acompanhar.
+### Opções disponíveis
 
-Ele roda automaticamente toda segunda-feira, baixa a versão mais
-recente da doc e faz commit se algo mudou. Assim o link no Copilot
-Spaces sempre reflete a documentação atualizada, sem esforço manual.
+| Opção | Descrição |
+|---|---|
+| `--section <caminho>` | Seção a baixar (obrigatório, exceto com `--list`/`--search`) |
+| `--output <pasta>` | Pasta de saída (padrão: `./github-docs`) |
+| `--keep-raw` | Mantém o cache bruto em `.gh_docs_cache/` (útil para debug) |
+| `--list` | Lista categorias de nível superior e sai |
+| `--search <termo>` | Busca seções por palavra-chave e sai |
 
-## Como funciona (resumo técnico)
+### Como o sync funciona
 
-1. Baixa o tarball do repo `github/docs` (branch `main`) via
-   `codeload.github.com` — não precisa de autenticação.
-2. Extrai apenas a(s) pasta(s) da(s) seção(ões) informada(s) e as
-   pastas `data/reusables` e `data/variables` (necessárias para
-   resolver os templates).
-3. Resolve recursivamente as tags `{% data variables.x.y %}` e
-   `{% data reusables.x.y %}`, os blocos
-   `{% ifversion %}...{% else %}...{% endif %}` (mantendo a versão
-   padrão do GitHub.com) e os links `[AUTOTITLE](...)`.
-4. Remove o front matter YAML, promovendo o campo `title` para um `#`
-   no topo do arquivo.
-5. Ignora páginas de índice sem conteúdo real (só navegação).
+1. Baixa o tarball do repositório `github/docs` via `codeload.github.com` — sem autenticação.
+2. Extrai a(s) seção(ões) solicitada(s) e as pastas `data/reusables` e `data/variables`.
+3. Resolve recursivamente `{% data variables.x.y %}`, `{% data reusables.x.y %}`, blocos `{% ifversion %}` (mantendo a versão padrão do GitHub.com) e links `[AUTOTITLE]`.
+4. Remove o front matter YAML, promovendo o campo `title` para `# H1`.
+5. Ignora páginas de índice sem conteúdo real.
 
-## Limitações conhecidas
+> Se a API do GitHub atingir o rate limit, o script cai automaticamente para o tarball completo — nunca falha silenciosamente.
 
-- Só funciona para conteúdo em **inglês** — traduções (como pt-BR) não
-  ficam no repositório público `github/docs` (são geradas por um
-  pipeline de tradução separado).
-- Se a GitHub reestruturar o repositório `github/docs` (mudar nomes de
-  pastas), os caminhos de `--section` podem precisar de ajuste — rode
-  `--list` ou `--search` de novo para confirmar.
+### Automação semanal
 
-## Template de apresentação (60 minutos com hands-on)
+Copie `.github/workflows/fetch-docs.yml` para o seu repositório, ajuste a variável `DOCS_SECTION` e pronto: toda segunda-feira o workflow baixa a versão mais recente da documentação e faz commit se algo mudou. O link no Copilot Spaces fica sempre atualizado sem intervenção manual.
 
-A pasta `slides/` inclui dois arquivos de template prontos para criar
-treinamentos de **1 hora** sobre GitHub Copilot:
+### Limitações
+
+- Somente conteúdo em **inglês** — traduções (pt-BR etc.) são geradas por pipeline separado e não estão no repositório público `github/docs`.
+- Se a GitHub reestruturar o repositório, rode `--list` ou `--search` para confirmar os novos caminhos.
+
+---
+
+## Pilar 2 — Templates de treinamento
+
+### Slides prontos para uso
+
+A pasta `slides/` traz dois arquivos para criar treinamentos de **1 hora** sobre GitHub Copilot:
 
 | Arquivo | Descrição |
 |---|---|
-| `slides/template.md` | Guia de conteúdo para o instrutor — agenda, timebox, orientações por bloco |
-| `slides/template.html` | Apresentação **Reveal.js** com tema GitHub Copilot — pronto para abrir no navegador |
+| `slides/template.md` | Guia de conteúdo para o instrutor — agenda, timebox e orientações por bloco |
+| `slides/template.html` | Apresentação Reveal.js com tema GitHub Copilot — abre direto no navegador |
 
-A estrutura cobre seis blocos:
+Estrutura padrão de 60 minutos:
 
 | Bloco | Horário | Duração |
 |---|---|---|
@@ -122,45 +119,30 @@ A estrutura cobre seis blocos:
 | ✅ Boas Práticas | 50:00 – 55:00 | 5 min |
 | 🎯 Encerramento & Q&A | 55:00 – 60:00 | 5 min |
 
-### Como usar o template HTML
+### Criando um novo slide
 
 1. Copie `slides/template.html` para um novo arquivo (ex: `slides/copilot-mcp.html`).
-2. Substitua os marcadores `[...]` pelos dados do treinamento (tema, instrutor, links).
-3. Abra o arquivo no navegador — não precisa de servidor local.
-4. Adicione imagens em `slides/images/` e referencie com caminho relativo (`images/nome.png`).
-5. Registre o novo slide em `slides/slide-sources.yml` para ativar o monitoramento de desatualização.
+2. Substitua os marcadores `[...]` pelo tema, instrutor e links do treinamento.
+3. Adicione imagens em `slides/images/` e referencie com caminho relativo (`images/nome.png`).
+4. Registre o novo slide em `slides/slide-sources.yml` para ativar o monitoramento de desatualização.
 
 ---
 
-## Automação para detectar slides HTML desatualizados
+## Pilar 3 — Detecção de slides desatualizados
 
-Este repositório também inclui um fluxo para detectar quando seus
-slides em HTML ficaram desatualizados em relação à documentação
-Markdown sincronizada.
+O workflow `check-slides-freshness.yml` compara o conteúdo dos slides HTML com a documentação Markdown sincronizada e alerta quando há defasagem.
 
-Arquivos adicionados para isso:
+### Configurando o mapeamento
 
-- `.github/workflows/check-slides-freshness.yml`
-- `scripts/check_slides_freshness.py`
-- `slides/slide-sources.yml`
-- `slides/.freshness-state.json`
-
-### Como configurar o mapeamento
-
-No arquivo `slides/slide-sources.yml`, cada slide define:
+Em `slides/slide-sources.yml`, cada entrada define:
 
 - `slide`: caminho do arquivo HTML
 - `sources`: lista de arquivos Markdown fonte
-- `selectors` (opcional): recortes relevantes (`headings` e/ou
-  `regex_patterns`) para que a checagem considere apenas conteúdo que
-  realmente alimenta o slide
+- `selectors` *(opcional)*: recortes por `headings` e/ou `regex_patterns` para focar apenas no conteúdo relevante ao slide
 
-Se você não informar `selectors`, o script considera o conteúdo inteiro
-do arquivo Markdown fonte.
+### Inicializando o baseline
 
-### Como inicializar/atualizar baseline
-
-Depois de criar ou revisar slides, rode:
+Após criar ou revisar um slide, grave o estado atual:
 
 ```bash
 python3 scripts/check_slides_freshness.py \
@@ -170,55 +152,31 @@ python3 scripts/check_slides_freshness.py \
   --summary-file slides/.freshness-summary.md
 ```
 
-Isso grava no `slides/.freshness-state.json` os hashes atuais do
-conteúdo relevante.
+### Quando a automação roda
 
-### Comportamento da automação
+- Toda segunda-feira às 07:00 UTC
+- Manualmente via `workflow_dispatch`
+- Automaticamente após cada execução bem-sucedida do `fetch-docs.yml`
 
-O workflow `check-slides-freshness.yml` roda:
+Ao detectar desatualização, o workflow:
 
-- semanalmente (segunda-feira, 07:00 UTC)
-- manualmente (`workflow_dispatch`)
-- após a conclusão com sucesso do workflow de sync (`fetch-docs.yml`)
+- Gera resumo no **GitHub Actions Job Summary**
+- Abre (ou comenta em) uma issue com label `slides-stale`
+- Envia e-mail de alerta *(se secrets SMTP configurados)*
+- Cria uma Discussion de alerta *(se `DISCUSSION_CATEGORY_ID` configurado)*
 
-Quando detectar desatualização:
+### Secrets e variáveis de configuração
 
-- gera resumo no `GitHub Actions Job Summary`
-- cria (ou comenta) issue aberta com label `slides-stale` e título
-  `Slides HTML desatualizados`
-- comenta em uma issue fixa de alerta (opcional)
-- cria discussion de alerta (opcional)
-- envia e-mail de alerta (quando os secrets SMTP estiverem configurados)
+| Secret / Variável | Descrição |
+|---|---|
+| `SMTP_SERVER` | Servidor SMTP para envio de e-mail |
+| `SMTP_PORT` | Porta do servidor SMTP |
+| `SMTP_USERNAME` | Usuário de autenticação SMTP |
+| `SMTP_PASSWORD` | Senha SMTP |
+| `ALERT_EMAIL_TO` | Destinatário(s) do e-mail (separados por vírgula) |
+| `ALERT_EMAIL_FROM` | Remetente do e-mail |
+| `ALERT_ISSUE_NUMBER` | Número da issue de monitoramento central (opcional) |
+| `DISCUSSION_CATEGORY_ID` | ID GraphQL da categoria de Discussions (opcional) |
 
-### Configurando alerta por e-mail
+> **Dica:** para descobrir o `DISCUSSION_CATEGORY_ID`, use `gh api graphql` consultando as categorias do repositório.
 
-Para habilitar envio de e-mail no workflow, configure estes secrets no
-repositório:
-
-- `SMTP_SERVER`
-- `SMTP_PORT`
-- `SMTP_USERNAME`
-- `SMTP_PASSWORD`
-- `ALERT_EMAIL_TO` (pode ter múltiplos destinos separados por vírgula)
-- `ALERT_EMAIL_FROM`
-
-Se houver slide stale e esses secrets não estiverem preenchidos, o
-workflow continua abrindo issue normalmente e apenas registra aviso no
-`Job Summary`.
-
-### Configurando comentário automático em issue
-
-Para também comentar em uma issue específica (por exemplo, uma issue de
-monitoramento central), configure:
-
-- `ALERT_ISSUE_NUMBER` (somente o número da issue, ex: `123`)
-
-### Configurando criação automática de Discussion
-
-Para criar uma Discussion automaticamente a cada detecção de stale,
-configure:
-
-- `DISCUSSION_CATEGORY_ID` (ID GraphQL da categoria de Discussions)
-
-Dica para descobrir o ID da categoria: use `gh api graphql` consultando
-as categorias do repositório e copie o `id` da categoria desejada.
