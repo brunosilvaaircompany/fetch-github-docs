@@ -358,6 +358,66 @@
     }
 
     .clear-filter-btn:hover { background: rgba(110, 64, 201, 0.15); }
+
+    .deck-actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 12px;
+    }
+
+    .deck-action-btn {
+      background: rgba(110, 64, 201, 0.2);
+      border: 1px solid var(--accent);
+      border-radius: 20px;
+      color: var(--accent-light);
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 7px 16px;
+      transition: background 0.15s, transform 0.15s;
+    }
+
+    .deck-action-btn:hover {
+      background: rgba(110, 64, 201, 0.3);
+      transform: translateY(-1px);
+    }
+
+    .user-deck-badge {
+      background: rgba(63, 185, 80, 0.12);
+      color: var(--green);
+      border: 1px solid rgba(63, 185, 80, 0.28);
+    }
+
+    .deck-delete-btn {
+      border: 1px solid rgba(248, 81, 73, 0.5);
+      background: rgba(248, 81, 73, 0.08);
+      color: #f85149;
+      border-radius: 999px;
+      padding: 4px 10px;
+      cursor: pointer;
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+
+    .deck-delete-btn:hover {
+      background: rgba(248, 81, 73, 0.18);
+    }
+
+    .deck-duplicate-btn {
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-muted);
+      border-radius: 999px;
+      padding: 4px 10px;
+      cursor: pointer;
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+
+    .deck-duplicate-btn:hover {
+      border-color: var(--accent-light);
+      color: var(--text);
+    }
   </style>
 </head>
 <body>
@@ -384,6 +444,9 @@
   <main class="grid-section">
 
     <div class="section-label">Apresentações</div>
+    <div class="deck-actions">
+      <button id="new-deck-btn" class="deck-action-btn" type="button">+ Novo deck</button>
+    </div>
 
     <!-- ── Filter ── -->
     <div class="filter-bar">
@@ -410,13 +473,15 @@
     </div>
     <div class="filter-status" id="filter-status" aria-live="polite"></div>
 
-    <div class="grid">
+    <div class="grid" id="slides-grid">
 
       <!-- Copilot CLI -->
       <a class="card" href="slides/copilot-cli/index.html"
          data-title="github copilot cli"
          data-desc="treinamento completo sobre o agente de terminal do copilot instalação autenticação criação de prs e customização com mcp"
-         data-tags="cli reveal.js 60 min">
+         data-tags="cli reveal.js 60 min"
+         data-source-path="slides/copilot-cli/index.html"
+         data-static-title="GitHub Copilot CLI">
         <div class="card-icon">⚡</div>
         <div class="card-title">GitHub Copilot CLI</div>
         <div class="card-desc">
@@ -434,7 +499,9 @@
       <a class="card template" href="slides/template.html"
          data-title="template de treinamento"
          data-desc="slide base com o tema github copilot copie para criar novas apresentações de 60 minutos com estrutura padronizada"
-         data-tags="template reveal.js">
+         data-tags="template reveal.js"
+         data-source-path="slides/template.html"
+         data-static-title="Template de Treinamento">
         <div class="card-icon">📄</div>
         <div class="card-title">Template de Treinamento</div>
         <div class="card-desc">
@@ -460,31 +527,236 @@
 
   </main>
 
-  <footer>
-    Gerado automaticamente a partir de
-    <a href="https://github.com/brunosilvaaircompany/copilot-knowledge-base" target="_blank">brunosilvaaircompany/copilot-knowledge-base</a>
-    &nbsp;·&nbsp;
-    Documentação sincronizada diariamente de
-    <a href="https://docs.github.com" target="_blank">docs.github.com</a>
-  </footer>
-  <script>
-    (function () {
-      const input      = document.getElementById('filter-input');
-      const status     = document.getElementById('filter-status');
-      const emptyState = document.getElementById('grid-empty');
-      const clearBtn   = document.getElementById('clear-filter');
-      const tagBtns    = document.querySelectorAll('.filter-tag-btn');
-      const cards      = Array.from(document.querySelectorAll('.grid .card'));
-      const total      = cards.length;
+ <footer>
+   Gerado automaticamente a partir de
+   <a href="https://github.com/brunosilvaaircompany/copilot-knowledge-base" target="_blank">brunosilvaaircompany/copilot-knowledge-base</a>
+   &nbsp;·&nbsp;
+   Documentação sincronizada diariamente de
+   <a href="https://docs.github.com" target="_blank">docs.github.com</a>
+ </footer>
+ <script src="slides/editor-storage.js?v=deck-v1"></script>
+ <script>
+   (function () {
+     const store      = window.SlideDeckStore || null;
+     const grid       = document.getElementById('slides-grid');
+     const newDeckBtn = document.getElementById('new-deck-btn');
+     const input      = document.getElementById('filter-input');
+     const status     = document.getElementById('filter-status');
+     const emptyState = document.getElementById('grid-empty');
+     const clearBtn   = document.getElementById('clear-filter');
+     const tagsWrap   = document.querySelector('.filter-tags');
 
-      let activeTag  = 'all';
-      let searchText = '';
+     let activeTag  = 'all';
+     let searchText = '';
+     let cards = [];
+     const baseTags = ['cli', 'reveal.js', '60 min', 'template'];
+     let tagValues = ['all'].concat(baseTags);
 
-      function applyFilter() {
-        let visible = 0;
+     function normalizeTags(tags) {
+       if (Array.isArray(tags)) {
+         return tags.filter(Boolean).join(' ');
+       }
+       return String(tags || '');
+     }
 
-        cards.forEach(function (card) {
-          const title = (card.dataset.title || '').toLowerCase();
+     function createDeckCard(deck) {
+       const card = document.createElement('a');
+       card.className = 'card';
+       card.href = store.buildDeckHref(deck);
+       card.dataset.title = String(deck.title || '').toLowerCase();
+       card.dataset.desc = String(deck.description || '').toLowerCase();
+       card.dataset.tags = ('deck reveal.js ' + normalizeTags(deck.tags)).toLowerCase();
+
+       const icon = document.createElement('div');
+       icon.className = 'card-icon';
+       icon.textContent = '🧩';
+
+       const title = document.createElement('div');
+       title.className = 'card-title';
+       title.textContent = deck.title || 'Novo deck';
+
+       const description = document.createElement('div');
+       description.className = 'card-desc';
+       description.textContent = deck.description || 'Deck personalizado salvo localmente no navegador.';
+
+       const meta = document.createElement('div');
+       meta.className = 'card-meta';
+
+       const userTag = document.createElement('span');
+       userTag.className = 'tag user-deck-badge';
+       userTag.textContent = 'Meu deck';
+       meta.appendChild(userTag);
+
+       const tags = Array.isArray(deck.tags) ? deck.tags : [];
+       tags.slice(0, 3).forEach(function (tagName) {
+         const tag = document.createElement('span');
+         tag.className = 'tag';
+         tag.textContent = tagName;
+         meta.appendChild(tag);
+       });
+
+       const cta = document.createElement('span');
+       cta.className = 'card-cta';
+       cta.textContent = 'Abrir →';
+       meta.appendChild(cta);
+
+       const deckId = String(deck.id || '');
+       if (deckId.indexOf('path:') !== 0) {
+         const actionsWrap = document.createElement('span');
+         actionsWrap.style.marginLeft = 'auto';
+         actionsWrap.style.display = 'flex';
+         actionsWrap.style.gap = '6px';
+
+         const duplicateButton = document.createElement('button');
+         duplicateButton.type = 'button';
+         duplicateButton.className = 'deck-duplicate-btn';
+         duplicateButton.textContent = 'Duplicar';
+         duplicateButton.addEventListener('click', function (event) {
+           event.preventDefault();
+           event.stopPropagation();
+           const duplicated = store.duplicateDeck(deckId);
+           if (!duplicated) {
+             window.alert('Nao foi possivel duplicar o deck.');
+             return;
+           }
+           renderUserDeckCards();
+           applyFilter();
+         });
+
+         const deleteButton = document.createElement('button');
+         deleteButton.type = 'button';
+         deleteButton.className = 'deck-delete-btn';
+         deleteButton.textContent = 'Excluir';
+         deleteButton.addEventListener('click', function (event) {
+           event.preventDefault();
+           event.stopPropagation();
+           const label = deck.title || 'este deck';
+           const shouldDelete = window.confirm('Excluir "' + label + '"?');
+           if (!shouldDelete) {
+             return;
+           }
+           const deleted = store.deleteDeck(deckId);
+           if (!deleted) {
+             window.alert('Nao foi possivel excluir o deck.');
+             return;
+           }
+           renderUserDeckCards();
+           applyFilter();
+         });
+
+         actionsWrap.appendChild(duplicateButton);
+         actionsWrap.appendChild(deleteButton);
+         meta.appendChild(actionsWrap);
+       }
+
+       card.appendChild(icon);
+       card.appendChild(title);
+       card.appendChild(description);
+       card.appendChild(meta);
+       return card;
+     }
+
+     function renderUserDeckCards() {
+       if (!store || !grid) {
+         cards = Array.from(document.querySelectorAll('.grid .card'));
+         return;
+       }
+
+       const existing = Array.from(grid.querySelectorAll('[data-user-deck="true"]'));
+       existing.forEach(function (node) {
+         node.remove();
+       });
+
+       const decks = store.listDecks().filter(function (deck) {
+         return String(deck.id || '').indexOf('path:') !== 0;
+       });
+       decks.reverse().forEach(function (deck) {
+         const card = createDeckCard(deck);
+         card.setAttribute('data-user-deck', 'true');
+         grid.insertBefore(card, grid.firstChild);
+       });
+
+       cards = Array.from(document.querySelectorAll('.grid .card'));
+       updateFilterTags(decks);
+     }
+
+     function updateFilterTags(decks) {
+       if (!tagsWrap) {
+         return;
+       }
+
+       const dynamicTags = [];
+       decks.forEach(function (deck) {
+         const tags = Array.isArray(deck.tags) ? deck.tags : [];
+         tags.forEach(function (tag) {
+           const normalized = String(tag || '').trim().toLowerCase();
+           if (normalized && dynamicTags.indexOf(normalized) < 0 && baseTags.indexOf(normalized) < 0) {
+             dynamicTags.push(normalized);
+           }
+         });
+       });
+       dynamicTags.sort();
+
+       tagValues = ['all'].concat(baseTags, dynamicTags);
+       if (tagValues.indexOf(activeTag) < 0) {
+         activeTag = 'all';
+       }
+
+       tagsWrap.innerHTML = '';
+       tagValues.forEach(function (value) {
+         const button = document.createElement('button');
+         button.type = 'button';
+         button.className = 'filter-tag-btn' + (value === activeTag ? ' active' : '');
+         button.dataset.filter = value;
+         button.textContent = value === 'all' ? 'Todos' : value;
+         tagsWrap.appendChild(button);
+       });
+     }
+
+     function createDeckFlow() {
+       if (!store) {
+         window.alert('Modulo de armazenamento indisponivel.');
+         return;
+       }
+       const title = window.prompt('Titulo do novo deck:', 'Novo deck');
+       if (title === null) {
+         return;
+       }
+       const description = window.prompt('Descricao do deck:', '');
+       if (description === null) {
+         return;
+       }
+       const tags = window.prompt('Tags (separadas por virgula):', '');
+       if (tags === null) {
+         return;
+       }
+
+       const created = store.createDeck({
+         sourcePath: 'slides/template.html',
+         title: title,
+         description: description,
+         tags: tags
+       });
+       if (!created) {
+         window.alert('Nao foi possivel criar o deck.');
+         return;
+       }
+       window.location.assign(store.buildDeckHref(created));
+     }
+
+     function ensureCards() {
+       if (cards.length === 0) {
+         cards = Array.from(document.querySelectorAll('.grid .card'));
+       }
+     }
+
+     function applyFilter() {
+       ensureCards();
+       let visible = 0;
+       const total = cards.length;
+
+       cards.forEach(function (card) {
+         const title = (card.dataset.title || '').toLowerCase();
           const desc  = (card.dataset.desc  || '').toLowerCase();
           const tags  = (card.dataset.tags  || '').toLowerCase();
 
@@ -510,26 +782,82 @@
         }
       }
 
+      renderUserDeckCards();
+
+      // inject Duplicar into static (built-in) cards
+      Array.from(grid.querySelectorAll('[data-source-path]')).forEach(function (card) {
+        if (card.dataset.userDeck === 'true') {
+          return;
+        }
+        var meta = card.querySelector('.card-meta');
+        if (!meta || meta.querySelector('.deck-duplicate-btn')) {
+          return;
+        }
+        var sourcePath = card.dataset.sourcePath || '';
+        var staticTitle = card.dataset.staticTitle || card.querySelector('.card-title').textContent || 'Deck';
+        var dupBtn = document.createElement('button');
+        dupBtn.type = 'button';
+        dupBtn.className = 'deck-duplicate-btn';
+        dupBtn.textContent = 'Duplicar';
+        dupBtn.style.marginLeft = 'auto';
+        dupBtn.addEventListener('click', function (event) {
+          event.preventDefault();
+          event.stopPropagation();
+          if (!store) {
+            window.alert('Modulo de armazenamento indisponivel.');
+            return;
+          }
+          var created = store.createDeck({
+            sourcePath: sourcePath,
+            title: 'Copia de ' + staticTitle,
+            description: '',
+            tags: []
+          });
+          if (!created) {
+            window.alert('Nao foi possivel duplicar o deck.');
+            return;
+          }
+          renderUserDeckCards();
+          applyFilter();
+        });
+        meta.appendChild(dupBtn);
+      });
+
+      if (newDeckBtn) {
+        newDeckBtn.addEventListener('click', createDeckFlow);
+      }
+
       input.addEventListener('input', function () {
         searchText = input.value.trim().toLowerCase();
         applyFilter();
       });
 
-      tagBtns.forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          tagBtns.forEach(function (b) { b.classList.remove('active'); });
-          btn.classList.add('active');
+      if (tagsWrap) {
+        tagsWrap.addEventListener('click', function (event) {
+          const btn = event.target.closest('.filter-tag-btn');
+          if (!btn) {
+            return;
+          }
           activeTag = btn.dataset.filter;
+          const currentButtons = Array.from(tagsWrap.querySelectorAll('.filter-tag-btn'));
+          currentButtons.forEach(function (b) { b.classList.remove('active'); });
+          btn.classList.add('active');
           applyFilter();
         });
-      });
+      }
 
       clearBtn.addEventListener('click', function () {
         input.value = '';
         searchText  = '';
         activeTag   = 'all';
-        tagBtns.forEach(function (b) { b.classList.remove('active'); });
-        document.querySelector('[data-filter="all"]').classList.add('active');
+        if (tagsWrap) {
+          const currentButtons = Array.from(tagsWrap.querySelectorAll('.filter-tag-btn'));
+          currentButtons.forEach(function (b) { b.classList.remove('active'); });
+          const allButton = tagsWrap.querySelector('[data-filter="all"]');
+          if (allButton) {
+            allButton.classList.add('active');
+          }
+        }
         applyFilter();
       });
     })();
