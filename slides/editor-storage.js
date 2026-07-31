@@ -439,6 +439,34 @@
     return clone(state.decks[id]);
   }
 
+  function duplicateDeck(deckId) {
+    const source = getDeckById(deckId);
+    if (!source) {
+      return null;
+    }
+    const createdAt = nowIso();
+    const newTitle = "Copia de " + (source.title || "deck");
+    const id = makeDeckId(newTitle);
+    const deck = normalizeDeck({
+      id,
+      title: newTitle,
+      description: String(source.description || ""),
+      tags: parseTags(source.tags),
+      sourcePath: String(source.sourcePath || DEFAULT_DECK_SOURCE),
+      createdAt,
+      updatedAt: createdAt,
+      slidesHtml: typeof source.slidesHtml === "string" ? source.slidesHtml : "",
+      cssText: typeof source.cssText === "string" ? source.cssText : ""
+    });
+    const state = readState();
+    state.decks[id] = deck;
+    state.decks[id].slidesHtml = deck.slidesHtml;
+    state.decks[id].cssText = deck.cssText;
+    state.deckOrder.unshift(id);
+    writeState(state);
+    return clone(state.decks[id]);
+  }
+
   function deleteDeck(deckId) {
     const id = String(deckId || "");
     const state = readState();
@@ -597,6 +625,7 @@
     getDeckById,
     listDecks,
     createDeck,
+    duplicateDeck,
     updateDeckMeta,
     updateDeckContent,
     deleteDeck,

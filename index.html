@@ -389,7 +389,6 @@
     }
 
     .deck-delete-btn {
-      margin-left: auto;
       border: 1px solid rgba(248, 81, 73, 0.5);
       background: rgba(248, 81, 73, 0.08);
       color: #f85149;
@@ -402,6 +401,22 @@
 
     .deck-delete-btn:hover {
       background: rgba(248, 81, 73, 0.18);
+    }
+
+    .deck-duplicate-btn {
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-muted);
+      border-radius: 999px;
+      padding: 4px 10px;
+      cursor: pointer;
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+
+    .deck-duplicate-btn:hover {
+      border-color: var(--accent-light);
+      color: var(--text);
     }
   </style>
 </head>
@@ -583,6 +598,27 @@
 
        const deckId = String(deck.id || '');
        if (deckId.indexOf('path:') !== 0) {
+         const actionsWrap = document.createElement('span');
+         actionsWrap.style.marginLeft = 'auto';
+         actionsWrap.style.display = 'flex';
+         actionsWrap.style.gap = '6px';
+
+         const duplicateButton = document.createElement('button');
+         duplicateButton.type = 'button';
+         duplicateButton.className = 'deck-duplicate-btn';
+         duplicateButton.textContent = 'Duplicar';
+         duplicateButton.addEventListener('click', function (event) {
+           event.preventDefault();
+           event.stopPropagation();
+           const duplicated = store.duplicateDeck(deckId);
+           if (!duplicated) {
+             window.alert('Nao foi possivel duplicar o deck.');
+             return;
+           }
+           renderUserDeckCards();
+           applyFilter();
+         });
+
          const deleteButton = document.createElement('button');
          deleteButton.type = 'button';
          deleteButton.className = 'deck-delete-btn';
@@ -603,7 +639,10 @@
            renderUserDeckCards();
            applyFilter();
          });
-         meta.appendChild(deleteButton);
+
+         actionsWrap.appendChild(duplicateButton);
+         actionsWrap.appendChild(deleteButton);
+         meta.appendChild(actionsWrap);
        }
 
        card.appendChild(icon);
