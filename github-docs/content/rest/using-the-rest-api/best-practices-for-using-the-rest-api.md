@@ -68,7 +68,7 @@ To make a conditional request with an `etag`:
 1. Make a request and save the value of the `etag` header from the response.
 
    ```shell
-   curl --include --header "Authorization: Bearer YOUR-TOKEN" https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3/repos/REPO-OWNER/REPO-NAME/pulls
+   curl --include --header "Authorization: Bearer YOUR-TOKEN" {% data variables.product.rest_url %}/repos/{% ifversion ghes %}REPO-OWNER/REPO-NAME{% else %}octocat/Spoon-Knife{% endif %}/pulls
    ```
 
    The response includes an `etag` header:
@@ -81,7 +81,7 @@ To make a conditional request with an `etag`:
 1. On your next request to the same URL, send the saved value in the `if-none-match` header.
 
    ```shell
-   curl --include --header "Authorization: Bearer YOUR-TOKEN" --header 'if-none-match: "644b5b0155e6404a9cc4bd9d8b1ae730"' https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3/repos/REPO-OWNER/REPO-NAME/pulls
+   curl --include --header "Authorization: Bearer YOUR-TOKEN" --header 'if-none-match: "644b5b0155e6404a9cc4bd9d8b1ae730"' {% data variables.product.rest_url %}/repos/{% ifversion ghes %}REPO-OWNER/REPO-NAME{% else %}octocat/Spoon-Knife{% endif %}/pulls
    ```
 
    If the data has not changed, you will receive a `304 Not Modified` response, which does not count against your primary rate limit:
@@ -93,7 +93,7 @@ To make a conditional request with an `etag`:
 You can also use the `last-modified` header. For example, if a previous request returned a `last-modified` header value of `Wed, 25 Oct 2023 19:17:59 GMT`, you can use the `if-modified-since` header in a future request:
 
 ```shell
-curl --include --header "Authorization: Bearer YOUR-TOKEN" --header 'if-modified-since: Wed, 25 Oct 2023 19:17:59 GMT' https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3/repos/REPO-OWNER/REPO-NAME
+curl --include --header "Authorization: Bearer YOUR-TOKEN" --header 'if-modified-since: Wed, 25 Oct 2023 19:17:59 GMT' {% data variables.product.rest_url %}/repos/{% ifversion ghes %}REPO-OWNER/REPO-NAME{% else %}octocat/Spoon-Knife{% endif %}
 ```
 
 Conditional requests for unsafe methods, such as `POST`, `PUT`, `PATCH`, and `DELETE` are not supported unless otherwise noted in the documentation for a specific endpoint.
@@ -105,7 +105,7 @@ A conditional request only saves you time and rate limit if the endpoint returns
 Request only the data that you need. A smaller, more specific response changes less often, so it returns `304 Not Modified` more often. For example, to check the pull requests for one branch, filter the list by that branch instead of listing every pull request and searching the results yourself. Replace `HEAD-OWNER` with the account that owns the head branch; for a pull request from a fork, this is the account that owns the fork. Replace `BRANCH-NAME` with the name of the branch, and URL-encode it if it contains special characters such as `#` or `&`:
 
 ```shell
-curl --include --header "Authorization: Bearer YOUR-TOKEN" "https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3/repos/REPO-OWNER/REPO-NAME/pulls?head=HEAD-OWNER:BRANCH-NAME"
+curl --include --header "Authorization: Bearer YOUR-TOKEN" "{% data variables.product.rest_url %}/repos/{% ifversion ghes %}REPO-OWNER/REPO-NAME{% else %}octocat/Spoon-Knife{% endif %}/pulls?head=HEAD-OWNER:BRANCH-NAME"
 ```
 
 If you page through a list, use a stable sort order. Some parameters, such as `sort=updated`, reorder the list whenever an item changes. When an item moves to a new position, the items between its old and new positions shift onto different pages, so pages that you already fetched can return new data instead of `304 Not Modified`. A stable order, such as the default, stops updates to existing items from reordering the list, although adding or removing items can still shift entries onto other pages.

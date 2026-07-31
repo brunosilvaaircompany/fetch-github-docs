@@ -50,13 +50,13 @@ Both GitHub Packages and subdomain isolation must be enabled to use Container re
 1. In your Dockerfile, add this line, replacing `HOSTNAME`, `OWNER` and `REPO` with your details:
 
    ```shell
-   LABEL org.opencontainers.image.source=https://github.com/OWNER/REPO
+   LABEL org.opencontainers.image.source=https://{% ifversion fpt or ghec %}github.com{% else %}HOSTNAME{% endif %}/OWNER/REPO
    ```
 
    For example, if you're the user `octocat` and own `my-repo`, and your GitHub hostname is `github.companyname.com`, you would add this line to your Dockerfile:
 
    ```shell
-   LABEL org.opencontainers.image.source=https://github.com/octocat/my-repo
+   LABEL org.opencontainers.image.source=https://{% ifversion fpt or ghec %}github.com{% else %}{% data reusables.package_registry.container-registry-example-hostname %}{% endif %}/octocat/my-repo
    ```
 
    For more information, see [LABEL](https://docs.docker.com/engine/reference/builder/#label) in the official Docker documentation and [Pre-defined Annotation Keys](https://github.com/opencontainers/image-spec/blob/main/annotations.md#pre-defined-annotation-keys) in the `opencontainers/image-spec` repository.
@@ -80,8 +80,7 @@ Both GitHub Packages and subdomain isolation must be enabled to use Container re
 1. Assign a name and hosting destination to your Docker image.
 
    ```shell
-   docker tag IMAGE_NAME ghcr.io{% elsif ghes %}containers.HOSTNAME
-/NAMESPACE/NEW_IMAGE_NAME:TAG
+   docker tag IMAGE_NAME {% data reusables.package_registry.container-registry-hostname %}/NAMESPACE/NEW_IMAGE_NAME:TAG
    ```
 
    Replace `NAMESPACE` with the name of the personal account or organization to which you want the package to be scoped.
@@ -89,16 +88,14 @@ Both GitHub Packages and subdomain isolation must be enabled to use Container re
    For example:
 
    ```shell
-   docker tag 38f737a91f39 ghcr.io{% elsif ghes %}containers.github.companyname.com
-/octocat/hello_docker:latest
+   docker tag 38f737a91f39 {% ifversion fpt or ghec %}ghcr.io{% elsif ghes %}{% data reusables.package_registry.container-registry-example-hostname %}{% endif %}/octocat/hello_docker:latest
    ```
 
 1. If you haven't already, authenticate to the Container registry. For more information, see [Working With The Container Registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry#authenticating-to-the-container-registry).
    {% raw %}
 
    ```shell
-   $ echo $CR_PAT | docker login {% endraw %}ghcr.io{% elsif ghes %}containers.HOSTNAME
-{% raw %} -u USERNAME --password-stdin
+   $ echo $CR_PAT | docker login {% endraw %}{% data reusables.package_registry.container-registry-hostname %}{% raw %} -u USERNAME --password-stdin
    > Login Succeeded
    ```
 
@@ -106,15 +103,13 @@ Both GitHub Packages and subdomain isolation must be enabled to use Container re
 1. Push your container image to the Container registry.
 
    ```shell
-   docker push ghcr.io{% elsif ghes %}containers.HOSTNAME
-/NAMESPACE/IMAGE-NAME:TAG
+   docker push {% data reusables.package_registry.container-registry-hostname %}/NAMESPACE/IMAGE-NAME:TAG
    ```
 
    For example:
 
    ```shell
-   docker push ghcr.io{% elsif ghes %}containers.github.companyname.com
-/octocat/hello_docker:latest
+   docker push {% ifversion fpt or ghec %}ghcr.io{% elsif ghes %}{% data reusables.package_registry.container-registry-example-hostname %}{% endif %}/octocat/hello_docker:latest
    ```
 
 ## Unlinking a repository from a package on GitHub

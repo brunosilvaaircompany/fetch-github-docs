@@ -23,9 +23,9 @@ All streamed audit logs are sent as compressed JSON files. The filename format i
 
 
 
-Enabling audit log streaming can cause a minor impact on the performance of {% ifversion ghes %}your GitHub Enterprise Server instance. To learn about increasing resources to mitigate this performance impact, see [Increasing Cpu Or Memory Resources](https://docs.github.com/en/admin/monitoring-and-managing-your-instance/updating-the-virtual-machine-and-physical-resources/increasing-cpu-or-memory-resources).
+Enabling audit log streaming can cause a minor impact on the performance of your GitHub Enterprise Server instance. To learn about increasing resources to mitigate this performance impact, see [Increasing Cpu Or Memory Resources](https://docs.github.com/en/admin/monitoring-and-managing-your-instance/updating-the-virtual-machine-and-physical-resources/increasing-cpu-or-memory-resources).
 
-{% endif %}
+
 
 
 
@@ -215,7 +215,7 @@ From GitHub:
 1. Under "Authentication", click **OpenID Connect**.
 1. Configure the stream settings.
 
-{% ifversion ghec %}
+
     - Under "Region", select the bucket's region. For example, `us-east-1`; an option for Auto Discovery is also available.
     - Under "Bucket", type the name of the bucket you want to stream to. For example, `auditlog-streaming-test`.
     - Under "ARN Role" type the ARN role you noted earlier. For example, `arn:aws::iam::1234567890:role/github-audit-log-streaming-role`.
@@ -230,7 +230,7 @@ To disable streaming to S3 with OIDC, delete the GitHub OIDC provider you create
 
 If you disable streaming due to a security vulnerability in OIDC, after you delete the provider, set up streaming with access keys until the vulnerability is resolved. See [Setting up streaming to S3 with access keys](#setting-up-streaming-to-s3-with-access-keys).
 
-{% endif %}
+
 
 #### Integrating with AWS CloudTrail Lake
 

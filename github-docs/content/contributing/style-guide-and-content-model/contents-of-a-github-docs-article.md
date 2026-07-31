@@ -149,7 +149,7 @@ When an article describes one step in a larger process or has a logical next ste
 
 - You can monitor self-hosted runners and troubleshoot common issues. See "Monitoring and troubleshooting self hosted runners."
 
-- GitHub recommends that you review security considerations for self-hosted runner machines. See "Security hardening for GitHub Actions."
+- {% data variables.product.company_short %} recommends that you review security considerations for self-hosted runner machines. See "Security hardening for {% data variables.product.prodname_actions %}."
 ```
 
 In this example from [Getting Started With Self Hosted Runners For Your Enterprise](https://docs.github.com/en/enterprise-cloud@latest/admin/managing-github-actions-for-your-enterprise/getting-started-with-github-actions-for-your-enterprise/getting-started-with-self-hosted-runners-for-your-enterprise#next-steps), the next steps section includes links to procedures that someone will need to do after they start using the feature described in the article.

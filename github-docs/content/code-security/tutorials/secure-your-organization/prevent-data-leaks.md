@@ -56,7 +56,7 @@ No matter how well you tighten your organization to prevent data leaks, some may
 Secret scanning helps secure code and keep secrets safe across organizations and repositories by scanning and detecting secrets that were accidentally committed over the full Git history of every branch in GitHub repositories. Any strings that match patterns provided by secret scanning partners, by other service providers, or defined by you or your organization, are reported as alerts in the **{% octicon "shield" aria-hidden="true" aria-label="shield" %} Security and quality** tab of repositories.
 
 
-There are two forms of secret scanning available: **Secret scanning alerts for partners** and **{% ifversion fpt or ghec %}Secret scanning alerts for users**.
+There are two forms of secret scanning available: **Secret scanning alerts for partners** and **Secret scanning alerts for users**.
 
 * Secret scanning alerts for partners: These are enabled by default and automatically run on all public repositories and public npm packages.
 * Secret scanning alerts for users: To get additional scanning capabilities for your organization, you need to enable secret scanning alerts for users.
@@ -64,10 +64,8 @@ There are two forms of secret scanning available: **Secret scanning alerts for p
   When enabled, secret scanning alerts for users can be detected on the following types of repository:
   * Public repositories owned by personal accounts on GitHub.com
   * Public repositories owned by organizations
-  * Private and internal repositories owned by organizations using GitHub Team or GitHub Enterprise Cloud, with a license for GitHub Code Security{% elsif ghec %}
-  * Public repositories owned by organizations that use GitHub Enterprise Cloud
-  * Private and internal repositories when you have a license for GitHub Code Security
-{% endif %}
+  * Private and internal repositories owned by organizations using GitHub Team or GitHub Enterprise Cloud, with a license for GitHub Code Security
+
 
 
 

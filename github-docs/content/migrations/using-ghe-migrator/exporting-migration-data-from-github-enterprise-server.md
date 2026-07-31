@@ -48,7 +48,7 @@
 1. When prompted for a personal access token, enter the access token you created in [Preparing the GitHub Enterprise Server source instance](#preparing-the-github-enterprise-server-source-instance):
 
    ```shell
-   Enter personal access token:  **************
+   Enter {% data variables.product.pat_generic %}:  **************
    ```
 
 1. When `ghe-migrator add` has finished it will print the unique "Migration GUID" that it generated to identify this export as well as a list of the resources that were added to the export. You will use the Migration GUID that it generated in subsequent `ghe-migrator add` and `ghe-migrator export` steps to tell `ghe-migrator` to continue operating on the same export.

@@ -211,6 +211,4 @@ In addition to firewalls or proxies, customizations performed to GitHub-hosted r
 
 Issues may arise from the use of GitHub-hosted runners within your configured Azure Virtual Networks (VNETs) settings.
 
-For troubleshooting advice, see [Troubleshooting Azure Private Network Configurations For GitHub Hosted Runners In Your Organization](https://docs.github.com/en/organizations/managing-organization-settings/troubleshooting-azure-private-network-configurations-for-github-hosted-runners-in-your-organization) or {% ifversion ghec %}[Troubleshooting Azure Private Network Configurations For GitHub Hosted Runners In Your Enterprise](https://docs.github.com/en/admin/configuring-settings/configuring-private-networking-for-hosted-compute-products/troubleshooting-azure-private-network-configurations-for-github-hosted-runners-in-your-enterprise).
-
-{% endif %}
+For troubleshooting advice, see [Troubleshooting Azure Private Network Configurations For GitHub Hosted Runners In Your Organization](https://docs.github.com/en/organizations/managing-organization-settings/troubleshooting-azure-private-network-configurations-for-github-hosted-runners-in-your-organization) or [Troubleshooting Azure Private Network Configurations For GitHub Hosted Runners In Your Enterprise](https://docs.github.com/en/admin/configuring-settings/configuring-private-networking-for-hosted-compute-products/troubleshooting-azure-private-network-configurations-for-github-hosted-runners-in-your-enterprise).

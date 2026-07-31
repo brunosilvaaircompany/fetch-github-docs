@@ -12,7 +12,7 @@ Here's a sample request sent from a browser hitting
 `http://example.com`:
 
 ```shell
-$ curl -I https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3 -H "Origin: http://example.com"
+$ curl -I {% data variables.product.rest_url %} -H "Origin: http://example.com"
 HTTP/2 302
 Access-Control-Allow-Origin: *
 Access-Control-Expose-Headers: ETag, Link, x-ratelimit-limit, x-ratelimit-remaining, x-ratelimit-reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
@@ -21,7 +21,7 @@ Access-Control-Expose-Headers: ETag, Link, x-ratelimit-limit, x-ratelimit-remain
 This is what the CORS preflight request looks like:
 
 ```shell
-$ curl -I https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3 -H "Origin: http://example.com" -X OPTIONS
+$ curl -I {% data variables.product.rest_url %} -H "Origin: http://example.com" -X OPTIONS
 HTTP/2 204
 Access-Control-Allow-Origin: *
 Access-Control-Allow-Headers: Authorization, Content-Type, If-Match, If-Modified-Since, If-None-Match, If-Unmodified-Since, X-Requested-With
@@ -36,7 +36,7 @@ You can send a `?callback` parameter to any GET call to have the results
 wrapped in a JSON function. This is typically used when browsers want to embed GitHub content in web pages and avoid cross-domain problems. The response includes the same data output as the regular API, plus the relevant HTTP Header information.
 
 ```shell
-$ curl https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3?callback=foo
+$ curl {% data variables.product.rest_url %}?callback=foo
 
 > /**/foo({
 >   "meta": {
@@ -45,7 +45,7 @@ $ curl https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3?callback=
 >     "x-ratelimit-remaining": "4966",
 >     "x-ratelimit-reset": "1372700873",
 >     "link": [ // pagination headers and other links
->       ["https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3?page=2", {"rel": "next"}]
+>       ["{% data variables.product.rest_url %}?page=2", {"rel": "next"}]
 >     ]
 >   },
 >   "data": {
@@ -68,7 +68,7 @@ function foo(response) {
 }
 
 var script = document.createElement('script');
-script.src = 'https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3?callback=foo';
+script.src = '{% data variables.product.rest_url %}?callback=foo';
 
 document.getElementsByTagName('head')[0].appendChild(script);
 </script>

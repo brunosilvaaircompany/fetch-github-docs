@@ -91,11 +91,7 @@ If you have external tools which create or manage Software Bills of Materials (S
 For example, the following [SPDX Dependency Submission Action](https://github.com/marketplace/actions/spdx-dependency-submission-action) workflow calculates the dependencies for a repository, generates an exportable SBOM in SPDX 2.2 format, and submits it to the dependency submission API.
 
 ```yaml
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
+{% data reusables.actions.actions-not-certified-by-github-comment %}
 name: SBOM upload
 
 on:
@@ -112,16 +108,14 @@ jobs:
       contents: write
 
     steps:
-    - uses: actions/checkout@v6
-
+    - uses: {% data reusables.actions.action-checkout %}
     - name: Generate SBOM
       # generation command documentation: https://github.com/microsoft/sbom-tool#sbom-generation
       run: |
         curl -Lo $RUNNER_TEMP/sbom-tool https://github.com/microsoft/sbom-tool/releases/latest/download/sbom-tool-linux-x64
         chmod +x $RUNNER_TEMP/sbom-tool
         $RUNNER_TEMP/sbom-tool generate -b . -bc . -pn ${{ github.repository }} -pv 1.0.0 -ps OwnerName -nsb https://sbom.mycompany.com -V Verbose
-    - uses: actions/upload-artifact@v4
-
+    - uses: {% data reusables.actions.action-upload-artifact %}
       with:
         name: sbom
         path: _manifest/spdx_2.2

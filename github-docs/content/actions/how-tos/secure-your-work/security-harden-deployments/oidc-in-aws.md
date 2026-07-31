@@ -63,8 +63,8 @@ Edit the trust policy, adding the `sub` field to the validation conditions. For 
 ```json copy
 "Condition": {
   "StringEquals": {
-    "HOSTNAME/_services/token:aud": "sts.amazonaws.com",
-    "HOSTNAME/_services/token:sub": "repo:octo-org/octo-repo:ref:refs/heads/octo-branch"
+    "{% ifversion ghes %}HOSTNAME/_services/token{% else %}token.actions.githubusercontent.com{% endif %}:aud": "sts.amazonaws.com",
+    "{% ifversion ghes %}HOSTNAME/_services/token{% else %}token.actions.githubusercontent.com{% endif %}:sub": "repo:octo-org/octo-repo:ref:refs/heads/octo-branch"
   }
 }
 ```
@@ -89,8 +89,8 @@ If you use a workflow with an environment, the `sub` field must reference the en
 ```json copy
 "Condition": {
   "StringEquals": {
-    "HOSTNAME/_services/token:aud": "sts.amazonaws.com",
-    "HOSTNAME/_services/token:sub": "repo:octo-org/octo-repo:environment:prod"
+    "{% ifversion ghes %}HOSTNAME/_services/token{% else %}token.actions.githubusercontent.com{% endif %}:aud": "sts.amazonaws.com",
+    "{% ifversion ghes %}HOSTNAME/_services/token{% else %}token.actions.githubusercontent.com{% endif %}:sub": "repo:octo-org/octo-repo:environment:prod"
   }
 }
 ```
@@ -146,11 +146,7 @@ The `aws-actions/configure-aws-credentials` action receives a JWT from the GitHu
 ```yaml copy
 # Sample workflow to access AWS resources when workflow is tied to branch
 # The workflow creates a static website using Amazon S3
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
+{% data reusables.actions.actions-not-certified-by-github-comment %}
 name: AWS example workflow
 on:
   push
@@ -166,8 +162,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Git clone the repository
-        uses: actions/checkout@v6
-
+        uses: {% data reusables.actions.action-checkout %}
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@e3dd6a429d7300a6a4c196c26e071d42e0343502
         with:

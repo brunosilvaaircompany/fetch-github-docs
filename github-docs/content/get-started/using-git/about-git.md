@@ -64,7 +64,7 @@ For more information, see the [full reference guide to Git commands](https://git
 ### Example: Contribute to an existing repository
 
 ```bash
-# download a repository on GitHub to our machine
+# download a repository on {% data variables.product.github %} to our machine
 # Replace `owner/repo` with the owner and name of the repository to clone
 git clone https://github.com/owner/repo.git
 

@@ -20,11 +20,11 @@ For example, the following code block shows content for three different tools.
 
 ```markdown
 {% raw %}{% vscode %}
-This content is specific to {% endraw %}Visual Studio Code{% raw %}.
+This content is specific to {% endraw %}{% data variables.product.prodname_vscode %}{% raw %}.
 {% endvscode %}
 
 {% visualstudio %}
-This content is specific to {% endraw %}Visual Studio{% raw %}.
+This content is specific to {% endraw %}{% data variables.product.prodname_vs %}{% raw %}.
 {% endvisualstudio %}
 
 {% jetbrains %}

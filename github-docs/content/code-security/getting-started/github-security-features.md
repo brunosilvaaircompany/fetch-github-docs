@@ -7,10 +7,10 @@ GitHub's security features help keep your code and secrets secure in repositorie
 
 
 * Some features are available for all GitHub plans.
-* Additional features are available to organizations {% ifversion ghec %}and enterprises on GitHub Team and GitHub Enterprise Cloud that purchase a GitHub Advanced Security product:
+* Additional features are available to organizations and enterprises on GitHub Team and GitHub Enterprise Cloud that purchase a GitHub Advanced Security product:
   * [GitHub Secret Protection](#available-with-github-secret-protection)
   * [GitHub Code Security](#available-with-github-code-security)
-* In addition, a number of GitHub Secret Protection and GitHub Code Security features can be run on public repositories for free.{% endif %}
+* In addition, a number of GitHub Secret Protection and GitHub Code Security features can be run on public repositories for free.
 
 
 
@@ -25,10 +25,10 @@ The following security features are available for you to use, regardless of the 
 
 
 
-Most of these features are available for public{% ifversion ghec %}, internal, and private repositories.
+Most of these features are available for public, internal, and private repositories.
 Some features are _only_ available for public repositories.
 
-{% endif %}
+
 
 ### Security policy
 
@@ -89,7 +89,7 @@ Enforce consistent code standards, security, and compliance across branches and 
 
 Create unfalsifiable provenance and integrity guarantees for the software you build. For more information, see [Use Artifact Attestations](https://docs.github.com/en/actions/how-tos/secure-your-work/use-artifact-attestations/use-artifact-attestations).
 
-{% ifversion fpt %}
+
 
 > [!NOTE]
 > If you are on a GitHub Free, GitHub Pro, or GitHub Team plan, artifact attestations are only available for public repositories. To use artifact attestations in private or internal repositories, you must be on a GitHub Enterprise Cloud plan.
@@ -106,7 +106,7 @@ Push protection for users automatically protects you from accidentally committin
 
 
 
-{% endif %}
+
 
 ## Available with GitHub Secret Protection
 

@@ -6,9 +6,9 @@ When you create a ruleset, you can allow certain users to bypass the rules in th
 
 
 
-For organizations on the GitHub Enterprise plan, you can set up rulesets at the {% ifversion enterprise-code-rulesets %} enterprise or organization level to target multiple repositories in your organization. See [Managing Rulesets For Repositories In Your Organization](https://docs.github.com/en/enterprise-cloud@latest/organizations/managing-organization-settings/managing-rulesets-for-repositories-in-your-organization) in the GitHub Enterprise Cloud documentation.
+For organizations on the GitHub Enterprise plan, you can set up rulesets at the  enterprise or organization level to target multiple repositories in your organization. See [Managing Rulesets For Repositories In Your Organization](https://docs.github.com/en/enterprise-cloud@latest/organizations/managing-organization-settings/managing-rulesets-for-repositories-in-your-organization) in the GitHub Enterprise Cloud documentation.
 
-{% endif %}
+
 
 You can use rulesets to target branches or tags in a repository or to block pushes to a repository and the repository's entire fork network.
 

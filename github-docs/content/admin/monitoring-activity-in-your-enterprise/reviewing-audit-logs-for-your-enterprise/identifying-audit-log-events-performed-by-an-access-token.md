@@ -98,8 +98,7 @@ Searches using the REST API do not return Git events.
 For example, if the name of the enterprise account is `octo-corp`, the following curl command would search @octo-corp's audit log for all events that are associated with the token whose URI-encoded SHA-256 hash is `EH4L8o6PfCqipALbL%2BQT62lyqUtnI7ql0SPbkaQnjv8`.
 
 ```shell
-curl --header "Accept: application/vnd.github+json" --header "Authorization: Bearer YOUR-TOKEN" --header "X-GitHub-Api-Version:{{ allVersions[currentVersion].latestApiVersion }}"
- 'https://api.github.com/enterprises/octo-corp/audit-log?phrase=hashed_token:"EH4L8o6PfCqipALbL%2BQT62lyqUtnI7ql0SPbkaQnjv8"'
+curl --header "Accept: application/vnd.github+json" --header "Authorization: Bearer YOUR-TOKEN" {% data reusables.rest-api.version-header %} 'https://api.github.com/enterprises/octo-corp/audit-log?phrase=hashed_token:"EH4L8o6PfCqipALbL%2BQT62lyqUtnI7ql0SPbkaQnjv8"'
 ```
 
 

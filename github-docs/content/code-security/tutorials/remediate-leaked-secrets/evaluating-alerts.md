@@ -87,7 +87,7 @@ Tokens, like personal access token and other credentials, are considered persona
 |Access| Whether the token has organization access|
 
 Only people with admin permissions to the repository containing a leaked secret can view security alert details and token metadata for an alert. Enterprise owners can request temporary access to the repository for this purpose.
- If access is granted, GitHub will notify the owner of the repository containing the leaked secret, report the action in the repository owner and enterprise audit logs, and enable access for 2 hours.{% ifversion ghec %} For more information, see [Accessing User Owned Repositories In Your Enterprise](https://docs.github.com/en/admin/managing-accounts-and-repositories/managing-repositories-in-your-enterprise/accessing-user-owned-repositories-in-your-enterprise).{% endif %}
+ If access is granted, GitHub will notify the owner of the repository containing the leaked secret, report the action in the repository owner and enterprise audit logs, and enable access for 2 hours. For more information, see [Accessing User Owned Repositories In Your Enterprise](https://docs.github.com/en/admin/managing-accounts-and-repositories/managing-repositories-in-your-enterprise/accessing-user-owned-repositories-in-your-enterprise).
 
 
 
@@ -116,7 +116,7 @@ The following table shows **all the available metadata**. Note that metadata che
 
 
 
-{% ifversion copilot-chat-ghas-alerts %}
+
 
 ## Asking GitHub Copilot Chat about secret scanning alerts
 
@@ -134,5 +134,3 @@ Secret scanning alerts can have the following labels assigned to them. Depending
 |-------------------------|--------------------------------------------------------------------------------|-------------------------|
 |`public leak`| The secret detected in your repository has also been found as publicly leaked by at least one of GitHub's scans of code, discussions, gists, issues, pull requests, and wikis. This may require you to address the alert with greater urgency, or remediate the alert differently compared to a privately exposed token. | You'll see links to any specific public locations where the leaked secret has been detected. |
 |`multi-repo`| The secret detected in your repository has been found across multiple repositories in your organization or enterprise. This information may help you more easily dedupe the alert across your organization or enterprise. | If you have appropriate permissions, you'll see links to any specific alerts for the same secret in your organization or enterprise. |
-
-{% endif %}

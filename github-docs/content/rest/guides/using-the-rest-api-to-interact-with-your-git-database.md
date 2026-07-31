@@ -5,7 +5,7 @@
 This basically allows you to reimplement a lot of Git functionality with the REST API - by creating raw objects directly into the database and updating branch references you could technically do just about anything that Git can do without having Git installed.
 
 The REST API will return a `409 Conflict` if the Git repository is empty
-or unavailable. An unavailable repository typically means GitHub is in the process of creating the repository. For an empty repository, you can use the [`PUT /repos/{owner}/{repo}/contents/{path}`](/rest/repos/contents#create-or-update-file-contents) REST API endpoint to create content and initialize the repository so you can use the API to manage the Git database. Contact us through the [GitHub Support portal](https://support.github.com){% elsif ghes %}your site administrator if this response status persists.
+or unavailable. An unavailable repository typically means GitHub is in the process of creating the repository. For an empty repository, you can use the [`PUT /repos/{owner}/{repo}/contents/{path}`](/rest/repos/contents#create-or-update-file-contents) REST API endpoint to create content and initialize the repository so you can use the API to manage the Git database. Contact us through the [GitHub Support portal](https://support.github.com) if this response status persists.
 
 For more information on the Git object database, please read the
 [Git Internals](https://git-scm.com/book/en/v2/Git-Internals-Plumbing-and-Porcelain) chapter of

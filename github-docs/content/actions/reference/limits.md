@@ -1,6 +1,6 @@
 # Actions limits
 
-You may be rate limited by GitHub Actions when you scale your usage. Some limits can be increased by contacting us through the [GitHub Support portal](https://support.github.com){% elsif ghes %}your site administrator.
+You may be rate limited by GitHub Actions when you scale your usage. Some limits can be increased by contacting us through the [GitHub Support portal](https://support.github.com).
 
 Unless otherwise stated, the expected behavior when a limit is reached is that the workflow/job will get cancelled.
 

@@ -6,7 +6,7 @@ You can create your own Dependabot auto-triage rules based on alert metadata. Yo
 
 Since any rules that you create apply to both future and current alerts, you can also use auto-triage rules to manage your alerts in bulk.
 
-Repository administrators can create custom auto-triage rules for their repositories. For private or internal repositories, this requires GitHub Code Security.{% elsif ghes %}This requires GitHub Code Security.
+Repository administrators can create custom auto-triage rules for their repositories. For private or internal repositories, this requires GitHub Code Security.
 
 Organization owners and security managers can set custom auto-triage rules at the organization-level, and then choose if a rule is enforced or enabled across all public and private repositories in the organization.
 

@@ -52,11 +52,7 @@ GitHub provides a workflow template for Maven that should work for most Java wit
    If you don't find the "Java with Maven" workflow template, copy the following workflow code to a new file called `maven.yml` in the `.github/workflows` directory of your repository.
 
    ```yaml copy
-   # This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
+   {% data reusables.actions.actions-not-certified-by-github-comment %}
    name: Java CI with Maven
 
    on:
@@ -70,11 +66,9 @@ GitHub provides a workflow template for Maven that should work for most Java wit
        runs-on: ubuntu-latest
 
        steps:
-       - uses: actions/checkout@v6
-
+       - uses: {% data reusables.actions.action-checkout %}
        - name: Set up JDK 17
-         uses: actions/setup-java@v4
-
+         uses: {% data reusables.actions.action-setup-java %}
          with:
            java-version: '17'
            distribution: 'temurin'
@@ -128,10 +122,8 @@ If you use different commands to build your project, or you want to use a differ
 
 ```yaml copy
 steps:
-  - uses: actions/checkout@v6
-
-  - uses: actions/setup-java@v4
-
+  - uses: {% data reusables.actions.action-checkout %}
+  - uses: {% data reusables.actions.action-setup-java %}
     with:
       java-version: '17'
       distribution: 'temurin'
@@ -145,11 +137,9 @@ You can cache your dependencies to speed up your workflow runs. After a successf
 
 ```yaml copy
 steps:
-  - uses: actions/checkout@v6
-
+  - uses: {% data reusables.actions.action-checkout %}
   - name: Set up JDK 17
-    uses: actions/setup-java@v4
-
+    uses: {% data reusables.actions.action-setup-java %}
     with:
       java-version: '17'
       distribution: 'temurin'
@@ -168,17 +158,14 @@ Maven will usually create output files like JARs, EARs, or WARs in the `target` 
 
 ```yaml copy
 steps:
-  - uses: actions/checkout@v6
-
-  - uses: actions/setup-java@v4
-
+  - uses: {% data reusables.actions.action-checkout %}
+  - uses: {% data reusables.actions.action-setup-java %}
     with:
       java-version: '17'
       distribution: 'temurin'
   - run: mvn --batch-mode --update-snapshots verify
   - run: mkdir staging && cp target/*.jar staging
-  - uses: actions/upload-artifact@v4
-
+  - uses: {% data reusables.actions.action-upload-artifact %}
     with:
       name: Package
       path: staging

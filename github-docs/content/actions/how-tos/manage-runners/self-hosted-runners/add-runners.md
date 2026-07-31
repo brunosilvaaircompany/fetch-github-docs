@@ -38,7 +38,7 @@ For more information about custom organization roles, see [Permissions Of Custom
 For information about how to add a self-hosted runner with the REST API, see [Self Hosted Runners](https://docs.github.com/en/rest/actions/self-hosted-runners).
 
 > [!NOTE]
-> Enterprise owners and organization {% elsif fpt %}Organization owners can choose which repositories are allowed to create repository-level self-hosted runners. Users with the “Manage organization runners and runner groups” permission can only choose which repositories are allowed to create repository-level self-hosted runners for repositories in your organization.
+> Enterprise owners and organization owners can choose which repositories are allowed to create repository-level self-hosted runners. Users with the “Manage organization runners and runner groups” permission can only choose which repositories are allowed to create repository-level self-hosted runners for repositories in your organization.
 
 For more information about custom organization roles, see [Permissions Of Custom Organization Roles](https://docs.github.com/en/organizations/managing-peoples-access-to-your-organization-with-roles/permissions-of-custom-organization-roles).
 
@@ -75,7 +75,7 @@ For more information, see [Enforcing Policies For GitHub Actions In Your Enterpr
 
 ### Checking that your self-hosted runner was successfully added
 
-After completing the steps to add a self-hosted runner, the runner and its status are now listed under "Runners"{% elsif ghes %}"Self-hosted runners".
+After completing the steps to add a self-hosted runner, the runner and its status are now listed under "Runners".
 
 The self-hosted runner application must be active for the runner to accept jobs. When the runner application is connected to GitHub and ready to receive jobs, you will see the following message on the machine's terminal.
 
@@ -125,7 +125,7 @@ For more information about custom organization roles, see [Permissions Of Custom
 
 ### Checking that your self-hosted runner was successfully added
 
-After completing the steps to add a self-hosted runner, the runner and its status are now listed under "Runners"{% elsif ghes %}"Self-hosted runners".
+After completing the steps to add a self-hosted runner, the runner and its status are now listed under "Runners".
 
 The self-hosted runner application must be active for the runner to accept jobs. When the runner application is connected to GitHub and ready to receive jobs, you will see the following message on the machine's terminal.
 
@@ -145,7 +145,7 @@ For more information, see [Monitor And Troubleshoot](https://docs.github.com/en/
 
 ## Adding a self-hosted runner to an enterprise
 
-If you use GitHub Enterprise Cloud, you{% elsif ghec or ghes %}You can add self-hosted runners to an enterprise, where they can be assigned to multiple organizations. The organization owner can control which repositories can use it. For more information, see the [GitHub Enterprise Cloud documentation](/enterprise-cloud@latest/actions/how-tos/manage-runners/self-hosted-runners/add-runners#adding-a-self-hosted-runner-to-an-enterprise).
+If you use GitHub Enterprise Cloud, you can add self-hosted runners to an enterprise, where they can be assigned to multiple organizations. The organization owner can control which repositories can use it. For more information, see the [GitHub Enterprise Cloud documentation](/enterprise-cloud@latest/actions/how-tos/manage-runners/self-hosted-runners/add-runners#adding-a-self-hosted-runner-to-an-enterprise).
 
 
 New runners are assigned to the default group. You can modify the runner's group after you've registered the runner. For more information, see [Manage Access](https://docs.github.com/en/actions/how-tos/manage-runners/self-hosted-runners/manage-access#moving-a-self-hosted-runner-to-a-group).
@@ -185,7 +185,7 @@ To add a self-hosted runner to an enterprise, you must be an enterprise owner. F
 
 ### Checking that your self-hosted runner was successfully added
 
-After completing the steps to add a self-hosted runner, the runner and its status are now listed under "Runners"{% elsif ghes %}"Self-hosted runners".
+After completing the steps to add a self-hosted runner, the runner and its status are now listed under "Runners".
 
 The self-hosted runner application must be active for the runner to accept jobs. When the runner application is connected to GitHub and ready to receive jobs, you will see the following message on the machine's terminal.
 

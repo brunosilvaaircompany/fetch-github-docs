@@ -24,7 +24,7 @@ At the top of the page, under "Next payment due", you can see the date of your n
 
 
 
-## Viewing spending for your organization{% elsif ghec or ghes %}enterprise
+## Viewing spending for your organization
 
 The "Overview" page provides a high-level view of your spending and budgets.
 
@@ -41,20 +41,11 @@ The "Overview" page provides a high-level view of your spending and budgets.
 1. On the left side of the page, in the organization sidebar, click **{% octicon "credit-card" aria-hidden="true" aria-label="credit-card" %} Billing & Licensing**.
 
 
-{% elsif ghec %}
-
-
-1. In the top-right corner of GitHub Enterprise Server, click your profile picture, then click **Enterprise settings**.
-
-
-1. At the top of the page, click **{% octicon "credit-card" aria-hidden="true" aria-label="credit-card" %} Billing and licensing**.
-
-
 
 
 On this page, you can view your usage in the following categories:
 
-* **Current metered usage:** The card on the top left shows the gross metered usage for your organization{% elsif ghec or ghes %}enterprise including all cost centers. Click **More details** to view a breakdown of the usage by cost center.
+* **Current metered usage:** The card on the top left shows the gross metered usage for your organization including all cost centers. Click **More details** to view a breakdown of the usage by cost center.
 
 * **By products:** You can use the product tabs to view usage and discounts for different products.
 
@@ -63,8 +54,6 @@ On this page, you can view your usage in the following categories:
 
 
 * **By repository:** The card at the bottom of the page shows the top five repositories that generate the most usage. You can click **View details** in the upper-right corner of the card to view all usage, including a breakdown by gross usage versus billable usage (minus any discounts that may apply).
-{% elsif ghec %}
-* **By organization** and **by repository:** The two cards at the bottom of the page show the top five organizations and repositories that generate the most usage. You can click **View details** in the upper-right corner of each card to view all usage, including a breakdown by gross usage versus billable usage (minus any discounts that may apply).
 
 
 

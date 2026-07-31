@@ -25,8 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v6
-
+        uses: {% data reusables.actions.action-checkout %}
       - name: Install jq tool
         run: |
           sudo apt-get update
@@ -49,8 +48,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v6
-
+        uses: {% data reusables.actions.action-checkout %}
       - name: Install GitHub CLI
         run: |
           brew update

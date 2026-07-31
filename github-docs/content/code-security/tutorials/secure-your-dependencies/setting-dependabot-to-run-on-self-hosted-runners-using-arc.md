@@ -152,14 +152,6 @@ Don't forget to add the following setting to the runner scale set configuration 
 
 1. Under "Dependabot", scroll to "Dependabot on Action Runners", and select **Enable** for "Dependabot on self-hosted runners".
 
-{% elsif ghes %}
-
-1. Create an organization on GitHub Enterprise Server. For more information, see [Creating A New Organization From Scratch](https://docs.github.com/en/organizations/collaborating-with-groups-in-organizations/creating-a-new-organization-from-scratch).
-1. Create a runner group. See [Adding runner groups](#adding-runner-groups).
-1. Enable the dependency graph from the Management Console. See [Enable Dependency Graph](https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-enterprise-security/configure-specific-tools/enable-dependency-graph#enabling-the-dependency-graph-via-the-management-console).
-1. Enable GitHub Connect for your enterprise. See [Enabling GitHub Connect For Githubcom](https://docs.github.com/en/admin/configuring-settings/configuring-github-connect/enabling-github-connect-for-githubcom#enabling-github-connect).
-1. Enable Dependabot alerts for the enterprise. See [Enabling Dependabot For Your Enterprise](https://docs.github.com/en/admin/configuring-settings/configuring-github-connect/enabling-dependabot-for-your-enterprise#enabling-dependabot-alerts).
-
 
 
 ## Triggering a Dependabot run

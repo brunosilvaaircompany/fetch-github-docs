@@ -57,13 +57,11 @@ jobs:
     steps:
       # This workflow will run a script that is stored in the repository. This step checks out the repository contents so that the workflow can access the script.
       - name: Check out repo content
-        uses: actions/checkout@v6
-
+        uses: {% data reusables.actions.action-checkout %}
 
       # This step sets up Node.js. The script that this workflow will run uses Node.js.
       - name: Setup Node.js
-        uses: actions/setup-node@v7
-
+        uses: {% data reusables.actions.action-setup-node %}
         with:
           node-version: '20.x'
 
@@ -74,16 +72,16 @@ jobs:
       # This step sets some environment variables, then runs a script to find and redeliver failed webhook deliveries.
       # - Replace `YOUR_APP_ID_SECRET_NAME` with the name of the secret where you stored your app ID.
       # - Replace `YOUR_PRIVATE_KEY_SECRET_NAME` with the name of the secret where you stored your private key.
-      # - Replace `YOUR_TOKEN_SECRET_NAME` with the name of the secret where you stored your personal access token.
+      # - Replace `YOUR_TOKEN_SECRET_NAME` with the name of the secret where you stored your {% data variables.product.pat_generic %}.
       # - Replace `YOUR_LAST_REDELIVERY_VARIABLE_NAME` with the name that you want to use for a configuration variable that will be stored in the repository where this workflow is stored. The name can be any string that contains only alphanumeric characters and `_`, and does not start with `GITHUB_` or a number. For more information, see [Variables](https://docs.github.com/en/actions/learn-github-actions/variables#defining-configuration-variables-for-multiple-workflows).
-      # - Replace `YOUR_HOSTNAME` with the name of {% ifversion ghes %}your GitHub Enterprise Server instance.{% endif %}
+      {% ifversion ghes %}# - Replace `YOUR_HOSTNAME` with the name of {% data variables.location.product_location %}.{% endif %}
       - name: Run script
         env:
           APP_ID: {% raw %}${{ secrets.YOUR_APP_ID_SECRET_NAME }}{% endraw %}
           PRIVATE_KEY: {% raw %}${{ secrets.YOUR_PRIVATE_KEY_SECRET_NAME }}{% endraw %}
           TOKEN: {% raw %}${{ secrets.YOUR_TOKEN_SECRET_NAME }}{% endraw %}
           LAST_REDELIVERY_VARIABLE_NAME: 'YOUR_LAST_REDELIVERY_VARIABLE_NAME'
-          HOSTNAME: 'YOUR_HOSTNAME'
+          {% ifversion ghes %}HOSTNAME: 'YOUR_HOSTNAME'{% endif %}
           WORKFLOW_REPO: {% raw %}${{ github.event.repository.name }}{% endraw %}
           WORKFLOW_REPO_OWNER: {% raw %}${{ github.repository_owner }}{% endraw %}
         run: |
@@ -97,36 +95,36 @@ This section demonstrates how you can write a script to find and redeliver faile
 Copy this script into a file called `.github/workflows/scripts/redeliver-failed-deliveries.mjs` in the same repository where you saved the GitHub Actions workflow file above.
 
 ```javascript copy annotate
-// This script uses GitHub's Octokit SDK to make API requests. For more information, see [Scripting With The Rest API And JavaScript](https://docs.github.com/en/rest/guides/scripting-with-the-rest-api-and-javascript).
+// This script uses {% data variables.product.company_short %}'s Octokit SDK to make API requests. For more information, see [Scripting With The Rest API And JavaScript](https://docs.github.com/en/rest/guides/scripting-with-the-rest-api-and-javascript).
 import { App, Octokit } from "octokit";
 
 //
 async function checkAndRedeliverWebhooks() {
-  // Get the values of environment variables that were set by the GitHub Actions workflow.
+  // Get the values of environment variables that were set by the {% data variables.product.prodname_actions %} workflow.
   const APP_ID = process.env.APP_ID;
   const PRIVATE_KEY = process.env.PRIVATE_KEY;
   const TOKEN = process.env.TOKEN;
   const LAST_REDELIVERY_VARIABLE_NAME = process.env.LAST_REDELIVERY_VARIABLE_NAME;
-  const HOSTNAME = process.env.HOSTNAME;
+  {% ifversion ghes %}const HOSTNAME = process.env.HOSTNAME;{% endif %}
   const WORKFLOW_REPO_NAME = process.env.WORKFLOW_REPO;
   const WORKFLOW_REPO_OWNER = process.env.WORKFLOW_REPO_OWNER;
 
-  // Create an instance of the octokit `App` using the app ID, private key, and hostname values that were set in the GitHub Actions workflow.
+  // Create an instance of the octokit `App` using the {% ifversion ghes %}app ID, private key, and hostname{% else %}app ID and private key{% endif %} values that were set in the {% data variables.product.prodname_actions %} workflow.
   //
   // This will be used to make API requests to the webhook-related endpoints.
   const app = new App({
     appId: APP_ID,
-    privateKey: PRIVATE_KEY,
+    privateKey: PRIVATE_KEY,{% ifversion ghes %}
     Octokit: Octokit.defaults({
-      baseUrl: "{% ifversion fpt or ghec %}https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3",
+      baseUrl: "{% data variables.product.rest_url %}",
     }),{% endif %}
   });
 
-  // Create an instance of `Octokit` using the token and hostname values that were set in the GitHub Actions workflow.
+  // Create an instance of `Octokit` using the token{% ifversion ghes %} and hostname{% endif %} values that were set in the {% data variables.product.prodname_actions %} workflow.
   //
   // This will be used to update the configuration variable that stores the last time that this script ran.
-  const octokit = new Octokit({ 
-    baseUrl: "{% ifversion fpt or ghec %}https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3",{% endif %}
+  const octokit = new Octokit({ {% ifversion ghes %}
+    baseUrl: "{% data variables.product.rest_url %}",{% endif %}
     auth: TOKEN,
   });
 

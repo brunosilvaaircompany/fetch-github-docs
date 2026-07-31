@@ -20,7 +20,7 @@ Let's walk through an example.
 If you [request the authenticated user](/rest/users/users#get-the-authenticated-user):
 
 ```shell
-curl -i --header "Authorization: Bearer YOUR-TOKEN" https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3/user
+curl -i --header "Authorization: Bearer YOUR-TOKEN" {% data variables.product.rest_url %}/user
 ```
 
 you'll get a response that includes the `node_id` of the authenticated user:

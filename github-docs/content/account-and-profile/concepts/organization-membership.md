@@ -23,9 +23,9 @@ By default, your organization membership visibility is set to private. You can c
 
 
 
-If your organization belongs to an enterprise account, you are automatically a member of the enterprise account and visible to enterprise account owners. For more information, see [Enterprise Accounts](https://docs.github.com/en/enterprise-cloud@latest/admin/concepts/enterprise-fundamentals/enterprise-accounts){% ifversion fpt %}" in the GitHub Enterprise Cloud documentation.
+If your organization belongs to an enterprise account, you are automatically a member of the enterprise account and visible to enterprise account owners. For more information, see [Enterprise Accounts](https://docs.github.com/en/enterprise-cloud@latest/admin/concepts/enterprise-fundamentals/enterprise-accounts)" in the GitHub Enterprise Cloud documentation.
 
-{% endif %}
+
 
 You can leave an organization at any time. For more information, see [Removing Yourself From An Organization](https://docs.github.com/en/account-and-profile/how-tos/organization-membership/removing-yourself-from-an-organization).
 

@@ -13,7 +13,7 @@ If you want to allow authentication for some people who don't have an account on
 
 ## Username considerations with CAS
 
-GitHub normalizes a value from your IdP{% elsif ghes %}external authentication provider to determine the username for each new personal account in your enterprise on GitHub{% elsif ghes %}on your GitHub Enterprise Server instance.
+GitHub normalizes a value from your IdP to determine the username for each new personal account in your enterprise on GitHub.
  For more information, see [Username Considerations For External Authentication](https://docs.github.com/en/admin/managing-iam/iam-configuration-reference/username-considerations-for-external-authentication).
 
 ## CAS attributes

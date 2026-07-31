@@ -66,8 +66,7 @@ This procedure assumes you've already:
    ```shell
    $ git commit -m "Rename file"
    # Commits the tracked changes and prepares them to be pushed to a remote repository.
-   # To remove this commit and modify the file, use 'git reset --soft HEAD~1' and commit and add the file again.
-
+   # {% data reusables.git.reset-head-to-previous-commit-codeblock %}
    ```
 
 1. [Push the changes](/get-started/using-git/pushing-commits-to-a-remote-repository) in your local repository to your GitHub Enterprise Server instance.

@@ -28,7 +28,7 @@ This guide applies in any of the following situations.
 
 With SCIM, you manage the lifecycle of user accounts from your IdP:
 
-* After you configure provisioning for Enterprise Managed Users, your IdP uses SCIM to provision user accounts on GitHub and add the accounts to your enterprise. to create an account and send an onboarding email to the user. If you assign a group to the application in your IdP, your IdP will provision accounts for all members of the group.
+* After you configure provisioning for Enterprise Managed Users, your IdP uses SCIM to provision user accounts on GitHub and add the accounts to your enterprise. If you assign a group to the application in your IdP, your IdP will provision accounts for all members of the group.
 * When you update information associated with a user's identity on your IdP, your IdP will update the user's account on GitHub.
 * When you unassign the user from the IdP application or deactivate a user's account on your IdP, your IdP will communicate with GitHub to invalidate any sessions and disable the member's account. The disabled account's information is maintained and their username is changed to a hash of their original username, with the short code appended if applicable.
 * If you reassign a user to the IdP application or reactivate their account on your IdP, the user account will be reactivated, and the username will be restored.
@@ -38,7 +38,7 @@ To configure team and organization membership, repository access, and permission
 
 
 
-{% endif %}
+
 
 ## Prerequisites
 
@@ -62,7 +62,7 @@ To ensure you can continue to sign in and configure settings when SCIM is enable
 
    For help finding these settings, see [Configuring Saml Single Sign On For Your Enterprise](https://docs.github.com/en/admin/managing-iam/using-saml-for-enterprise-iam/configuring-saml-single-sign-on-for-your-enterprise#configuring-saml-sso).
 
-1. Create a built-in user account{% ifversion scim-for-ghes-ga %} with the username `scim-admin` to perform provisioning actions on your instance. See [Allowing Built In Authentication For Users Outside Your Provider](https://docs.github.com/en/admin/managing-iam/understanding-iam-for-enterprises/allowing-built-in-authentication-for-users-outside-your-provider#inviting-users-outside-your-provider-to-authenticate-to-your-instance).
+1. Create a built-in user account with the username `scim-admin` to perform provisioning actions on your instance. See [Allowing Built In Authentication For Users Outside Your Provider](https://docs.github.com/en/admin/managing-iam/understanding-iam-for-enterprises/allowing-built-in-authentication-for-users-outside-your-provider#inviting-users-outside-your-provider-to-authenticate-to-your-instance).
 
    Ensure the user's email and username are different from any user you plan on provisioning through SCIM. If your email provider supports it, you can modify an email address by adding `+admin`, for example `johndoe+admin@example.com`.
 
@@ -121,7 +121,7 @@ To ensure you can continue to sign in and configure settings when SCIM is enable
 
 You can confirm that SCIM is now enabled by checking your instance's [audit logs](/admin/monitoring-activity-in-your-enterprise/reviewing-audit-logs-for-your-enterprise/audit-log-events-for-your-enterprise). You should expect to see a "business.enable_open_scim" event, indicating that GitHub's [SCIM REST API](/admin/managing-iam/provisioning-user-accounts-with-scim/provisioning-users-and-groups-with-scim-using-the-rest-api) has been enabled on your instance.
 
-{% endif %}
+
 
 
 

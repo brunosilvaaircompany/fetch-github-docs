@@ -83,7 +83,7 @@ Tackle similar alerts together to build momentum, reduce context switching, and 
 
 You can leverage Copilot to help resolve alerts in a security campaign. Depending on the features enabled in your repository, you may have access to Copilot Autofix suggestions and Copilot Chat.
 
-{% ifversion code-scanning-autofix %}
+
 
 ### Autofix for code scanning alerts
 
@@ -107,7 +107,7 @@ For example:
 
 If you don't already have access to Copilot Chat through your organization or enterprise, you can sign up to GitHub Copilot Free. See [Accessing GitHub Copilot Free](https://docs.github.com/en/copilot/managing-copilot/managing-copilot-as-an-individual-subscriber/managing-copilot-free/accessing-github-copilot-free).
 
-{% endif %}
+
 
 ## Next steps
 

@@ -37,7 +37,7 @@ Leaked secrets can allow attackers to access systems, steal data, or cause other
 
 How to Enable:
 
-1. Go to your repository on GitHub.
+1. Go to your repository on {% data variables.product.github %}.
 1. Click on Settings.
 1. In the left sidebar, click Code security.
 1. Scroll to Secret scanning.

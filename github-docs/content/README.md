@@ -246,7 +246,7 @@ Example:
 ```yaml
 journeyTracks:
   - id: 'getting_started'
-    title: 'Getting started with GitHub Actions'
+    title: 'Getting started with {% data variables.product.prodname_actions %}'
     description: 'Learn the basics of GitHub Actions.'
     guides:
       - href: '/actions/quickstart'
@@ -254,7 +254,7 @@ journeyTracks:
         alternativeNextStep: 'Want to skip ahead? See [Using Workflows](https://docs.github.com/en/actions/using-workflows).'
       - href: '/actions/using-workflows'
   - id: 'advanced'
-    title: 'Advanced GitHub Actions'
+    title: 'Advanced {% data variables.product.prodname_actions %}'
     description: 'Dive deeper into advanced features.'
     guides:
       - href: '/actions/using-workflows/workflow-syntax-for-github-actions'
@@ -336,7 +336,7 @@ When using Liquid conditionals in lists or tables, you can use [whitespace contr
 You can add a hyphen (`-`) on either the left, right, or both sides to indicate that there should be no newline or other whitespace on that side.
 
 ```
-
+{%- ifversion fpt %}
 ```
 
 For example, to version a table row, instead of adding liquid versioning for the row starting at the end of the previous row, like this:
@@ -345,7 +345,7 @@ For example, to version a table row, instead of adding liquid versioning for the
 Column A | Column B | Column C
 ---------|----------|---------
 This row is for all versions | B1 | C1{% ifversion ghes %}
-This row is for GHES only | B2 | C2
+This row is for GHES only | B2 | C2{% endif %}
 This row is for all versions | B3 | C3
 ```
 
@@ -355,9 +355,9 @@ You can include the liquid versioning on its own line and use whitespace control
 Column A | Column B | Column C
 ---------|----------|---------
 This row is for all versions | B1 | C1
-
+{%- ifversion ghes %}
 This row is for GHES only | B2 | C2
-
+{%- endif %}
 This row is for all versions | B3 | C3
 ```
 
@@ -397,7 +397,7 @@ Sometimes you may want to link from an article to the same article in a differen
 You can link directly to a different version of the page using the `currentArticle` property. This means that the link will continue to work directly even if the article URL changes.
 
 ```markdown
-For more information, see the [GitHub Enterprise Cloud documentation](/enterprise-cloud@latest/{{ currentArticle }}).
+{% ifversion fpt %}For more information, see the [{% data variables.product.prodname_ghe_cloud %} documentation](/enterprise-cloud@latest/{{ currentArticle }}).{% endif %}
 ```
 
 ### Preventing transformations

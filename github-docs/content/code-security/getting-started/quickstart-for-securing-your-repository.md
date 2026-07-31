@@ -6,7 +6,7 @@ This guide shows you how to configure security features for a repository.
 
 Your security needs are unique to your repository, so you may not need to enable every feature for your repository. For more information, see [GitHub Security Features](https://docs.github.com/en/code-security/getting-started/github-security-features).
 
-Some features are available for all repositories{% elsif fpt or ghec %}repositories on all plans. Additional features are available to organizations and enterprises that use GitHub Secret Protection, GitHub Code Security, or GitHub Advanced Security. GitHub Advanced Security features are also enabled for all public repositories on GitHub. For more information, see [About GitHub Advanced Security](https://docs.github.com/en/get-started/learning-about-github/about-github-advanced-security).
+Some features are available for all repositories. Additional features are available to organizations and enterprises that use GitHub Secret Protection, GitHub Code Security, or GitHub Advanced Security. GitHub Advanced Security features are also enabled for all public repositories on GitHub. For more information, see [About GitHub Advanced Security](https://docs.github.com/en/get-started/learning-about-github/about-github-advanced-security).
 
 
 
@@ -72,8 +72,7 @@ To enable dependency review for a repository, ensure that the dependency graph i
 1. From the main page of your repository, click **{% octicon "gear" aria-hidden="true" aria-label="gear" %} Settings**.
 1. Click **Advanced Security**.
 1. To the right of Code Security, click **Enable**.
-1. Under Code Security, check that dependency graph is enabled for the repository. {% elsif ghes %}
-1. Check that dependency graph is configured for your enterprise.
+1. Under Code Security, check that dependency graph is enabled for the repository. 
 
 ## Managing Dependabot security updates
 

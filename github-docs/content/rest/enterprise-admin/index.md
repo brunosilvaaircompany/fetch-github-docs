@@ -14,7 +14,7 @@
 These endpoints, except the Manage GitHub Enterprise Server API, are prefixed with the following URL:
 
 ```shell
-https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3
+{% data variables.product.rest_url %}
 ```
 
 

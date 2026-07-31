@@ -14,13 +14,6 @@ You can get a list of all jobs currently running on GitHub-hosted runners in you
 1. Navigate to the main page of the organization or repository.
 1. Click **{% octicon "gear" aria-hidden="true" aria-label="gear" %} Settings**.
 1. In the left sidebar, click **Actions**, then click **Runners**.
-{% elsif ghec %}
-1. Navigate to your runner settings:
-   * **In an organization or repository:** Navigate to the main page, then click **{% octicon "gear" aria-hidden="true" aria-label="gear" %} Settings**.
-   * **If using an enterprise account:** Navigate to your enterprise account by clicking your profile picture in the top-right corner of GitHub, then clicking **Your enterprises**, then clicking the enterprise.
-1. Navigate to the GitHub Actions settings:
-   * **In an organization or repository:** Click **Actions** in the left sidebar, then click **Runners**.
-   * **If using an enterprise account:** In the left sidebar, click **"{% octicon "law" aria-hidden="true" aria-label="law" %} Policies"**, then click **Actions**, then click the **Runners** tab.
 
 
 1. In the "Runners" table, click the entry for **GitHub-hosted runners**. This entry will only be present if you're using GitHub-hosted runners.
@@ -37,13 +30,6 @@ The following procedure demonstrates how to check the maximum number of concurre
 1. Navigate to the main page of the organization or repository.
 1. Click **{% octicon "gear" aria-hidden="true" aria-label="gear" %} Settings**.
 1. In the left sidebar, click **Actions**, then click **Runners**.
-{% elsif ghec %}
-1. Navigate to your runner settings:
-   * **In an organization or repository:** Navigate to the main page, then click **{% octicon "gear" aria-hidden="true" aria-label="gear" %} Settings**.
-   * **If using an enterprise account:** Navigate to your enterprise account by clicking your profile picture in the top-right corner of GitHub, then clicking **Your enterprises**, then clicking the enterprise.
-1. Navigate to the GitHub Actions settings:
-   * **In an organization or repository:** Click **Actions** in the left sidebar, then click **Runners**.
-   * **If using an enterprise account:** In the left sidebar, click **"{% octicon "law" aria-hidden="true" aria-label="law" %} Policies"**, then click **Actions**, then click the **Runners** tab.
 
 
 1. In the "Runners" table, click the entry for **GitHub-hosted runners**. This entry will only be present if you're using GitHub-hosted runners.

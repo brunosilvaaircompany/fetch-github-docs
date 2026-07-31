@@ -279,11 +279,9 @@ In YAML examples, such as actions and workflow files, use two spaces to indent l
 
 ```yaml
     steps:
-      - uses: actions/checkout@v6
-
+      - uses: {% data reusables.actions.action-checkout %}
       - name: Setup Python
-        uses: actions/setup-python@v5
-
+        uses: {% data reusables.actions.action-setup-python %}
         with:
           python-version: {% raw %}${{ matrix.python }}{% endraw %}
 ```
@@ -685,7 +683,7 @@ For example, the Free, Pro, & Team version of [Managing The Publication Of GitHu
 ```text
 You can choose to allow or disallow the publication of GitHub Pages sites.
 
-{% raw %}Organizations that use GitHub Enterprise Cloud can choose to allow publicly published sites, privately published sites, both, or neither. For more information, see [the GitHub Enterprise Cloud documentation](/enterprise-cloud@latest/{{ currentArticle }}).{% endraw %}
+{% raw %}Organizations that use {% data variables.product.prodname_ghe_cloud %} can choose to allow publicly published sites, privately published sites, both, or neither. For more information, see [the {% data variables.product.prodname_ghe_cloud %} documentation](/enterprise-cloud@latest/{{ currentArticle }}).{% endraw %}
 ```
 
 To link to a different article in a different version, use this format:
@@ -889,16 +887,14 @@ For example, to use the `actions/checkout` action in an example, use its reusabl
 ```yaml
 steps:
   - name: Checkout
-    uses: actions/checkout@v6
-
+    uses: {% data reusables.actions.action-checkout %}
 ```
 
 For GitHub Docs purposes, a first-party action is any action that has the `actions/`, `github/` or `octo-org/` prefix. For example, this is a first-party action:
 
 ```yaml
 steps:
-  - uses: actions/checkout@v6
-
+  - uses: {% data reusables.actions.action-checkout %}
 ```
 
 #### Disclaimers for third-party actions
@@ -906,7 +902,7 @@ steps:
 Code examples that use third-party actions must include the following disclaimer as part of the code block:
 
 ```yaml
-# This workflow uses actions that are not certified by GitHub.
+# This workflow uses actions that are not certified by {% data variables.product.company_short %}.
 # They are provided by a third-party and are governed by
 # separate terms of service, privacy policy, and support
 # documentation.

@@ -13,7 +13,7 @@ Dependency review helps you understand dependency changes and the security impac
 
 Before you can use dependency review, you must enable the dependency graph. See [Explore Dependencies](https://docs.github.com/en/code-security/how-tos/secure-your-supply-chain/secure-your-dependencies/explore-dependencies).
 
-Before you can use dependency review, you must enable the dependency graph and connect {% ifversion ghes %}your GitHub Enterprise Server instance to GitHub.com. See [Enabling Dependabot For Your Enterprise](https://docs.github.com/en/admin/configuring-settings/configuring-github-connect/enabling-dependabot-for-your-enterprise).{% endif %}
+Before you can use dependency review, you must enable the dependency graph and connect your GitHub Enterprise Server instance to GitHub.com. See [Enabling Dependabot For Your Enterprise](https://docs.github.com/en/admin/configuring-settings/configuring-github-connect/enabling-dependabot-for-your-enterprise).
 
 Dependency review helps you find vulnerable dependencies before they reach production. See [Dependency Review](https://docs.github.com/en/code-security/concepts/supply-chain-security/dependency-review).
 

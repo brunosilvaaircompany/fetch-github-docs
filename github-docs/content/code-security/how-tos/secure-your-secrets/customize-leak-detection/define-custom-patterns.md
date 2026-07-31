@@ -29,10 +29,6 @@ Before defining a custom pattern, you must ensure that Secret Protection is enab
 
    ![Screenshot of a filled custom secret scanning pattern form.](/assets/images/help/repository/secret-scanning-create-custom-pattern.png)
 
-{% elsif ghes %}
-
-   ![Screenshot of a filled custom secret scanning pattern form.](/assets/images/help/repository/secret-scanning-create-custom-pattern-ghes17.png)
-
 
 
 1. When you're ready to test your new custom pattern, to identify matches in the repository without creating alerts, click **Save and dry run**.
@@ -75,10 +71,6 @@ Before defining a custom pattern, you must ensure that you enable secret scannin
 
 
    ![Screenshot of a filled custom secret scanning pattern form.](/assets/images/help/repository/secret-scanning-create-custom-pattern.png)
-
-{% elsif ghes %}
-
-   ![Screenshot of a filled custom secret scanning pattern form.](/assets/images/help/repository/secret-scanning-create-custom-pattern-ghes17.png)
 
 
 
@@ -132,10 +124,6 @@ Before defining a custom pattern, you must ensure that you enable secret scannin
 
 
    ![Screenshot of a filled custom secret scanning pattern form.](/assets/images/help/repository/secret-scanning-create-custom-pattern.png)
-
-{% elsif ghes %}
-
-   ![Screenshot of a filled custom secret scanning pattern form.](/assets/images/help/repository/secret-scanning-create-custom-pattern-ghes17.png)
 
 
 

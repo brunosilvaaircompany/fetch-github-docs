@@ -14,4 +14,4 @@ You can check the current "Actions" service status on the [Status Dashboard](htt
 
 ## Fixing the problem
 
-Try running the workflow again. If the problem persists, contact us through the [GitHub Support portal](https://support.github.com){% elsif ghes %}your site administrator.
+Try running the workflow again. If the problem persists, contact us through the [GitHub Support portal](https://support.github.com).

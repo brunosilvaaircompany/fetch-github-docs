@@ -22,7 +22,7 @@ Before you delete your personal account, make a copy of all repositories, privat
 ## Deleting your personal account
 
 > [!WARNING]
-> Once your personal account has been deleted, GitHub{% elsif ghes %}an enterprise owner cannot restore your content.
+> Once your personal account has been deleted, GitHub cannot restore your content.
 
 1. In the upper-right corner of any page on GitHub, click your profile picture, then click **{% octicon "gear" aria-hidden="true" aria-label="gear" %} Settings**.
 

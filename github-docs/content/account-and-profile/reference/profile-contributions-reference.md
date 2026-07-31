@@ -41,7 +41,7 @@ In addition, **at least one** of the following must be true:
 
 ## Who can see your contributions and achievements
 
-On GitHub.com{% elsif ghes %}GitHub Enterprise Server, **public** contributions on your profile are visible to anyone in the world who can access GitHub.com{% elsif ghes %}only to other users of {% ifversion ghes %}your GitHub Enterprise Server instance{% endif %}.
+On GitHub.com, **public** contributions on your profile are visible to anyone in the world who can access GitHub.com.
 
 When you publicize private contributions, people without access to those private repositories will see the number of contributions you made each day. They will not see specific details.
 

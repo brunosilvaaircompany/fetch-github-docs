@@ -42,7 +42,7 @@ You can also use GitHub CLI in your GitHub Actions workflows. For more informati
 
 Instead of using the `gh auth login` command, pass an access token as an environment variable called `GH_TOKEN`. GitHub recommends that you use the built-in `GITHUB_TOKEN` instead of creating a token. If this is not possible, store your token as a secret and replace `GITHUB_TOKEN` in the example below with the name of your secret. For more information about `GITHUB_TOKEN`, see [Authenticate With Github_Token](https://docs.github.com/en/actions/tutorials/authenticate-with-github_token). For more information about secrets, see [Use Secrets](https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets).
 
-The following example workflow uses the [List repository issues](/rest/issues/issues#list-repository-issues) endpoint, and requests a list of issues in a repository you specify. Replace `HOSTNAME` with the name of {% ifversion ghes %}your GitHub Enterprise Server instance. Replace `REPO-OWNER` with the name of the account that owns the repository. Replace `REPO-NAME` with the name of the repository.{% endif %}
+The following example workflow uses the [List repository issues](/rest/issues/issues#list-repository-issues) endpoint, and requests a list of issues in a repository you specify. Replace `HOSTNAME` with the name of your GitHub Enterprise Server instance. Replace `REPO-OWNER` with the name of the account that owns the repository. Replace `REPO-NAME` with the name of the repository.
 
 ```yaml copy
 on:
@@ -56,7 +56,7 @@ jobs:
       - env:
           GH_TOKEN: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
         run: |
-          gh api https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3/repos/REPO-OWNER/REPO-NAME/issues
+          gh api {% data variables.product.rest_url %}{% data variables.rest.example_request_url %}
 ```
 
 ### Authenticating with a GitHub App
@@ -65,7 +65,7 @@ If you are authenticating with a GitHub App, you can create an installation acce
 
 1. Store your GitHub App's client ID as a configuration variable. In the following example, replace `APP_CLIENT_ID` with the name of the configuration variable. You can find your client ID on the settings page for your app or through the API. For more information, see [Apps](https://docs.github.com/en/rest/apps/apps#get-an-app). For more information about configuration variables, see [Use Variables](https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/use-variables#defining-configuration-variables-for-multiple-workflows).
 1. Generate a private key for your app. Store the contents of the resulting file as a secret. (Store the entire contents of the file, including `-----BEGIN RSA PRIVATE KEY-----` and `-----END RSA PRIVATE KEY-----`.) In the following example, replace `APP_PRIVATE_KEY` with the name of the secret. For more information, see [Managing Private Keys For GitHub Apps](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/managing-private-keys-for-github-apps). For more information about secrets, see [Use Secrets](https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets).
-1. Add a step to generate a token, and use that token instead of `GITHUB_TOKEN`. Note that this token will expire after 60 minutes. For example:. Replace `REPO-OWNER` with the name of the account that owns the repository. Replace `REPO-NAME` with the name of the repository.{% endif %}
+1. Add a step to generate a token, and use that token instead of `GITHUB_TOKEN`. Note that this token will expire after 60 minutes. For example:
 
    ```yaml copy
    on:
@@ -84,7 +84,7 @@ If you are authenticating with a GitHub App, you can create an installation acce
            env:
              GH_TOKEN: {% raw %}${{ steps.generate-token.outputs.token }}{% endraw %}
            run: |
-             gh api https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3/repos/REPO-OWNER/REPO-NAME/issues
+             gh api {% data variables.product.rest_url %}{% data variables.rest.example_request_url %}
    ```
 
 {% endcli %}
@@ -110,11 +110,11 @@ You can use Octokit.js to interact with the GitHub REST API in your JavaScript s
 
 1. Install `octokit`. For example, `npm install octokit`. For other ways to install or load `octokit`, see [the Octokit.js README](https://github.com/octokit/octokit.js/#readme).
 1. Import `octokit` in your script. For example, `import { Octokit } from "octokit";`. For other ways to import `octokit`, see [the Octokit.js README](https://github.com/octokit/octokit.js/#readme).
-1. Create an instance of `Octokit` with your token. Replace `HOSTNAME` with the name of {% ifversion ghes %}your GitHub Enterprise Server instance.{% endif %} Replace `YOUR-TOKEN` with your token.
+1. Create an instance of `Octokit` with your token. Replace `HOSTNAME` with the name of your GitHub Enterprise Server instance. Replace `YOUR-TOKEN` with your token.
 
    ```javascript copy
-   const octokit = new Octokit({ 
-     baseUrl: "{% ifversion fpt or ghec %}https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3",{% endif %}
+   const octokit = new Octokit({ {% ifversion ghes %}
+     baseUrl: "{% data variables.product.rest_url %}",{% endif %}
      auth: 'YOUR-TOKEN'
    });
    ```
@@ -125,8 +125,8 @@ You can use Octokit.js to interact with the GitHub REST API in your JavaScript s
 
    ```javascript copy
    await octokit.request("GET /repos/{owner}/{repo}/issues", {
-     owner: "REPO-OWNER",
-     repo: "REPO-NAME",
+     owner: "{% ifversion ghes %}REPO-OWNER{% else %}octocat{% endif %}",
+     repo: "{% ifversion ghes %}REPO-NAME{% else %}Spoon-Knife{% endif %}",
    });
    ```
 
@@ -155,12 +155,10 @@ jobs:
       issues: read
     steps:
       - name: Check out repo content
-        uses: actions/checkout@v6
-
+        uses: {% data reusables.actions.action-checkout %}
 
       - name: Setup Node
-        uses: actions/setup-node@v7
-
+        uses: {% data reusables.actions.action-setup-node %}
         with:
           node-version: '16.17.0'
           cache: npm
@@ -175,20 +173,20 @@ jobs:
           TOKEN: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
 ```
 
-The following is an example JavaScript script with the file path `.github/actions-scripts/use-the-api.mjs`. Replace `HOSTNAME` with the name of {% ifversion ghes %}your GitHub Enterprise Server instance. Replace `REPO-OWNER` with the name of the account that owns the repository. Replace `REPO-NAME` with the name of the repository.{% endif %}
+The following is an example JavaScript script with the file path `.github/actions-scripts/use-the-api.mjs`. Replace `HOSTNAME` with the name of your GitHub Enterprise Server instance. Replace `REPO-OWNER` with the name of the account that owns the repository. Replace `REPO-NAME` with the name of the repository.
 
 ```javascript
 import { Octokit } from "octokit"
 
-const octokit = new Octokit({ 
-  baseUrl: "{% ifversion fpt or ghec %}https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3",{% endif %}
+const octokit = new Octokit({ {% ifversion ghes %}
+  baseUrl: "{% data variables.product.rest_url %}",{% endif %}
   auth: process.env.TOKEN
 });
 
 try {
   const result = await octokit.request("GET /repos/{owner}/{repo}/issues", {
-      owner: "REPO-OWNER",
-      repo: "REPO-NAME",
+      owner: "{% ifversion ghes %}REPO-OWNER{% else %}octocat{% endif %}",
+      repo: "{% ifversion ghes %}REPO-NAME{% else %}Spoon-Knife{% endif %}",
     });
 
   const titleAndAuthor = result.data.map(issue => {title: issue.title, authorID: issue.user.id})
@@ -216,12 +214,10 @@ If you are authenticating with a GitHub App, you can create an installation acce
        runs-on: ubuntu-latest
        steps:
          - name: Check out repo content
-           uses: actions/checkout@v6
-
+           uses: {% data reusables.actions.action-checkout %}
 
          - name: Setup Node
-           uses: actions/setup-node@v7
-
+           uses: {% data reusables.actions.action-setup-node %}
            with:
              node-version: '16.17.0'
              cache: npm
@@ -268,11 +264,11 @@ If you are authenticating with a GitHub App, you can create an installation acce
    >
    > If these options are not possible, consider using another CLI service to store your token securely.
 
-1. Use the `curl` command to make your request. Pass your token in an `Authorization` header. Replace `HOSTNAME` with the name of {% ifversion ghes %}your GitHub Enterprise Server instance. Replace `REPO-OWNER` with the name of the account that owns the repository. Replace `REPO-NAME` with the name of the repository.{% endif %} Replace `YOUR-TOKEN` with your token.
+1. Use the `curl` command to make your request. Pass your token in an `Authorization` header. Replace `HOSTNAME` with the name of your GitHub Enterprise Server instance. Replace `REPO-OWNER` with the name of the account that owns the repository. Replace `REPO-NAME` with the name of the repository. Replace `YOUR-TOKEN` with your token.
 
    ```shell copy
    curl --request GET \
-   --url "https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3/repos/REPO-OWNER/REPO-NAME/issues" \
+   --url "{% data variables.product.rest_url %}{% data variables.rest.example_request_url %}" \
    --header "Accept: application/vnd.github+json" \
    --header "Authorization: Bearer YOUR-TOKEN"
    ```
@@ -289,7 +285,7 @@ You can also use `curl` commands in your GitHub Actions workflows.
 
 GitHub recommends that you use the built-in `GITHUB_TOKEN` instead of creating a token. If this is not possible, store your token as a secret and replace `GITHUB_TOKEN` in the example below with the name of your secret. For more information about `GITHUB_TOKEN`, see [Authenticate With Github_Token](https://docs.github.com/en/actions/tutorials/authenticate-with-github_token). For more information about secrets, see [Use Secrets](https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets).
 
-In the following example, replace `HOSTNAME` with the name of {% ifversion ghes %}your GitHub Enterprise Server instance. Replace `REPO-OWNER` with the name of the account that owns the repository. Replace `REPO-NAME` with the name of the repository.{% endif %}
+In the following example, replace `HOSTNAME` with the name of your GitHub Enterprise Server instance. Replace `REPO-OWNER` with the name of the account that owns the repository. Replace `REPO-NAME` with the name of the repository.
 
 ```yaml copy
 on:
@@ -304,7 +300,7 @@ jobs:
           GH_TOKEN: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
         run: |
           curl --request GET \
-          --url "https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3/repos/REPO-OWNER/REPO-NAME/issues" \
+          --url "{% data variables.product.rest_url %}{% data variables.rest.example_request_url %}" \
           --header "Accept: application/vnd.github+json" \
           --header "Authorization: Bearer $GH_TOKEN"
 ```
@@ -315,7 +311,7 @@ If you are authenticating with a GitHub App, you can create an installation acce
 
 1. Store your GitHub App's client ID as a configuration variable. In the following example, replace `APP_CLIENT_ID` with the name of the configuration variable. You can find your client ID on the settings page for your app or through the App API. For more information, see [Apps](https://docs.github.com/en/rest/apps/apps#get-an-app). For more information about configuration variables, see [Use Variables](https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/use-variables#defining-configuration-variables-for-multiple-workflows).
 1. Generate a private key for your app. Store the contents of the resulting file as a secret. (Store the entire contents of the file, including `-----BEGIN RSA PRIVATE KEY-----` and `-----END RSA PRIVATE KEY-----`.) In the following example, replace `APP_PRIVATE_KEY` with the name of the secret. For more information, see [Managing Private Keys For GitHub Apps](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/managing-private-keys-for-github-apps). For more information about storing secrets, see [Use Secrets](https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets).
-1. Add a step to generate a token, and use that token instead of `GITHUB_TOKEN`. Note that this token will expire after 60 minutes. For example:. Replace `REPO-OWNER` with the name of the account that owns the repository. Replace `REPO-NAME` with the name of the repository.{% endif %}
+1. Add a step to generate a token, and use that token instead of `GITHUB_TOKEN`. Note that this token will expire after 60 minutes. For example:
 
    ```yaml copy
    on:
@@ -336,7 +332,7 @@ If you are authenticating with a GitHub App, you can create an installation acce
              GH_TOKEN: {% raw %}${{ steps.generate-token.outputs.token }}{% endraw %}
            run: |
              curl --request GET \
-             --url "https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3/repos/REPO-OWNER/REPO-NAME/issues" \
+             --url "{% data variables.product.rest_url %}{% data variables.rest.example_request_url %}" \
              --header "Accept: application/vnd.github+json" \
              --header "Authorization: Bearer $GH_TOKEN"
 

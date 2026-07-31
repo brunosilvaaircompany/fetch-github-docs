@@ -131,8 +131,7 @@ For recommended specifications (RAM, CPU cores, and disk) for running CodeQL ana
 In general, you do not need to worry about where the CodeQL analysis workflow places CodeQL databases since later steps will automatically find databases created by previous steps. However, if you are writing a custom workflow step that requires the CodeQL database to be in a specific disk location, for example to upload the database as a workflow artifact, you can specify that location using the `db-location` parameter under the `init` action.
 
 ``` yaml copy
-- uses: github/codeql-action/init@v4
-
+- uses: {% data reusables.actions.action-codeql-action-init %}
   with:
     db-location: {% raw %}'${{ github.runner_temp }}/my_location'{% endraw %}
 ```
@@ -153,8 +152,7 @@ CodeQL code scanning supports code written in the following languages:
 * JavaScript/TypeScript
 * Python
 * Ruby
-* Rust{% else ifversion codeql-rust-public-preview %}
-* Rust (public preview)
+* Rust
 * Swift
 * GitHub Actions workflows
 
@@ -183,8 +181,6 @@ GitHub Actions workflows | `actions`
 | Ruby | `ruby` |
 |  |
 Rust | `rust`
-| {% else ifversion codeql-rust-public-preview %}
-| Rust (public preview) | `rust` |
 | 
 | Swift | `swift` |
 
@@ -195,8 +191,7 @@ Rust | `rust`
 These language identifiers can be used as arguments to the `languages` input of the `init` action. We recommend that only one language is provided as an argument:
 
 ```yaml copy
-- uses: github/codeql-action/init@v4
-
+- uses: {% data reusables.actions.action-codeql-action-init %}
   with:
     languages: javascript-typescript
 ```
@@ -204,8 +199,7 @@ These language identifiers can be used as arguments to the `languages` input of 
 The default CodeQL analysis workflow file created after [configuring advanced setup for code scanning with CodeQL](/code-security/how-tos/find-and-fix-code-vulnerabilities/configure-code-scanning/configuring-advanced-setup-for-code-scanning#configuring-advanced-setup-for-code-scanning-with-codeql) defines a matrix containing a property named `language` which lists the languages in your repository that will be analyzed. This matrix has been automatically pre-populated with supported languages detected in your repository. Using the `language` matrix allows CodeQL to run each language analysis in parallel and to customize analysis for each language. In an individual analysis, the name of the language from the matrix is provided to the `init` action as the argument for the `languages` input. We recommend that all workflows adopt this configuration. For more information about matrices, see [Run Job Variations](https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/run-job-variations).
 
 ```yaml copy
-- uses: github/codeql-action/init@v4
-
+- uses: {% data reusables.actions.action-codeql-action-init %}
   with:
     languages: {% raw %}${{ matrix.language }}{% endraw %}
 ```
@@ -253,8 +247,7 @@ This parameter is particularly useful if you work with monorepos and have multip
 
 ``` yaml copy
     - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v4
-
+      uses: {% data reusables.actions.action-codeql-action-analyze %}
       with:
         # Optional. Specify a category to distinguish between multiple analyses
         # for the same tool and ref. If you don't use `category` in your workflow,
@@ -287,8 +280,7 @@ To add one or more published CodeQL model packs, specify them inside the `with: 
 ` section of the workflow. Within `packs` you specify one or more packages to use and, optionally, which version to download. Where you don't specify a version, the latest version is downloaded. If you want to use packages that are not publicly available, you need to set the `GITHUB_TOKEN` environment variable to a secret that has access to the packages. For more information, see [Authenticate With Github_Token](https://docs.github.com/en/actions/tutorials/authenticate-with-github_token) and [Use Secrets](https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets).
 
 ``` yaml copy
-- uses: github/codeql-action/init@v4
-
+- uses: {% data reusables.actions.action-codeql-action-init %}
   with:
     config-file: ./.github/codeql/codeql-config.yml
     queries: security-extended
@@ -331,8 +323,7 @@ In the example below, `scope` is the organization or personal account that publi
 * Version 4.5.6 of `pack4` is downloaded and only the queries found in `path/to/queries` are run.
 
 ``` yaml copy
-- uses: github/codeql-action/init@v4
-
+- uses: {% data reusables.actions.action-codeql-action-init %}
   with:
     # Comma-separated list of packs to download
     packs: scope/pack1,scope/pack2@1.2.3,scope/pack3@~3.2.1,scope/pack4@4.5.6:path/to/queries
@@ -349,8 +340,7 @@ If your workflow uses packs that are published on a GitHub Enterprise Server ins
  action. This input accepts a list of `url`, `packages`, and `token` properties as shown below.
 
 ```yaml copy
-- uses: github/codeql-action/init@v4
-
+- uses: {% data reusables.actions.action-codeql-action-init %}
   with:
     registries: {% raw %}|
       # URL to the container registry, usually in this format
@@ -386,8 +376,7 @@ To add one or more queries, add a `with: queries:` entry within the `uses: githu
 You can also specify query suites in the value of `queries`. Query suites are collections of queries, usually grouped by purpose or language.
 
 ``` yaml copy
-- uses: github/codeql-action/init@v4
-
+- uses: {% data reusables.actions.action-codeql-action-init %}
   with:
     # Comma-separated list of queries / packs / suites to run.
     # This may include paths or a built in suite, for example:
@@ -421,8 +410,7 @@ If you also use a configuration file for custom settings, any additional packs o
 In the following example, the `+` symbol ensures that the specified additional packs and queries are used together with any specified in the referenced configuration file.
 
 ``` yaml copy
-- uses: github/codeql-action/init@v4
-
+- uses: {% data reusables.actions.action-codeql-action-init %}
   with:
     config-file: ./.github/codeql/codeql-config.yml
     queries: +security-and-quality,octo-org/python-qlpack/show_ifs.ql@main
@@ -438,8 +426,7 @@ A custom configuration file is an alternative way to specify additional packs an
 In the workflow file, use the `config-file` parameter of the `init` action to specify the path to the configuration file you want to use. This example loads the configuration file _./.github/codeql/codeql-config.yml_.
 
 ``` yaml copy
-- uses: github/codeql-action/init@v4
-
+- uses: {% data reusables.actions.action-codeql-action-init %}
   with:
     config-file: ./.github/codeql/codeql-config.yml
 ```
@@ -450,8 +437,7 @@ The configuration file can be located within the repository you are analyzing, o
 If the configuration file is located in an external private repository, use the `external-repository-token` parameter of the `init` action to specify a token that has access to the private repository.
 
 ```yaml copy
-- uses: github/codeql-action/init@v4
-
+- uses: {% data reusables.actions.action-codeql-action-init %}
   with:
     external-repository-token: {% raw %}${{ secrets.ACCESS_TOKEN }}{% endraw %}
 ```
@@ -640,8 +626,7 @@ If you'd prefer to specify additional configuration details in the workflow file
 This step in a GitHub Actions workflow file uses a `config` input to disable the default queries, add the `security-extended` query suite, and exclude queries that are tagged with `cwe-020`.
 
 ```yaml
-- uses: github/codeql-action/init@v4
-
+- uses: {% data reusables.actions.action-codeql-action-init %}
   with:
     languages: {% raw %}${{ matrix.language }}{% endraw %}
     config: |
@@ -662,8 +647,7 @@ You can use the same approach to specify any valid configuration options in the 
 > In the following example, `vars.CODEQL_CONF` is a GitHub Actions variable. Its value can be the contents of any valid configuration file. For more information, see [Use Variables](https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/use-variables#defining-configuration-variables-for-multiple-workflows).
 >
 > ```yaml
-> - uses: github/codeql-action/init@v4
-
+> - uses: {% data reusables.actions.action-codeql-action-init %}
 >   with:
 >     languages: {% raw %}${{ matrix.language }}{% endraw %}
 >     config: {% raw %}${{ vars.CODEQL_CONF }}{% endraw %}

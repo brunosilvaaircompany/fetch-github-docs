@@ -7,7 +7,7 @@ For information on using the latest version, see [Configuring Code Scanning For 
 
 
 
-If you're using advanced setup and your workflow doesn't explicitly specify the languages to analyze, CodeQL implicitly detects the supported languages in your code base. In this configuration, out of the compiled languages C/C++, C#, Go, Java, Kotlin, Rust, {% else ifversion codeql-rust-public-preview %}Rust (public preview), and Swift, CodeQL only analyzes the language with the most source files. Edit the workflow and add a matrix specifying the languages you want to analyze. The default CodeQL analysis workflow uses such a matrix.
+If you're using advanced setup and your workflow doesn't explicitly specify the languages to analyze, CodeQL implicitly detects the supported languages in your code base. In this configuration, out of the compiled languages C/C++, C#, Go, Java, Kotlin, Rust, and Swift, CodeQL only analyzes the language with the most source files. Edit the workflow and add a matrix specifying the languages you want to analyze. The default CodeQL analysis workflow uses such a matrix.
 
   The following extracts from a workflow show how you can use a matrix within the job strategy to specify languages, and then reference each language within the "Initialize CodeQL" step:
 
@@ -25,9 +25,8 @@ If you're using advanced setup and your workflow doesn't explicitly specify the 
 
       steps:
       # ...
-        - name: Initialize CodeQL
-          uses: github/codeql-action/init@v4
-
+        - name: Initialize {% data variables.product.prodname_codeql %}
+          uses: {% data reusables.actions.action-codeql-action-init %}
           with:
             languages: {% raw %}${{ matrix.language }}{% endraw %}
   ```

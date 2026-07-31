@@ -64,7 +64,7 @@ You must set some configuration on the GitHub Enterprise Server instance before 
 When the configuration has been applied, and before starting a migration, set required environment variables. For example:
 
 ```shell
-export API_URL='http://localhost:1738'
+export API_URL='{% data reusables.elm.localhost-value %}'
 ```
 
 >[!IMPORTANT] Copy the values for `API_URL` and `MIGRATION_MANAGER_HMAC_KEY` verbatim. The other variables are specific to your environment.

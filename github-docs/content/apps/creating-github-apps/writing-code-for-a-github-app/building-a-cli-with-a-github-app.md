@@ -47,16 +47,14 @@ You will need your app's client ID in order to generate a user access token via 
      1. To the right of the organization, click **Settings**.
    * For an app owned by an enterprise:
      1. If you use Enterprise Managed Users, click **Your enterprise** to go directly to the enterprise account settings.
-     1. If you use personal accounts, click **Your enterprises** and then to the right of the enterprise, click **Settings**.{% elsif ghes %}
-     1. Click **Enterprise settings**.
-
+     1. If you use personal accounts, click **Your enterprises** and then to the right of the enterprise, click **Settings**.
 
 
 1. Navigate to the GitHub App settings.
    * For an app owned by a personal account or organization:
      1. In the left sidebar, click **{% octicon "code" aria-hidden="true" aria-label="code" %} Developer settings**, then click **GitHub Apps**.
    * For an app owned by an enterprise:
-     1. In the left sidebar, under "Settings",{% elsif ghes %} click **Settings**, then click **GitHub Apps**.
+     1. In the left sidebar, under "Settings", click **GitHub Apps**.
 
 1. Next to the GitHub App that you want to work with, click **Edit**.
 1. On the app's settings page, find the client ID for your app. You will use it later in this tutorial. Note that the client ID is different from the app ID.
@@ -247,7 +245,7 @@ The `login` command will run the device flow to get a user access token. For mor
 
    ```ruby copy
    def request_device_code
-     uri = URI("https://github.com/login/device/code")
+     uri = URI("{% data variables.product.oauth_host_code %}/login/device/code")
      parameters = URI.encode_www_form("client_id" => CLIENT_ID)
      headers = {"Accept" => "application/json"}
 
@@ -260,7 +258,7 @@ The `login` command will run the device flow to get a user access token. For mor
 
    ```ruby copy
    def request_token(device_code)
-     uri = URI("https://github.com/login/oauth/access_token")
+     uri = URI("{% data variables.product.oauth_host_code %}/login/oauth/access_token")
      parameters = URI.encode_www_form({
        "client_id" => CLIENT_ID,
        "device_code" => device_code,
@@ -407,7 +405,7 @@ The `login` command will run the device flow to get a user access token. For mor
    end
 
    def request_device_code
-     uri = URI("https://github.com/login/device/code")
+     uri = URI("{% data variables.product.oauth_host_code %}/login/device/code")
      parameters = URI.encode_www_form("client_id" => CLIENT_ID)
      headers = {"Accept" => "application/json"}
 
@@ -416,7 +414,7 @@ The `login` command will run the device flow to get a user access token. For mor
    end
 
    def request_token(device_code)
-     uri = URI("https://github.com/login/oauth/access_token")
+     uri = URI("{% data variables.product.oauth_host_code %}/login/oauth/access_token")
      parameters = URI.encode_www_form({
        "client_id" => CLIENT_ID,
        "device_code" => device_code,
@@ -485,7 +483,7 @@ The `login` command will run the device flow to get a user access token. For mor
    1. In your terminal, from the directory where `app_cli.rb` is stored, run `./app_cli.rb login`. You should see output that looks like this. The code will differ every time:
 
       ```shell
-      Please visit: https://github.com/login/device
+      Please visit: {% data variables.product.oauth_host_code %}/login/device
       and enter code: CA86-8D94
       ```
 
@@ -501,7 +499,7 @@ Now that your app can generate a user access token, you can make API requests on
 
    ```ruby copy
    def whoami
-     uri = URI("https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3/user")
+     uri = URI("{% data variables.product.rest_url %}/user")
 
      begin
        token = File.read("./.token").strip
@@ -613,7 +611,7 @@ This is the full code example that was outlined in the previous section. Replace
    end
 
    def request_device_code
-     uri = URI("https://github.com/login/device/code")
+     uri = URI("{% data variables.product.oauth_host_code %}/login/device/code")
      parameters = URI.encode_www_form("client_id" => CLIENT_ID)
      headers = {"Accept" => "application/json"}
 
@@ -622,7 +620,7 @@ This is the full code example that was outlined in the previous section. Replace
    end
 
    def request_token(device_code)
-     uri = URI("https://github.com/login/oauth/access_token")
+     uri = URI("{% data variables.product.oauth_host_code %}/login/oauth/access_token")
      parameters = URI.encode_www_form({
        "client_id" => CLIENT_ID,
        "device_code" => device_code,
@@ -686,7 +684,7 @@ This is the full code example that was outlined in the previous section. Replace
    end
 
    def whoami
-     uri = URI("https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3/user")
+     uri = URI("{% data variables.product.rest_url %}/user")
 
      begin
        token = File.read("./.token").strip
@@ -722,7 +720,7 @@ This tutorial assumes that your app code is stored in a file named `app_cli.rb`.
 1. In your terminal, from the directory where `app_cli.rb` is stored, run `./app_cli.rb login`. You should see output that looks like this. The code will differ every time:
 
    ```shell
-   Please visit: https://github.com/login/device
+   Please visit: {% data variables.product.oauth_host_code %}/login/device
    and enter code: CA86-8D94
    ```
 

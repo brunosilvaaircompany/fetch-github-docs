@@ -4,7 +4,13 @@
 
 GitHub has many features that help you improve and maintain the quality of your code. Some features are included in all GitHub plans. Additional features are available to organizations on GitHub Team and GitHub Enterprise Cloud that purchase a GitHub Advanced Security product:
 
-{% data reusables.advanced-security.ghas-products-bullets+ghas %}
+* **GitHub Secret Protection**, which includes features that help you detect and prevent secret leaks, such as secret scanning and push protection.
+* **GitHub Code Security**, which includes features that help you find and fix vulnerabilities, like code scanning, premium Dependabot features, and dependency review.
+
+
+
+Alternatively, you may have a GitHub Advanced Security license that includes all features in GitHub Secret Protection and GitHub Code Security.
+
 
 You can easily enable and manage GitHub's security features throughout your organization with security configurations, which control repository-level security features, and global settings, which control security features at the organization level. We recommend applying security configurations _and_ customizing your global settings to create a system that best meets the security needs of your organization.
 

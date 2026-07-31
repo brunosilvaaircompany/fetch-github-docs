@@ -7,8 +7,8 @@ You can register a GitHub App in a few different ways.
 * Under your **personal account**.
 * Under an **organization you own**.
 * Under an **organization** that has granted you permission to manage all its apps. See [Adding And Removing GitHub App Managers In Your Organization](https://docs.github.com/en/organizations/managing-programmatic-access-to-your-organization/adding-and-removing-github-app-managers-in-your-organization).
-* Under your **enterprise**, but it can only be installed on{% ifversion enterprise-installed-apps %} that enterprise and organizations within the enterprise.
-{% endif %}
+* Under your **enterprise**, but it can only be installed on that enterprise and organizations within the enterprise.
+
 
 A user, organization, or enterprise can register up to 100 GitHub Apps, but there is no limit to how many GitHub Apps can be installed on an account.
 
@@ -23,16 +23,14 @@ A user, organization, or enterprise can register up to 100 GitHub Apps, but ther
      1. To the right of the organization, click **Settings**.
    * For an app owned by an enterprise:
      1. If you use Enterprise Managed Users, click **Your enterprise** to go directly to the enterprise account settings.
-     1. If you use personal accounts, click **Your enterprises** and then to the right of the enterprise, click **Settings**.{% elsif ghes %}
-     1. Click **Enterprise settings**.
-
+     1. If you use personal accounts, click **Your enterprises** and then to the right of the enterprise, click **Settings**.
 
 
 1. Navigate to the GitHub App settings.
    * For an app owned by a personal account or organization:
      1. In the left sidebar, click **{% octicon "code" aria-hidden="true" aria-label="code" %} Developer settings**, then click **GitHub Apps**.
    * For an app owned by an enterprise:
-     1. In the left sidebar, under "Settings",{% elsif ghes %} click **Settings**, then click **GitHub Apps**.
+     1. In the left sidebar, under "Settings", click **GitHub Apps**.
 
 1. Click **New GitHub App**.
 1. Under "GitHub App name", enter a name for your app. You should choose a clear and short name. The name cannot be longer than 34 characters. Your app's name (converted to lowercase, with spaces replaced by `-`, and with special characters replaced) will be shown in the user interface when your app takes an action. For example, `My APp Näme` would display as `my-app-name`.

@@ -23,8 +23,8 @@ We recommend creating a **repository policy** to govern the lifecycle of reposit
 For a full list of repository management policies, see [Enforcing Repository Management Policies In Your Enterprise](https://docs.github.com/en/admin/enforcing-policies/enforcing-policies-for-your-enterprise/enforcing-repository-management-policies-in-your-enterprise).
 
 
-Another way to enforce standards within your enterprise is to use pre-receive hooks, which are scripts that run on {% ifversion ghes %}your GitHub Enterprise Server instance to implement quality checks. For more information, see [Enforcing Policy With Pre Receive Hooks](https://docs.github.com/en/admin/enforcing-policies/enforcing-policy-with-pre-receive-hooks).
-{% endif %}
+Another way to enforce standards within your enterprise is to use pre-receive hooks, which are scripts that run on your GitHub Enterprise Server instance to implement quality checks. For more information, see [Enforcing Policy With Pre Receive Hooks](https://docs.github.com/en/admin/enforcing-policies/enforcing-policy-with-pre-receive-hooks).
+
 
 ## Further reading
 

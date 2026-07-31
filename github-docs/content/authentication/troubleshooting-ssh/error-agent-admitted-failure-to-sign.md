@@ -3,7 +3,7 @@
 When trying to SSH into your GitHub Enterprise Server instance on a Linux computer, you may see the following message in your terminal:
 
 ```shell
-$ ssh -vT git@github.com
+$ ssh -vT git@{% data variables.product.product_url %}
 > ...
 > Agent admitted failure to sign using the key.
 > debug1: No more authentication methods to try.

@@ -11,9 +11,9 @@ A reusable workflow can be used by another workflow if any of the following is t
 * Both workflows are in the same repository.
 * The called workflow is stored in a public repository on GitHub Enterprise Server.
 
-  You cannot directly use reusable workflows defined on GitHub.com. Instead store a copy of the reusable workflow on {% ifversion ghes %}your GitHub Enterprise Server instance, and call the workflow from that path.
+  You cannot directly use reusable workflows defined on GitHub.com. Instead store a copy of the reusable workflow on your GitHub Enterprise Server instance, and call the workflow from that path.
 
-  {% elsif actions-workflow-policy %}, and your enterprise allows you to use public reusable workflows.{% endif %}
+  
 * The called workflow is stored in an internal repository and the settings for that repository allow it to be accessed. For more information, see [Share With Your Enterprise](https://docs.github.com/en/actions/how-tos/reuse-automations/share-with-your-enterprise).
 * The called workflow is stored in a private repository and the settings for that repository allow it to be accessed. For more information, see [Share With Your Enterprise](https://docs.github.com/en/actions/how-tos/reuse-automations/share-with-your-enterprise).
 
@@ -118,7 +118,7 @@ You can use templates in repositories that match or have more restricted visibil
 * Workflow templates in an internal `.github` repository are only available to internal and private repositories.
 * Workflow templates in a private `.github` repository are only available to private repositories.
 
-{% ifversion ghec %}
+
 
 Because public workflow templates require a public `.github` repository, they are not available for Enterprise Managed Users.
 
@@ -127,7 +127,7 @@ Because public workflow templates require a public `.github` repository, they ar
 ### Granting access for private/internal repositories
 
 If you're using a private or internal `.github` repository, you need to grant Read access to users or teams who should be able to use the templates.
-{% endif %}
+
 
 ### The `$default-branch` placeholder
 
@@ -160,8 +160,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
-
+      - uses: {% data reusables.actions.action-checkout %}
       - name: Run a one-line script
         run: echo Hello from Octo Organization
 ```
@@ -254,11 +253,9 @@ jobs:
     env:
       NODE_VERSION: '18'
     steps:
-      - uses: actions/checkout@v6
-
+      - uses: {% data reusables.actions.action-checkout %}
       - name: Set up Node.js
-        uses: actions/setup-node@v7
-
+        uses: {% data reusables.actions.action-setup-node %}
         with:
           node-version: {% raw %}${{ env.NODE_VERSION }}{% endraw %}
       - run: npm test

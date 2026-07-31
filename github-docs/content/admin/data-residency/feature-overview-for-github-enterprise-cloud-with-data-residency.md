@@ -57,7 +57,7 @@ The following examples are not exhaustive.
 
 | Feature | Example on GitHub.com | Example on GHE.com |
 | ------ | ------------ | ----------- |
-| GitHub Packages | The Container registry is located at `ghcr.io`{% elsif ghes %}<code>containers.<em>HOSTNAME</em></code>. | The Container registry is located at `https://containers.SUBDOMAIN.ghe.com`. |
+| GitHub Packages | The Container registry is located at `ghcr.io`. | The Container registry is located at `https://containers.SUBDOMAIN.ghe.com`. |
 | User provisioning | The "tenant URL" for Microsoft Entra ID is `https://api.github.com/scim/v2/enterprises/ENTERPRISE` | The "tenant URL" for Microsoft Entra ID is `https://api.SUBDOMAIN.ghe.com/scim/v2/enterprises/SUBDOMAIN` |
 | OIDC trusts for GitHub Actions deployments | The OIDC token is issued from `https://token.actions.githubusercontent.com`. | The OIDC token is issued from `https://token.actions.SUBDOMAIN.ghe.com` |
 | Raw URLs | `https://raw.githubusercontent.com/` | `https://raw.SUBDOMAIN.ghe.com/` |

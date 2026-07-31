@@ -27,7 +27,7 @@ You can search and browse actions directly in your repository's workflow editor.
 
 You can add an action to your workflow by referencing the action in your workflow file. The actions you use in your workflow can be defined in:
 
-* The same repository as your workflow file{% ifversion ghec or ghes %}
+* The same repository as your workflow file
 * An internal repository within the same enterprise account that is configured to allow access to workflows
 * Any public repository
 * A published Docker container image on Docker Hub
@@ -52,7 +52,7 @@ An action's listing page includes the action's version and the workflow syntax r
 You can also enable Dependabot version updates for the actions that you add to your workflow. For more information, see [Auto Update Actions](https://docs.github.com/en/code-security/how-tos/secure-your-supply-chain/secure-your-dependencies/auto-update-actions).
 
 
-{% endif %}
+
 
 ### Adding an action from the same repository
 
@@ -96,8 +96,7 @@ jobs:
     steps:
       # This step checks out a copy of your repository.
       - name: My first step - check out repository
-        uses: actions/checkout@v6
-
+        uses: {% data reusables.actions.action-checkout %}
       # This step references the directory that contains the action.
       - name: Use local hello-world-action
         uses: ./.github/actions/hello-world-action
@@ -116,13 +115,12 @@ jobs:
   my_first_job:
     steps:
       - name: My first step
-        uses: actions/setup-node@v7
-
+        uses: {% data reusables.actions.action-setup-node %}
 ```
 
 
-If {% ifversion ghec %}you're on GHE.com{% elsif ghes %}an enterprise owner has enabled access to actions on GitHub.com, you can use this syntax to reference actions either within your enterprise or on GitHub.com. GitHub Actions will look for the action in your enterprise first, then fall back to GitHub.com.
-{% endif %}
+If you're on GHE.com, you can use this syntax to reference actions either within your enterprise or on GitHub.com. GitHub Actions will look for the action in your enterprise first, then fall back to GitHub.com.
+
 
 ### Referencing a container on Docker Hub
 

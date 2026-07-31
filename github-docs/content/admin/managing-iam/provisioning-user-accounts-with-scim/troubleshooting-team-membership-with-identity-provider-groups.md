@@ -29,7 +29,7 @@ If GitHub is unable to synchronize team membership with a group on your IdP, you
 
 ### Error: "Out of sync due to insufficient licenses"
 
-GitHub stores IdP group membership data for {% ifversion ghes %}SCIM-provisioned users at the enterprise level. This data is populated and updated through Group SCIM API calls from your identity provider (IdP).
+GitHub stores IdP group membership data for SCIM-provisioned users at the enterprise level. This data is populated and updated through Group SCIM API calls from your identity provider (IdP).
 
 For IdP groups that are mapped to teams, GitHub runs a **daily reconciliation job** to synchronize team membership with the stored enterprise-level IdP group data. The reconciliation also runs whenever a Group SCIM API call updates group membership, or when an admin links or unlinks a team to a stored group on GitHub.
 
@@ -57,7 +57,7 @@ To allow synchronization to complete successfully, make additional enterprise li
 * **Purchase additional licenses**  
   * If all current users require access, purchase more licenses for your enterprise. For more information, see [Manage User Licenses](https://docs.github.com/en/billing/how-tos/manage-plan-and-licenses/manage-user-licenses#enterprises-on-github-enterprise-cloud).
 
-{% endif %}
+
 
 ### Error: "Out of sync"
 

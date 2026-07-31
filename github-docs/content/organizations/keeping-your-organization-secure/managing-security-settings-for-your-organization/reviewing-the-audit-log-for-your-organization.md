@@ -268,7 +268,7 @@ There is a hard limit when exporting the audit logs for your organization. These
 
 To avoid these limits, we recommend reducing the audit log to a smaller dataset before exporting. For more information, see [Reviewing The Audit Log For Your Organization](https://docs.github.com/en/organizations/keeping-your-organization-secure/managing-security-settings-for-your-organization/reviewing-the-audit-log-for-your-organization#searching-the-audit-log).
 
-{% ifversion ghec %}
+
 If you intend to review a large dataset of audit logs, we recommend streaming your logs to an external data management system. For more information, see [Streaming The Audit Log For Your Enterprise](https://docs.github.com/en/admin/monitoring-activity-in-your-enterprise/reviewing-audit-logs-for-your-enterprise/streaming-the-audit-log-for-your-enterprise).
 
 
@@ -296,7 +296,7 @@ After you export the log, you'll see the following keys and values in the result
 | `data.old_user` | hubot
 | `data.team` | octo-org/engineering
 
-{% endif %}
+
 
 ## Using the audit log API
 
@@ -304,53 +304,7 @@ After you export the log, you'll see the following keys and values in the result
 
 Organizations that use GitHub Enterprise Cloud can interact with the audit log using the GraphQL API and REST API. For more information, see [the GitHub Enterprise Cloud documentation](/enterprise-cloud@latest/organizations/keeping-your-organization-secure/managing-security-settings-for-your-organization/reviewing-the-audit-log-for-your-organization#using-the-audit-log-api).
 
-. You can use the `read:audit_log` scope to access the audit log via the APIs.
 
-
-
-> [!NOTE]
-> To use the audit log API, your organization must use GitHub Enterprise Cloud. For more information about how you can try GitHub Enterprise Cloud for free, see [Setting up a trial of GitHub Enterprise Cloud](/admin/overview/setting-up-a-trial-of-github-enterprise-cloud).
-
-
-### Using the GraphQL API
-
-
-
-To ensure your intellectual property is secure, and you maintain compliance for your organization, you can use the audit log GraphQL API to keep copies of your audit log data and monitor:
-* Access to your organization or repository settings
-* Changes in permissions
-* Added or removed users in an organization, repository, or team
-* Users being promoted to admin
-* Changes to permissions of a GitHub App
-* API requests (must be enabled)
-
-
-
-Note that you can't retrieve Git events using the GraphQL API. To retrieve Git events, use the REST API instead. For more information, see [`git` category actions](/organizations/keeping-your-organization-secure/managing-security-settings-for-your-organization/audit-log-events-for-your-organization#git).
-
-
-The GraphQL response can include data for up to 90 to 120 days.
-
-For example, you can make a GraphQL request to see all the new organization members added to your organization. For more information, see the [Enterprise Admin](https://docs.github.com/en/graphql/reference/enterprise-admin#interface-auditentry/).
-
-
-
-### Using the REST API
-
-To ensure your intellectual property is secure, and you maintain compliance for your organization, you can use the audit log REST API to keep copies of your audit log data. For more information about the specific events you can access using the REST API, see [Audit Log Events For Your Organization](https://docs.github.com/en/organizations/keeping-your-organization-secure/managing-security-settings-for-your-organization/audit-log-events-for-your-organization).
-
-The audit log retains Git events for seven days.
- This is shorter than other audit log events, which can be retained for up to seven months.
-
-
-By default, only events from the past three months are returned. To include older events, you must specify a timestamp in your query.
-
-When you use the REST API to request Git events, events that were initiated via the web browser or the REST or GraphQL APIs are not included. For example, when you merge a pull request in the web browser, changes are pushed to the base branch, but the Git event for that push is not included in the response.
-
-For more information about the audit log REST API, see [Orgs](https://docs.github.com/en/rest/orgs#get-the-audit-log-for-an-organization).
-
-
-{% endif %}
 
 # Further reading
 

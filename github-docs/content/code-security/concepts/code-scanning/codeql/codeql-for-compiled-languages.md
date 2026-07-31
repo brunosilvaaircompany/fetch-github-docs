@@ -2,7 +2,7 @@
 
 ## About the CodeQL analysis workflow and compiled languages
 
-Code scanning works by running queries against one or more CodeQL databases. Each database contains a representation of the code in a single language in your repository. For the compiled languages C/C++, C#, Go, Java, Kotlin, Rust, {% else ifversion codeql-rust-public-preview %}Rust (public preview), and Swift, the process of populating this database often involves building the code and extracting data.
+Code scanning works by running queries against one or more CodeQL databases. Each database contains a representation of the code in a single language in your repository. For the compiled languages C/C++, C#, Go, Java, Kotlin, Rust, and Swift, the process of populating this database often involves building the code and extracting data.
 
 When you enable code scanning, both default and advanced setup generate a CodeQL database for analysis using the simplest method available. For C/C++, C#, Java and Rust, the CodeQL database is generated directly from the codebase without requiring a build (`none` build mode). For other compiled languages, CodeQL builds the codebase using the `autobuild` build mode. Alternatively, you can use the `manual` build mode to specify explicit build commands to analyze only the files that are built by these custom commands.
 

@@ -50,12 +50,6 @@ The `Dismiss package malware alerts` rule is disabled by default, but can be ena
 > 
 Custom auto-triage rules for Dependabot alerts are available on public repositories and on any organization-owned repositories in GitHub Team with [GitHub Code Security](/get-started/learning-about-github/about-github-advanced-security) enabled.
 
-{%- elsif ghec %}
-Custom auto-triage rules for Dependabot alerts are available on public repositories and on any organization-owned repositories in GitHub Team or GitHub Enterprise with [GitHub Code Security](/get-started/learning-about-github/about-github-advanced-security) enabled.
-
-{%- elsif ghes %}
-Custom auto-triage rules for Dependabot alerts are available for organization-owned repositories with [GitHub Code Security](/get-started/learning-about-github/about-github-advanced-security) enabled.
-
 
 
 

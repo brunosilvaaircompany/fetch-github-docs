@@ -57,16 +57,9 @@ The `build-push-action` options required for Docker Hub are:
 * `push`: If set to `true`, the image will be pushed to the registry if it is built successfully.
 
 ```yaml copy
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
+{% data reusables.actions.actions-not-certified-by-github-comment %}
 
-
-# GitHub recommends pinning actions to a commit SHA.
-# To get a newer version, you will need to update the SHA.
-# You can also reference a tag or branch, but the action may change without warning.
-
+{% data reusables.actions.actions-use-sha-pinning-comment %}
 
 name: Publish Docker image
 
@@ -77,16 +70,15 @@ on:
 jobs:
   push_to_registry:
     name: Push Docker image to Docker Hub
-    runs-on: [self-hosted]
+    runs-on: {% ifversion ghes %}[self-hosted]{% else %}ubuntu-latest{% endif %}
     permissions:
       packages: write
       contents: read
-      attestations: write
-      id-token: write
+      {% ifversion artifact-attestations %}attestations: write{% endif %}
+      {% ifversion artifact-attestations %}id-token: write{% endif %}
     steps:
       - name: Check out the repo
-        uses: actions/checkout@v6
-
+        uses: {% data reusables.actions.action-checkout %}
 
       - name: Log in to Docker Hub
         uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
@@ -110,14 +102,14 @@ jobs:
           tags: {% raw %}${{ steps.meta.outputs.tags }}{% endraw %}
           labels: {% raw %}${{ steps.meta.outputs.labels }}{% endraw %}
 
-
+{% ifversion artifact-attestations %}
       - name: Generate artifact attestation
         uses: actions/attest@v4
         with:
           subject-name: index.docker.io/my-docker-hub-namespace/my-docker-hub-repository
           subject-digest: {% raw %}${{ steps.push.outputs.digest }}{% endraw %}
           push-to-registry: true
-
+{% endif -%}
 ```
 
 The above workflow checks out the GitHub repository, uses the `login-action` to log in to the registry, and then uses the `build-push-action` action to: build a Docker image based on your repository's `Dockerfile`; push the image to Docker Hub, and apply a tag to the image.
@@ -143,8 +135,7 @@ Each time you create a new release on GitHub, you can trigger a workflow to publ
 In the example workflow below, we use the Docker `login-action`, `metadata-action`, and `build-push-action` actions to build the Docker image, and if the build succeeds, push the built image to GitHub Packages.
 
 The `login-action` options required for GitHub Packages are:
-* `registry`: Must be set to `ghcr.io`{% elsif ghes %}`ghcr.io{% elsif ghes %}containers.HOSTNAME
-`.
+* `registry`: Must be set to `ghcr.io`.
 * `username`: You can use the {% raw %}`${{ github.actor }}`{% endraw %} context to automatically use the username of the user that triggered the workflow run. For more information, see [Contexts](https://docs.github.com/en/actions/reference/workflows-and-actions/contexts#github-context).
 * `password`: You can use the automatically-generated `GITHUB_TOKEN` secret for the password. For more information, see [Authenticate With Github_Token](https://docs.github.com/en/actions/tutorials/authenticate-with-github_token).
 
@@ -176,7 +167,7 @@ on:
 
 # Defines two custom environment variables for the workflow. These are used for the Container registry domain, and a name for the Docker image that this workflow builds.
 env:
-  REGISTRY: ghcr.io{% elsif ghes %}containers.HOSTNAME
+  REGISTRY: ghcr.io
 
   IMAGE_NAME: {% raw %}${{ github.repository }}{% endraw %}
 
@@ -251,16 +242,9 @@ In a single workflow, you can publish your Docker image to multiple registries b
 The following example workflow uses the steps from the previous sections ([Publishing images to Docker Hub](#publishing-images-to-docker-hub) and [Publishing images to GitHub Packages](#publishing-images-to-github-packages)) to create a single workflow that pushes to both registries.
 
 ```yaml copy
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
+{% data reusables.actions.actions-not-certified-by-github-comment %}
 
-
-# GitHub recommends pinning actions to a commit SHA.
-# To get a newer version, you will need to update the SHA.
-# You can also reference a tag or branch, but the action may change without warning.
-
+{% data reusables.actions.actions-use-sha-pinning-comment %}
 
 name: Publish Docker image
 
@@ -271,14 +255,13 @@ on:
 jobs:
   push_to_registries:
     name: Push Docker image to multiple registries
-    runs-on: [self-hosted]
+    runs-on: {% ifversion ghes %}[self-hosted]{% else %}ubuntu-latest{% endif %}
     permissions:
       packages: write
       contents: read
     steps:
       - name: Check out the repo
-        uses: actions/checkout@v6
-
+        uses: {% data reusables.actions.action-checkout %}
 
       - name: Log in to Docker Hub
         uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
@@ -289,8 +272,7 @@ jobs:
       - name: Log in to the Container registry
         uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
         with:
-          registry: ghcr.io{% elsif ghes %}ghcr.io{% elsif ghes %}containers.HOSTNAME
-
+          registry: {% ifversion fpt or ghec %}ghcr.io{% elsif ghes %}{% data reusables.package_registry.container-registry-hostname %}{% endif %}
           username: {% raw %}${{ github.actor }}{% endraw %}
           password: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
 
@@ -300,8 +282,7 @@ jobs:
         with:
           images: |
             my-docker-hub-namespace/my-docker-hub-repository
-            ghcr.io{% elsif ghes %}containers.HOSTNAME
-/{% raw %}${{ github.repository }}{% endraw %}
+            {% data reusables.package_registry.container-registry-hostname %}/{% raw %}${{ github.repository }}{% endraw %}
 
       - name: Build and push Docker images
         id: push

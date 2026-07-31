@@ -169,7 +169,7 @@ Defines a **cooldown period** for dependency updates, allowing updates to be del
 
 This feature enables users to customize how often Dependabot generates new version updates, offering greater control over update frequency. For examples, see [Optimizing Pr Creation Version Updates](https://docs.github.com/en/code-security/tutorials/secure-your-dependencies/optimizing-pr-creation-version-updates#setting-up-a-cooldown-period-for-dependency-updates).
 
-{% ifversion dependabot-cooldown-default-days %}
+
 
 Dependabot default behavior:
 
@@ -262,7 +262,7 @@ The table below shows the package managers that support `cooldown`. The `default
 > * If `semver-major-days`, `semver-minor-days`, or `semver-patch-days` are not defined, the `default-days` settings will take precedence for cooldown-based updates.
 > * The `exclude` list always take precedence over the `include` list. If a dependency is specified in both lists, it is **excluded from cooldown** and will be updated immediately.
 
-{% endif %}
+
 
 ## `directories` or `directory` {% octicon "versions" aria-label="Version updates" height="24" %} {% octicon "shield-check" aria-label="Security updates" height="24" %}
 

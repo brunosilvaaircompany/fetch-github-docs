@@ -20,12 +20,12 @@ If your site administrator has disabled private mode, you can also use anonymous
 
 
 > [!WARNING]
-> Anonymous gists cannot be deleted from the web browser. To have an anonymous gist deleted, contact {% ifversion fpt or ghec %}us through the [GitHub Support portal](https://support.github.com){% elsif ghes %}your site administrator. Please provide the URL of the gist you wish to delete.
+> Anonymous gists cannot be deleted from the web browser. To have an anonymous gist deleted, contact us through the [GitHub Support portal](https://support.github.com). Please provide the URL of the gist you wish to delete.
 
 
 
 
-{% endif %}
+
 
 You'll receive a notification when:
 * You are the author of a gist.

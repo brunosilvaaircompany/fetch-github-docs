@@ -179,7 +179,7 @@ Alternatively, you can specify the values of `app_id`, `installation_id` and `pr
 
 ```yaml
 ## githubConfigSecret is the Kubernetes secret to use when authenticating with GitHub API.
-## You can choose to use a GitHub App or a personal access token (classic)
+## You can choose to use a GitHub App or a {% data variables.product.pat_v1 %}
 githubConfigSecret:
   ## GitHub Apps Configuration
   ## IDs must be strings, use quotes

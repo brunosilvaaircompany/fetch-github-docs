@@ -32,13 +32,13 @@ There are two types of versioning syntax for GitHub Docs.
     * Product-based versioning:
 
       ```javascript
-      {% raw %} ... {% endraw %}
+      {% raw %}{% ifversion SHORT-PRODUCT-NAME %} ... {% endif %}{% endraw %}
       ```
 
     * Feature-based versioning:
 
       ```javascript
-      {% raw %} ... {% endraw %}
+      {% raw %}{% ifversion FEATURE-NAME %} ... {% endif %}{% endraw %}
       ```
 
 ## About the different versions of GitHub
@@ -95,7 +95,7 @@ versions:
 
 ## Versioning with Liquid conditional operators
 
-We use the [Liquid template language](https://shopify.github.io/liquid/basics/introduction/) (specifically, [this Node.js port](https://github.com/harttle/liquidjs)) and a custom `{% raw %}{% endraw %}` tag to create versions of our documentation.
+We use the [Liquid template language](https://shopify.github.io/liquid/basics/introduction/) (specifically, [this Node.js port](https://github.com/harttle/liquidjs)) and a custom `{% raw %}{% ifversion ... %}{% endraw %}` tag to create versions of our documentation.
 
 If you define multiple products in the `versions` key within a page's YAML frontmatter, you can use the conditional operators `ifversion`/`else` (or `ifversion`/`elsif`/`else`) in the Markdown to control how the site renders content on the page for a particular product. For example, a feature may have more options on GitHub.com than on GitHub Enterprise Server, so you can version the content appropriately via the `versions` frontmatter, and use Liquid conditionals to describe the additional options for GitHub.com.
 
@@ -157,7 +157,7 @@ For example, to version one step of a procedure, instead of adding liquid versio
 
 ```markdown
 1. This step is for all versions{% raw %}{% ifversion ghes %}{% endraw %}
-1. This step is for GHES only{% raw %}{% endraw %}
+1. This step is for GHES only{% raw %}{% endif %}{% endraw %}
 1. This step is for all versions
 ```
 
@@ -165,9 +165,9 @@ You can include the liquid versioning on its own line and use whitespace control
 
 ```markdown
 1. This step is for all versions
-{% raw %}{% endraw %}
+{% raw %}{%- ifversion ghes %}{% endraw %}
 1. This step is for GHES only
-{% raw %}{% endraw %}
+{% raw %}{%- endif %}{% endraw %}
 1. This row is for all versions
 ```
 
@@ -201,7 +201,7 @@ The format and allowed values are the same as the frontmatter versions property.
 
 ### Liquid conditionals
 
-Now you can use `{% raw %} ... {% endraw %}` in content files!
+Now you can use `{% raw %}{% ifversion meow %} ... {% endif %}{% endraw %}` in content files!
 
 ### Frontmatter
 
@@ -248,11 +248,11 @@ Use versioning syntax within a sentence or paragraph to differentiate prose for 
 
 * Do use versioning syntax inline within paragraphs to avoid repeating sentences or entire paragraphs.
 
-  > You can do {% raw %}something{% elsif ghec %}something else{% endraw %}.
+  > You can do {% raw %}{% ifversion fpt %}something{% elsif ghec %}something else{% endif %}{% endraw %}.
 
 * Do use your judgment: for prose that would be complicated to write or read without lots of versioning syntax within a sentence or paragraph, consider repeating the entire paragraph in a version block for each relevant product.
 
-  > {% raw %}
+  > {% raw %}{% ifversion fpt %}
   >
   > If you use a Free, Pro, or Team plan, you can do something. Here's more information about the things you can do with a Free, Pro, or Team plan...
   >
@@ -260,7 +260,7 @@ Use versioning syntax within a sentence or paragraph to differentiate prose for 
   >
   > If you use GitHub Enterprise Cloud, you can do something else. Here's more information about the things you can do with GitHub Enterprise Cloud...
   >
-  > {% endraw %}
+  > {% endif %}{% endraw %}
 
 ### Be explicit, not implicit
 

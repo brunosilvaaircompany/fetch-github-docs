@@ -107,9 +107,9 @@ The `configure` CLI command is used to set required credentials and options for 
    $ gh actions-importer configure
    ✔ Which CI providers are you configuring?: Bamboo
    Enter the following values (leave empty to omit):
-   ✔ Personal access token for GitHub: ***************
+   ✔ {% data variables.product.pat_generic_caps %} for GitHub: ***************
    ✔ Base url of the GitHub instance: https://github.com
-   ✔ Personal access token for Bamboo: ********************
+   ✔ {% data variables.product.pat_generic_caps %} for Bamboo: ********************
    ✔ Base url of the Bamboo instance: https://bamboo.example.com
    Environment variables successfully updated.
    ```

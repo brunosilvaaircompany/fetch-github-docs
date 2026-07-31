@@ -15,8 +15,7 @@ The following options can be used to limit which actions are allowed in converte
   For example:
 
   ```shell
-  --allowed-actions actions/checkout@v6
- actions/upload-artifact@* my-org/*
+  --allowed-actions {% data reusables.actions.action-checkout %} actions/upload-artifact@* my-org/*
   ```
 
   You can provide an empty list to disallow all actions. For example, `--allowed-actions=`.

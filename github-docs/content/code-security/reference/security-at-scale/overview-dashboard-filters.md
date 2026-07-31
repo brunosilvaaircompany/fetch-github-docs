@@ -62,7 +62,7 @@ If you add custom properties to your organization and set values for repositorie
 
 **Available in:** Enterprise-level views
 
-You can limit the data to repositories owned by a single organization in your enterprise{% ifversion ghec %} or an Enterprise Managed User (EMU) account. If you are an owner of an enterprise with managed users, you can also filter by repository owner type.
+You can limit the data to repositories owned by a single organization in your enterprise or an Enterprise Managed User (EMU) account. If you are an owner of an enterprise with managed users, you can also filter by repository owner type.
 
 | Qualifier | Description | Views |
 | -------- | -------- | ------ |
@@ -72,17 +72,7 @@ You can limit the data to repositories owned by a single organization in your en
 |   |
 | `org` | Display data for repositories owned by one organization. | Dependabot alerts and code scanning alerts |
 
-{% else %}
 
-## Repository owner filters
-
-**Available in:** Enterprise-level views
-
-| Qualifier | Description |
-| -------- | -------- |
-| `org` | Display data for repositories owned by one organization. |
-
-{% endif %}
 
 ## Security feature enablement filters
 

@@ -1,6 +1,6 @@
 ## Inviting a collaborator to a personal repository
 
-You can send an invitation to collaborate in your repository directly to someone on GitHub, or to the person's email address{% elsif ghes %}..
+You can send an invitation to collaborate in your repository directly to someone on GitHub, or to the person's email address.
 
 1. Ask for the username of the person you're inviting as a collaborator. If they don't have a username yet, they can sign up for GitHub. For more information, see [Creating An Account On GitHub](https://docs.github.com/en/account-and-profile/how-tos/account-management/creating-an-account-on-github).
 1. On GitHub, navigate to the main page of the repository.

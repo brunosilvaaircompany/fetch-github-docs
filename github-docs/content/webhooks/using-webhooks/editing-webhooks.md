@@ -52,7 +52,7 @@ You can use the GitHub web interface or the REST API to edit an organization web
 
 Enterprise owners can edit a global webhook to change any of the settings that were selected when the webhook was initially created.
 
-{% ifversion ghes %}
+
 
 You can use the GitHub web interface or the REST API to edit a global webhook. For more information about using the REST API to edit a global webhook, see [Global Webhooks](https://docs.github.com/en/rest/enterprise-admin/global-webhooks).
 
@@ -73,7 +73,7 @@ You can use the GitHub web interface or the REST API to edit a global webhook. F
 1. Click **Update Webhook**.
 
 
-{% endif %}
+
 
 
 
@@ -119,9 +119,7 @@ The owner of a GitHub App can edit the webhook configuration for the app. If the
      1. To the right of the organization, click **Settings**.
    * For an app owned by an enterprise:
      1. If you use Enterprise Managed Users, click **Your enterprise** to go directly to the enterprise account settings.
-     1. If you use personal accounts, click **Your enterprises** and then to the right of the enterprise, click **Settings**.{% elsif ghes %}
-     1. Click **Enterprise settings**.
-
+     1. If you use personal accounts, click **Your enterprises** and then to the right of the enterprise, click **Settings**.
 
 1. In the left sidebar, click **{% octicon "code" aria-hidden="true" aria-label="code" %} Developer settings**.
 

@@ -323,8 +323,7 @@ To use secrets that are larger than 48 KB, you can use a workaround to store sec
        name: My Job
        runs-on: ubuntu-latest
        steps:
-         - uses: actions/checkout@v6
-
+         - uses: {% data reusables.actions.action-checkout %}
          - name: Decrypt large secret
            run: ./decrypt_secret.sh
            env:
@@ -376,8 +375,7 @@ You can use Base64 encoding to store small binary blobs as secrets. You can then
      decode-secret:
        runs-on: ubuntu-latest
        steps:
-         - uses: actions/checkout@v6
-
+         - uses: {% data reusables.actions.action-checkout %}
          - name: Retrieve the secret and decode it to a file
            env:
              {% raw %}CERTIFICATE_BASE64: ${{ secrets.CERTIFICATE_BASE64 }}{% endraw %}

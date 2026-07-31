@@ -44,7 +44,7 @@ To turn your fork into a standalone repository, you can clone the fork and use t
 1. Create a bare clone of the fork.
 
    ```shell
-   git clone --bare https://github.com/EXAMPLE-USER/FORK.git
+   git clone --bare https://{% data variables.product.product_url %}/EXAMPLE-USER/FORK.git
    ```
 
 1. Delete the forked repository. See [Deleting A Repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/deleting-a-repository).<br><br>
@@ -56,7 +56,7 @@ To turn your fork into a standalone repository, you can clone the fork and use t
 1. Mirror-push the repository back to the same remote URL.
 
    ```shell
-   git --git-dir FORK.git push --mirror https://github.com/EXAMPLE-USER/FORK.git
+   git --git-dir FORK.git push --mirror https://{% data variables.product.product_url %}/EXAMPLE-USER/FORK.git
    ```
 
 1. Remove the temporary local clone you created earlier.

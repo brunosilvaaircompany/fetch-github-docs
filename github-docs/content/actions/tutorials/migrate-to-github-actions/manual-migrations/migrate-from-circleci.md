@@ -79,8 +79,7 @@ Below is an example of the syntax for each system.
 
 ```yaml
 - name: Cache node modules
-  uses: actions/cache@v4
-
+  uses: {% data reusables.actions.action-cache %}
   with:
     path: ~/.npm
     key: {% raw %}v1-npm-deps-${{ hashFiles('**/package-lock.json') }}{% endraw %}
@@ -117,8 +116,7 @@ Below is an example in CircleCI and GitHub Actions configuration syntax.
 
 ```yaml
 - name: Upload math result for job 1
-  uses: actions/upload-artifact@v4
-
+  uses: {% data reusables.actions.action-upload-artifact %}
   with:
     name: homework
     path: math-homework.txt
@@ -126,8 +124,7 @@ Below is an example in CircleCI and GitHub Actions configuration syntax.
 ...
 
 - name: Download math result for job 1
-  uses: actions/download-artifact@v5
-
+  uses: {% data reusables.actions.action-download-artifact %}
   with:
     name: homework
 ```
@@ -236,8 +233,7 @@ jobs:
 
       - name: Setup file system permissions
         run: sudo chmod -R 777 $GITHUB_WORKSPACE /github /__w/_temp
-      - uses: actions/checkout@v6
-
+      - uses: {% data reusables.actions.action-checkout %}
       - name: Install dependencies
         run: bundle install --path vendor/bundle
       - name: Setup environment configuration
@@ -346,16 +342,9 @@ workflows:
 ### Complete example for GitHub Actions
 
 ```yaml
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
+{% data reusables.actions.actions-not-certified-by-github-comment %}
 
-
-# GitHub recommends pinning actions to a commit SHA.
-# To get a newer version, you will need to update the SHA.
-# You can also reference a tag or branch, but the action may change without warning.
-
+{% data reusables.actions.actions-use-sha-pinning-comment %}
 
 name: Containers
 
@@ -388,15 +377,13 @@ jobs:
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
-      - uses: actions/checkout@v6
-
+      - uses: {% data reusables.actions.action-checkout %}
       - name: Setup Ruby
         uses: eregon/use-ruby-action@ec02537da5712d66d4d50a0f33b7eb52773b5ed1
         with:
           ruby-version: {% raw %}${{ matrix.ruby }}{% endraw %}
       - name: Cache dependencies
-        uses: actions/cache@v4
-
+        uses: {% data reusables.actions.action-cache %}
         with:
           path: vendor/bundle
           key: administrate-{% raw %}${{ matrix.image }}-${{ hashFiles('Gemfile.lock') }}{% endraw %}

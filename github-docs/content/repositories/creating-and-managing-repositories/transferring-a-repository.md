@@ -9,12 +9,10 @@ Prerequisites for repository transfers:
 * To transfer a repository you must have administrator access to the repository.
 
 * Repositories on GitHub.com can only be transferred to other owners on GitHub.com.
-{%- ifversion ghec %}
+
 * Repositories cannot be transferred into an enterprise with managed users from outside the enterprise, or vice versa.
 
-{%- elsif ghes %}
-* Repositories can only be transferred to an owner within the same GitHub Enterprise Server instance. For more information about moving a repository from GitHub Enterprise Server to GitHub Enterprise Cloud, see [Migrating Repositories From GitHub Enterprise Server To GitHub Enterprise Cloud](https://docs.github.com/en/migrations/using-github-enterprise-importer/migrating-between-github-products/migrating-repositories-from-github-enterprise-server-to-github-enterprise-cloud).
-{%- endif %}
+
 * To transfer a repository that you own to an organization, you must have permission to create a repository in the target organization.
 * The target account must not have a repository with the same name, or a fork in the same network.
 * The original owner of the repository is added as a collaborator on the transferred repository. Other collaborators to the transferred repository remain intact.

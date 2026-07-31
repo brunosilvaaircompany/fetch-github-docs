@@ -17,7 +17,7 @@ Use one of your recovery codes to automatically regain entry into your account. 
 > [!NOTE]
 > If you do not know your password, you can use a recovery code after requesting a new password. See [Updating Your GitHub Access Credentials](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/updating-your-github-access-credentials#requesting-a-new-password).
 
-1. Navigate to  [`https://github.com/login`](https://github.com/login) {%- elsif ghes %} `http(s)://HOSTNAME/login` .
+1. Navigate to  [`https://github.com/login`](https://github.com/login) .
 1. To prompt two-factor authentication, type your username and password, then click **Sign in**.
 
 
@@ -62,7 +62,7 @@ You can use your two-factor authentication credentials or two-factor authenticat
 > If you protect your personal account with two-factor authentication but do not know your password,  you will need to begin with a password reset request. For more information, see [Recovering without your password](/authentication/securing-your-account-with-two-factor-authentication-2fa/recovering-your-account-if-you-lose-your-2fa-credentials#recovering-without-your-password).
 
 
-1. Navigate to  [`https://github.com/login`](https://github.com/login) {%- elsif ghes %} `http(s)://HOSTNAME/login` .
+1. Navigate to  [`https://github.com/login`](https://github.com/login) .
 1. To prompt two-factor authentication, type your username and password, then click **Sign in**.
 
 
@@ -108,7 +108,7 @@ If you have your recovery codes, you can use them to complete the password reset
 
 If you have lost access to your two-factor authentication credentials and your recovery codes, you can start account recovery request. You'll need to verify your identity using a recovery authentication factor, such as an SSH key or previously verified device.
 
-1. To request a new password, visit https://{% ifversion fpt or ghec %}github.com/password_reset.
+1. To request a new password, visit https://github.com/password_reset.
 1. Enter the email address associated with your account, then click **Send password reset email.**
    > [!NOTE]
    > Only primary and backup email addresses can be used to request a new password. Unless you have previously chosen a specific backup email address, all verified emails are considered backup email addresses.
@@ -135,7 +135,7 @@ A member of GitHub Support will review your request and email you within three b
 
 If you have exhausted your recovery options, you can unlink your email address from your account. The email address is then available for you to link it to a new or existing account, maintaining your commit history. See [Unlinking Your Email Address From A Locked Account](https://docs.github.com/en/account-and-profile/how-tos/account-management/unlinking-your-email-address-from-a-locked-account).
 
-{% endif %}
+
 
 ## Further reading
 

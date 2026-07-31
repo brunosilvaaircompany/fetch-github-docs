@@ -15,7 +15,7 @@ If you do use Enterprise Managed Users, enterprise owners and billing managers c
 
 
 
-## Inviting{% elsif ghes %}Adding an enterprise administrator to your enterprise account
+## Inviting an enterprise administrator to your enterprise account
 
 After you invite someone to join the enterprise account, they must accept the emailed invitation before they can access the enterprise account. Pending invitations will expire after 7 days.
 
@@ -29,7 +29,7 @@ You can see all pending invitations to become an administrator of your enterpris
 
 1. Under "{% octicon "person" aria-hidden="true" aria-label="person" %} People", click **Administrators**.
 
-1. Above the list of administrators, click **Invite admin**{% elsif ghes %}**Add owner**.
+1. Above the list of administrators, click **Invite admin**.
 1. Type the username, full name, or email address of the person you want to invite to become an enterprise administrator, then select the appropriate person from the results.
 
 1. Select **Owner** or **Billing Manager**.

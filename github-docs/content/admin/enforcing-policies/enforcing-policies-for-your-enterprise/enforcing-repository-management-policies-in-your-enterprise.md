@@ -125,11 +125,11 @@ Across all organizations owned by your enterprise, you can allow members to invi
 
 1. Under "{% octicon "law" aria-hidden="true" aria-label="law" %} Policies", click **Member privileges**.
 
-1. Under "Repository outside collaborators{% elsif ghes %}invitations", review the information about changing the setting. Optionally, to view the current configuration for all organizations in the enterprise account before you change the setting, click **{% octicon "eye" aria-hidden="true" aria-label="eye" %} View your organizations' current configurations**.
+1. Under "Repository outside collaborators", review the information about changing the setting. Optionally, to view the current configuration for all organizations in the enterprise account before you change the setting, click **{% octicon "eye" aria-hidden="true" aria-label="eye" %} View your organizations' current configurations**.
 
    ![Screenshot of a policy in the enterprise settings. A link, labeled "View your organizations' current configurations", is outlined.](/assets/images/help/business-accounts/view-current-policy-implementation-link.png)
 
-1. Under "Repository outside collaborators{% elsif ghes %}invitations", select the dropdown menu and click a policy.
+1. Under "Repository outside collaborators", select the dropdown menu and click a policy.
 
 ## Enforcing a policy for the default branch name
 
@@ -381,7 +381,7 @@ You can override the default inherited settings by configuring the settings for 
 > * You may not use this feature to violate your license from GitHub, including the limit on the number of user licenses for your GitHub Enterprise Server instance.
 
 
-If you have [enabled private mode](/admin/configuring-settings/hardening-security-for-your-enterprise/enabling-private-mode) for {% ifversion ghes %}your GitHub Enterprise Server instance, you can allow repository administrators to enable anonymous Git read access to public repositories.
+If you have [enabled private mode](/admin/configuring-settings/hardening-security-for-your-enterprise/enabling-private-mode) for your GitHub Enterprise Server instance, you can allow repository administrators to enable anonymous Git read access to public repositories.
 
 Enabling anonymous Git read access allows users to bypass authentication for custom tools on your enterprise. When you or a repository administrator enable this access setting for a repository, unauthenticated Git operations (and anyone with network access to your GitHub Enterprise Server instance) will have read access to the repository without authentication.
 
@@ -430,4 +430,3 @@ To see the repositories with anonymous Git read access enabled, filter the repos
    ![Screenshot of the "Enable anonymous Git read access" setting. The "Enable" button is outlined.](/assets/images/enterprise/site-admin-settings/site-admin-enable-anonymous-git-read-access.png)
 1. Review the changes. To confirm, click **Yes, enable anonymous Git read access.**
 1. Optionally, to prevent repository admins from changing this setting for this repository, select **Prevent repository admins from disabling anonymous Git read access**.
-{% endif %}

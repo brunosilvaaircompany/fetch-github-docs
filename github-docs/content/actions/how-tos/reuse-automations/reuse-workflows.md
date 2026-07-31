@@ -133,7 +133,7 @@ You call a reusable workflow by using the `uses` keyword. Unlike when you are us
 You reference reusable workflow files using one of the following syntaxes:
 
 * `$/.github/workflows/{filename}` for a reusable workflow in the same repository. This is the recommended syntax for referencing a reusable workflow in the same repository. This syntax is not available in GitHub Enterprise Server.
-* `{owner}/{repo}/.github/workflows/{filename}@{ref}` for reusable workflows in public and private{% elsif ghec or ghes %}public, internal and private repositories.
+* `{owner}/{repo}/.github/workflows/{filename}@{ref}` for reusable workflows in public and private repositories.
 * `./.github/workflows/{filename}` for reusable workflows in the same repository.
 
 When you reference a reusable workflow with `{owner}/{repo}` and `@{ref}`, the `{ref}` can be a SHA, a release tag, or a branch name. If a release tag and a branch have the same name, the release tag takes precedence over the branch name. Using the commit SHA is the safest option for stability and security. For more information, see [Secure Use](https://docs.github.com/en/actions/reference/security/secure-use#reusing-third-party-workflows).

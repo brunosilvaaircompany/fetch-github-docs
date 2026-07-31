@@ -37,7 +37,7 @@ If you cannot use a single partner IdP for both authentication and provisioning,
 
 With SCIM, you manage the lifecycle of user accounts from your IdP:
 
-* After you configure provisioning for Enterprise Managed Users, your IdP uses SCIM to provision user accounts on GitHub and add the accounts to your enterprise. to create an account and send an onboarding email to the user.{% endif %} If you assign a group to the application in your IdP, your IdP will provision accounts for all members of the group.
+* After you configure provisioning for Enterprise Managed Users, your IdP uses SCIM to provision user accounts on GitHub and add the accounts to your enterprise. If you assign a group to the application in your IdP, your IdP will provision accounts for all members of the group.
 * When you update information associated with a user's identity on your IdP, your IdP will update the user's account on GitHub.
 * When you unassign the user from the IdP application or deactivate a user's account on your IdP, your IdP will communicate with GitHub to invalidate any sessions and disable the member's account. The disabled account's information is maintained and their username is changed to a hash of their original username, with the short code appended if applicable.
 * If you reassign a user to the IdP application or reactivate their account on your IdP, the user account will be reactivated, and the username will be restored.

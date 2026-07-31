@@ -54,16 +54,14 @@ If your locally-hosted code isn't tracked by any VCS, the first step is to initi
 
    ```shell
    $ git add .
-   # Adds the files in the local repository and stages them for commit. To unstage a file, use 'git reset HEAD YOUR-FILE'.
-
+   # Adds the files in the local repository and stages them for commit. {% data reusables.git.unstage-codeblock %}
    ```
 
 1. Commit the files that you've staged in your local repository.
 
    ```shell
    $ git commit -m "First commit"
-   # Commits the tracked changes and prepares them to be pushed to a remote repository. To remove this commit and modify the file, use 'git reset --soft HEAD~1' and commit and add the file again.
-
+   # Commits the tracked changes and prepares them to be pushed to a remote repository. {% data reusables.git.reset-head-to-previous-commit-codeblock %}
    ```
 
 ## Importing a Git repository with the command line

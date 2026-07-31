@@ -115,4 +115,4 @@ $ eval $(ssh-agent -s)
 {% endlinux %}
 
 > [!WARNING]
-> If you see an SSH key you're not familiar with on GitHub, delete it immediately and contact us through the [GitHub Support portal](https://support.github.com){% elsif ghes %}your site administrator for further help. An unidentified public key may indicate a possible security concern.
+> If you see an SSH key you're not familiar with on GitHub, delete it immediately and contact us through the [GitHub Support portal](https://support.github.com) for further help. An unidentified public key may indicate a possible security concern.

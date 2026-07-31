@@ -46,8 +46,8 @@ After you create your ticket, you can view your ticket and the responses from Gi
 
 ## Prerequisites
 
-{% ifversion ghec %}If you use an enterprise account, there are some steps you should follow before you start using the GitHub Support portal. For more information, see [Getting Your Enterprise Started With The GitHub Support Portal](https://docs.github.com/en/support/contacting-github-support/getting-your-enterprise-started-with-the-github-support-portal).
-{% endif %}
+If you use an enterprise account, there are some steps you should follow before you start using the GitHub Support portal. For more information, see [Getting Your Enterprise Started With The GitHub Support Portal](https://docs.github.com/en/support/contacting-github-support/getting-your-enterprise-started-with-the-github-support-portal).
+
 
 ## What to include in your support ticket
 
@@ -226,7 +226,7 @@ Before you submit a ticket, you have the option of using Copilot in GitHub Suppo
 
 
 
-1. Select the **Product** dropdown menu and click {% ifversion ghes %}**GitHub Enterprise Server (self-hosted)**.
+1. Select the **Product** dropdown menu and click **GitHub Enterprise Server (self-hosted)**.
 
 
 1. If prompted, select the **Server installation** dropdown menu and click the installation your support ticket is regarding. If the installation is not listed, click **Other**.
@@ -263,7 +263,7 @@ Before you submit a ticket, you have the option of using Copilot in GitHub Suppo
 1. Click **Send request**.
 
 
-{% endif %}
+
 
 ## Further reading
 

@@ -72,16 +72,9 @@ If you configured a deployment environment, change the value of `environment` to
 
 
 ```yaml copy
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
+{% data reusables.actions.actions-not-certified-by-github-comment %}
 
-
-# GitHub recommends pinning actions to a commit SHA.
-# To get a newer version, you will need to update the SHA.
-# You can also reference a tag or branch, but the action may change without warning.
-
+{% data reusables.actions.actions-use-sha-pinning-comment %}
 
 name: Build and deploy a container to an Azure Web App
 
@@ -102,8 +95,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v6
-
+      - uses: {% data reusables.actions.action-checkout %}
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b

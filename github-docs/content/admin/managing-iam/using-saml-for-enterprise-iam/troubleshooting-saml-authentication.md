@@ -13,7 +13,7 @@ You can configure GitHub Enterprise Server to write verbose debug logs for every
 > [!WARNING]
 >
 > * Only enable SAML debugging temporarily, and disable debugging immediately after you finish troubleshooting. If you leave debugging enabled, the size of the logs increases much faster than usual, which can negatively impact the performance of GitHub Enterprise Server.
-> * Test new authentication settings for {% ifversion ghes %}your GitHub Enterprise Server instance in a staging environment before you apply the settings in your production environment. For more information, see [Setting Up A Staging Instance](https://docs.github.com/en/admin/installing-your-enterprise-server/setting-up-a-github-enterprise-server-instance/setting-up-a-staging-instance).
+> * Test new authentication settings for your GitHub Enterprise Server instance in a staging environment before you apply the settings in your production environment. For more information, see [Setting Up A Staging Instance](https://docs.github.com/en/admin/installing-your-enterprise-server/setting-up-a-github-enterprise-server-instance/setting-up-a-staging-instance).
 
 
 1. In the top-right corner of GitHub Enterprise Server, click your profile picture, then click **Enterprise settings**.
@@ -82,7 +82,7 @@ Audience is invalid. Audience attribute does not match https://YOUR-INSTANCE-URL
 ```
 
 Ensure that you set the value for `Audience` on your IdP to the `EntityId` for your GitHub Enterprise Server instance, which is the full URL to your instance. For example, `https://ghe.corp.example.com`.
-{% endif %}
+
 
 ## Error: "Current time is earlier than NotBefore condition"
 
@@ -97,9 +97,9 @@ If you use ADFS as your IdP, also set `NotBeforeSkew` in ADFS to 1 minute for Gi
 
 ## Error: "failure - Updated SAML validation returned an invalid result"
 
-This error can occur in version 3.17.0 or later of {% ifversion ghes %}your GitHub Enterprise Server instance. It indicates that GitHub is unable to properly process the SAML response it received from the identity provider. Please open a GitHub support ticket so that the GitHub Support and Engineering teams can investigate and address the issue.
+This error can occur in version 3.17.0 or later of your GitHub Enterprise Server instance. It indicates that GitHub is unable to properly process the SAML response it received from the identity provider. Please open a GitHub support ticket so that the GitHub Support and Engineering teams can investigate and address the issue.
 
-{% endif %}
+
 
 
 ## Users are repeatedly redirected to authenticate

@@ -52,11 +52,7 @@ GitHub provides a workflow template for Gradle that should work for most Java wi
    If you don't find the "Java with Gradle" workflow template, copy the following workflow code to a new file called `gradle.yml` in the `.github/workflows` directory of your repository.
 
    ```yaml copy
-   # This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
+   {% data reusables.actions.actions-not-certified-by-github-comment %}
    name: Java CI with Gradle
 
    on:
@@ -72,11 +68,9 @@ GitHub provides a workflow template for Gradle that should work for most Java wi
      build:
        runs-on: ubuntu-latest
        steps:
-       - uses: actions/checkout@v6
-
+       - uses: {% data reusables.actions.action-checkout %}
        - name: Set up JDK 17
-         uses: actions/setup-java@v4
-
+         uses: {% data reusables.actions.action-setup-java %}
          with:
            java-version: '17'
            distribution: 'temurin'
@@ -138,16 +132,10 @@ The workflow template will run the `build` task by default. In the default Gradl
 If you use different commands to build your project, or you want to use a different task, you can specify those. For example, you may want to run the `package` task that's configured in your `ci.gradle` file.
 
 ```yaml copy
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
+{% data reusables.actions.actions-not-certified-by-github-comment %}
 steps:
-  - uses: actions/checkout@v6
-
-  - uses: actions/setup-java@v4
-
+  - uses: {% data reusables.actions.action-checkout %}
+  - uses: {% data reusables.actions.action-setup-java %}
     with:
       java-version: '17'
       distribution: 'temurin'
@@ -172,16 +160,10 @@ After your build has succeeded and your tests have passed, you may want to uploa
 Gradle will usually create output files like JARs, EARs, or WARs in the `build/libs` directory. You can upload the contents of that directory using the `upload-artifact` action.
 
 ```yaml copy
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
+{% data reusables.actions.actions-not-certified-by-github-comment %}
 steps:
-  - uses: actions/checkout@v6
-
-  - uses: actions/setup-java@v4
-
+  - uses: {% data reusables.actions.action-checkout %}
+  - uses: {% data reusables.actions.action-setup-java %}
     with:
       java-version: '17'
       distribution: 'temurin'
@@ -193,8 +175,7 @@ steps:
     run: ./gradlew build
 
   - name: Upload build artifacts
-    uses: actions/upload-artifact@v4
-
+    uses: {% data reusables.actions.action-upload-artifact %}
     with:
       name: Package
       path: build/libs

@@ -12,7 +12,7 @@ You can contribute to GitHub's set of featured topics in the [github/explore](ht
 
 Repository admins can add any topics they'd like to a repository. Helpful topics to classify a repository include the repository's intended purpose, subject area, community, or language. Additionally, GitHub analyzes public repository content and generates suggested topics that repository admins can accept or reject. Private repository content is not analyzed and does not receive topic suggestions.
 
-Public and private{% elsif ghec or ghes %}Public, private, and internal repositories can have topics, although you will only see private repositories that you have access to in topic search results.
+Public and private repositories can have topics, although you will only see private repositories that you have access to in topic search results.
 
 You can search for repositories that are associated with a particular topic. For more information, see [Searching For Repositories](https://docs.github.com/en/search-github/searching-on-github/searching-for-repositories#search-by-topic). You can also search for a list of topics on GitHub. For more information, see [Searching Topics](https://docs.github.com/en/search-github/searching-on-github/searching-topics).
 

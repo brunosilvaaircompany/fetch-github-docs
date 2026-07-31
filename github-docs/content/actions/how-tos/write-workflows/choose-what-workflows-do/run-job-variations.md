@@ -59,8 +59,7 @@ jobs:
       matrix:
         version: {% raw %}${{ github.event.client_payload.versions }}{% endraw %}
     steps:
-      - uses: actions/setup-node@v7
-
+      - uses: {% data reusables.actions.action-setup-node %}
         with:
           node-version: {% raw %}${{ matrix.version }}{% endraw %}
 ```
@@ -168,8 +167,7 @@ jobs:
         run: |
           echo "$color" > color
       - name: Produce Artifact
-        uses: actions/upload-artifact@v4
-
+        uses: {% data reusables.actions.action-upload-artifact %}
         with:
           name: {% raw %}${{ matrix.color }}{% endraw %}
           path: color
@@ -185,8 +183,7 @@ jobs:
 
     steps:
     - name: Retrieve Artifact
-      uses: actions/download-artifact@v5
-
+      uses: {% data reusables.actions.action-download-artifact %}
       with:
         name: {% raw %}${{ matrix.color }}{% endraw %}
 

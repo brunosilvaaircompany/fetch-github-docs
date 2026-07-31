@@ -29,12 +29,12 @@ You can use organizations for free, with GitHub Free, which includes limited fea
 
 Organizations are limited to owning 100,000 repositories, to create additional repositories you can create additional organizations.
 
-{% ifversion fpt %}
+
 For more information about how you can try GitHub Enterprise Cloud for free, see [Setting up a trial of GitHub Enterprise Cloud](/admin/overview/setting-up-a-trial-of-github-enterprise-cloud).
 
 
 
-{% endif %}
+
 
 ## Organizations and enterprise accounts
 
@@ -50,23 +50,7 @@ For more information about how you can try GitHub Enterprise Cloud for free, see
 
 
 Enterprise accounts are a feature of GitHub Enterprise Cloud that allow owners to centrally manage policy and billing for multiple organizations. For more information, see [the GitHub Enterprise Cloud documentation](/enterprise-cloud@latest/organizations/collaborating-with-groups-in-organizations/about-organizations).
- Enterprise owners can set policy for all organizations in the enterprise account or allow organization owners to set the policy at the organization level. Organization owners cannot change settings enforced for your organization at the enterprise account level. If you have questions about a policy or setting for your organization, contact the owner of your enterprise account.
 
-
-
-
-
-
-If you currently use GitHub Enterprise Cloud with a single organization, we encourage you to create an enterprise account.
-
-
- For more information, see [Creating An Enterprise Account](https://docs.github.com/en/admin/managing-your-enterprise-account/creating-an-enterprise-account).
-
-Enterprise account owners can invite existing organization accounts to join their enterprise. For more information, see [Adding Organizations To Your Enterprise](https://docs.github.com/en/enterprise-cloud@latest/admin/managing-accounts-and-repositories/managing-organizations-in-your-enterprise/adding-organizations-to-your-enterprise#inviting-an-organization-to-join-your-enterprise-account).
-
-
-
-{% endif %}
 
 
 

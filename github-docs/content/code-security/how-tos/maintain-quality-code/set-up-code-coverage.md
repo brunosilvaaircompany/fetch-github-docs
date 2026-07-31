@@ -54,10 +54,10 @@ After your tests generate a Cobertura XML report, upload it to GitHub so coverag
 This example runs Python tests with `pytest-cov` and uploads the coverage report:
 
 ```yaml annotate copy
-# This workflow runs your test suite, generates a Cobertura XML coverage report, and uploads it to GitHub. Once this workflow is committed, coverage results appear automatically on every pull request.
+# This workflow runs your test suite, generates a Cobertura XML coverage report, and uploads it to {% data variables.product.github %}. Once this workflow is committed, coverage results appear automatically on every pull request.
 name: Code Coverage
 
-# Run on pushes to the default branch (to establish the baseline) and on pull requests (to compare against it). Code Quality compares PR branch coverage to the default branch, so both triggers are needed.
+# Run on pushes to the default branch (to establish the baseline) and on pull requests (to compare against it). {% data variables.product.prodname_code_quality_short %} compares PR branch coverage to the default branch, so both triggers are needed.
 on:
   push:
     branches: [main]
@@ -74,14 +74,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # Check out the PR head commit (not the merge commit) so coverage line numbers map correctly to the diff.
-      - uses: actions/checkout@v6
-
+      - uses: {% data reusables.actions.action-checkout %}
         with:
           ref: {% raw %}${{ github.event.pull_request.head.sha || github.sha }}{% endraw %}
 
       # Replace this step with whatever language setup your project uses (Node.js, Java, Go, etc.). The upload action works with any language that produces a Cobertura XML report.
-      - uses: actions/setup-python@v5
-
+      - uses: {% data reusables.actions.action-setup-python %}
         with:
           python-version: "3.x"
 
@@ -95,7 +93,7 @@ jobs:
       - name: Run tests with coverage
         run: pytest --cov=. --cov-report=xml
 
-      # This step replaces any third-party coverage upload (Codecov, Coveralls, etc.). After this runs, the `github-code-quality[bot]` bot posts a coverage summary directly on the pull request.
+      # This step replaces any third-party coverage upload (Codecov, Coveralls, etc.). After this runs, the `{% data variables.code-quality.pr_commenter %}` bot posts a coverage summary directly on the pull request.
       - name: Upload coverage report
         if: {% raw %}github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository{% endraw %}
         uses: actions/upload-code-coverage@v1

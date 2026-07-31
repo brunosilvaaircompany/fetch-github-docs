@@ -58,7 +58,7 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/OWNER/REPOSITORY")
+            url = uri("https://{% ifversion fpt or ghec %}maven.pkg.github.com{% else %}REGISTRY_URL{% endif %}/OWNER/REPOSITORY")
             credentials {
                 username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
                 password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
@@ -85,7 +85,7 @@ subprojects {
         repositories {
             maven {
                 name = "GitHubPackages"
-                url = uri("https://maven.pkg.github.com/OWNER/REPOSITORY")
+                url = uri("https://{% ifversion fpt or ghec %}maven.pkg.github.com{% else %}REGISTRY_URL{% endif %}/OWNER/REPOSITORY")
                 credentials {
                     username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
                     password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
@@ -111,7 +111,7 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/OWNER/REPOSITORY")
+            url = uri("https://{% ifversion fpt or ghec %}maven.pkg.github.com{% else %}REGISTRY_URL{% endif %}/OWNER/REPOSITORY")
             credentials {
                 username = project.findProperty("gpr.user") as String? ?: System.getenv("USERNAME")
                 password = project.findProperty("gpr.key") as String? ?: System.getenv("TOKEN")
@@ -138,7 +138,7 @@ subprojects {
         repositories {
             maven {
                 name = "GitHubPackages"
-                url = uri("https://maven.pkg.github.com/OWNER/REPOSITORY")
+                url = uri("https://{% ifversion fpt or ghec %}maven.pkg.github.com{% else %}REGISTRY_URL{% endif %}/OWNER/REPOSITORY")
                 credentials {
                     username = project.findProperty("gpr.user") as String? ?: System.getenv("USERNAME")
                     password = project.findProperty("gpr.key") as String? ?: System.getenv("TOKEN")
@@ -201,7 +201,7 @@ To use a published package from GitHub Packages, add the package as a dependency
    ```shell
    repositories {
        maven {
-           url = uri("https://maven.pkg.github.com/OWNER/REPOSITORY")
+           url = uri("https://{% ifversion fpt or ghec %}maven.pkg.github.com{% else %}REGISTRY_URL{% endif %}/OWNER/REPOSITORY")
            credentials {
                username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
                password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
@@ -215,7 +215,7 @@ To use a published package from GitHub Packages, add the package as a dependency
    ```shell
    repositories {
        maven {
-           url = uri("https://maven.pkg.github.com/OWNER/REPOSITORY")
+           url = uri("https://{% ifversion fpt or ghec %}maven.pkg.github.com{% else %}REGISTRY_URL{% endif %}/OWNER/REPOSITORY")
            credentials {
                username = project.findProperty("gpr.user") as String? ?: System.getenv("USERNAME")
                password = project.findProperty("gpr.key") as String? ?: System.getenv("TOKEN")

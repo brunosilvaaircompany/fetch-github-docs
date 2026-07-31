@@ -22,8 +22,8 @@ Repositories owned by personal accounts have a single owner who has full control
 | Manage security and analysis settings for the repository | [Managing Security And Analysis Settings For Your Repository](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-security-and-analysis-settings-for-your-repository) |
 |  |
 |  |
-| Enable the dependency graph for a private {% ifversion ghec %}or internal repository, or public fork | [Explore Dependencies](https://docs.github.com/en/code-security/how-tos/secure-your-supply-chain/secure-your-dependencies/explore-dependencies) |
-| {% endif %} |
+| Enable the dependency graph for a private or internal repository, or public fork | [Explore Dependencies](https://docs.github.com/en/code-security/how-tos/secure-your-supply-chain/secure-your-dependencies/explore-dependencies) |
+|  |
 | Delete and restore packages | [Deleting And Restoring A Package](https://docs.github.com/en/packages/learn-github-packages/deleting-and-restoring-a-package) |
 | Customize the repository's social media preview | [Customizing Your Repositorys Social Media Preview](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/customizing-your-repositorys-social-media-preview) |
 | Create a template from the repository | [Creating A Template Repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-template-repository) |

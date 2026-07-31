@@ -15,7 +15,7 @@ You can enforce policies to control the security settings for organizations owne
 
 
 
-If {% ifversion ghes %}your GitHub Enterprise Server instance uses LDAP or built-in authentication, enterprise{% else %}Enterprise{% endif %} owners can require that organization members, billing managers, and outside collaborators in all organizations owned by an enterprise use two-factor authentication to secure their user accounts. This policy is not available for enterprises with managed users.
+If your GitHub Enterprise Server instance uses LDAP or built-in authentication, enterprise owners can require that organization members, billing managers, and outside collaborators in all organizations owned by an enterprise use two-factor authentication to secure their user accounts. This policy is not available for enterprises with managed users.
 
 Before you can require two-factor authentication for all organizations owned by your enterprise, you must enable 2FA for your own account. For more information, see [Securing Your Account With Two Factor Authentication 2Fa](https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa).
 
@@ -70,7 +70,7 @@ Before you require secure methods of two-factor authentication, we recommend not
 
 ## Managing SSH certificate authorities for your enterprise
 
-You can use a SSH certificate authority (CA) to allow members of any organization owned by your enterprise to access that organization's repositories using SSH certificates you provide. {% ifversion ghec %}If your enterprise uses Enterprise Managed Users, enterprise{% elsif ghes %}Enterprise members can also be allowed to use the certificate to access personally-owned repositories.{% endif %} You can require that members use SSH certificates to access organization resources, unless SSH is disabled in your repository.
+You can use a SSH certificate authority (CA) to allow members of any organization owned by your enterprise to access that organization's repositories using SSH certificates you provide. If your enterprise uses Enterprise Managed Users, enterprise members can also be allowed to use the certificate to access personally-owned repositories. You can require that members use SSH certificates to access organization resources, unless SSH is disabled in your repository.
  For more information, see [About SSH Certificate Authorities](https://docs.github.com/en/organizations/managing-git-access-to-your-organizations-repositories/about-ssh-certificate-authorities).
 
 GitHub uses OpenSSH-format SSH user certificates to authenticate Git operations over SSH by validating the certificate's signature and fields (including its validity period) against a trusted SSH certificate authority (CA) configured at the organization and/or enterprise level.
@@ -102,7 +102,7 @@ If you add one certificate authority to an enterprise and another certificate au
 1. Optionally, to require members to use SSH certificates, select **Require SSH Certificates**, then click **Save**.
 
    > [!NOTE]
-   > When you require SSH certificates, users will not be able to authenticate to access the organization's repositories over HTTPS or with an unsigned SSH key.{% elsif ghec %}, regardless of whether the SSH key is authorized for an organization that requires authentication through an external identity system.
+   > When you require SSH certificates, users will not be able to authenticate to access the organization's repositories over HTTPS or with an unsigned SSH key.
    >
    > The requirement does not apply to authorized GitHub Apps (including user-to-server tokens), deploy keys, or to GitHub features such as GitHub Actions and Codespaces, which are trusted environments within the GitHub ecosystem.
 
@@ -111,7 +111,7 @@ If you add one certificate authority to an enterprise and another certificate au
 
 ### Managing access to user-owned repositories
 
-You can enable or disable access to user-owned repositories with an SSH certificate{% ifversion ghec %} if your enterprise uses managed user accounts. However, if your enterprise uses personal accounts on GitHub.com members cannot use the certificate to access personally-owned repositories.
+You can enable or disable access to user-owned repositories with an SSH certificate if your enterprise uses managed user accounts. However, if your enterprise uses personal accounts on GitHub.com members cannot use the certificate to access personally-owned repositories.
 
 
 1. In the top-right corner of GitHub Enterprise Server, click your profile picture, then click **Enterprise settings**.
@@ -122,7 +122,7 @@ You can enable or disable access to user-owned repositories with an SSH certific
 1. Under **{% octicon "gear" aria-hidden="true" aria-label="gear" %} Settings**, click **Authentication security**.
 
 1. Under "SSH Certificate Authorities", select the **Access User Owned Repository** checkbox.
-{% endif %}
+
 
 ### Deleting an SSH certificate authority
 
@@ -146,7 +146,7 @@ Deleting a CA immediately prevents GitHub from accepting SSH certificates signed
 
 ## Upgrading an SSH certificate authority
 
-CAs uploaded to your enterprise {% ifversion ghec %}prior to March 27th, 2024,{% elsif ghes %}before GitHub Enterprise Server version 3.13 allow the use of non-expiring certificates. To learn more about why expirations are now required for new CAs, see [About SSH Certificate Authorities](https://docs.github.com/en/organizations/managing-git-access-to-your-organizations-repositories/about-ssh-certificate-authorities#issuing-certificates). You can upgrade an existing CA to prevent it from issuing non-expiring certificates. For best security, we strongly recommend upgrading all your CAs once you validate you're not reliant on non-expiring certificates.
+CAs uploaded to your enterprise prior to March 27th, 2024, allow the use of non-expiring certificates. To learn more about why expirations are now required for new CAs, see [About SSH Certificate Authorities](https://docs.github.com/en/organizations/managing-git-access-to-your-organizations-repositories/about-ssh-certificate-authorities#issuing-certificates). You can upgrade an existing CA to prevent it from issuing non-expiring certificates. For best security, we strongly recommend upgrading all your CAs once you validate you're not reliant on non-expiring certificates.
 
 
 1. In the top-right corner of GitHub Enterprise Server, click your profile picture, then click **Enterprise settings**.
@@ -160,7 +160,7 @@ CAs uploaded to your enterprise {% ifversion ghec %}prior to March 27th, 2024,{%
 1. Read the warning, then click **Upgrade**.
 
 After upgrading the CA, non-expiring certificates signed by that CA will be rejected.
-{% endif %}
+
 
 
 

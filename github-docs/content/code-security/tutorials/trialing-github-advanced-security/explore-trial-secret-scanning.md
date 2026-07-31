@@ -60,9 +60,9 @@ You can enable validity checks to check whether detected tokens are still active
 
 ## Engage developers in security remediation
 
-Security campaigns provide a way for security teams to engage with developers to remediate security technical debt. They also provide a practical way to combine education in secret storage with examples of exposed secrets that your developers can fix. For more information, see [About Security Campaigns](https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/security-at-scale/about-security-campaigns) and [Best Practice Fix Alerts At Scale](https://docs.github.com/en/enterprise-cloud@latest/code-security/tutorials/secure-your-organization/best-practice-fix-alerts-at-scale){% ifversion fpt or ghes %} in the GitHub Enterprise Cloud documentation.
+Security campaigns provide a way for security teams to engage with developers to remediate security technical debt. They also provide a practical way to combine education in secret storage with examples of exposed secrets that your developers can fix. For more information, see [About Security Campaigns](https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/security-at-scale/about-security-campaigns) and [Best Practice Fix Alerts At Scale](https://docs.github.com/en/enterprise-cloud@latest/code-security/tutorials/secure-your-organization/best-practice-fix-alerts-at-scale) in the GitHub Enterprise Cloud documentation.
 
-{% endif %}
+
 
 ## Next steps
 

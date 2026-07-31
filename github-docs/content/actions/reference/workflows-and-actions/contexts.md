@@ -495,8 +495,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
-
+      - uses: {% data reusables.actions.action-checkout %}
         with:
           repository: {% raw %}${{ job.workflow_repository }}{% endraw %}
           ref: {% raw %}${{ job.workflow_sha }}{% endraw %}
@@ -673,8 +672,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
-
+      - uses: {% data reusables.actions.action-checkout %}
       - name: Build with logs
         run: |
           mkdir {% raw %}${{ runner.temp }}{% endraw %}/build_logs
@@ -682,8 +680,7 @@ jobs:
           exit 1
       - name: Upload logs on fail
         if: {% raw %}${{ failure() }}{% endraw %}
-        uses: actions/upload-artifact@v4
-
+        uses: {% data reusables.actions.action-upload-artifact %}
         with:
           name: Build failure logs
           path: {% raw %}${{ runner.temp }}{% endraw %}/build_logs
@@ -783,8 +780,7 @@ jobs:
     steps:
       - run: echo "Mock test logs" > test-job-{% raw %}${{ strategy.job-index }}{% endraw %}.txt
       - name: Upload logs
-        uses: actions/upload-artifact@v4
-
+        uses: {% data reusables.actions.action-upload-artifact %}
         with:
           name: Build log for job {% raw %}${{ strategy.job-index }}{% endraw %}
           path: test-job-{% raw %}${{ strategy.job-index }}{% endraw %}.txt
@@ -828,8 +824,7 @@ jobs:
         os: [ubuntu-latest, windows-latest]
         node: [14, 16]
     steps:
-      - uses: actions/setup-node@v7
-
+      - uses: {% data reusables.actions.action-setup-node %}
         with:
           node-version: {% raw %}${{ matrix.node }}{% endraw %}
       - name: Output node version

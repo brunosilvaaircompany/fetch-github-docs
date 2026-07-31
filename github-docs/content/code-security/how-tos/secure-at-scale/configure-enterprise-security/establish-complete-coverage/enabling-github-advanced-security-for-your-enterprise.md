@@ -20,7 +20,7 @@ For guidance on a phased deployment of GitHub Advanced Security, see [Introducti
 
 1. At the top of the page, click {% octicon "gear" aria-hidden="true" aria-label="gear" %} **Settings**.
 
-1. Under **{% octicon "gear" aria-hidden="true" aria-label="gear" %} Settings**, click **Licensing{% elsif ghes %}License**.
+1. Under **{% octicon "gear" aria-hidden="true" aria-label="gear" %} Settings**, click **Licensing**.
 
 1. If your license includes GitHub Secret Protection, GitHub Code Security, or GitHub Advanced Security, the license page includes a section showing details of current usage.
 

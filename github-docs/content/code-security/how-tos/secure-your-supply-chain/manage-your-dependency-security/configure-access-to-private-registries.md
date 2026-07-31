@@ -58,12 +58,12 @@ For more information about how automatic access works, see [Automatic Dependabot
 
 
 You can configure Dependabot's access to private registries at the org-level.
-{% ifversion org-private-registry-oidc %}
+
 Organization-level registries support **Token**, **Username and password**, and **OIDC** authentication.
 
 For more information about configuration, see [Giving Org Access Private Registries](https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/manage-usage-and-access/giving-org-access-private-registries).
 
-{% endif %}
+
 
 You can also configure Dependabot's access to private registries in the `dependabot.yml` file.
 The top-level `registries` key is optional and specifies authentication details.
@@ -206,7 +206,7 @@ Dependabot can use OpenID Connect (OIDC) to authenticate with private registries
 
 With OIDC-based authentication, Dependabot update jobs can dynamically obtain short-lived credentials from your cloud identity provider, just like GitHub Actions workflows using OIDC federation.
 
-{% ifversion org-private-registry-oidc %}
+
 
 > [!TIP]
 > OIDC authentication is also available for **organization-level** private registries, which you can configure through the organization settings UI or the REST API. For more information, see [Giving Org Access Private Registries](https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/manage-usage-and-access/giving-org-access-private-registries#configuring-oidc-authentication-for-a-private-registry).
@@ -300,7 +300,7 @@ registries:
 
 For more information about how OIDC works, see [Openid Connect](https://docs.github.com/en/actions/concepts/security/openid-connect).
 
-{% endif %}
+
 
 ## Allowing external code execution
 

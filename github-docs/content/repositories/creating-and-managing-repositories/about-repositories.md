@@ -48,15 +48,12 @@ With GitHub Free for personal accounts and organizations, you can work with unli
 
 You can restrict who has access to a repository by choosing a repository's visibility: public, internal, or private.
 
-When you create a repository, you can choose to make the repository public or private. If you're creating the repository in an organization{% ifversion ghec %} that is owned by an enterprise account, you can also choose to make the repository internal.{% endif %} Repositories in organizations that use GitHub Enterprise Cloud and are owned by an enterprise account can also be created with internal visibility. For more information, see [the GitHub Enterprise Cloud documentation](/enterprise-cloud@latest/repositories/creating-and-managing-repositories/about-repositories).
+When you create a repository, you can choose to make the repository public or private. If you're creating the repository in an organization that is owned by an enterprise account, you can also choose to make the repository internal. Repositories in organizations that use GitHub Enterprise Cloud and are owned by an enterprise account can also be created with internal visibility. For more information, see [the GitHub Enterprise Cloud documentation](/enterprise-cloud@latest/repositories/creating-and-managing-repositories/about-repositories).
 
 
-* {% ifversion ghec %}If your account is not a managed user account, you can create public repositories. Public repositories are accessible to everyone on the internet.
+* If your account is not a managed user account, you can create public repositories. Public repositories are accessible to everyone on the internet.
 * Private repositories are only accessible to you, people you explicitly share access with, and, for organization repositories, certain organization members.
-{%- elsif ghes %}
-* If your GitHub Enterprise Server instance is not in private mode or behind a firewall, public repositories are accessible to everyone on the internet. Otherwise, public repositories are available to everyone using your GitHub Enterprise Server instance, including outside collaborators.
-* Private repositories are only accessible to you, people you explicitly share access with, and, for organization repositories, certain organization members.
-{%- endif %}
+
 
 * Internal repositories are accessible to all enterprise members. For more information, see [About internal repositories](#about-internal-repositories).
 
@@ -84,7 +81,7 @@ People with admin permissions for a repository can change an existing repository
 If your organization is owned by an enterprise account, you can use internal repositories to practice "innersource" within your enterprise. Members of your enterprise can collaborate using open source methodologies without sharing proprietary information publicly, even with private mode disabled.
  For more information on innersource, see [Use Innersource](https://docs.github.com/en/admin/concepts/enterprise-best-practices/use-innersource).
 
-{% ifversion ghec %}
+
 
 > [!NOTE]
 > You can only create internal repositories if you use GitHub Enterprise Cloud with an enterprise account. An enterprise account is a separate type of account that allows a central point of management for multiple organizations. For more information, see [Types Of GitHub Accounts](https://docs.github.com/en/get-started/learning-about-github/types-of-github-accounts).
@@ -100,7 +97,7 @@ Internal repositories are the default setting for all new repositories created i
 
 By default, enterprise members can fork an internal repository into any organization where the user can create repositories. Organization owners can also allow users to create a fork owned by a user account, and can manage the forking policy for an organization. Enterprise owners can manage the forking policy for some or all organizations within an enterprise. For more information, see [Managing The Forking Policy For Your Organization](https://docs.github.com/en/organizations/managing-organization-settings/managing-the-forking-policy-for-your-organization) and [Enforcing Repository Management Policies In Your Enterprise](https://docs.github.com/en/admin/enforcing-policies/enforcing-policies-for-your-enterprise/enforcing-repository-management-policies-in-your-enterprise#enforcing-a-policy-for-forking-private-or-internal-repositories).
 
-{% endif %}
+
 
 ## Next steps
 

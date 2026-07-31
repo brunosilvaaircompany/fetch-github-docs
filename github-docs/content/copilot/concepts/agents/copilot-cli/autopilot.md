@@ -102,8 +102,7 @@ Use the `--allow-all` (or `--yolo`) option to grant Copilot permission to use al
 Example usage:
 
 ```shell
-copilot --autopilot --yolo --max-autopilot-continues 10 -p "YOUR PROMPT HERE"
-
+{% data reusables.cli.autopilot-programmatic-prompt %}
 ```
 
 ## Summary

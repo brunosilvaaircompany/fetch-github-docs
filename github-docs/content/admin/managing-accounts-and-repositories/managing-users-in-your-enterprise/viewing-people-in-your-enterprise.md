@@ -192,7 +192,7 @@ You can view a list of all dormant users  who have not been suspended and who ar
 
 ## Filtering by member type in an enterprise with managed users
 
-If your enterprise uses Enterprise Managed Users, you{% elsif ghes %}You can filter the member list of an organization by type to determine if memberships are managed through an IdP or managed directly. Memberships managed through an IdP were added through an IdP group, and the IdP group was connected to a team within the organization. Memberships managed directly were added to the organization manually. The way a membership is managed in an organization determines how it must be removed. You can use this filter to determine how members were added to an organization, so you know how to remove them. For more information, see [Enterprise Managed Users](https://docs.github.com/en/enterprise-cloud@latest/admin/concepts/identity-and-access-management/enterprise-managed-users#about-organization-membership-management).
+If your enterprise uses Enterprise Managed Users, you can filter the member list of an organization by type to determine if memberships are managed through an IdP or managed directly. Memberships managed through an IdP were added through an IdP group, and the IdP group was connected to a team within the organization. Memberships managed directly were added to the organization manually. The way a membership is managed in an organization determines how it must be removed. You can use this filter to determine how members were added to an organization, so you know how to remove them. For more information, see [Enterprise Managed Users](https://docs.github.com/en/enterprise-cloud@latest/admin/concepts/identity-and-access-management/enterprise-managed-users#about-organization-membership-management).
 
 
 1. In the top-right corner of GitHub Enterprise Server, click your profile picture, then click **Enterprise settings**.
@@ -220,13 +220,13 @@ If you use SAML authentication and SCIM provisioning, you can filter members bas
 
 1. Select **Account Type**, then choose from the following options.
 
-   * **Built-in:** Users with local accounts on {% ifversion ghes %}your GitHub Enterprise Server instance who authenticate with a username and password.
+   * **Built-in:** Users with local accounts on your GitHub Enterprise Server instance who authenticate with a username and password.
 
    * **SAML JIT provisioned:** Users who authenticate with SAML via an identity provider and were created through just-in-time (JIT) provisioning when they first signed in. These users are not linked to SCIM identities.
    * **SCIM provisioned:** Users who were created and managed through SCIM provisioning from your identity provider. These users are linked to SCIM identities.
 
 
-{% endif %}
+
 
 
 Enterprise administrators with CLI access can export a full CSV of SCIM provisioned user identities using the [ghe-scim-identities-csv](/admin/administering-your-instance/administering-your-instance-from-the-command-line/command-line-utilities#ghe-scim-identities-csv) tool.
@@ -263,28 +263,7 @@ You can see which people in your enterprise have enabled two-factor authenticati
 
    ![Screenshot of the list of enterprise members. A dropdown menu, labeled "Two-factor authentication", is expanded and outlined in orange.](/assets/images/help/2fa/filter-enterprise-members-by-2fa.png)
 
-.
 
-
-> [!NOTE]
-> As of March 2023, GitHub required all users who contribute code on GitHub.com to enable one or more forms of two-factor authentication (2FA). If you were in an eligible group, you would have received a notification email when that group was selected for enrollment, marking the beginning of a 45-day 2FA enrollment period, and you would have seen banners asking you to enroll in 2FA on GitHub.com. If you didn't receive a notification, then you were not part of a group required to enable 2FA, though we strongly recommend it.
-
->
-> For more information about the 2FA enrollment rollout, see [this blog post](https://github.blog/2023-03-09-raising-the-bar-for-software-security-github-2fa-begins-march-13).
-
-
-
-
-1. In the top-right corner of GitHub Enterprise Server, click your profile picture, then click **Enterprise settings**.
-
-
-1. At the top of the page, click **{% octicon "person" aria-hidden="true" aria-label="person" %} People**.
-
-1. To view enterprise members who have enabled or disabled two-factor authentication, on the right, select **Two-factor authentication**, then select **Secure** or **Disabled**.
-
-   ![Screenshot of the list of organization members. A dropdown menu, labeled "Two-factor Authentication", is expanded and outlined in orange.](/assets/images/help/2fa/ghes-filter-org-members-by-2fa.png)
-
-{% endif %}
 
 ## Further reading
 

@@ -52,16 +52,7 @@ The [advanced search](https://github.com/search/advanced) page provides a visual
 
 ## Searching repositories on GitHub.com from your private enterprise environment
 
-If you use GitHub.com or GHE.com as well as GitHub Enterprise Server, and an enterprise owner has enabled unified search, you can search across both environments at the same time from GitHub Enterprise Server. For more information, see [About Searching On GitHub](https://docs.github.com/en/enterprise-server@latest/search-github/getting-started-with-searching-on-github/about-searching-on-github#searching-repositories-on-githubcom-from-your-private-enterprise-environment) in the GitHub Enterprise Server documentation.{% elsif ghes %}[Enabling Unified Search For Your Enterprise](https://docs.github.com/en/admin/configuring-settings/configuring-github-connect/enabling-unified-search-for-your-enterprise).
-
-Your enterprise owner on GitHub Enterprise Server can separately enable unified search for all public repositories on GitHub.com and for private repositories owned by the organization or enterprise on GitHub.com or GHE.com that is connected to GitHub Enterprise Server through GitHub Connect.
-
-Before you can use unified search for private repositories, you must connect your user accounts across environments. For more information, see [Enabling Repository Search Across Environments](https://docs.github.com/en/search-github/getting-started-with-searching-on-github/enabling-repository-search-across-environments).
-
-When you search from GitHub Enterprise Server, only private repositories that you have access to and that are owned by the connected organization or enterprise account will be included in search results. Neither you nor anyone else will be able to search private repositories owned by your user account on GitHub.com or GHE.com from GitHub Enterprise Server.
-
-To limit your search to one environment, you can use a filter option on the {% ifversion fpt or ghec %}[advanced search](https://github.com/search/advanced) page or you can use the `environment:` search prefix. To only search for content on GitHub Enterprise Server, use the search syntax `environment:local`. To only search for content on GitHub.com, use `environment:github`.
-{% endif %}
+If you use GitHub.com or GHE.com as well as GitHub Enterprise Server, and an enterprise owner has enabled unified search, you can search across both environments at the same time from GitHub Enterprise Server. For more information, see [About Searching On GitHub](https://docs.github.com/en/enterprise-server@latest/search-github/getting-started-with-searching-on-github/about-searching-on-github#searching-repositories-on-githubcom-from-your-private-enterprise-environment) in the GitHub Enterprise Server documentation.
 
 ## Further reading
 

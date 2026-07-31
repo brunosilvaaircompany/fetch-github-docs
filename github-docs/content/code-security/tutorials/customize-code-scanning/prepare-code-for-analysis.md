@@ -7,7 +7,7 @@
 
 
 > [!NOTE]
-> This article describes the features available with the CodeQL CLI 2.20.7{% elsif ghes < 3.19 %}2.21.4{% elsif ghes < 3.20 %}2.22.4{% elsif ghes < 3.21 %}2.23.9{% elsif ghes < 3.22 %}2.24.3 bundle included in the initial release of GitHub Enterprise Server {{ allVersions[currentVersion].currentRelease }}.
+> This article describes the features available with the CodeQL CLI 2.20.7 bundle included in the initial release of GitHub Enterprise Server {{ allVersions[currentVersion].currentRelease }}.
 >
 > If your site administrator has updated your CodeQL CLI version to a newer release, please see the [GitHub Enterprise Cloud version](/enterprise-cloud@latest/{{ currentArticle }}) of this article for information on the latest features.
 
@@ -57,8 +57,6 @@ GitHub Actions workflows | `actions`
 | Ruby | `ruby` |
 |  |
 Rust | `rust`
-| {% else ifversion codeql-rust-public-preview %}
-| Rust (public preview) | `rust` |
 | 
 | Swift | `swift` |
 
@@ -323,7 +321,7 @@ The following examples are designed to give you an idea of some of the build com
   # and stop all running Bazel server processes.
   bazel clean --expunge
 
-  # Build using the following Bazel flags, to help CodeQL detect the build:
+  # Build using the following Bazel flags, to help {% data variables.product.prodname_codeql %} detect the build:
   # `--spawn_strategy=local`: build locally, instead of using a distributed build
   # `--nouse_action_cache`: turn off build caching, which might prevent recompilation of source code
   # `--noremote_accept_cached`, `--noremote_upload_local_results`: avoid using a remote cache
@@ -333,7 +331,7 @@ The following examples are designed to give you an idea of some of the build com
 
   # After building, stop all running Bazel server processes.
   # This ensures future build commands start in a clean Bazel server process
-  # without CodeQL attached.
+  # without {% data variables.product.prodname_codeql %} attached.
   bazel shutdown
   ```
 
@@ -398,15 +396,15 @@ The following example shows how you could use indirect build tracing in an Azure
 
 ```yaml
 steps:
-    # Download the CodeQL CLI and query packs...
+    # Download the {% data variables.product.prodname_codeql_cli %} and query packs...
     # Check out the repository ...
 
     # Run any pre-build tasks, for example, restore NuGet dependencies...
 
-    # Initialize the CodeQL database.
-    # In this example, the CodeQL CLI has been downloaded and placed on the PATH.
+    # Initialize the {% data variables.product.prodname_codeql %} database.
+    # In this example, the {% data variables.product.prodname_codeql_cli %} has been downloaded and placed on the PATH.
     - task: CmdLine@1
-       displayName: Initialize CodeQL database
+       displayName: Initialize {% data variables.product.prodname_codeql %} database
       inputs:
           # Assumes the source code is checked out to the current working directory.
           # Creates a database at `<current working directory>/db`.
@@ -417,7 +415,7 @@ steps:
     # and set them so they are available for subsequent commands
     # in the build pipeline. This is done in PowerShell in this example.
     - task: PowerShell@1
-       displayName: Set CodeQL environment variables
+       displayName: Set {% data variables.product.prodname_codeql %} environment variables
        inputs:
           targetType: inline
           script: >
@@ -443,7 +441,7 @@ steps:
 
     # Read and set the generated environment variables to end build tracing. This is done in PowerShell in this example.
     - task: PowerShell@1
-       displayName: Clear CodeQL environment variables
+       displayName: Clear {% data variables.product.prodname_codeql %} environment variables
        inputs:
           targetType: inline
           script: >
@@ -457,7 +455,7 @@ steps:
              }
 
     - task: CmdLine@2
-       displayName: Finalize CodeQL database
+       displayName: Finalize {% data variables.product.prodname_codeql %} database
        inputs:
           script: 'codeql database finalize db'
 

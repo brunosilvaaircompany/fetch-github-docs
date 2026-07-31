@@ -108,7 +108,7 @@ For more information, see [Dependabot Alerts](https://docs.github.com/en/code-se
 
 Dependabot malware alerts flag malicious dependencies in your repositories. Dependabot generates alerts using the GitHub Advisory Database, which contains advisories for known vulnerabilities and malicious packages.
 
-Dependabot scans for malicious packages and sends alerts when:{% ifversion fpt or ghec %}
+Dependabot scans for malicious packages and sends alerts when:
 * A new advisory is added to the GitHub Advisory Database
 * The dependency graph for a repository changes
 
@@ -118,7 +118,7 @@ You can view malware alerts for a repository:
 
 Each alert includes a link to the affected file in the project, as well as the patch version number for the package (if available).
 
-{% endif %}
+
 
 #### What are Dependabot updates?
 

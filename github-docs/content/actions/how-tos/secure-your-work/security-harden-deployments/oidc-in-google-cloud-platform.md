@@ -85,11 +85,7 @@ This example has a job called `Get_OIDC_ID_token` that uses actions to request a
 This action exchanges a GitHub OIDC token for a Google Cloud access token, using [Workload Identity Federation](https://cloud.google.com/iam/docs/workload-identity-federation).
 
 ```yaml copy
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
+{% data reusables.actions.actions-not-certified-by-github-comment %}
 name: List services in GCP
 on:
   pull_request:

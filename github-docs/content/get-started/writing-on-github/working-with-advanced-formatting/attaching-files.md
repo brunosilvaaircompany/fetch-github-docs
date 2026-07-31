@@ -21,8 +21,7 @@ The maximum file size is:
 
 * 10MB for images and gifs
 * 10MB for videos uploaded to a repository owned by a user or organization on a free GitHub plan
-* 100MB for videos uploaded to a repository owned by a user or organization on a paid GitHub plan{% elsif ghes %}
-* 100MB for videos
+* 100MB for videos uploaded to a repository owned by a user or organization on a paid GitHub plan
 * 25MB for all other files
 
 > [!NOTE]

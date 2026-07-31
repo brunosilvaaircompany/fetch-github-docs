@@ -55,7 +55,7 @@ If you enable security and analysis features, GitHub performs read-only analysis
 
 1. In the "Security" section of the sidebar, click **{% octicon "codescan" aria-hidden="true" aria-label="codescan" %} Advanced Security**.
 
-1. Under "Advanced Security", to the right of the feature, click **Disable** or **Enable**. The control for "Secret Protection and Code Security" is disabled if your organization{% elsif ghec or ghes %}enterprise has no available licenses.
+1. Under "Advanced Security", to the right of the feature, click **Disable** or **Enable**. The control for "Secret Protection and Code Security" is disabled if your organization has no available licenses.
 
    > [!NOTE]
    > If you disable Secret Protection and Code Security, dependency review, secret scanning alerts for users and code scanning are disabled. Any workflows, SARIF uploads, or API calls for code scanning will fail. If Code Security is re-enabled, code scanning will return to its previous state.

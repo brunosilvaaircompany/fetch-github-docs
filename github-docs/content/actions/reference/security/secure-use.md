@@ -122,13 +122,13 @@ You can help mitigate this risk by following these good practices:
   
   
   
-  GitHub offers policies at the {% ifversion ghec or ghes %}repository, organization, and enterprise level to require actions to be pinned to a full-length commit SHA:
+  GitHub offers policies at the repository, organization, and enterprise level to require actions to be pinned to a full-length commit SHA:
     * To configure the policy at the repository level, see [Managing GitHub Actions Settings For A Repository](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository#managing-github-actions-permissions-for-your-repository).
     * To configure the policy at the organization level, see [Disabling Or Limiting GitHub Actions For Your Organization](https://docs.github.com/en/organizations/managing-organization-settings/disabling-or-limiting-github-actions-for-your-organization#managing-github-actions-permissions-for-your-organization).
     
     * To configure the policy at the enterprise level, see [Enforcing Policies For GitHub Actions In Your Enterprise](https://docs.github.com/en/admin/enforcing-policies/enforcing-policies-for-your-enterprise/enforcing-policies-for-github-actions-in-your-enterprise#policies).
     
-  {%- endif %}
+  
 
 * **Audit the source code of the action**
 
@@ -231,7 +231,7 @@ For more information on how to enable code scanning, see [Configure Code Scannin
 
 GitHub-hosted runners take measures to help you mitigate security risks.
 
-{% ifversion actions-sbom %}
+
 
 #### Reviewing the supply chain for GitHub-hosted runners
 
@@ -246,7 +246,7 @@ SBOMs are available for Ubuntu, Windows, and macOS runner images maintained by G
 GitHub-hosted runners are provisioned with an `etc/hosts` file that blocks network access to various cryptocurrency mining pools and malicious sites. Hosts such as MiningMadness.com and cpu-pool.com are rerouted to localhost so that they do not present a significant security risk.
  For more information, see [GitHub Hosted Runners](https://docs.github.com/en/actions/concepts/runners/github-hosted-runners).
 
-{% endif %}
+
 
 ### Hardening for self-hosted runners
 
@@ -254,11 +254,11 @@ GitHub-hosted runners are provisioned with an `etc/hosts` file that blocks netwo
 **GitHub-hosted** runners execute code within ephemeral and clean isolated virtual machines, meaning there is no way to persistently compromise this environment, or otherwise gain access to more information than was placed in this environment during the bootstrap process.
 
 
-**Self-hosted**{% elsif ghes %}Self-hosted runners for GitHub do not have guarantees around running in ephemeral clean virtual machines, and can be persistently compromised by untrusted code in a workflow.
+**Self-hosted** runners for GitHub do not have guarantees around running in ephemeral clean virtual machines, and can be persistently compromised by untrusted code in a workflow.
 
-As a result, self-hosted runners should almost [never be used for public repositories](/actions/reference/security/secure-use) on GitHub, because any user can open pull requests against the repository and compromise the environment. Similarly, be{% elsif ghes %}Be cautious when using self-hosted runners on private or internal repositories, as anyone who can fork the repository and open a pull request (generally those with read access to the repository) are able to compromise the self-hosted runner environment, including gaining access to secrets and the `GITHUB_TOKEN` which, depending on its settings, can grant write access to the repository. Although workflows can control access to environment secrets by using environments and required reviews, these workflows are not run in an isolated environment and are still susceptible to the same risks when run on a self-hosted runner.
+As a result, self-hosted runners should almost [never be used for public repositories](/actions/reference/security/secure-use) on GitHub, because any user can open pull requests against the repository and compromise the environment. Similarly, be cautious when using self-hosted runners on private or internal repositories, as anyone who can fork the repository and open a pull request (generally those with read access to the repository) are able to compromise the self-hosted runner environment, including gaining access to secrets and the `GITHUB_TOKEN` which, depending on its settings, can grant write access to the repository. Although workflows can control access to environment secrets by using environments and required reviews, these workflows are not run in an isolated environment and are still susceptible to the same risks when run on a self-hosted runner.
 
-Enterprise owners and organization {% elsif fpt %}Organization owners can choose which repositories are allowed to create repository-level self-hosted runners. Users with the “Manage organization runners and runner groups” permission can only choose which repositories are allowed to create repository-level self-hosted runners for repositories in your organization.
+Enterprise owners and organization owners can choose which repositories are allowed to create repository-level self-hosted runners. Users with the “Manage organization runners and runner groups” permission can only choose which repositories are allowed to create repository-level self-hosted runners for repositories in your organization.
 
 For more information about custom organization roles, see [Permissions Of Custom Organization Roles](https://docs.github.com/en/organizations/managing-peoples-access-to-your-organization-with-roles/permissions-of-custom-organization-roles).
 

@@ -168,7 +168,7 @@ safe-outputs:
 
 Review issue activity from the last 7 days in this repository.
 
-Create a GitHub issue that includes:
+Create a {% data variables.product.github %} issue that includes:
 
 - Total issues opened and closed this week.
 - The top recurring themes from issue titles and descriptions.

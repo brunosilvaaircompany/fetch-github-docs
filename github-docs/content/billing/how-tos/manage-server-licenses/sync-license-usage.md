@@ -29,7 +29,7 @@ To enable license sync, you must:
 
 1. At the top of the page, click {% octicon "gear" aria-hidden="true" aria-label="gear" %} **Settings**.
 
-1. Under **{% octicon "gear" aria-hidden="true" aria-label="gear" %} Settings**, click **Licensing{% elsif ghes %}License**.
+1. Under **{% octicon "gear" aria-hidden="true" aria-label="gear" %} Settings**, click **Licensing**.
 
 1. Under "License sync", click **{% octicon "sync" aria-hidden="true" aria-label="sync" %} Sync now**.
 
@@ -42,7 +42,7 @@ You can download a JSON file from GitHub Enterprise Server and upload the file t
 
 1. At the top of the page, click {% octicon "gear" aria-hidden="true" aria-label="gear" %} **Settings**.
 
-1. Under **{% octicon "gear" aria-hidden="true" aria-label="gear" %} Settings**, click **Licensing{% elsif ghes %}License**.
+1. Under **{% octicon "gear" aria-hidden="true" aria-label="gear" %} Settings**, click **Licensing**.
 
 1. In the "User licenses" section, under "Quick links", to download a file containing your current license usage on GitHub Enterprise Server, click **Export license usage**.
 

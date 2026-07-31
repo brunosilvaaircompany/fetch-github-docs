@@ -67,11 +67,9 @@ jobs:
       matrix:
         node-version: [12.x, 14.x, 16.x]
     steps:
-    - uses: actions/checkout@v6
-
+    - uses: {% data reusables.actions.action-checkout %}
     - name: Use Node.js {% raw %}${{ matrix.node-version }}{% endraw %}
-      uses: actions/setup-node@v7
-
+      uses: {% data reusables.actions.action-setup-node %}
       with:
         node-version: {% raw %}${{ matrix.node-version }}{% endraw %}
         cache: 'npm'
@@ -105,5 +103,5 @@ See [Events That Trigger Workflows](https://docs.github.com/en/actions/reference
 A protected branch can also require a status check from a specific GitHub App. If you see a message similar to the following, verify that the check listed in the merge box was set by the expected app.
 
 ```text
-Required status check "build" was not set by the expected GitHub App.
+Required status check "build" was not set by the expected {% data variables.product.prodname_github_app %}.
 ```

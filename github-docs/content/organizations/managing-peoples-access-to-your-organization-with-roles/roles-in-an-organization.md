@@ -99,11 +99,11 @@ To manage access to repositories for outside collaborators or repository collabo
 * [Removing An Outside Collaborator From An Organization Repository](https://docs.github.com/en/organizations/managing-user-access-to-your-organizations-repositories/managing-outside-collaborators/removing-an-outside-collaborator-from-an-organization-repository)
 
 
-To control who can add outside collaborators{% ifversion repository-collaborators %} or repository collaborators to repositories, see:
+To control who can add outside collaborators or repository collaborators to repositories, see:
 
 * [Setting Permissions For Adding Outside Collaborators](https://docs.github.com/en/organizations/managing-organization-settings/setting-permissions-for-adding-outside-collaborators)
 * [Enforcing Repository Management Policies In Your Enterprise](https://docs.github.com/en/admin/enforcing-policies/enforcing-policies-for-your-enterprise/enforcing-repository-management-policies-in-your-enterprise#enforcing-a-policy-for-inviting-outside-collaborators-to-repositories)
-{% endif %}
+
 
 ## Next steps
 

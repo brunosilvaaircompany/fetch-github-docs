@@ -69,13 +69,13 @@ You can enable Dependabot alerts for all eligible repositories in your organizat
 
 ## Managing Dependabot alerts for your enterprise
 
-{% ifversion security-configuration-enterprise-level %}
+
 
 Security configurations, which are collections of security settings, allow you to manage Dependabot alerts for your enterprise. You can configure your own custom security configuration to have the enablement settings to meet the specific security needs of your enterprise. See [Create Custom Configuration](https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-enterprise-security/establish-complete-coverage/create-custom-configuration).
 
 
 
-{% endif %}
+
 
 ## Managing Dependabot alerts at scale with rules
 

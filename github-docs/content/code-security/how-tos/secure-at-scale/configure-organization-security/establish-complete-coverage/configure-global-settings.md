@@ -89,15 +89,6 @@ You can recommend that repositories in your organization use the "Extended" quer
 
 
 
-* [Enabling AI-powered security detections](#enabling-ai-powered-security-detections)
-
-* [Expanding CodeQL analysis](#expanding-codeql-analysis)
-
-* [Continuing scans on inactive repositories](#continuing-scans-on-inactive-repositories)
-
-
-{% endif %}
-
 ### Recommending the extended query suite for default setup
 
 Code scanning offers specific groups of CodeQL queries, called CodeQL query suites, to run against your code. By default, the "Default" query suite is run. GitHub also offers the "Extended" query suite, which contains all the queries in the "Default" query suite, plus additional queries with lower precision and severity. To suggest the "Extended" query suite across your organization, select **Recommend the extended query suite for repositories enabling default setup**. For more information on built-in query suites for CodeQL default setup, see [Codeql Query Suites](https://docs.github.com/en/code-security/concepts/code-scanning/codeql/codeql-query-suites).
@@ -133,7 +124,7 @@ By default, code scanning default setup pauses weekly scheduled scans on reposit
 
 ## Configuring global secret scanning settings
 
-Secret scanning is a security tool that scans the entire Git history of repositories, as well as issues, pull requests, discussions, and wikis{% elsif ghes < 3.19 %}, pull requests, and discussions in those repositories, for leaked secrets that have been accidentally committed, such as tokens or private keys.
+Secret scanning is a security tool that scans the entire Git history of repositories, as well as issues, pull requests, discussions, and wikis in those repositories, for leaked secrets that have been accidentally committed, such as tokens or private keys.
 
 
 You can customize several global settings for secret scanning:

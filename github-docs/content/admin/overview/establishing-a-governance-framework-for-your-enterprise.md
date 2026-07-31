@@ -80,7 +80,7 @@ With **secret scanning**, you can scan your code to detect sensitive information
 
 To learn more, see [Secret Scanning](https://docs.github.com/en/code-security/concepts/secret-security/secret-scanning).
 
-Secret scanning can be enabled at the enterprise, organization, and repository level. See [Configure Secret Scanning](https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-enterprise-security/configure-specific-tools/configure-secret-scanning){% elsif ghec %}[Organization Security](https://docs.github.com/en/code-security/concepts/security-at-scale/organization-security) for enablement at enterprise level.
+Secret scanning can be enabled at the enterprise, organization, and repository level. See [Configure Secret Scanning](https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-enterprise-security/configure-specific-tools/configure-secret-scanning) for enablement at enterprise level.
 
 ### Push protection
 
@@ -123,4 +123,4 @@ Code scanning can be integrated to your CI/CD pipeline, providing continuous mon
 
 To get started quickly with code scanning, we recommend you use the default setup. See [Configure Code Scanning](https://docs.github.com/en/code-security/how-tos/find-and-fix-code-vulnerabilities/configure-code-scanning/configure-code-scanning).
 
-Code scanning can be enabled at the enterprise, organization, and repository level. See [Configuring Code Scanning For Your Appliance](https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-enterprise-security/configure-specific-tools/configuring-code-scanning-for-your-appliance){% elsif ghec %}[Organization Security](https://docs.github.com/en/code-security/concepts/security-at-scale/organization-security) for enablement at enterprise level.
+Code scanning can be enabled at the enterprise, organization, and repository level. See [Configuring Code Scanning For Your Appliance](https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-enterprise-security/configure-specific-tools/configuring-code-scanning-for-your-appliance) for enablement at enterprise level.

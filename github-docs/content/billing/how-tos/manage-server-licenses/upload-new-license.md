@@ -18,7 +18,7 @@ If you'd like to renew or add user licenses to GitHub Enterprise, or if you have
 
 1. At the top of the page, click {% octicon "gear" aria-hidden="true" aria-label="gear" %} **Settings**.
 
-1. Under **{% octicon "gear" aria-hidden="true" aria-label="gear" %} Settings**, click **Licensing{% elsif ghes %}License**.
+1. Under **{% octicon "gear" aria-hidden="true" aria-label="gear" %} Settings**, click **Licensing**.
 
 1. In the "User licenses" section, under "Quick links", click **Update license**. If prompted, enter the root password for your instance.
 
@@ -30,16 +30,16 @@ If you'd like to renew or add user licenses to GitHub Enterprise, or if you have
 
 ## Uploading your license with the REST API
 
-You can use the REST API to upload a license to your GitHub Enterprise Server instance. See [Manage Ghes](https://docs.github.com/en/enterprise-server@latest/rest/enterprise-admin/manage-ghes#upload-an-enterprise-license) in the documentation for GitHub Enterprise Server.{% elsif ghes %}See [Manage Ghes](https://docs.github.com/en/rest/enterprise-admin/manage-ghes#upload-an-enterprise-license).
+You can use the REST API to upload a license to your GitHub Enterprise Server instance. See [Manage Ghes](https://docs.github.com/en/enterprise-server@latest/rest/enterprise-admin/manage-ghes#upload-an-enterprise-license) in the documentation for GitHub Enterprise Server.
 
 ## Uploading a license with the GitHub CLI
 
 You can import a license to your GitHub Enterprise Server instance using the `gh es` extension of the GitHub CLI. See the [usage instructions](https://github.com/github/gh-es/blob/main/USAGE.md#gh-es-config-import-license) in the `github/gh-es` repository on GitHub.com.
 
-For more information about accessing your instance via the extension, see [Administering Your Instance Using The GitHub CLI](https://docs.github.com/en/enterprise-server@latest/admin/administering-your-instance/administering-your-instance-from-the-command-line/administering-your-instance-using-the-github-cli) in the documentation for GitHub Enterprise Server.{% elsif ghes %}see [Administering Your Instance Using The GitHub CLI](https://docs.github.com/en/admin/administering-your-instance/administering-your-instance-from-the-command-line/administering-your-instance-using-the-github-cli).
+For more information about accessing your instance via the extension, see [Administering Your Instance Using The GitHub CLI](https://docs.github.com/en/enterprise-server@latest/admin/administering-your-instance/administering-your-instance-from-the-command-line/administering-your-instance-using-the-github-cli) in the documentation for GitHub Enterprise Server.
 
 ## Uploading a license via SSH
 
-You can upload and interact with your license from the command line via SSH. See the documentation for the `ghe-license` command in [Command Line Utilities](https://docs.github.com/en/enterprise-server@latest/admin/administering-your-instance/administering-your-instance-from-the-command-line/command-line-utilities#ghe-license) in the documentation for GitHub Enterprise Server.{% elsif ghes %}[Command Line Utilities](https://docs.github.com/en/admin/administering-your-instance/administering-your-instance-from-the-command-line/command-line-utilities#ghe-license).
+You can upload and interact with your license from the command line via SSH. See the documentation for the `ghe-license` command in [Command Line Utilities](https://docs.github.com/en/enterprise-server@latest/admin/administering-your-instance/administering-your-instance-from-the-command-line/command-line-utilities#ghe-license) in the documentation for GitHub Enterprise Server.
 
-For more information about accessing your instance via SSH, see [Accessing The Administrative Shell SSH](https://docs.github.com/en/enterprise-server@latest/admin/administering-your-instance/administering-your-instance-from-the-command-line/accessing-the-administrative-shell-ssh) in the documentation for GitHub Enterprise Server.{% elsif ghes %}[Accessing The Administrative Shell SSH](https://docs.github.com/en/admin/administering-your-instance/administering-your-instance-from-the-command-line/accessing-the-administrative-shell-ssh).
+For more information about accessing your instance via SSH, see [Accessing The Administrative Shell SSH](https://docs.github.com/en/enterprise-server@latest/admin/administering-your-instance/administering-your-instance-from-the-command-line/accessing-the-administrative-shell-ssh) in the documentation for GitHub Enterprise Server.

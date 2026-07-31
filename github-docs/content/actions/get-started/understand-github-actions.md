@@ -17,11 +17,7 @@ GitHub Actions goes beyond just DevOps and lets you run workflows when other eve
 
 GitHub provides Linux, Windows, and macOS virtual machines to run your workflows, or you can host your own self-hosted runners in your own data center or cloud infrastructure.
 
-{% elsif ghes %}
 
-You must host your own Linux, Windows, or macOS virtual machines to run workflows for {% ifversion ghes %}your GitHub Enterprise Server instance.
-
-{% endif %}
 
 
 
@@ -92,12 +88,7 @@ For more information on actions, see [Reuse Automations](https://docs.github.com
 
 A **runner** is a server that runs your workflows when they're triggered. Each runner can run a single **job** at a time.
  You must host your own runners for GitHub Enterprise Server.
-{% elsif fpt or ghec %}GitHub provides Ubuntu Linux, Microsoft Windows, and macOS runners to run your **workflows**. Each workflow run executes in a fresh, newly-provisioned virtual machine.
 
-{% ifversion actions-hosted-runners %} GitHub also offers larger runners, which are available in larger configurations. For more information, see [Larger Runners](https://docs.github.com/en/actions/how-tos/manage-runners/larger-runners).
-
-If you need a different operating system or require a specific hardware configuration, you can host your own runners.
-{% endif %}
 
 For more information about self-hosted runners, see [Self Hosted Runners](https://docs.github.com/en/actions/how-tos/manage-runners/self-hosted-runners).
 

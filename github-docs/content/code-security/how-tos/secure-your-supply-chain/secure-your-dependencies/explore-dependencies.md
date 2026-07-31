@@ -41,10 +41,10 @@ For each dependency, you can see its ecosystem, the manifest file in which it wa
 * If the package manager for the dependency is in a public repository, you can hover on the dependency name to display a pop-up with the associated repository information.
 * You can sort and filter dependencies by typing filters as `key:value` pairs into the search bar.
 
-    * Use `ecosystem: <ecosystem-name>` to display dependencies for the selected ecosystem.{% ifversion transitive-dependency-labeling-npm %}
+    * Use `ecosystem: <ecosystem-name>` to display dependencies for the selected ecosystem.
     * Use `relationship:` to filter the list by relationship status. Possible values are `direct`, `transitive`, and `inconclusive`. Alternatively, you can click the relationship label adjacent to a dependency name to only show dependencies of the same relationship status. This filter is only available for ecosystems with transitive dependency support. See [Dependency Graph Supported Package Ecosystems](https://docs.github.com/en/code-security/reference/supply-chain-security/dependency-graph-supported-package-ecosystems) for more information.
 
-{% endif %}
+
 
 
 Any direct and indirect dependencies that are specified in the repository's manifest or lock files are listed.

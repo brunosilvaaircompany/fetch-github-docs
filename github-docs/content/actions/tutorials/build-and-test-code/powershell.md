@@ -47,8 +47,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v6
-
+        uses: {% data reusables.actions.action-checkout %}
       - name: Perform a Pester test from the command-line
         shell: pwsh
         run: Test-Path resultsfile.log | Should -Be $true
@@ -108,8 +107,7 @@ jobs:
     name: Install dependencies
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
-
+      - uses: {% data reusables.actions.action-checkout %}
       - name: Install from PSGallery
         shell: pwsh
         run: |
@@ -128,12 +126,10 @@ PowerShell caches its dependencies in different locations, depending on the runn
 
 ```yaml
 steps:
-  - uses: actions/checkout@v6
-
+  - uses: {% data reusables.actions.action-checkout %}
   - name: Setup PowerShell module cache
     id: cacher
-    uses: actions/cache@v4
-
+    uses: {% data reusables.actions.action-cache %}
     with:
       path: "~/.local/share/powershell/Modules"
       key: {% raw %}${{ runner.os }}-SqlServer-PSScriptAnalyzer{% endraw %}
@@ -158,8 +154,7 @@ The following example installs `PSScriptAnalyzer` and uses it to lint all `ps1` 
     name: Install and run PSScriptAnalyzer
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
-
+      - uses: {% data reusables.actions.action-checkout %}
       - name: Install PSScriptAnalyzer module
         shell: pwsh
         run: |
@@ -194,14 +189,12 @@ jobs:
     name: Run Pester and upload results
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
-
+      - uses: {% data reusables.actions.action-checkout %}
       - name: Test with Pester
         shell: pwsh
         run: Invoke-Pester Unit.Tests.ps1 -Passthru | Export-CliXml -Path Unit.Tests.xml
       - name: Upload test results
-        uses: actions/upload-artifact@v4
-
+        uses: {% data reusables.actions.action-upload-artifact %}
         with:
           name: ubuntu-Unit-Tests
           path: Unit.Tests.xml
@@ -227,8 +220,7 @@ jobs:
   publish-to-gallery:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
-
+      - uses: {% data reusables.actions.action-checkout %}
       - name: Build and publish
         env:
           NUGET_KEY: {% raw %}${{ secrets.NUGET_KEY }}{% endraw %}

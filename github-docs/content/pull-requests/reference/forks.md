@@ -23,18 +23,6 @@ You can fork a private or internal repository to your personal account or to an 
 
 Generally, you can fork any public repository to your personal account or to an organization where you have permission to create repositories, unless you're a member of an enterprise with managed users.
 
-{% elsif fpt %}
-You can fork any public repository:
-
-* To your personal account
-* To an organization where you have permission to create repositories
-
-If you have access to a private repository and the owner permits forking, you can fork the repository:
-
-* To your personal account
-* To an organization on GitHub Team where you have permission to create repositories
-
-You cannot fork a private repository to an organization using GitHub Free. For more information about GitHub Team and GitHub Free, see [Githubs Plans](https://docs.github.com/en/get-started/learning-about-github/githubs-plans).
 
 
 
@@ -42,10 +30,10 @@ Repository, organization, and enterprise policies can limit whether repositories
 
 
 
-If you're a member of an enterprise with managed users, additional restrictions apply to the repositories you can fork. {% ifversion ghec %}Managed user accounts cannot fork repositories from outside of the enterprise. They can fork private or internal repositories owned by organizations in the enterprise into their user account namespace or other organizations owned by the enterprise, as specified by enterprise policy.
+If you're a member of an enterprise with managed users, additional restrictions apply to the repositories you can fork. Managed user accounts cannot fork repositories from outside of the enterprise. They can fork private or internal repositories owned by organizations in the enterprise into their user account namespace or other organizations owned by the enterprise, as specified by enterprise policy.
  See [Enterprise Managed Users](https://docs.github.com/en/enterprise-cloud@latest/admin/concepts/identity-and-access-management/enterprise-managed-users) in the GitHub Enterprise Cloud documentation.
 
-{% endif %}
+
 
 See [Managing The Forking Policy For Your Organization](https://docs.github.com/en/organizations/managing-organization-settings/managing-the-forking-policy-for-your-organization).
 

@@ -38,7 +38,7 @@ Custom deployment protection rules are not compatible when a workflow job's envi
 
    ```shell
    curl --request POST \
-   --url "https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3/app/installations/INSTALLATION_ID/ACCESS_TOKENS" \
+   --url "{% data variables.product.rest_url %}/app/installations/INSTALLATION_ID/ACCESS_TOKENS" \
    --header "Accept: application/vnd.github+json" \
    --header "Authorization: Bearer {jwt}" \
    --header "Content-Type: application/json" \

@@ -44,8 +44,8 @@ You can enforce strict controls without defining exceptions or additional config
 * **Allow enterprise, and select non-enterprise, actions and reusable workflows**
 : Any action or reusable workflow defined in a repository within the enterprise can be used, plus any action or reusable workflow that matches criteria you specify.
 
-* **Require actions to be pinned to a full-length commit SHA**: All actions must be pinned to a full-length commit SHA to be used. This includes actions from your enterprise and actions authored by GitHub. {% ifversion actions-workflow-policy %}Reusable workflows can still be referenced by tag. For more information, see [Secure Use](https://docs.github.com/en/actions/reference/security/secure-use#using-third-party-actions).
-{%- endif %}
+* **Require actions to be pinned to a full-length commit SHA**: All actions must be pinned to a full-length commit SHA to be used. This includes actions from your enterprise and actions authored by GitHub. Reusable workflows can still be referenced by tag. For more information, see [Secure Use](https://docs.github.com/en/actions/reference/security/secure-use#using-third-party-actions).
+
 
 <span id="allowing-select-actions-and-reusable-workflows-to-run" ></span>
 
@@ -74,9 +74,9 @@ When specifying actions and reusable workflows, use the following syntax:
    * To allow all actions and reusable workflows from the `octocat` and `octokit` organizations, use `octocat/*, octokit/*`.
 
 * To block specific patterns, use the `!` prefix.
-   * To allow all actions{% ifversion actions-workflow-policy %} and reusable workflows from the `space-org` organization, but block a specific action like `space-org/action`, use `space-org/*, !space-org/action@*`.
+   * To allow all actions and reusable workflows from the `space-org` organization, but block a specific action like `space-org/action`, use `space-org/*, !space-org/action@*`.
    * By default, only actions and reusable workflows specified in the list will be allowed. To allow all actions and reusable workflows while also blocking specific actions, use `*, !space-org/action@*`.
-{%- endif %}
+
 
 Policies never restrict access to local actions on the runner filesystem (where the `uses:` path start with `./`).
 
@@ -178,7 +178,7 @@ For more information about cache eviction, see [Dependency Caching](https://docs
 
 By default:
 
-* The total cache storage that GitHub Actions uses on the external storage for {% ifversion ghes %}your GitHub Enterprise Server instance is limited to a maximum of 10 GB per repository.
+* The total cache storage that GitHub Actions uses on the external storage for your GitHub Enterprise Server instance is limited to a maximum of 10 GB per repository.
 * The maximum allowed size that can be set for a repository is 25 GB.
 
 If you exceed the limit, GitHub will save the new cache but will begin evicting caches until the total size is less than the repository limit.
@@ -188,7 +188,7 @@ You can customize both the default total cache size for each repository and the 
 
 Organization owners can set a lower total cache size that applies to each repository in their organization. People with admin access to a repository can set a total cache size for their repository up to the maximum cache size allowed by the enterprise or organization policy setting.
 
-{% endif %}
+
 
 
 

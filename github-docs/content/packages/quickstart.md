@@ -22,7 +22,7 @@ If you use a managed user account, you cannot publish a package to a repository 
 1. Clone the repository to your local machine.
 
     ```shell
-    git clone https://YOUR-HOSTNAME/YOUR-USERNAME/YOUR-REPOSITORY.git
+    git clone https://{% ifversion ghes %}YOUR-HOSTNAME{% else %}github.com{% endif %}/YOUR-USERNAME/YOUR-REPOSITORY.git
     cd YOUR-REPOSITORY
     ```
 
@@ -66,10 +66,8 @@ If you use a managed user account, you cannot publish a package to a repository 
       build:
         runs-on: ubuntu-latest
         steps:
-          - uses: actions/checkout@v6
-
-          - uses: actions/setup-node@v7
-
+          - uses: {% data reusables.actions.action-checkout %}
+          - uses: {% data reusables.actions.action-setup-node %}
             with:
               node-version: 20
           - run: npm ci
@@ -82,13 +80,11 @@ If you use a managed user account, you cannot publish a package to a repository 
           packages: write
           contents: read
         steps:
-          - uses: actions/checkout@v6
-
-          - uses: actions/setup-node@v7
-
+          - uses: {% data reusables.actions.action-checkout %}
+          - uses: {% data reusables.actions.action-setup-node %}
             with:
               node-version: 20
-              registry-url: https://npm.YOUR-HOSTNAME.com/
+              registry-url: {% ifversion ghes %}https://npm.YOUR-HOSTNAME.com/{% else %}https://npm.pkg.github.com/{% endif %}
           - run: npm ci
           - run: npm publish
             env:

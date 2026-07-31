@@ -4,7 +4,7 @@
 
 
 
-You can choose whether members and GitHub Apps can create repositories in your organization. If you allow members and GitHub Apps to create repositories, you can choose which types of repositories they can create.{% elsif fpt %}If you allow members and GitHub Apps to create repositories, you can choose whether they can create both public and private repositories or public repositories only. Organization owners can always create any type of repository.
+You can choose whether members and GitHub Apps can create repositories in your organization. If you allow members and GitHub Apps to create repositories, you can choose which types of repositories they can create. Organization owners can always create any type of repository.
 
 
 Organizations using GitHub Enterprise Cloud can also restrict members to creating private repositories only. For more information, see [the GitHub Enterprise Cloud documentation](/enterprise-cloud@latest/organizations/managing-organization-settings/restricting-repository-creation-in-your-organization).

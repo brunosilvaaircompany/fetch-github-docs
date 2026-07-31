@@ -109,12 +109,12 @@ Accept: application/xml
 The access token allows you to make requests to the API on a behalf of a user.
 
     Authorization: Bearer OAUTH-TOKEN
-    GET https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3/user
+    GET https://api.github.com/user
 
 For example, in curl you can set the Authorization header like this:
 
 ```shell
-curl -H "Authorization: Bearer OAUTH-TOKEN" https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3/user
+curl -H "Authorization: Bearer OAUTH-TOKEN" {% data variables.product.rest_url %}/user
 ```
 
 Every time you receive an access token, you should use the token to revalidate the user's identity. A user can change which account they are signed into when you send them to authorize your app, and you risk mixing user data if you do not validate the user's identity after every sign in.
@@ -128,7 +128,7 @@ Before you can use the device flow to authorize and identify users, you must fir
 ### Overview of the device flow
 
 1. Your app requests device and user verification codes and gets the authorization URL where the user will enter the user verification code.
-1. The app prompts the user to enter a user verification code at  [`https://github.com/login/device`](https://github.com/login/device) {%- elsif ghes %} `http(s)://HOSTNAME/login/device` .
+1. The app prompts the user to enter a user verification code at  [`https://github.com/login/device`](https://github.com/login/device) .
 1. The app polls for the user authentication status. Once the user has authorized the device, the app will be able to make API calls with a new access token.
 
 ### Step 1: App requests the device and user verification codes from GitHub
@@ -147,14 +147,14 @@ Parameter name | Type | Description
 By default, the response takes the following form:
 
 ```shell
-device_code=3584d83530557fdd1f46af8289938c8ef79f9dc5&expires_in=900&interval=5&user_code=WDJB-MJHT&verification_uri=https%3A%2F%2Fgithub.com%2Flogin%2Fdevice
+device_code=3584d83530557fdd1f46af8289938c8ef79f9dc5&expires_in=900&interval=5&user_code=WDJB-MJHT&verification_uri=https%3A%2F%2F{% data variables.product.product_url %}%2Flogin%2Fdevice
 ```
 
 Parameter name | Type | Description
 -----|------|--------------
 `device_code` | `string` | The device verification code is 40 characters and used to verify the device.
 `user_code` | `string` | The user verification code is displayed on the device so the user can enter the code in a browser. This code is 8 characters with a hyphen in the middle.
-`verification_uri` | `string` | The verification URL where users need to enter the `user_code`:  [`https://github.com/login/device`](https://github.com/login/device) {%- elsif ghes %} `http(s)://HOSTNAME/login/device` .
+`verification_uri` | `string` | The verification URL where users need to enter the `user_code`:  [`https://github.com/login/device`](https://github.com/login/device) .
 `expires_in` | `integer`| The number of seconds before the `device_code` and `user_code` expire. The default is 900 seconds or 15 minutes.
 `interval` | `integer` | The minimum number of seconds that must pass before you can make a new access token request (`POST https://github.com/login/oauth/access_token`) to complete the device authorization. For example, if the interval is 5, then you cannot make a new request until 5 seconds pass. If you make more than one request over 5 seconds, then you will hit the rate limit and receive a `slow_down` error.
 
@@ -166,7 +166,7 @@ Accept: application/json
 {
   "device_code": "3584d83530557fdd1f46af8289938c8ef79f9dc5",
   "user_code": "WDJB-MJHT",
-  "verification_uri": "https://github.com/login/device",
+  "verification_uri": "{% data variables.product.oauth_host_code %}/login/device",
   "expires_in": 900,
   "interval": 5
 }
@@ -177,7 +177,7 @@ Accept: application/xml
 <OAuth>
   <device_code>3584d83530557fdd1f46af8289938c8ef79f9dc5</device_code>
   <user_code>WDJB-MJHT</user_code>
-  <verification_uri>https://github.com/login/device</verification_uri>
+  <verification_uri>{% data variables.product.oauth_host_code %}/login/device</verification_uri>
   <expires_in>900</expires_in>
   <interval>5</interval>
 </OAuth>
@@ -185,7 +185,7 @@ Accept: application/xml
 
 ### Step 2: Prompt the user to enter the user code in a browser
 
-Your device will show the user verification code and prompt the user to enter the code at  [`https://github.com/login/device`](https://github.com/login/device) {%- elsif ghes %} `http(s)://HOSTNAME/login/device` .
+Your device will show the user verification code and prompt the user to enter the code at  [`https://github.com/login/device`](https://github.com/login/device) .
 
 ### Step 3: App polls GitHub to check if the user authorized the device
 
@@ -309,7 +309,7 @@ You can link to authorization information for an OAuth app so that users can rev
 To build this link, you'll need your OAuth app's `client_id` that you received from GitHub when you registered the application.
 
 ```http
-https://github.com/settings/connections/applications/:client_id
+{% data variables.product.oauth_host_code %}/settings/connections/applications/:client_id
 ```
 
 > [!TIP]

@@ -53,26 +53,25 @@ A workflow is a set of automated steps that GitHub Actions runs for you. Add one
          url: {% raw %}${{ steps.deployment.outputs.page_url }}{% endraw %}
        steps:
          - name: Checkout
-           uses: actions/checkout@v6
-
+           uses: {% data reusables.actions.action-checkout %}
          - name: Setup Pages
            uses: actions/configure-pages@v5
          - name: Upload artifact
-   
+   {%- ifversion fpt or ghec %}
            uses: actions/upload-pages-artifact@v4
    {%- elsif ghes %}
            uses: actions/upload-pages-artifact@v2
-   
+   {%- endif %}
            with:
              path: '.'
          - name: Deploy to GitHub Pages
-   
+   {%- ifversion fpt or ghec %}
            id: deployment
            uses: actions/deploy-pages@v4
    {%- elsif ghes %}
            id: deployment
            uses: actions/deploy-pages@v2
-   
+   {%- endif %}
    ```
 
 1. Commit the file directly to the `main` branch.
@@ -92,8 +91,8 @@ After you commit the workflow, GitHub Actions runs it automatically.
 
 1. In your repository, click the **Actions** tab to watch the workflow run.
 1. Click the latest workflow run to see a summary of the job details.
-1. When the run completes, open your published site at `https://YOUR-USERNAME.github.io/stargazers-log/`{% elsif ghes %}`https://pages.HOSTNAME/YOUR-USERNAME/stargazers-log/`. Replace `YOUR-USERNAME` with your username, and replace `HOSTNAME` with your GitHub Enterprise Server hostname.
-    * For example, if your GitHub account username is `octocat`, your site is at `https://octocat.github.io/stargazers-log/`{% elsif ghes %}`https://pages.HOSTNAME/octocat/stargazers-log/`.
+1. When the run completes, open your published site at `https://YOUR-USERNAME.github.io/stargazers-log/`. Replace `YOUR-USERNAME` with your username, and replace `HOSTNAME` with your GitHub Enterprise Server hostname.
+    * For example, if your GitHub account username is `octocat`, your site is at `https://octocat.github.io/stargazers-log/`.
 
 From now on, every push to `main` redeploys your site with your latest changes.
 

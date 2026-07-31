@@ -80,8 +80,8 @@ For example, this script gets all of the issues from the `octocat/Spoon-Knife` r
 ```javascript copy
 import { Octokit } from "octokit";
 
-const octokit = new Octokit({ 
-  baseUrl: "{% ifversion fpt or ghec %}https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3",
+const octokit = new Octokit({ {% ifversion ghes %}
+  baseUrl: "{% data variables.product.rest_url %}",
 {% endif %}});
 
 const data = await octokit.paginate("GET /repos/{owner}/{repo}/issues", {
@@ -107,8 +107,8 @@ The `getPaginatedData` function makes a request to an endpoint with `octokit.req
 ```javascript copy
 import { Octokit } from "octokit";
 
-const octokit = new Octokit({ 
-  baseUrl: "{% ifversion fpt or ghec %}https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3",
+const octokit = new Octokit({ {% ifversion ghes %}
+  baseUrl: "{% data variables.product.rest_url %}",
 {% endif %}});
 
 async function getPaginatedData(url) {

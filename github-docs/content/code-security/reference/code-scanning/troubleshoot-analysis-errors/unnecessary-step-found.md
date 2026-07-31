@@ -33,13 +33,11 @@ Remove the lines from the CodeQL workflow. The revised `steps` section of the wo
 ```yaml
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: {% data reusables.actions.action-checkout %}
 
-
-      # Initializes the CodeQL tools for scanning.
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v4
-
+      # Initializes the {% data variables.product.prodname_codeql %} tools for scanning.
+      - name: Initialize {% data variables.product.prodname_codeql %}
+        uses: {% data reusables.actions.action-codeql-action-init %}
 
       # ...
 ```

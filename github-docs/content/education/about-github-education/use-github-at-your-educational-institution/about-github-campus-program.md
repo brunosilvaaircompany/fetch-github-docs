@@ -15,7 +15,7 @@ To read about how GitHub is used by educators, see [GitHub Education stories](ht
 
 * You must offer GitHub to all of your technical and academic departments and your school’s logo will be shared on the GitHub Education website as a GitHub Campus Program Partner.
 
-* New organizations in your enterprise are automatically added to your enterprise account. To add organizations that existed before your school joined the GitHub Campus Program, please contact us through the [GitHub Support portal](https://support.github.com){% elsif ghes %}your site administrator. For more information about administrating your enterprise, see the [enterprise administrators documentation](/admin).
+* New organizations in your enterprise are automatically added to your enterprise account. To add organizations that existed before your school joined the GitHub Campus Program, please contact us through the [GitHub Support portal](https://support.github.com). For more information about administrating your enterprise, see the [enterprise administrators documentation](/admin).
 
 To read more about GitHub's privacy practices, see [GitHub General Privacy Statement](https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement).
 

@@ -115,6 +115,6 @@ There are a few steps to fix this problem.
 
 ### Additional steps for "All analysis uploads blocked due to alert limit"
 
-On top of fixing the code scanning configuration and removing or fixing the output of third-party tools, you will need to contact us through the [GitHub Support portal](https://support.github.com){% elsif ghes %}your site administrator to assist you in deleting the alerts for any offending configurations.
+On top of fixing the code scanning configuration and removing or fixing the output of third-party tools, you will need to contact us through the [GitHub Support portal](https://support.github.com) to assist you in deleting the alerts for any offending configurations.
 
 **There is no self-service method for deleting alerts at this time, so contacting customer support is necessary before code-scanning can be re-enabled.**

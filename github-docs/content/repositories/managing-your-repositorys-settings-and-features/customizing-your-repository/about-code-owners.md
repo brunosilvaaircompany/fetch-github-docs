@@ -55,7 +55,7 @@ A CODEOWNERS file uses a pattern that follows most of the same rules used in [gi
 
 If you want to match two or more code owners with the same pattern, all the code owners must be on the same line. If the code owners are not on the same line, the pattern matches only the last mentioned code owner.
 
-In most cases, you can also refer to a user by an email address that has been added to their account, for example `user@example.com`.  You cannot use an email address to refer to a managed user account. For more information about managed user accounts, see [Enterprise Managed Users](https://docs.github.com/en/enterprise-cloud@latest/admin/concepts/identity-and-access-management/enterprise-managed-users){% ifversion fpt %}" in the GitHub Enterprise Cloud documentation.{% endif %}
+In most cases, you can also refer to a user by an email address that has been added to their account, for example `user@example.com`.  You cannot use an email address to refer to a managed user account. For more information about managed user accounts, see [Enterprise Managed Users](https://docs.github.com/en/enterprise-cloud@latest/admin/concepts/identity-and-access-management/enterprise-managed-users)" in the GitHub Enterprise Cloud documentation.
 
 CODEOWNERS paths are case sensitive, because GitHub uses a case sensitive file system. Since CODEOWNERS are evaluated by GitHub, even systems that are case insensitive (for example, macOS) must use paths and files that are cased correctly in the CODEOWNERS file.
 

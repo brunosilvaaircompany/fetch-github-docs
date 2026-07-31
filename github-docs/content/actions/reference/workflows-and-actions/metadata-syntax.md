@@ -326,11 +326,9 @@ runs:
     # Reference a specific commit
     - uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3
     # Reference the major version of a release
-    - uses: actions/checkout@v6
-
+    - uses: {% data reusables.actions.action-checkout %}
     # Reference a specific version
-    - uses: actions/checkout@v6
-.2.0
+    - uses: {% data reusables.actions.action-checkout %}.2.0
     # Reference a branch
     - uses: actions/checkout@main
     # References a subdirectory in a public GitHub repository at a specific branch, ref, or SHA

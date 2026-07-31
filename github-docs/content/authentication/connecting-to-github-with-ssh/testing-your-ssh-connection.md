@@ -19,14 +19,14 @@ You'll need to authenticate this action using your password, which is the SSH ke
 1. Enter the following:
 
    ```shell copy
-   ssh -T git@github.com
-   # Attempts to ssh to GitHub
+   ssh -T git@{% data variables.product.product_url %}
+   # Attempts to ssh to {% data variables.product.github %}
    ```
 
    You may see a warning like this:
 
    ```shell
-   > The authenticity of host 'github.com (IP ADDRESS)' can't be established.
+   > The authenticity of host '{% data variables.product.product_url %} (IP ADDRESS)' can't be established.
    > ED25519 key fingerprint is SHA256:+DiY3wvvV6TuJJhbpZisF/zLDA0zPMSvHdkr4UvCOqU.
    > Are you sure you want to continue connecting (yes/no)?
    ```
@@ -64,6 +64,6 @@ You'll need to authenticate this action using your password, which is the SSH ke
 
 >
 > ```shell
-> ssh -T octocorp@octocorp.ghe.com
-> # Attempts to ssh to octocorp.ghe.com
+> ssh -T {% data variables.enterprise.data_residency_example_git_ssh %}
+> # Attempts to ssh to {% data variables.enterprise.data_residency_example_domain %}
 > ```

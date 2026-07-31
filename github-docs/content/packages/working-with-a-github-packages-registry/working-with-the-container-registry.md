@@ -20,10 +20,10 @@ To use the Container registry on GitHub Enterprise Server, your site administrat
 
 ## URL for the Container registry
 
-If you access GitHub at GitHub.com, you will publish packages to ghcr.io{% elsif ghes %}containers.HOSTNAME
+If you access GitHub at GitHub.com, you will publish packages to ghcr.io
 . Examples in this article use this URL.
 
-If you access GitHub at another domain, such as `octocorp.ghe.com`, replace "ghcr.io{% elsif ghes %}containers.HOSTNAME
+If you access GitHub at another domain, such as `octocorp.ghe.com`, replace "ghcr.io
 " with `https://containers.SUBDOMAIN.ghe.com`, where `SUBDOMAIN` is your enterprise's unique subdomain.
 
 
@@ -93,12 +93,12 @@ Ensure that you replace `HOSTNAME` with your GitHub Enterprise Server instance h
    export CR_PAT=YOUR_TOKEN
    ```
 
-1. Using the CLI for your container type, sign in to the Container registry service at `ghcr.io{% elsif ghes %}containers.HOSTNAME
+1. Using the CLI for your container type, sign in to the Container registry service at `ghcr.io
 `.
    {% raw %}
 
    ```shell
-   $ echo $CR_PAT | docker login {% endraw %}ghcr.io{% elsif ghes %}containers.HOSTNAME
+   $ echo $CR_PAT | docker login {% endraw %}ghcr.io
 {% raw %} -u USERNAME --password-stdin
    > Login Succeeded
    ```
@@ -111,8 +111,7 @@ Ensure that you replace `HOSTNAME` with your GitHub Enterprise Server instance h
 This example pushes the latest version of `IMAGE_NAME`.
 
 ```shell
-docker push ghcr.io{% elsif ghes %}containers.HOSTNAME
-/NAMESPACE/IMAGE_NAME:latest
+docker push {% data reusables.package_registry.container-registry-hostname %}/NAMESPACE/IMAGE_NAME:latest
 ```
 
 Replace `NAMESPACE` with the name of the personal account or organization to which you want the image to be scoped.
@@ -120,15 +119,13 @@ Replace `NAMESPACE` with the name of the personal account or organization to whi
 This example pushes the `2.5` version of the image.
 
 ```shell
-docker push ghcr.io{% elsif ghes %}containers.HOSTNAME
-/NAMESPACE/IMAGE_NAME:2.5
+docker push {% data reusables.package_registry.container-registry-hostname %}/NAMESPACE/IMAGE_NAME:2.5
 ```
 
 When you first publish a package, the default visibility is private. To change the visibility or set access permissions, see [Configuring A Packages Access Control And Visibility](https://docs.github.com/en/packages/learn-github-packages/configuring-a-packages-access-control-and-visibility).
  You can link a published package to a repository using the user interface or command line. For more information, see [Connecting A Repository To A Package](https://docs.github.com/en/packages/learn-github-packages/connecting-a-repository-to-a-package).
 
-When you push a container image from the command line, the image is not linked to a repository by default. This is the case even if you tag the image with a namespace that matches the name of the repository, such as `ghcr.io{% elsif ghes %}containers.github.companyname.com
-/octocat/my-repo:latest`.
+When you push a container image from the command line, the image is not linked to a repository by default. This is the case even if you tag the image with a namespace that matches the name of the repository, such as `ghcr.io/octocat/my-repo:latest`.
 
 The easiest way to connect a repository to a container package is to publish the package from a workflow using `${% raw %}{{secrets.GITHUB_TOKEN}}{% endraw %}`, as the repository that contains the workflow is linked automatically. Note that the `GITHUB_TOKEN` will not have permission to push the package if you have previously pushed a package to the same namespace, but have not connected the package to the repository.
 
@@ -143,30 +140,26 @@ To ensure you're always using the same image, you can specify the exact containe
 1. To find the digest SHA value, use `docker inspect` or `docker pull` and copy the SHA value after `Digest:`
 
    ```shell
-   docker inspect ghcr.io{% elsif ghes %}containers.HOSTNAME
-/NAMESPACE/IMAGE_NAME
+   docker inspect {% data reusables.package_registry.container-registry-hostname %}/NAMESPACE/IMAGE_NAME
    ```
 
    Replace `NAMESPACE` with the name of the personal account or organization to which the image is scoped.
 1. Remove image locally as needed.
 
    ```shell
-   docker rmi ghcr.io{% elsif ghes %}containers.HOSTNAME
-/NAMESPACE/IMAGE_NAME:latest
+   docker rmi {% data reusables.package_registry.container-registry-hostname %}/NAMESPACE/IMAGE_NAME:latest
    ```
 
 1. Pull the container image with `@YOUR_SHA_VALUE` after the image name.
 
    ```shell
-   docker pull ghcr.io{% elsif ghes %}containers.HOSTNAME
-/NAMESPACE/IMAGE_NAME@sha256:82jf9a84u29hiasldj289498uhois8498hjs29hkuhs
+   docker pull {% data reusables.package_registry.container-registry-hostname %}/NAMESPACE/IMAGE_NAME@sha256:82jf9a84u29hiasldj289498uhois8498hjs29hkuhs
    ```
 
 ### Pull by name
 
 ```shell
-docker pull ghcr.io{% elsif ghes %}containers.HOSTNAME
-/NAMESPACE/IMAGE_NAME
+docker pull {% data reusables.package_registry.container-registry-hostname %}/NAMESPACE/IMAGE_NAME
 ```
 
 Replace `NAMESPACE` with the name of the personal account or organization to which the image is scoped.
@@ -176,17 +169,14 @@ Replace `NAMESPACE` with the name of the personal account or organization to whi
 Docker CLI example showing an image pulled by its name and the `1.14.1` version tag:
 
 ```shell
-$ docker pull ghcr.io{% elsif ghes %}containers.HOSTNAME
-/NAMESPACE/IMAGE_NAME:1.14.1
+$ docker pull {% data reusables.package_registry.container-registry-hostname %}/NAMESPACE/IMAGE_NAME:1.14.1
 > 5e35bd43cf78: Pull complete
 > 0c48c2209aab: Pull complete
 > fd45dd1aad5a: Pull complete
 > db6eb50c2d36: Pull complete
 > Digest: sha256:ae3b135f133155b3824d8b1f62959ff8a72e9cf9e884d88db7895d8544010d8e
-> Status: Downloaded newer image for ghcr.io{% elsif ghes %}containers.HOSTNAME
-/NAMESPACE/IMAGE_NAME/release:1.14.1
-> ghcr.io{% elsif ghes %}containers.HOSTNAME
-/NAMESPACE/IMAGE_NAME/release:1.14.1
+> Status: Downloaded newer image for {% data reusables.package_registry.container-registry-hostname %}/NAMESPACE/IMAGE_NAME/release:1.14.1
+> {% data reusables.package_registry.container-registry-hostname %}/NAMESPACE/IMAGE_NAME/release:1.14.1
 ```
 
 Replace `NAMESPACE` with the name of the personal account or organization to which the image is scoped.
@@ -194,14 +184,11 @@ Replace `NAMESPACE` with the name of the personal account or organization to whi
 ### Pull by name and latest version
 
 ```shell
-$ docker pull ghcr.io{% elsif ghes %}containers.HOSTNAME
-/NAMESPACE/IMAGE_NAME:latest
+$ docker pull {% data reusables.package_registry.container-registry-hostname %}/NAMESPACE/IMAGE_NAME:latest
 > latest: Pulling from NAMESPACE/IMAGE_NAME
 > Digest: sha256:b3d3e366b55f9a54599220198b3db5da8f53592acbbb7dc7e4e9878762fc5344
-> Status: Downloaded newer image for ghcr.io{% elsif ghes %}containers.HOSTNAME
-/NAMESPACE/IMAGE_NAME:latest
-> ghcr.io{% elsif ghes %}containers.HOSTNAME
-/NAMESPACE/IMAGE_NAME:latest
+> Status: Downloaded newer image for {% data reusables.package_registry.container-registry-hostname %}/NAMESPACE/IMAGE_NAME:latest
+> {% data reusables.package_registry.container-registry-hostname %}/NAMESPACE/IMAGE_NAME:latest
 ```
 
 Replace `NAMESPACE` with the name of the personal account or organization to which the image is scoped.
@@ -221,16 +208,14 @@ docker build -t hello_docker .
    ```shell
    $ docker images
    > REPOSITORY                                            TAG                 IMAGE ID            CREATED             SIZE
-   > ghcr.io{% elsif ghes %}containers.HOSTNAME
-/my-org/hello_docker         latest            38f737a91f39        47 hours ago        91.7MB
+   > {% data reusables.package_registry.container-registry-hostname %}/my-org/hello_docker         latest            38f737a91f39        47 hours ago        91.7MB
    > hello-world                                           latest              fce289e99eb9        16 months ago       1.84kB
    ```
 
 1. Tag your Docker image using the image ID and your desired image name and hosting destination.
 
    ```shell
-   docker tag 38f737a91f39 ghcr.io{% elsif ghes %}containers.HOSTNAME
-/NAMESPACE/NEW_IMAGE_NAME:latest
+   docker tag 38f737a91f39 {% data reusables.package_registry.container-registry-hostname %}/NAMESPACE/NEW_IMAGE_NAME:latest
    ```
 
 Replace `NAMESPACE` with the name of the personal account or organization to which you want the image to be scoped.
@@ -255,7 +240,7 @@ Key | Description
 To add a key as a Docker label, we recommend using the `LABEL` instruction in your `Dockerfile`. For example, if you're the user `octocat` and you own `my-repo`, and your image is distributed under the terms of the MIT license, you would add the following lines to your `Dockerfile`:
 
 ```dockerfile
-LABEL org.opencontainers.image.source=https://github.com/octocat/my-repo
+LABEL org.opencontainers.image.source=https://{% ifversion fpt or ghec %}github.com{% else %}HOSTNAME{% endif %}/octocat/my-repo
 LABEL org.opencontainers.image.description="My container image"
 LABEL org.opencontainers.image.licenses=MIT
 ```
@@ -272,7 +257,7 @@ Alternatively, you can add labels to an image at buildtime with the `docker buil
 
 ```shell
 $ docker build \
- --label "org.opencontainers.image.source=https://github.com/octocat/my-repo" \
+ --label "org.opencontainers.image.source=https://{% ifversion fpt or ghec %}github.com{% else %}HOSTNAME{% endif %}/octocat/my-repo" \
  --label "org.opencontainers.image.description=My container image" \
  --label "org.opencontainers.image.licenses=MIT"
 ```
@@ -294,11 +279,7 @@ To provide a description for a multi-arch image, set a value for the `org.openco
 For example, the following GitHub Actions workflow step builds and pushes a multi-arch image. The `outputs` parameter sets the description for the image.
 
 ```yaml
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
+{% data reusables.actions.actions-not-certified-by-github-comment %}
 
 - name: Build and push Docker image
   uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4

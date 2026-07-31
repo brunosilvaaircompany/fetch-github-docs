@@ -17,7 +17,7 @@ If either of these apply to your enterprise account, you can contact [GitHub's S
 
 Deleting your enterprise account cancels the enterprise license and removes the enterprise account from GitHub.
 
-If there are any outstanding balances on your account, you will be charged a one-time payment when you initiate the deletion process. If you delete your enterprise account partway through a billing cycle, contact us through the [GitHub Support portal](https://support.github.com){% elsif ghes %}your site administrator to request a prorated refund for the remainder of the billing cycle.
+If there are any outstanding balances on your account, you will be charged a one-time payment when you initiate the deletion process. If you delete your enterprise account partway through a billing cycle, contact us through the [GitHub Support portal](https://support.github.com) to request a prorated refund for the remainder of the billing cycle.
 
 When you delete your enterprise account, you lose the policies, billing settings, and user roles you've configured. You do not lose data like repositories or packages, unless you choose to delete the organizations that contain that data.
 
@@ -42,4 +42,4 @@ If you upgraded to an enterprise account from a single organization and then del
    1. At the top of the page, click **Cancel trial** if your trial is active, or click **Delete trial** if your trial is expired.
    1. Follow the prompts.
 
-If you want to restore an enterprise account that you have deleted, you must contact us through the [GitHub Support portal](https://support.github.com){% elsif ghes %}your site administrator.
+If you want to restore an enterprise account that you have deleted, you must contact us through the [GitHub Support portal](https://support.github.com).

@@ -144,7 +144,7 @@ You can use these steps to create and share a support bundle if you have SSH acc
 
 1. At the top of the page, click {% octicon "gear" aria-hidden="true" aria-label="gear" %} **Settings**.
 
-1. Under **{% octicon "gear" aria-hidden="true" aria-label="gear" %} Settings**, click **Licensing{% elsif ghes %}License**.
+1. Under **{% octicon "gear" aria-hidden="true" aria-label="gear" %} Settings**, click **Licensing**.
 
 1. Under "GitHub Enterprise Help", click **Upload a support bundle**.
 

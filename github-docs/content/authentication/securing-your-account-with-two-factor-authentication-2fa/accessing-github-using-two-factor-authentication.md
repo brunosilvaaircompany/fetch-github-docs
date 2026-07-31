@@ -4,9 +4,7 @@ With two-factor authentication (2FA) enabled, you'll need to use a second factor
 
 If you access GitHub using other methods, such as the API or the command line, you'll authenticate using a token, application, or SSH key. For more information, see [About Authentication To GitHub](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/about-authentication-to-github).
 
- or use a passkey or security key when accessing GitHub through your browser. If you access GitHub using other methods, such as the API or the command line, you'll need to use an alternative form of authentication. For more information, see [About Authentication To GitHub](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/about-authentication-to-github).
 
-{% endif %}
 
 ## Performing 2FA when signing in to the website
 

@@ -56,12 +56,10 @@ GitHub provides a Go workflow template that should work for most Go projects. Th
 
        runs-on: self-hosted
        steps:
-         - uses: actions/checkout@v6
-
+         - uses: {% data reusables.actions.action-checkout %}
 
          - name: Set up Go
-           uses: actions/setup-go@v5
-
+           uses: {% data reusables.actions.action-setup-go %}
            with:
              go-version: '1.20'
 
@@ -105,11 +103,9 @@ jobs:
         go-version: [ '1.19', '1.20', '1.21.x' ]
 
     steps:
-      - uses: actions/checkout@v6
-
+      - uses: {% data reusables.actions.action-checkout %}
       - name: Setup Go {% raw %}${{ matrix.go-version }}{% endraw %}
-        uses: actions/setup-go@v5
-
+        uses: {% data reusables.actions.action-setup-go %}
         with:
           go-version: {% raw %}${{ matrix.go-version }}{% endraw %}
       # You can test your matrix by printing the current Go version
@@ -123,8 +119,7 @@ You can configure your job to use a specific version of Go, such as `1.20.8`. Al
 
 ```yaml copy
       - name: Setup Go 1.21.x
-        uses: actions/setup-go@v5
-
+        uses: {% data reusables.actions.action-setup-go %}
         with:
           # Semantic version range syntax or exact version of Go
           go-version: '1.21.x'
@@ -136,11 +131,9 @@ You can use `go get` to install dependencies:
 
 ```yaml copy
     steps:
-      - uses: actions/checkout@v6
-
+      - uses: {% data reusables.actions.action-checkout %}
       - name: Setup Go
-        uses: actions/setup-go@v5
-
+        uses: {% data reusables.actions.action-setup-go %}
         with:
           go-version: '1.21.x'
       - name: Install dependencies
@@ -160,8 +153,7 @@ You can use the `cache-dependency-path` parameter for cases when multiple depend
 
 ```yaml copy
       - name: Setup Go
-        uses: actions/setup-go@v5
-
+        uses: {% data reusables.actions.action-setup-go %}
         with:
           go-version: '1.17'
           cache-dependency-path: subdir/go.sum
@@ -182,11 +174,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v6
-
+      - uses: {% data reusables.actions.action-checkout %}
       - name: Setup Go
-        uses: actions/setup-go@v5
-
+        uses: {% data reusables.actions.action-setup-go %}
         with:
           go-version: '1.21.x'
       - name: Install dependencies
@@ -217,11 +207,9 @@ jobs:
         go-version: [ '1.19', '1.20', '1.21.x' ]
 
     steps:
-      - uses: actions/checkout@v6
-
+      - uses: {% data reusables.actions.action-checkout %}
       - name: Setup Go
-        uses: actions/setup-go@v5
-
+        uses: {% data reusables.actions.action-setup-go %}
         with:
           go-version: {% raw %}${{ matrix.go-version }}{% endraw %}
       - name: Install dependencies
@@ -229,8 +217,7 @@ jobs:
       - name: Test with Go
         run: go test -json > TestResults-{% raw %}${{ matrix.go-version }}{% endraw %}.json
       - name: Upload Go test results
-        uses: actions/upload-artifact@v4
-
+        uses: {% data reusables.actions.action-upload-artifact %}
         with:
           name: Go-results-{% raw %}${{ matrix.go-version }}{% endraw %}
           path: TestResults-{% raw %}${{ matrix.go-version }}{% endraw %}.json

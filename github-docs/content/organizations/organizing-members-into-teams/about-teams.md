@@ -20,9 +20,9 @@ For more information, see:
 
 
 
-You can also use LDAP Sync to synchronize {% ifversion ghes %}your GitHub Enterprise Server instance team members and team roles against your established LDAP groups. This lets you establish role-based access control for users from your LDAP server instead of manually within your GitHub Enterprise Server instance. For more information, see [Using Ldap](https://docs.github.com/en/admin/managing-iam/using-ldap-for-enterprise-iam/using-ldap#enabling-ldap-sync).
+You can also use LDAP Sync to synchronize your GitHub Enterprise Server instance team members and team roles against your established LDAP groups. This lets you establish role-based access control for users from your LDAP server instead of manually within your GitHub Enterprise Server instance. For more information, see [Using Ldap](https://docs.github.com/en/admin/managing-iam/using-ldap-for-enterprise-iam/using-ldap#enabling-ldap-sync).
 
-{% endif %}
+
 
 
 Organizations that use GitHub Enterprise Cloud can use team synchronization to automatically add and remove organization members to teams through an identity provider. For more information, see [Synchronizing a team with an identity provider group](/enterprise-cloud@latest/organizations/organizing-members-into-teams/synchronizing-a-team-with-an-identity-provider-group) in the GitHub Enterprise Cloud documentation.
@@ -51,13 +51,6 @@ Each team has its own page within an organization. On a team's page, you can vie
 > Team Discussions are retired. You can read more about this on the [GitHub Blog](https://github.blog/changelog/2023-02-08-sunset-notice-team-discussions/).
 >
 > You can use GitHub Discussions to create organization-level discussions. For more information about GitHub Discussions, see [Discussions](https://docs.github.com/en/discussions).
-
-{% elsif ghes %}
-
-> [!NOTE]
-> Team Discussions are now retired. You can read more about this on the [GitHub Blog](https://github.blog/changelog/2023-02-08-sunset-notice-team-discussions/).
->
-> You can use GitHub Discussions to create organization-level discussions. For more information aboutGitHub Discussions, see [Discussions](https://docs.github.com/en/discussions).
 
 
 

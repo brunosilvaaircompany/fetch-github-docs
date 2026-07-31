@@ -28,9 +28,7 @@ Follow these steps to create the repository for this series.
 
    Alternatively, go to [new repository page on GitHub.com](https://github.com/new?ref_product=github&ref_type=engagement&ref_style=text) to open the new repository form directly.
 
-, in the upper-right corner of any page, select {% octicon "plus" aria-label="Create new" %}, then click **New repository**.
 
-{% endif %}
 
 1. Use the **Owner** dropdown menu to select your personal account to own the repository.
 1. In the **Repository name** field, type `stargazers-log`.

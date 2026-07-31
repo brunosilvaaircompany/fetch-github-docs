@@ -5,19 +5,7 @@ Security overview provides insights into the security of code stored in reposito
 
 The information below describes the views available to organizations with GitHub Secret Protection or GitHub Code Security that you can use to identify trends in detection, remediation, and prevention of security alerts and dig deep into the current state of your repositories.
 
-{% elsif ghec or ghes %}
 
-Security overview contains focused views where you can explore trends in detection, remediation, and prevention of security alerts and dig deep into the current state of your codebases.
-
-{% ifversion ghec %}
-All organizations on GitHub Enterprise can use:
-* **Secret risk assessment** to evaluate the exposure of their organization to leaked secrets, see [Viewing Your Security Risk Assessment Reports](https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/configure-specific-tools/viewing-your-security-risk-assessment-reports).
-* **Dependabot** data to evaluate the security of their supply chain in all repositories.
-
-
-In addition, data for **Advanced Security** features, such as code scanning and secret scanning, is shown for organizations and enterprises that use GitHub Secret Protection, GitHub Code Security, or GitHub Advanced Security, and for public repositories, see [Dependabot Alerts](https://docs.github.com/en/code-security/concepts/supply-chain-security/dependabot-alerts) and [About GitHub Advanced Security](https://docs.github.com/en/get-started/learning-about-github/about-github-advanced-security).
-
-{% endif %}
 
 ## About the views
 
@@ -96,6 +84,5 @@ This design ensures alert trends accurately reflect security activity during the
 ## Further reading
 
 * [Quickstart For Securing Your Repository](https://docs.github.com/en/code-security/getting-started/quickstart-for-securing-your-repository)
-* [Configure Organization Security](https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security){% elsif ghes %}
-* [Establish Complete Coverage](https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-enterprise-security/establish-complete-coverage)
+* [Configure Organization Security](https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security)
 * [Introduction To Adopting GitHub Advanced Security At Scale](https://docs.github.com/en/code-security/tutorials/adopting-github-advanced-security-at-scale/introduction-to-adopting-github-advanced-security-at-scale)

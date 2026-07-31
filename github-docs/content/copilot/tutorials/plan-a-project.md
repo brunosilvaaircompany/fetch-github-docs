@@ -41,7 +41,7 @@ With the repository set up, you can use Copilot to turn your project vision into
 
 1. Enter a detailed project description as your prompt. For example:
    ```I’m planning to create a shopping website in React and Node.js. The site should allow users to browse products by category, search for items, add products to a cart, and complete checkout. Please help me plan the project by creating issues and breaking it down into epics, features, and tasks.```
-1. Submit your prompt. Copilot will generate an issue tree, typically with an epic at the top and sub-issues for each main feature or task
+1. Submit your prompt. {% data variables.product.prodname_copilot_short %} will generate an issue tree, typically with an epic at the top and sub-issues for each main feature or task
 
 ![Screenshot of Copilot Chat. Copilot chat displays a list of issues with an epic at the top and several sub-issues beneath it.](/assets/images/help/copilot/copilot-creates-sub-issues.png)
 
@@ -53,12 +53,12 @@ With the repository set up, you can use Copilot to turn your project vision into
 
    The issue tree provides a clear overview of your project structure, making it easy to navigate between epics, features, and tasks.
 
-1. In this first iteration of the draft, Copilot may generate only high-level issues. You can refine these issues further by breaking them down into smaller tasks or features. Let's refine the issue "Feature: UI Skeleton and Navigation".
+1. In this first iteration of the draft, {% data variables.product.prodname_copilot_short %} may generate only high-level issues. You can refine these issues further by breaking them down into smaller tasks or features. Let's refine the issue "Feature: UI Skeleton and Navigation".
 
-    Prompt Copilot with:
+    Prompt {% data variables.product.prodname_copilot_short %} with:
    ```Can you break down the issue "Feature: UI Skeleton and Navigation" into smaller tasks?```
 
-   Copilot will generate multiple new sub-issues such as:
+   {% data variables.product.prodname_copilot_short %} will generate multiple new sub-issues such as:
     * Task: Set up React project structure and initial files
     * Task: Create placeholder pages for main routes
     * Task: Implement site-wide navigation bar component
@@ -71,11 +71,11 @@ With the repository set up, you can use Copilot to turn your project vision into
 
 ### Improve issue descriptions
 
-After you finish generating the issue tree you may notice that Copilot’s issue descriptions may be brief or unclear. To make them actionable, refine each issue as needed.
+After you finish generating the issue tree you may notice that {% data variables.product.prodname_copilot_short %}’s issue descriptions may be brief or unclear. To make them actionable, refine each issue as needed.
 
 1. Start with the newly generated issue such as "Task: Create placeholder pages for main routes".
 
-   Prompt Copilot with:
+   Prompt {% data variables.product.prodname_copilot_short %} with:
   ```Can you improve the description for “Task: Create placeholder pages for main routes”? Please provide a detailed technical summary, list the main routes to be included, outline the steps for implementation, and specify what should be delivered for this task. Please add any relevant code snippets.```
 
 1. Copilot will generate a new version of the draft issue "Task: Create placeholder pages for main routes."

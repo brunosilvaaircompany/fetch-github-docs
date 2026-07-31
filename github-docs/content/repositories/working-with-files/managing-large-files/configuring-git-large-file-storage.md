@@ -20,7 +20,7 @@ If there are referenced Git LFS files that did not upload successfully, you will
    For example, to associate a _.psd_ file, enter the following command:
 
    ```shell
-   $ git lfs track "*.psd"
+   $ git {% data variables.large_files.command_name %} track "*.psd"
    > Tracking "*.psd"
    ```
 

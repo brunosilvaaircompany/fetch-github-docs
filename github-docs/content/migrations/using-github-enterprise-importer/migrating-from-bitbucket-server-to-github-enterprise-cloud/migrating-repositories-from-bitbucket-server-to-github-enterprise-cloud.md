@@ -216,7 +216,7 @@ You must follow this step from a computer that can access:
 gh bbs2gh migrate-repo --bbs-server-url BBS-SERVER-URL \
   --bbs-project PROJECT --bbs-repo CURRENT-NAME \
   --github-org DESTINATION --github-repo NEW-NAME \
-  # If you are migrating to GHE.com:
+  # If you are migrating to {% data variables.enterprise.data_residency_site %}:
   --target-api-url TARGET-API-URL
   # If your Bitbucket Server instance runs on Linux:
   --ssh-user SSH-USER --ssh-private-key PATH-TO-KEY
@@ -313,7 +313,7 @@ gh bbs2gh migrate-repo --archive-path ARCHIVE-PATH \
   --bbs-repo CURRENT-NAME \
   # If you are using AWS S3 as your blob storage provider:
   --aws-bucket-name AWS-BUCKET-NAME
-  # If you are migrating to GHE.com:
+  # If you are migrating to {% data variables.enterprise.data_residency_site %}:
   --target-api-url TARGET-API-URL
 ```
 
@@ -373,7 +373,7 @@ To generate a migration script, run the `gh bbs2gh generate-script` command.
 gh bbs2gh generate-script --bbs-server-url BBS-SERVER-URL \
   --github-org DESTINATION \
   --output FILENAME \
-  # If you are migrating to GHE.com:
+  # If you are migrating to {% data variables.enterprise.data_residency_site %}:
   --target-api-url TARGET-API-URL
   # If your Bitbucket Server instance runs on Linux:
   --ssh-user SSH-USER --ssh-private-key PATH-TO-KEY

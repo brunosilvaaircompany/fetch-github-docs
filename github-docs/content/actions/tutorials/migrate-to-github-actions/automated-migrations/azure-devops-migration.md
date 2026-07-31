@@ -112,9 +112,9 @@ The `configure` CLI command is used to set required credentials and options for 
    $ gh actions-importer configure
    ✔ Which CI providers are you configuring?: Azure DevOps
    Enter the following values (leave empty to omit):
-   ✔ Personal access token for GitHub: ***************
+   ✔ {% data variables.product.pat_generic_caps %} for GitHub: ***************
    ✔ Base url of the GitHub instance: https://github.com
-   ✔ Personal access token for Azure DevOps: ***************
+   ✔ {% data variables.product.pat_generic_caps %} for Azure DevOps: ***************
    ✔ Base url of the Azure DevOps instance: https://dev.azure.com
    ✔ Azure DevOps organization name: :organization
    ✔ Azure DevOps project name: :project

@@ -100,8 +100,7 @@ jobs:
     runs-on:
       group: macos-build-runners
     steps:
-      - uses: actions/checkout@v6
-
+      - uses: {% data reusables.actions.action-checkout %}
       - name: Build
         run: swift build
       - name: Run tests
@@ -129,10 +128,8 @@ jobs:
     runs-on:
       labels: ubuntu-24.04-16core
     steps:
-      - uses: actions/checkout@v6
-
-      - uses: actions/setup-node@v7
-
+      - uses: {% data reusables.actions.action-checkout %}
+      - uses: {% data reusables.actions.action-setup-node %}
         with:
           node-version: '14'
       - run: npm install -g bats
@@ -153,10 +150,8 @@ jobs:
     runs-on:
       labels: windows-2022-16core
     steps:
-      - uses: actions/checkout@v6
-
-      - uses: actions/setup-node@v7
-
+      - uses: {% data reusables.actions.action-checkout %}
+      - uses: {% data reusables.actions.action-setup-node %}
         with:
           node-version: '14'
       - run: npm install -g bats
@@ -178,8 +173,7 @@ jobs:
   check-swift-version:
     runs-on: macos-26-xlarge
     steps:
-      - uses: actions/checkout@v6
-
+      - uses: {% data reusables.actions.action-checkout %}
       - name: Build
         run: swift build
       - name: Run tests
@@ -261,8 +255,7 @@ jobs:
       group: macos-runners
       labels: macos-26-xlarge
     steps:
-      - uses: actions/checkout@v6
-
+      - uses: {% data reusables.actions.action-checkout %}
       - name: Build
         run: swift build
       - name: Run tests

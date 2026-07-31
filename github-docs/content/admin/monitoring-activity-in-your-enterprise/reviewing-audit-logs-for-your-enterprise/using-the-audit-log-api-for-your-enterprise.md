@@ -40,36 +40,10 @@ The query below searches for audit log events created on Jan 1st, 2022 in the `a
 ```shell
 curl -H "Authorization: Bearer TOKEN" \
 --request GET \
-"{% ifversion fpt or ghec %}https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3/enterprises/avocado-corp/audit-log?phrase=created:2022-01-01&page=1&per_page=100"
+"{% data variables.product.rest_url %}/enterprises/avocado-corp/audit-log?phrase=created:2022-01-01&page=1&per_page=100"
 ```
 
-{% else %}
 
-The query below searches for audit log events created on Jan 1st, 2022 in the `avocado-corp` enterprise, and returns the first page with a maximum of 100 items per page using pagination. For more information about pagination, see [Using Pagination In The Rest API](https://docs.github.com/en/rest/using-the-rest-api/using-pagination-in-the-rest-api). The `--include` flag causes the headers to be returned along with the response.
-
-```shell
-curl --include -H "Authorization: Bearer TOKEN" \
---request GET \
-"https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3/enterprises/avocado-corp/audit-log?phrase=created:2022-01-01&per_page=100"
-```
-
-If there are more than 100 results, the `link` header will include URLs to fetch the next, first, and previous pages of results.
-
-```text
-link: <https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3/enterprises/13827/audit-log?phrase%3A2022-11-01=&per_page=100&after=MS42NjQzODMzNTk5MjdlKzEyfDloQzBxdURzaFdVbVlLWjkxRU9mNXc%3D&before=>; rel="next",
-<https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3/enterprises/13827/audit-log?phrase%3A2022-11-01=&per_page=100&after=&before=>; rel="first",
-<https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3/enterprises/13827/audit-log?phrase%3A2022-11-01=&per_page=100&after=&before=MS42Njc4NDA2MjM4MzNlKzEyfExqeG5sUElvNEZMbG1XZHA5akdKTVE%3D>; rel="prev"
-```
-
-Copy the corresponding pagination link into your next request. For example:
-
-```shell
-curl -I -H "Authorization: Bearer TOKEN" \
---request GET \
-"https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3/enterprises/13827/audit-log?phrase%3A2022-11-01=&per_page=100&after=MS42Njc4NDA2MjM5NDFlKzEyfHRYa3AwSkxUd2xyRjA5bWxfOS1RbFE%3D&before="
-```
-
-{% endif %}
 
 ## Example 2: Events for pull requests in an enterprise, for a specific date and actor
 
@@ -80,7 +54,7 @@ The query below searches for audit log events for pull requests, where the event
 ```shell
 curl -H "Authorization: Bearer TOKEN" \
 --request GET \
-"https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3/enterprises/avocado-corp/audit-log?phrase=action:pull_request+created:>=2022-01-01+actor:octocat"
+"{% data variables.product.rest_url %}/enterprises/avocado-corp/audit-log?phrase=action:pull_request+created:>=2022-01-01+actor:octocat"
 ```
 
 ## Example 3: Events for Git activity in an enterprise, for a specific date and actor
@@ -92,5 +66,5 @@ The query below searches for audit log events for Git activity, where the event 
 ```shell
 curl -H "Authorization: Bearer TOKEN" \
 --request GET \
-"https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3/enterprises/avocado-corp/audit-log?phrase=created:>=2024-01-01+actor:octocat&include=git"
+"{% data variables.product.rest_url %}/enterprises/avocado-corp/audit-log?phrase=created:>=2024-01-01+actor:octocat&include=git"
 ```

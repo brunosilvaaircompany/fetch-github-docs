@@ -13,7 +13,7 @@ If your OAuth app doesn't have access to a browser, such as a CLI tool, then you
 Check headers to see what OAuth scopes you have, and what the API action accepts:
 
 ```shell
-$ curl -H "Authorization: Bearer OAUTH-TOKEN" https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3/users/codertocat -I
+$ curl -H "Authorization: Bearer OAUTH-TOKEN" {% data variables.product.rest_url %}/users/codertocat -I
 HTTP/2 200
 X-OAuth-Scopes: repo, user
 X-Accepted-OAuth-Scopes: user
@@ -29,14 +29,14 @@ Name | Description
 **`(no scope)`** | Grants read-only access to public information (including user profile info, repository info, and gists)
 **`site_admin`** | Grants site administrators access to [GitHub Enterprise Server Administration API endpoints](/rest/enterprise-admin).
 **`repo`** | Grants full access to public, internal, and private repositories including read and write access to code, commit statuses, repository invitations, collaborators, deployment statuses, and repository webhooks. **Note:** In addition to repository related resources, the `repo` scope also grants access to manage organization-owned resources including projects, invitations, team memberships and webhooks. This scope also grants the ability to manage projects owned by users.
-&emsp;`repo:status`| Grants read/write access to commit statuses in public and private{% elsif ghec or ghes %}public, private, and internal repositories. This scope is only necessary to grant other users or services access to private repository commit statuses _without_ granting access to the code.
+&emsp;`repo:status`| Grants read/write access to commit statuses in public and private repositories. This scope is only necessary to grant other users or services access to private repository commit statuses _without_ granting access to the code.
 &emsp;`repo_deployment`| Grants access to [deployment statuses](/rest/repos#deployments) for public and private repositories. This scope is only necessary to grant other users or services access to deployment statuses, _without_ granting access to the code.
 &emsp;`public_repo`| Limits access to public repositories. That includes read/write access to code, commit statuses, repository projects, collaborators, and deployment statuses for public repositories and organizations. Also required for starring public repositories.
 &emsp;`repo:invite` | Grants accept/decline abilities for invitations to collaborate on a repository. This scope is only necessary to grant other users or services access to invites _without_ granting access to the code.
 &emsp;`security_events` | Grants: <br/> read and write access to security events in the [code scanning API](/rest/code-scanning) <br/> read and write access to security events in the [secret scanning API](/rest/secret-scanning) <br/> This scope is only necessary to grant other users or services access to security events _without_ granting access to the code.
-**`admin:repo_hook`** | Grants read, write, ping, and delete access to repository hooks in public or private{% elsif ghec or ghes %}public, private, or internal repositories. The `repo` and `public_repo` scopes grant full access to repositories, including repository hooks. Use the `admin:repo_hook` scope to limit access to only repository hooks.
-&emsp;`write:repo_hook` | Grants read, write, and ping access to hooks in public or private{% elsif ghec or ghes %}public, private, or internal repositories.
-&emsp;`read:repo_hook`| Grants read and ping access to hooks in public or private{% elsif ghec or ghes %}public, private, or internal repositories.
+**`admin:repo_hook`** | Grants read, write, ping, and delete access to repository hooks in public or private repositories. The `repo` and `public_repo` scopes grant full access to repositories, including repository hooks. Use the `admin:repo_hook` scope to limit access to only repository hooks.
+&emsp;`write:repo_hook` | Grants read, write, and ping access to hooks in public or private repositories.
+&emsp;`read:repo_hook`| Grants read and ping access to hooks in public or private repositories.
 **`admin:org`** | Fully manage the organization and its teams, projects, and memberships.
 &emsp;`write:org`| Read and write access to organization membership and organization projects.
 &emsp;`read:org`| Read-only access to organization membership, organization projects, and team membership.

@@ -76,13 +76,13 @@ Everyone makes mistakes, and it's possible that you'll accidentally commit a sec
 1. On line 13, `GH_TOKEN: ""`, insert this dummy token between the quotes:
 
    ```text
-   secret_scanning_ab85fc6f8d7638cf1c11da812da308d43_abcde
+   {% data variables.secret-scanning.learner-example-secret-a %}{% data variables.secret-scanning.learner-example-secret-b %}
    ```
 
    The end result should look like this:
 
    ```yaml
-   GH_TOKEN: "secret_scanning_ab85fc6f8d7638cf1c11da812da308d43_abcde"
+   GH_TOKEN: "{% data variables.secret-scanning.learner-example-secret-a %}{% data variables.secret-scanning.learner-example-secret-b %}"
    ```
 
 1. To attempt to commit the change, at the top right, click **Commit changes...** and then click **Commit changes** again in the dialog.

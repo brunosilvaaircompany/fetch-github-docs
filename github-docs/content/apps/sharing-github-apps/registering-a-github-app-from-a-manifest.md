@@ -3,8 +3,8 @@
 ## About GitHub App Manifests
 
 
->[!NOTE] GitHub App Manifests are not available for enterprise-owned GitHub Apps.{% ifversion enterprise-installed-apps %} They do not support enterprise permissions at this time.
-{% endif %}
+>[!NOTE] GitHub App Manifests are not available for enterprise-owned GitHub Apps. They do not support enterprise permissions at this time.
+
 
 When someone registers a GitHub App from a manifest, they only need to follow a URL and name the app. The manifest includes the permissions, events, and webhook URL needed to automatically register the app. The manifest flow creates the GitHub App registration and generates the app's webhook secret, private key (PEM file), client secret, and GitHub App ID. The person who creates the GitHub App registration from the manifest will own the GitHub App registration and can choose to edit the registration's settings, delete it, or transfer it to another person on GitHub.
 

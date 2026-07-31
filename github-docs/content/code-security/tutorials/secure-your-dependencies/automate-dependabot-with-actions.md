@@ -41,11 +41,7 @@ Example:
 
 
 ```yaml copy
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
+{% data reusables.actions.actions-not-certified-by-github-comment %}
 name: Dependabot fetch metadata
 on: pull_request
 
@@ -80,11 +76,7 @@ Example that flags all production dependency updates with a label:
 
 
 ```yaml copy
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
+{% data reusables.actions.actions-not-certified-by-github-comment %}
 name: Dependabot auto-label
 on: pull_request
 
@@ -118,11 +110,7 @@ Example:
 
 
 ```yaml copy
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
+{% data reusables.actions.actions-not-certified-by-github-comment %}
 name: Dependabot auto-approve
 on: pull_request
 
@@ -156,11 +144,7 @@ You can instead use GitHub Actions and the GitHub CLI. Here is an example that a
 
 
 ```yaml copy
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
+{% data reusables.actions.actions-not-certified-by-github-comment %}
 name: Dependabot auto-merge
 on: pull_request
 

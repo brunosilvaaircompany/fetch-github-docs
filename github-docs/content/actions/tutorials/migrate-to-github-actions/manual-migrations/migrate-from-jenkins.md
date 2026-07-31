@@ -207,10 +207,8 @@ jobs:
       matrix:
         os: [macos-latest, ubuntu-latest]
     steps:
-      - uses: actions/checkout@v6
-
-      - uses: actions/setup-node@v7
-
+      - uses: {% data reusables.actions.action-checkout %}
+      - uses: {% data reusables.actions.action-setup-node %}
         with:
           node-version: 20
       - run: npm install -g bats

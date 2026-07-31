@@ -43,7 +43,7 @@ You can:
 
 You can:
 
-* View all metered usage for your account and set budgets for your organization{% elsif ghec %}enterprise and organizations.
+* View all metered usage for your account and set budgets for your organization.
 * See enterprise usage, including costs for organizations and repositories.
 * Download CSV usage reports for products your enterprise is using.
 * Set budgets for your enterprise.

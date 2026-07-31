@@ -4,9 +4,9 @@
 
 After creating a GitHub App, you can install it based on its visibility.
 
-* **Only on this account:** The GitHub App can only be installed on the account that created it. This visibility is not available for apps{% ifversion ghec %} created by a managed user account or registered by an enterprise.{% endif %}
+* **Only on this account:** The GitHub App can only be installed on the account that created it. This visibility is not available for apps created by a managed user account or registered by an enterprise.
 * **Any account:** You can install this GitHub App on any account you control. This visibility is not available for apps registered by an enterprise.
-* **Only enterprise organizations:** If the GitHub App is owned by an enterprise, you can only install the app on{% ifversion enterprise-installed-apps %} that enterprise or organizations within the enterprise. Organizations where you are an organization owner will appear in the installation options.{% endif %}
+* **Only enterprise organizations:** If the GitHub App is owned by an enterprise, you can only install the app on that enterprise or organizations within the enterprise. Organizations where you are an organization owner will appear in the installation options.
 
 If you are an Enterprise Managed User, you cannot install a GitHub App on your user account.
 

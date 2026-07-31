@@ -7,7 +7,7 @@ With GitHub, you can store and collaborate on code. Accounts allow you to organi
 * Organization accounts
 * Enterprise accounts
 
-Every person who uses GitHub signs in to a user account. An organization account enhances collaboration between multiple users, and an enterprise account{% endif %} allows central management of multiple organizations.
+Every person who uses GitHub signs in to a user account. An organization account enhances collaboration between multiple users, and an enterprise account allows central management of multiple organizations.
 
 ## User accounts
 
@@ -33,7 +33,7 @@ Each personal account uses either GitHub Free or GitHub Pro. All personal accoun
 
 Many people use one personal account for all their work on GitHub.com, including both open source projects and paid employment. If you're currently using more than one personal account that you created for yourself, we suggest combining the accounts. For more information, see [Merging Multiple Personal Accounts](https://docs.github.com/en/account-and-profile/how-tos/account-management/merging-multiple-personal-accounts).
 
-Even if you're a member of an organization that uses SAML single sign-on, you will still sign in to your own personal account on GitHub.com, and that personal account will be linked to your identity in your organization's identity provider (IdP). For more information, see [About Authentication With Single Sign On](https://docs.github.com/en/enterprise-cloud@latest/authentication/authenticating-with-single-sign-on/about-authentication-with-single-sign-on){% ifversion fpt %}" in the GitHub Enterprise Cloud documentation.
+Even if you're a member of an organization that uses SAML single sign-on, you will still sign in to your own personal account on GitHub.com, and that personal account will be linked to your identity in your organization's identity provider (IdP). For more information, see [About Authentication With Single Sign On](https://docs.github.com/en/enterprise-cloud@latest/authentication/authenticating-with-single-sign-on/about-authentication-with-single-sign-on)" in the GitHub Enterprise Cloud documentation.
 
 ### Managed user accounts
 
@@ -45,7 +45,7 @@ As a managed user account:
 * You must sign in to your managed user account to access organizations and repositories owned by the enterprise.
 * You can create your own private repositories, but you cannot create public content or contribute to repositories outside the enterprise.
 
-{% endif %}
+
 
 ## Organization accounts
 
@@ -75,11 +75,7 @@ For more information about all the features of organizations, see [About Organiz
 
 
 GitHub Enterprise Cloud and GitHub Enterprise Server include enterprise accounts, which allow administrators to centrally manage policy and billing for multiple organizations and enable innersourcing between the organizations. For more information, see [Enterprise Accounts](https://docs.github.com/en/enterprise-cloud@latest/admin/concepts/enterprise-fundamentals/enterprise-accounts) in the GitHub Enterprise Cloud documentation.
-{% elsif ghec %}
-Enterprise accounts allow central policy management and billing for multiple organizations. You can use your enterprise account to centrally manage policy and billing. Unlike organizations, enterprise accounts cannot directly own resources like repositories, packages, or projects. These resources are owned by organizations within the enterprise account instead. For more information, see [Enterprise Accounts](https://docs.github.com/en/admin/concepts/enterprise-fundamentals/enterprise-accounts).
-{% elsif ghes %}
-Your enterprise account is a collection of all the organizations on {% ifversion ghes %}your GitHub Enterprise Server instance. You can use your enterprise account to centrally manage policy and billing. Unlike organizations, enterprise accounts cannot directly own resources like repositories, packages, or projects. These resources are owned by organizations within the enterprise account instead. For more information, see [Enterprise Accounts](https://docs.github.com/en/admin/concepts/enterprise-fundamentals/enterprise-accounts).
-{% endif %}
+
 
 ## Further reading
 

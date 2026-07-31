@@ -27,20 +27,6 @@ Before enabling metadata checks, you need to ensure that validity checks are ena
 
 1. Under "Secret Protection" and "Validity checks", to the right of "Extended metadata", click **Enable**.
 
-{% elsif ghes %}
-
-1. On GitHub, navigate to the main page of the repository.
-
-1. Under your repository name, click **{% octicon "gear" aria-hidden="true" aria-label="gear" %} Settings**. If you cannot see the "Settings" tab, select the **{% octicon "kebab-horizontal" aria-label="More" %}** dropdown menu, then click **Settings**.
-
-   ![Screenshot of a repository header showing the tabs. The "Settings" tab is highlighted by a dark orange outline.](/assets/images/help/repository/repo-actions-settings.png)
-
-1. In the "Security" section of the sidebar, click **{% octicon "codescan" aria-hidden="true" aria-label="codescan" %} Advanced Security**.
-
-1. Under "Secret Protection", to the right of "Validity checks", click **Enable**.
-
-1. Under "Secret Protection", to the right of "Extended metadata", click **Enable**.
-
 
 
 ## Further reading

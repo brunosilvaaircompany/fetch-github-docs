@@ -14,7 +14,7 @@ If you have an account on GitHub or GitHub Enterprise, you can use GitHub Deskto
 
 If you do not already have an account on GitHub, create one now. For more information, see [Creating An Account On GitHub](https://docs.github.com/en/account-and-profile/how-tos/account-management/creating-an-account-on-github).
 
-If you're part of an organization that uses Enterprise Managed Users and you do not have an account, contact your enterprise administrator.{% elsif ghes %}If you're a member of an organization that uses GitHub Enterprise Server and you do not have an account, contact your site administrator.
+If you're part of an organization that uses Enterprise Managed Users and you do not have an account, contact your enterprise administrator.
 
 ### Authenticating to GitHub
 

@@ -55,8 +55,7 @@ GitHub provides a workflow template for Swift that should work for most Swift pr
        runs-on: macos-latest
 
        steps:
-       - uses: actions/checkout@v6
-
+       - uses: {% data reusables.actions.action-checkout %}
        - name: Build
          run: swift build -v
        - name: Run tests
@@ -86,16 +85,9 @@ You can configure your job to use multiple versions of Swift in a matrix.
 
 ```yaml copy
 
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
+{% data reusables.actions.actions-not-certified-by-github-comment %}
 
-
-# GitHub recommends pinning actions to a commit SHA.
-# To get a newer version, you will need to update the SHA.
-# You can also reference a tag or branch, but the action may change without warning.
-
+{% data reusables.actions.actions-use-sha-pinning-comment %}
 
 name: Swift
 
@@ -113,8 +105,7 @@ jobs:
       - uses: swift-actions/setup-swift@65540b95f51493d65f5e59e97dcef9629ddf11bf
         with:
           swift-version: {% raw %}${{ matrix.swift }}{% endraw %}
-      - uses: actions/checkout@v6
-
+      - uses: {% data reusables.actions.action-checkout %}
       - name: Build
         run: swift build
       - name: Run tests
@@ -126,11 +117,7 @@ jobs:
 You can configure your job to use a single specific version of Swift, such as `5.3.3`.
 
 ```yaml copy
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
+{% data reusables.actions.actions-not-certified-by-github-comment %}
 steps:
   - uses: swift-actions/setup-swift@65540b95f51493d65f5e59e97dcef9629ddf11bf
     with:
@@ -144,14 +131,9 @@ steps:
 You can use the same commands that you use locally to build and test your code using Swift. This example demonstrates how to use `swift build` and `swift test` in a job:
 
 ```yaml copy
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
+{% data reusables.actions.actions-not-certified-by-github-comment %}
 steps:
-  - uses: actions/checkout@v6
-
+  - uses: {% data reusables.actions.action-checkout %}
   - uses: swift-actions/setup-swift@65540b95f51493d65f5e59e97dcef9629ddf11bf
     with:
       swift-version: "5.3.3"

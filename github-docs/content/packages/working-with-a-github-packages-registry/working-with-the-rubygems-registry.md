@@ -90,13 +90,13 @@ To install gems, you need to authenticate to GitHub Packages by updating your ge
 If you would like your package to be available globally, you can run the following command to add your registry as a source.
 
 ```shell
-gem sources --add https://USERNAME:TOKEN@rubygems.pkg.github.com/NAMESPACE/
+gem sources --add https://USERNAME:TOKEN@{% ifversion fpt or ghec %}rubygems.pkg.github.com{% else %}REGISTRY_URL{% endif %}/NAMESPACE/
 ```
 
 To authenticate with Bundler, configure Bundler to use your personal access token (classic), replacing USERNAME with your GitHub username, TOKEN with your personal access token, and NAMESPACE with the name of the personal account or organization to which the gem is scoped. Replace `REGISTRY_URL` with the URL for your instance's RubyGems registry. If your instance has subdomain isolation enabled, use `rubygems.HOSTNAME`. If your instance has subdomain isolation disabled, use `HOSTNAME/_registry/rubygems`. In either case, replace HOSTNAME with the hostname of your GitHub Enterprise Server instance.
 
 ```shell
-bundle config https://rubygems.pkg.github.com/NAMESPACE USERNAME:TOKEN
+bundle config https://{% ifversion fpt or ghec %}rubygems.pkg.github.com{% else %}REGISTRY_URL{% endif %}/NAMESPACE USERNAME:TOKEN
 ```
 
 ## Publishing a package
@@ -128,7 +128,7 @@ When you first publish a package, the default visibility is private. To change t
 
    ```shell
    $ gem push --key github \
-   --host https://rubygems.pkg.github.com/NAMESPACE \
+   --host https://{% ifversion fpt or ghec %}rubygems.pkg.github.com{% else %}REGISTRY_URL{% endif %}/NAMESPACE \
    GEM_NAME-0.0.1.gem
    ```
 
@@ -138,25 +138,15 @@ When you first publish a package, the default visibility is private. To change t
 
 The RubyGems registry stores packages within your organization or personal account, and allows you to associate packages with a repository. You can choose whether to inherit permissions from a repository, or set granular permissions independently of a repository.
 
-You can ensure gems will be linked to a repository as soon as they are published by including the URL of the GitHub repository in the `github_repo` field in `gem.metadata`. You can link multiple gems to the same repository. {% ifversion ghes %} In the following example, replace HOSTNAME with the host name of {% ifversion ghes %}your GitHub Enterprise Server instance.{% endif %}
+You can ensure gems will be linked to a repository as soon as they are published by including the URL of the GitHub repository in the `github_repo` field in `gem.metadata`. You can link multiple gems to the same repository.  In the following example, replace HOSTNAME with the host name of your GitHub Enterprise Server instance.
 
 ```ruby
-gem.metadata = { "github_repo" => "ssh://github.com/OWNER/REPOSITORY" }
+gem.metadata = { "github_repo" => "ssh://{% ifversion fpt or ghec %}github.com{% else %}HOSTNAME{% endif %}/OWNER/REPOSITORY" }
 ```
 
 For information on linking a published package with a repository, see [Connecting A Repository To A Package](https://docs.github.com/en/packages/learn-github-packages/connecting-a-repository-to-a-package).
 
-{% else %}
 
-## Publishing multiple packages to the same repository
-
-To publish multiple gems to the same repository, you can include the URL to the GitHub repository in the `github_repo` field in `gem.metadata`. If you include this field, GitHub matches the repository based on this value, instead of using the gem name. Replace HOSTNAME with the host name of your GitHub Enterprise Server instance.
-
-```ruby
-gem.metadata = { "github_repo" => "ssh://HOSTNAME/OWNER/REPOSITORY" }
-```
-
-{% endif %}
 
 ## Installing a package
 
@@ -171,7 +161,7 @@ You can use gems from GitHub Packages much like you use gems from _rubygems.org_
 
    gem "rails"
 
-   source "https://rubygems.pkg.github.com/NAMESPACE" do
+   source "https://{% ifversion fpt or ghec %}rubygems.pkg.github.com{% else %}REGISTRY_URL{% endif %}/NAMESPACE" do
      gem "GEM_NAME"
    end
    ```
@@ -179,7 +169,7 @@ You can use gems from GitHub Packages much like you use gems from _rubygems.org_
 1. For Bundler versions earlier than 1.7.0, you need to add a new global `source`. For more information on using Bundler, see the [bundler.io documentation](https://bundler.io/gemfile.html).
 
    ```ruby
-   source "https://rubygems.pkg.github.com/NAMESPACE"
+   source "https://{% ifversion fpt or ghec %}rubygems.pkg.github.com{% else %}REGISTRY_URL{% endif %}/NAMESPACE"
    source "https://rubygems.org"
 
    gem "rails"

@@ -115,7 +115,7 @@ request would look like this:
 
 ``` shell
 curl -H 'Accept: application/vnd.github.text-match+json' \
-'https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3/search/issues?q=windows+label:bug \
+'{% data variables.product.rest_url %}/search/issues?q=windows+label:bug \
 +language:python+state:open&sort=created&order=asc'
 ```
 

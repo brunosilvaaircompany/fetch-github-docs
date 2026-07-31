@@ -290,8 +290,7 @@ jobs:
       # To use this repository's private action,
       # you must check out the repository
       - name: Checkout
-        uses: actions/checkout@v6
-
+        uses: {% data reusables.actions.action-checkout %}
 
       - name: Hello world action step
         uses: ./ # Uses an action in the root directory

@@ -21,8 +21,7 @@ You may be able to understand why some source files haven't been analyzed by ins
 
 ```yaml
 - name: Initialize CodeQL
-  uses: github/codeql-action/init@v4
-
+  uses: {% data reusables.actions.action-codeql-action-init %}
   with:
     debug: true
 ```

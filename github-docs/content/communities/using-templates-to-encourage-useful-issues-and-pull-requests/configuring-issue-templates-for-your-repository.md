@@ -147,10 +147,10 @@ Here is an example _config.yml_ file.
 ```yaml copy
 blank_issues_enabled: false
 contact_links:
-  - name: GitHub Community Support
+  - name: {% data variables.product.prodname_gcf %}
     url: https://github.com/orgs/community/discussions
     about: Please ask and answer questions here.
-  - name: GitHub Security Bug Bounty
+  - name: {% data variables.product.prodname_dotcom %} Security Bug Bounty
     url: https://bounty.github.com/
     about: Please report security vulnerabilities here.
 ```

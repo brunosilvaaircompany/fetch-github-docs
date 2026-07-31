@@ -43,7 +43,7 @@ If you access GitHub through a subdomain of GHE.com, you must configure the  `Gi
    Alternatively, you can add the following to your `settings.json` file:
 
    ```json copy
-   "github-enterprise.uri": "https://SUBDOMAIN.ghe.com"
+   "github-enterprise.uri": "https://{% data variables.enterprise.data_residency_domain %}"
    ```
 
 1. In the VS Code settings, search for `Codespaces Auth Provider`.

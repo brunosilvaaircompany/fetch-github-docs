@@ -61,7 +61,7 @@ You can use the GitHub web interface or the REST API to delete an organization w
 
 Enterprise owners can disable a global webhook in an GitHub Enterprise.
 
-{% ifversion ghes %}
+
 
 You can use the GitHub web interface or the REST API to disable a global webhook. For more information about using the REST API to disable a global webhook, see [Global Webhooks](https://docs.github.com/en/rest/enterprise-admin/global-webhooks).
 
@@ -84,7 +84,7 @@ You can use the GitHub web interface or the REST API to disable a global webhook
    1. To _delete_ the webhook, click **Delete**. This action cannot be undone.
 
 
-{% endif %}
+
 
 
 
@@ -128,16 +128,14 @@ Each GitHub App has one webhook. You cannot delete the webhook, but you can deac
      1. To the right of the organization, click **Settings**.
    * For an app owned by an enterprise:
      1. If you use Enterprise Managed Users, click **Your enterprise** to go directly to the enterprise account settings.
-     1. If you use personal accounts, click **Your enterprises** and then to the right of the enterprise, click **Settings**.{% elsif ghes %}
-     1. Click **Enterprise settings**.
-
+     1. If you use personal accounts, click **Your enterprises** and then to the right of the enterprise, click **Settings**.
 
 
 1. Navigate to the GitHub App settings.
    * For an app owned by a personal account or organization:
      1. In the left sidebar, click **{% octicon "code" aria-hidden="true" aria-label="code" %} Developer settings**, then click **GitHub Apps**.
    * For an app owned by an enterprise:
-     1. In the left sidebar, under "Settings",{% elsif ghes %} click **Settings**, then click **GitHub Apps**.
+     1. In the left sidebar, under "Settings", click **GitHub Apps**.
 
 1. Next to the GitHub App that you want to deactivate the webhook for, click **Edit**.
 1. Under "Webhook," deselect **Active** to disable the webhook.

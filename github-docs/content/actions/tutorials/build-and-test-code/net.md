@@ -54,11 +54,9 @@ GitHub provides a workflow template for .NET that should work for most .NET proj
        runs-on: ubuntu-latest
 
        steps:
-       - uses: actions/checkout@v6
-
+       - uses: {% data reusables.actions.action-checkout %}
        - name: Setup .NET
-         uses: actions/setup-dotnet@v4
-
+         uses: {% data reusables.actions.action-setup-dotnet %}
          with:
            dotnet-version: 6.0.x
        - name: Restore dependencies
@@ -100,11 +98,9 @@ jobs:
         dotnet-version: [ '3.1.x', '6.0.x' ]
 
     steps:
-      - uses: actions/checkout@v6
-
+      - uses: {% data reusables.actions.action-checkout %}
       - name: Setup dotnet {% raw %}${{ matrix.dotnet-version }}{% endraw %}
-        uses: actions/setup-dotnet@v4
-
+        uses: {% data reusables.actions.action-setup-dotnet %}
         with:
           dotnet-version: {% raw %}${{ matrix.dotnet-version }}{% endraw %}
       # You can test your matrix by printing the current dotnet version
@@ -118,8 +114,7 @@ You can configure your job to use a specific version of .NET, such as `6.0.22`. 
 
 ```yaml
     - name: Setup .NET 6.x
-      uses: actions/setup-dotnet@v4
-
+      uses: {% data reusables.actions.action-setup-dotnet %}
       with:
         # Semantic version range syntax or exact version of a dotnet version
         dotnet-version: '6.x'
@@ -131,11 +126,9 @@ GitHub-hosted runners have the NuGet package manager installed. You can use the 
 
 ```yaml
 steps:
-- uses: actions/checkout@v6
-
+- uses: {% data reusables.actions.action-checkout %}
 - name: Setup dotnet
-  uses: actions/setup-dotnet@v4
-
+  uses: {% data reusables.actions.action-setup-dotnet %}
   with:
     dotnet-version: '6.0.x'
 - name: Install dependencies
@@ -150,11 +143,9 @@ For more information, see [Dependency Caching](https://docs.github.com/en/action
 
 ```yaml
 steps:
-- uses: actions/checkout@v6
-
+- uses: {% data reusables.actions.action-checkout %}
 - name: Setup dotnet
-  uses: actions/setup-dotnet@v4
-
+  uses: {% data reusables.actions.action-setup-dotnet %}
   with:
     dotnet-version: '6.x'
     cache: true
@@ -171,11 +162,9 @@ You can use the same commands that you use locally to build and test your code. 
 
 ```yaml
 steps:
-- uses: actions/checkout@v6
-
+- uses: {% data reusables.actions.action-checkout %}
 - name: Setup dotnet
-  uses: actions/setup-dotnet@v4
-
+  uses: {% data reusables.actions.action-setup-dotnet %}
   with:
     dotnet-version: '6.0.x'
 - name: Install dependencies
@@ -206,11 +195,9 @@ jobs:
         dotnet-version: [ '3.1.x', '6.0.x' ]
 
       steps:
-        - uses: actions/checkout@v6
-
+        - uses: {% data reusables.actions.action-checkout %}
         - name: Setup dotnet
-          uses: actions/setup-dotnet@v4
-
+          uses: {% data reusables.actions.action-setup-dotnet %}
           with:
             dotnet-version: {% raw %}${{ matrix.dotnet-version }}{% endraw %}
         - name: Install dependencies
@@ -218,8 +205,7 @@ jobs:
         - name: Test with dotnet
           run: dotnet test --no-restore --logger trx --results-directory {% raw %}"TestResults-${{ matrix.dotnet-version }}"{% endraw %}
         - name: Upload dotnet test results
-          uses: actions/upload-artifact@v4
-
+          uses: {% data reusables.actions.action-upload-artifact %}
           with:
             name: {% raw %}dotnet-results-${{ matrix.dotnet-version }}{% endraw %}
             path: {% raw %}TestResults-${{ matrix.dotnet-version }}{% endraw %}
@@ -245,10 +231,8 @@ jobs:
       packages: write
       contents: read
     steps:
-      - uses: actions/checkout@v6
-
-      - uses: actions/setup-dotnet@v4
-
+      - uses: {% data reusables.actions.action-checkout %}
+      - uses: {% data reusables.actions.action-setup-dotnet %}
         with:
           dotnet-version: '6.0.x' # SDK Version to use.
           source-url: https://nuget.pkg.github.com/<owner>/index.json

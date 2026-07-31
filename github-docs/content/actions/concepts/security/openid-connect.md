@@ -44,7 +44,7 @@ The following example OIDC token uses a subject (`sub`) that references a job en
   "jti": "example-id",
   "sub": "repo:octo-org/octo-repo:environment:prod",
   "environment": "prod",
-  "aud": "https://HOSTNAME/octo-org",
+  "aud": "{% ifversion ghes %}https://HOSTNAME{% else %}https://github.com{% endif %}/octo-org",
   "ref": "refs/heads/main",
   "sha": "example-sha",
   "repository": "octo-org/octo-repo",
@@ -61,13 +61,13 @@ The following example OIDC token uses a subject (`sub`) that references a job en
   "workflow": "example-workflow",
   "head_ref": "",
   "base_ref": "",
-  "event_name": "workflow_dispatch",
-  "enterprise": "avocado-corp",
-  "enterprise_id": "2",
-  "repo_property_workspace_id": "ws-abc123",
+  "event_name": "workflow_dispatch",{% ifversion actions-OIDC-custom-claim-enterprise %}
+  "enterprise": "avocado-corp",{% endif %}{% ifversion actions-OIDC-enterprise_id-claim %}
+  "enterprise_id": "2",{% endif %}{% ifversion oidc-custom-properties %}
+  "repo_property_workspace_id": "ws-abc123",{% endif %}
   "ref_type": "branch",
   "job_workflow_ref": "octo-org/octo-automation/.github/workflows/oidc.yml@refs/heads/main",
-  "iss": "https://HOSTNAME/_services/token",
+  "iss": "{% ifversion ghes %}https://HOSTNAME/_services/token{% else %}https://token.actions.githubusercontent.com{% endif %}",
   "nbf": 1632492967,
   "exp": 1632493867,
   "iat": 1632493567

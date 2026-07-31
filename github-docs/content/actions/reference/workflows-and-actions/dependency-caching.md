@@ -20,8 +20,7 @@ You cannot change the contents of an existing cache. Instead, you can create a n
 
     ```yaml
     - name: Cache Gradle packages
-      uses: actions/cache@v4
-
+      uses: {% data reusables.actions.action-cache %}
       with:
         path: |
           ~/.gradle/caches
@@ -79,13 +78,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
-
+      - uses: {% data reusables.actions.action-checkout %}
 
       - name: Cache node modules
         id: cache-npm
-        uses: actions/cache@v4
-
+        uses: {% data reusables.actions.action-cache %}
         env:
           cache-name: cache-node-modules
         with:

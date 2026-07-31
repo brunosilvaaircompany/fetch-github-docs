@@ -25,7 +25,7 @@ To commit to a pull request branch created from a fork, you need push access to 
 1. Clone the fork, then navigate into the cloned repository.
 
    ```shell
-   git clone https://github.com/USERNAME/FORK-OF-THE-REPOSITORY
+   git clone https://{% data variables.product.product_url %}/USERNAME/FORK-OF-THE-REPOSITORY
    cd FORK-OF-THE-REPOSITORY
    ```
 

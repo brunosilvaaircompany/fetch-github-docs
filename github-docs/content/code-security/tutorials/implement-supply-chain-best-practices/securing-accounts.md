@@ -6,7 +6,7 @@ This guide describes the highest impact changes you can make to increase account
 
 ## What's the risk?
 
-Account security is fundamental to the security of your supply chain. If an attacker can take over your account on GitHub, they can then make malicious changes to your code or build process. So your first goal should be to make it difficult for someone to take over your account and the accounts of other users of your organization{% elsif ghec %}your organization or enterprise{% elsif ghes %}your instance.
+Account security is fundamental to the security of your supply chain. If an attacker can take over your account on GitHub, they can then make malicious changes to your code or build process. So your first goal should be to make it difficult for someone to take over your account and the accounts of other users of your organization.
 
 
 
@@ -43,15 +43,15 @@ For more information about the authentication methods available for GitHub, see 
 
 
 
-The best way to improve the security of your personal account{% elsif ghes %}your personal account or your instance{% elsif ghec %}your accounts is to configure two-factor authentication (2FA). Passwords by themselves can be compromised by being guessable, by being reused on another site that's been compromised, or by social engineering, like phishing. 2FA makes it much more difficult for your accounts to be compromised, even if an attacker has your password.
+The best way to improve the security of your personal account is to configure two-factor authentication (2FA). Passwords by themselves can be compromised by being guessable, by being reused on another site that's been compromised, or by social engineering, like phishing. 2FA makes it much more difficult for your accounts to be compromised, even if an attacker has your password.
 
 As a best practice, to ensure both security and reliable access to your account, you should always have at least two second-factor credentials registered on your account. Extra credentials ensures that even if you lose access to one credential, you won't be locked out of your account.
 
 Additionally, you should prefer passkeys and security keys over authenticator apps (called TOTP apps) and avoid use of SMS whenever possible. Both SMS-based 2FA and TOTP apps are vulnerable to phishing, and do not provide the same level of protection as passkeys and security keys. SMS is no longer recommended under the [NIST 800-63B](https://nvlpubs.nist.gov/nistpubs/specialpublications/nist.sp.800-63b.pdf) digital identity guidelines.
 
-{% ifversion ghec %}
+
 If service accounts in your organization have been selected for 2FA enrollment by GitHub, their tokens and keys will continue to work after the deadline without interruption. Only access to GitHub through the website UI will be blocked until the account has enabled 2FA. We recommend setting up TOTP as the second factor for service accounts, and storing the TOTP secret exposed during setup in your company's shared password manager, with access to the secrets controlled through SSO.
-{% endif %}
+
 
 
 If you're an enterprise owner, you may be able to configure a policy to require 2FA for all organizations owned by your enterprise.
@@ -69,12 +69,10 @@ To learn more about enabling 2FA on your own account, see [Configuring Two Facto
 
 ### Configure your enterprise account
 
-Enterprise owners may be able to require 2FA for all {% ifversion ghes %}users on{% elsif ghec %}members of the instance{% elsif ghec %}enterprise. The availability of 2FA policies on GitHub depends on how users authenticate to access your instance{% elsif ghec %}enterprise's resources.
+Enterprise owners may be able to require 2FA for all users on the instance. The availability of 2FA policies on GitHub depends on how users authenticate to access your instance.
 
 
 * If you sign into GitHub Enterprise Server through an external IdP using CAS or SAML SSO, you
-{% elsif ghec %}
-If your enterprise uses Enterprise Managed Users or SAML authentication is enforced for your enterprise, you
  cannot configure 2FA on GitHub. Someone with administrative access to your IdP must configure 2FA for the IdP.
 
 
@@ -85,16 +83,16 @@ If your enterprise uses Enterprise Managed Users or SAML authentication is enfor
 
 For more information, see [About Saml For Enterprise Iam](https://docs.github.com/en/admin/managing-iam/understanding-iam-for-enterprises/about-saml-for-enterprise-iam) and [Enforcing Policies For Security Settings In Your Enterprise](https://docs.github.com/en/admin/enforcing-policies/enforcing-policies-for-your-enterprise/enforcing-policies-for-security-settings-in-your-enterprise#requiring-two-factor-authentication-for-organizations-in-your-enterprise).
 
-{% endif %}
+
 
 ### Configure your personal account
 
 
 
 > [!NOTE]
-> Depending on the authentication method that {% ifversion ghec %}an enterprise owner{% elsif ghes %}a site administrator has configured, you may not be able to enable 2FA for your personal account.
+> Depending on the authentication method that an enterprise owner has configured, you may not be able to enable 2FA for your personal account.
 
-{% endif %}
+
 
 GitHub supports several options for 2FA, and while any of them is better than nothing, the most secure option is a WebAuthn credential. WebAuthn requires an authenticator such as a FIDO2 hardware security key, a platform authenticator like Windows Hello, an Apple or Google phone, or a password manager. It's possible, although difficult, to phish other forms of 2FA (for example, someone asking you to read them your 6 digit one-time password). However WebAuthn is much more resistant to phishing, because domain scoping is built into the protocol, which prevents credentials from a website impersonating the login page from being used on GitHub.
 
@@ -105,9 +103,9 @@ When you set up 2FA, you should always download the recovery codes and set up mo
 
 
 > [!NOTE]
-> Depending on the authentication method that {% ifversion ghec %}an enterprise owner{% elsif ghes %}a site administrator has configured, you may not be able to require 2FA for your organization.
+> Depending on the authentication method that an enterprise owner has configured, you may not be able to require 2FA for your organization.
 
-{% endif %}
+
 
 If you're an organization owner, you can see which users don't have 2FA enabled, help them get set up, and then require 2FA for your organization. To guide you through that process, see:
 

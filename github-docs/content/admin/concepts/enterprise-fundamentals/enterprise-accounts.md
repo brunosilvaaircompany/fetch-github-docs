@@ -65,11 +65,11 @@ Enterprise administrators can set policies to govern how people work across your
 
 GitHub Apps are a secure way to manage automations across your enterprise. A GitHub App is a dedicated identity that provides scoped tokens to your external scripts and workflows, allowing you to automate processes and integrate with other platforms.
 
-In your enterprise account, you can define app registrations to automate a process consistently across organizations.{% ifversion enterprise-installed-apps %} You can also install apps for automations that take actions on the enterprise account itself, such as creating organizations.
+In your enterprise account, you can define app registrations to automate a process consistently across organizations. You can also install apps for automations that take actions on the enterprise account itself, such as creating organizations.
 
 Users can also authorize GitHub Apps to use their GitHub account and data in other applications—for example, to use their GitHub account to sign in to an IDE or connect a CI provider to your repositories.
 
-{% endif %}
+
 
 
 

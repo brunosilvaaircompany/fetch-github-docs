@@ -10,8 +10,7 @@ A repository must meet all the following criteria to be eligible for default set
 
 * Advanced setup for code scanning is not already enabled.
 * GitHub Actions is enabled.
-* It is publicly visible, or GitHub Code Security is enabled.{%- elsif ghes %}
-* GitHub Code Security is enabled.
+* It is publicly visible, or GitHub Code Security is enabled.
 
 
 ## Configuring default setup for all eligible repositories in an organization

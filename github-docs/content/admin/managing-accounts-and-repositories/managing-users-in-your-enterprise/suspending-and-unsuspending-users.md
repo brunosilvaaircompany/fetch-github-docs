@@ -94,7 +94,7 @@ You can create a custom message that suspended users will see when attempting to
 
 1. At the top of the page, click {% octicon "gear" aria-hidden="true" aria-label="gear" %} **Settings**.
 
-1. Under **{% octicon "gear" aria-hidden="true" aria-label="gear" %} Settings**, click **Messages{% elsif ghec %}Announcement**.
+1. Under **{% octicon "gear" aria-hidden="true" aria-label="gear" %} Settings**, click **Messages**.
 
 1. To the right of "Suspended user page," click **Add message**.
 

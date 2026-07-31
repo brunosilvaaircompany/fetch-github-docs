@@ -59,4 +59,4 @@ Note that setting `X-Github-Next-Global-ID` to `1` will affect the return value 
 
 ## Sharing feedback
 
-If you have any concerns about the rollout of this change impacting your app, please contact us through the [GitHub Support portal](https://support.github.com){% elsif ghes %}your site administrator and include information such as your app name so that we can better assist you.
+If you have any concerns about the rollout of this change impacting your app, please contact us through the [GitHub Support portal](https://support.github.com) and include information such as your app name so that we can better assist you.

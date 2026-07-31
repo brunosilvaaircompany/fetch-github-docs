@@ -61,16 +61,9 @@ If you configured a deployment environment, change the value of `environment` to
 
 
 ```yaml copy
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
+{% data reusables.actions.actions-not-certified-by-github-comment %}
 
-
-# GitHub recommends pinning actions to a commit SHA.
-# To get a newer version, you will need to update the SHA.
-# You can also reference a tag or branch, but the action may change without warning.
-
+{% data reusables.actions.actions-use-sha-pinning-comment %}
 
 name: Build and deploy Python app to Azure Web App
 
@@ -88,12 +81,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v6
-
+      - uses: {% data reusables.actions.action-checkout %}
 
       - name: Set up Python version
-        uses: actions/setup-python@v5
-
+        uses: {% data reusables.actions.action-setup-python %}
         with:
           python-version: {% raw %}${{ env.PYTHON_VERSION }}{% endraw %}
 
@@ -103,8 +94,7 @@ jobs:
           source venv/bin/activate
 
       - name: Set up dependency caching for faster installs
-        uses: actions/cache@v4
-
+        uses: {% data reusables.actions.action-cache %}
         with:
           path: ~/.cache/pip
           key: {% raw %}${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}{% endraw %}
@@ -117,8 +107,7 @@ jobs:
       # Optional: Add a step to run tests here (PyTest, Django test suites, etc.)
 
       - name: Upload artifact for deployment jobs
-        uses: actions/upload-artifact@v4
-
+        uses: {% data reusables.actions.action-upload-artifact %}
         with:
           name: python-app
           path: |
@@ -133,8 +122,7 @@ jobs:
 
     steps:
       - name: Download artifact from build job
-        uses: actions/download-artifact@v5
-
+        uses: {% data reusables.actions.action-download-artifact %}
         with:
           name: python-app
           path: .

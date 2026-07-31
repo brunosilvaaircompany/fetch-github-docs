@@ -109,7 +109,7 @@ This is a Go based repository with a Ruby client for certain API endpoints. It i
 
 ## Repository Structure
 - `cmd/`: Main service entry points and executables
-- `internal/`: Logic related to interactions with other GitHub services
+- `internal/`: Logic related to interactions with other {% data variables.product.github %} services
 - `lib/`: Core Go packages for billing logic
 - `admin/`: Admin interface components
 - `config/`: Configuration files and templates

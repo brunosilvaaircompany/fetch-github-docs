@@ -127,8 +127,7 @@ After your GitHub-hosted runners are configured, update your workflow files to t
        runs-on: [github-larger-runner, linux-x64]
        steps:
          - name: Checkout code
-           uses: actions/checkout@v6
-
+           uses: {% data reusables.actions.action-checkout %}
          - name: Build project
            run: make build
    ```

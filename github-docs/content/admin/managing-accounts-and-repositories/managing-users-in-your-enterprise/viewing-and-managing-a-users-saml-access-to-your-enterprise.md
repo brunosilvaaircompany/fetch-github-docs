@@ -50,29 +50,6 @@ If your enterprise uses Enterprise Managed Users, you will not be able to deprov
 1. Read the information, then click **Revoke external identity**.
 
 
-{% elsif scim-for-ghes-public-beta %}
-
-## Viewing a linked identity
-
-You can view the single sign-on identity that a member has linked to their account on GitHub.
-
-
-1. In the top-right corner of GitHub Enterprise Server, click your profile picture, then click **Enterprise settings**.
-
-
-1. At the top of the page, click **{% octicon "person" aria-hidden="true" aria-label="person" %} People**.
-
-1. Click on the name of the member whose linked identity you'd like to view or revoke.
-
-1. In the left sidebar, click **SAML identity linked**.
-
-   ![Screenshot of the people summary for @octocat. A link, labeled "SAML identity linked", is highlighted with an orange outline.](/assets/images/help/saml/saml-identity-linked.png)
-
-1. Under "Linked SSO identity", view the linked SSO identity for the member.
-
-
-The identity data on this page will include the SCIM data that was sent to GitHub during user provisioning. This SCIM data is what GitHub uses when matching a SAML SSO request to the provisioned user. Note that GitHub does not use SAML mappings when SCIM is enabled. For more information on how GitHub maps SAML and SCIM data for users, please see [Scim?Apiversion=2022 11 28](https://docs.github.com/en/rest/enterprise-admin/scim?apiVersion=2022-11-28#mapping-of-saml-and-scim-data).
-
 
 
 ## Viewing and revoking an active SAML session
@@ -101,7 +78,7 @@ The identity data on this page will include the SCIM data that was sent to GitHu
 You can see each personal access token and SSH key that a member has authorized for API and Git access. Only the last several characters of each token or key are visible. If necessary, work with the member to determine which credentials you should revoke. Be aware that revoking a credential only removes the SAML authorization. It does not delete the underlying token or SSH key.
 
 
-{% ifversion single_user_cred_revocation %}
+
 
 You can also revoke SSO authorizations for individual users or all users. For enterprises with Enterprise Managed Users, you can delete credentials entirely. This is useful for responding to security incidents. For more information, see [Revoke Authorizations Or Tokens](https://docs.github.com/en/enterprise-cloud@latest/admin/managing-iam/respond-to-incidents/revoke-authorizations-or-tokens).
 
@@ -129,5 +106,3 @@ You can also revoke SSO authorizations for individual users or all users. For en
 ## Further reading
 
 * [Viewing And Managing A Members Saml Access To Your Organization](https://docs.github.com/en/organizations/granting-access-to-your-organization-with-saml-single-sign-on/viewing-and-managing-a-members-saml-access-to-your-organization)
-
-{% endif %}

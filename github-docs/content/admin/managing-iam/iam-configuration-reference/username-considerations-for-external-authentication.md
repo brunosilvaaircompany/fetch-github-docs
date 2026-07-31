@@ -11,23 +11,9 @@
 
 You can configure external authentication for GitHub Enterprise Server using CAS, LDAP, or SAML. For more information, see [Identity And Access Management Fundamentals](https://docs.github.com/en/admin/concepts/identity-and-access-management/identity-and-access-management-fundamentals#which-authentication-method-are-available-to-me).
 
-When you use external authentication, {% ifversion ghes %}your GitHub Enterprise Server instance automatically creates a username for each person when the person signs into your GitHub Enterprise Server instance through your external authentication system for the first time.
-
-{% elsif ghec %}
-
-If you use an enterprise with Enterprise Managed Users, members of your enterprise authenticate to access GitHub through your SAML identity provider (IdP). For more information, see [Enterprise Managed Users](https://docs.github.com/en/admin/concepts/identity-and-access-management/enterprise-managed-users) and [Identity And Access Management Fundamentals](https://docs.github.com/en/admin/concepts/identity-and-access-management/identity-and-access-management-fundamentals#which-authentication-method-are-available-to-me).
-
-GitHub automatically creates a username for each person when their user account is provisioned via SCIM.
-
-* To create the username, GitHub normalizes an identifier provided by your IdP.
-* On GitHub.com, GitHub also adds an underscore and your enterprise's shortcode to the end of each username.
-
-If multiple identifiers are normalized into the same username, a username conflict occurs, and only the first user account is created. You can resolve username problems by making a change in your IdP so that the normalized usernames will be unique and within the 39-character limit.
-
-> [!NOTE] Conflicts can only occur between users within the same enterprise. Managed user accounts can share IdP identifiers or email addresses with other user accounts on GitHub.com that are outside the enterprise.
+When you use external authentication, your GitHub Enterprise Server instance automatically creates a username for each person when the person signs into your GitHub Enterprise Server instance through your external authentication system for the first time.
 
 
-{% endif %}
 
 
 
@@ -89,8 +75,6 @@ Usernames for user accounts on GitHub can only contain alphanumeric characters a
 
 
 When you configure SAML authentication, GitHub uses the SCIM `userName` attribute value sent from the IdP to determine the username for the corresponding user account on GitHub. If this value includes unsupported characters, GitHub will normalize the username per the following rules.
-{% elsif ghes %}
-When you configure CAS, LDAP, or SAML authentication (without SCIM), GitHub Enterprise Server uses an identifier from the user account on your external authentication provider to determine the username for the corresponding user account on your GitHub Enterprise Server instance. When SAML authentication is configured with SCIM, GitHub uses the SCIM `userName` attribute value sent from the IdP to determine the username for the corresponding user account. If the identifier includes unsupported characters, GitHub will normalize the username per the following rules.
 
 
 1. GitHub will normalize any non-alphanumeric character in your account's username into a dash. For example, a username of `mona.the.octocat` will be normalized to `mona-the-octocat`. Note that normalized usernames also can't start or end with a dash. They also can't contain two consecutive dashes.
@@ -119,7 +103,7 @@ When you configure CAS, LDAP, or SAML authentication (without SCIM), GitHub Ente
 
 ### About username normalization with SAML
 
-If you configure SAML authentication for {% ifversion ghes %}your GitHub Enterprise Server instance, GitHub determines each person's username by one of the following assertions in the SAML response, ordered by descending priority.
+If you configure SAML authentication for your GitHub Enterprise Server instance, GitHub determines each person's username by one of the following assertions in the SAML response, ordered by descending priority.
 
 1. The custom `username` attribute, if defined and present
 1. An `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name` assertion, if present
@@ -133,7 +117,7 @@ GitHub creates a mapping between the `NameID` from the IdP and the username on y
 > [!NOTE]
 > If the `NameID` for a user does change on the IdP, the person will see an error message when signing in to your GitHub Enterprise Server instance. To restore the person's access, you'll need to update the user account's `NameID` mapping. For more information, see [Updating A Users Saml Nameid](https://docs.github.com/en/admin/managing-iam/using-saml-for-enterprise-iam/updating-a-users-saml-nameid).
 
-{% endif %}
+
 
 
 

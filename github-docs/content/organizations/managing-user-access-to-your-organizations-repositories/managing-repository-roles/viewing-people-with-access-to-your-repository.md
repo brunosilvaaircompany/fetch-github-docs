@@ -16,7 +16,7 @@ You can see a combined overview of teams and people with access to your reposito
 
 ## Exporting a list of people with access to your repository
 
-{% ifversion ghec %}
+
 
 > [!NOTE]
 > Only organizations that use GitHub Enterprise Cloud can export a list of people with access to a repository. For more information about how you can try GitHub Enterprise Cloud for free, see [Setting up a trial of GitHub Enterprise Cloud](/admin/overview/setting-up-a-trial-of-github-enterprise-cloud).
@@ -33,4 +33,3 @@ You can see a combined overview of teams and people with access to your reposito
 1. At the bottom of the left sidebar, click **People**.
 
 1. Above the list of people, click **Export CSV**.
-{% endif %}

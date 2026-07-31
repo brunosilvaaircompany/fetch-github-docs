@@ -25,11 +25,11 @@ To use the action in your current workflow place this snippet under `jobs`.
 
 ```yaml
 - name: Upload GitHub Pages artifact
-
+{%- ifversion fpt or ghec %}
   uses: actions/upload-pages-artifact@v4
 {%- elsif ghes %}
   uses: actions/upload-pages-artifact@v2
-
+{%- endif %}
 ```
 
 ## Deploying GitHub Pages artifacts
@@ -60,11 +60,11 @@ jobs:
     steps:
       - name: Deploy artifact
         id: deployment
-
+{%- ifversion fpt or ghec %}
         uses: actions/deploy-pages@v4
 {%- elsif ghes %}
         uses: actions/deploy-pages@v3
-
+{%- endif %}
 # ...
 ```
 
@@ -81,8 +81,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
-
+        uses: {% data reusables.actions.action-checkout %}
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
@@ -92,11 +91,11 @@ jobs:
           source: ./
           destination: ./_site
       - name: Upload artifact
-
+{%- ifversion fpt or ghec %}
         uses: actions/upload-pages-artifact@v4
 {%- elsif ghes %}
         uses: actions/upload-pages-artifact@v2
-
+{%- endif %}
 
   # Deployment job
   deploy:
@@ -108,11 +107,11 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-
+{%- ifversion fpt or ghec %}
         uses: actions/deploy-pages@v4
 {%- elsif ghes %}
         uses: actions/deploy-pages@v3
-
+{%- endif %}
 # ...
 ```
 
@@ -130,26 +129,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
-
+        uses: {% data reusables.actions.action-checkout %}
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload Artifact
-
+{%- ifversion fpt or ghec %}
         uses: actions/upload-pages-artifact@v4
 {%- elsif ghes %}
         uses: actions/upload-pages-artifact@v2
-
+{%- endif %}
         with:
           # upload entire directory
           path: '.'
       - name: Deploy to GitHub Pages
         id: deployment
-
+{%- ifversion fpt or ghec %}
         uses: actions/deploy-pages@v4
 {%- elsif ghes %}
         uses: actions/deploy-pages@v3
-
+{%- endif %}
 
 # ...
 ```

@@ -36,11 +36,10 @@ Notice that all of the examples use a short version number for the action (`v3`)
 
    jobs:
      dependency-review:
-       runs-on: [self-hosted]
+       runs-on: {% ifversion ghes %}[self-hosted]{% else %}ubuntu-latest{% endif %}
        steps:
         - name: 'Checkout Repository'
-          uses: actions/checkout@v6
-
+          uses: {% data reusables.actions.action-checkout %}
         - name: Dependency Review
           uses: actions/dependency-review-action@v4
    ```
@@ -60,18 +59,17 @@ Notice that all of the examples use a short version number for the action (`v3`)
 
    jobs:
      dependency-review:
-       runs-on: [self-hosted]
+       runs-on: {% ifversion ghes %}[self-hosted]{% else %}ubuntu-latest{% endif %}
        steps:
        - name: 'Checkout Repository'
-         uses: actions/checkout@v6
-
+         uses: {% data reusables.actions.action-checkout %}
        - name: Dependency Review
          uses: actions/dependency-review-action@v4
          with:
            # Possible values: "critical", "high", "moderate", "low"
            fail-on-severity: critical
 
-           
+           {% ifversion dependency-review-action-licenses %}
            # You can only include one of these two options: `allow-licenses` and `deny-licenses`
            # ([String]). Only allow these licenses (optional)
            # Possible values: Any SPDX-compliant license identifiers or expressions from https://spdx.org/licenses/
@@ -79,9 +77,9 @@ Notice that all of the examples use a short version number for the action (`v3`)
            # ([String]). Block the pull request on these licenses (optional)
            # Possible values: Any SPDX-compliant license identifiers or expressions from https://spdx.org/licenses/
            deny-licenses: LGPL-2.0, BSD-2-Clause
-           
-           # ([String]). Skip these GitHub Advisory Database IDs during detection (optional)
-           # Possible values: Any valid GitHub Advisory Database ID from https://github.com/advisories
+           {% endif %}
+           # ([String]). Skip these {% data variables.product.prodname_advisory_database %} IDs during detection (optional)
+           # Possible values: Any valid {% data variables.product.prodname_advisory_database %} ID from https://github.com/advisories
            allow-ghsas: GHSA-abcd-1234-5679, GHSA-efgh-1234-5679
            # ([String]). Block pull requests that introduce vulnerabilities in the scopes that match this list (optional)
            # Possible values: "development", "runtime", "unknown"
@@ -105,11 +103,10 @@ Notice that all of the examples use a short version number for the action (`v3`)
 
    jobs:
      dependency-review:
-       runs-on: [self-hosted]
+       runs-on: {% ifversion ghes %}[self-hosted]{% else %}ubuntu-latest{% endif %}
        steps:
        - name: 'Checkout Repository'
-         uses: actions/checkout@v6
-
+         uses: {% data reusables.actions.action-checkout %}
        - name: Dependency Review
          uses: actions/dependency-review-action@v4
          with:
@@ -133,7 +130,7 @@ Notice that all of the examples use a short version number for the action (`v3`)
    ```yaml copy
      # Possible values: "critical", "high", "moderate", "low"
      fail-on-severity: critical
-   
+   {% ifversion dependency-review-action-licenses %}
      # You can only include one of these two options: `allow-licenses` and `deny-licenses`
      # ([String]). Only allow these licenses (optional)
      # Possible values: Any SPDX-compliant license identifiers or expressions from https://spdx.org/licenses/
@@ -146,9 +143,9 @@ Notice that all of the examples use a short version number for the action (`v3`)
      deny-licenses:
        - LGPL-2.0
        - BSD-2-Clause
-   
-      # ([String]). Skip these GitHub Advisory Database IDs during detection (optional)
-      # Possible values: Any valid GitHub Advisory Database ID from https://github.com/advisories
+   {% endif %}
+      # ([String]). Skip these {% data variables.product.prodname_advisory_database %} IDs during detection (optional)
+      # Possible values: Any valid {% data variables.product.prodname_advisory_database %} ID from https://github.com/advisories
      allow-ghsas:
        - GHSA-abcd-1234-5679
        - GHSA-efgh-1234-5679

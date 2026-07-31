@@ -175,8 +175,7 @@ jobs:
     runs-on: ubuntu-latest
     name: A job to say hello
     steps:
-      - uses: actions/checkout@v6
-
+      - uses: {% data reusables.actions.action-checkout %}
       - id: foo
         uses: OWNER/hello-world-composite-action@SHA
         with:
@@ -259,8 +258,7 @@ jobs:
     runs-on: ubuntu-latest
     name: A job to say hello
     steps:
-      - uses: actions/checkout@v6
-
+      - uses: {% data reusables.actions.action-checkout %}
       - id: foo
         uses: ./.github/actions/hello-world-composite-action
         with:

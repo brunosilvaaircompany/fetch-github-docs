@@ -378,9 +378,9 @@ Every row of a table in the GitHub Docs must start and end with a pipe, `|`, eve
 ```markdown
 | Where is the table located? | Does every row end with a pipe? |
 | --- | --- |
-| {% raw %}{% endraw %} |
+| {% raw %}{% ifversion some-cool-feature %}{% endraw %} |
 | GitHub Docs | Yes |
-| {% raw %}{% endraw %} |
+| {% raw %}{% endif %}{% endraw %} |
 ```
 
 ## Table row headers
@@ -501,7 +501,7 @@ Sometimes you may want to link from an article to the same article in a differen
 You can link directly to a different version of the page using the `currentArticle` property. This means that the link will continue to work directly even if the article URL changes.
 
 ```markdown
-{% raw %}For more information, see the [GitHub Enterprise Cloud documentation](/enterprise-cloud@latest{{ currentArticle }}).{% endraw %}
+{% raw %}{% ifversion fpt %}For more information, see the [{% data variables.product.prodname_ghe_cloud %} documentation](/enterprise-cloud@latest{{ currentArticle }}).{% endif %}{% endraw %}
 ```
 
 ### Preventing transformations

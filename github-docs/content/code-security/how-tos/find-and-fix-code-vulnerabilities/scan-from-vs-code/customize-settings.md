@@ -127,7 +127,7 @@ By default, the CodeQL for Visual Studio Code extension is configured to analyze
 Alternatively, you can define the URL in the JSON file where your settings for CodeQL are stored.
 
 ```json
-    "github-enterprise.uri": "SUBDOMAIN.ghe.com",
+    "github-enterprise.uri": "{% data variables.enterprise.data_residency_domain %}",
 ```
 
 ### When the extension uses the GitHub URL you set

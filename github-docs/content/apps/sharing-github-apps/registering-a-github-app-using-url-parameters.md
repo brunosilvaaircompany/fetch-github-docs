@@ -21,14 +21,14 @@ To create a custom configuration URL for a GitHub App on a personal or organizat
 
 * To register an app on a personal account, add URL parameters to: `https://github.com/settings/apps/new`
 * To register an app on an organization account, add URL parameters to: `https://github.com/organizations/ORGANIZATION/settings/apps/new`. Replace `ORGANIZATION` with the name of the organization where you'd like the customer to register the app. 
-* To register an app on an enterprise account, add URL parameters to: `{% ifversion fpt or ghec %}https://github.com/enterprises/ENTERPRISE/settings/apps/new`. Replace `ENTERPRISE` with the name of the enterprise where you'd like the customer to register the app.{% endif %}
+* To register an app on an enterprise account, add URL parameters to: `https://github.com/enterprises/ENTERPRISE/settings/apps/new`. Replace `ENTERPRISE` with the name of the enterprise where you'd like the customer to register the app.
 
 On the app registration page, the person registering the app can edit the preselected values before submitting the app. If you do not include parameters for required values (like `name`) in the URL query string, the person registering the app will need to input a value before they can register the app.
 
 For example, the following URL registers a new public app named `octocat-github-app` on a personal account. Using query parameters, the URL preconfigures a description and a callback URL. It also selects read and write permissions for `checks`, activates webhooks using the `webhook_active` parameter, subscribes to the `check_run` and `check_suite` webhook events, and selects the option to request user authorization (OAuth) during installation:
 
 ```text
-https://github.com/settings/apps/new?name=octocat-github-app&description=An%20Octocat%20App&callback_urls[]=https://example.com&request_oauth_on_install=true&public=true&checks=write&webhook_active=true&events[]=check_run&events[]=check_suite
+{% data variables.product.oauth_host_code %}/settings/apps/new?name=octocat-github-app&description=An%20Octocat%20App&callback_urls[]=https://example.com&request_oauth_on_install=true&public=true&checks=write&webhook_active=true&events[]=check_run&events[]=check_suite
 ```
 
 ## GitHub App configuration parameters

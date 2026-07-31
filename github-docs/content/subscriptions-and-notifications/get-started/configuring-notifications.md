@@ -12,7 +12,7 @@ To use the notifications inbox on GitHub and GitHub Mobile, you must enable noti
  For more information, see [Choosing your notification settings](#choosing-your-notification-settings).
 
 > [!TIP]
-> If you receive notifications both via email and on GitHub, you can automatically sync the read or unread status of the notification so that notifications on GitHub are automatically marked as read once you've read the corresponding email notification. To enable this sync, your email client must be able to view images from `notifications@github.com`, which your site administrator configures{% endif %}.
+> If you receive notifications both via email and on GitHub, you can automatically sync the read or unread status of the notification so that notifications on GitHub are automatically marked as read once you've read the corresponding email notification. To enable this sync, your email client must be able to view images from `notifications@github.com`.
 
 
 ### Benefits of the notifications inbox
@@ -86,7 +86,7 @@ After enabling email notifications, GitHub will send notifications to you as mul
 
 
 > [!TIP]
-> If you receive notifications both via email and on GitHub, you can automatically sync the read or unread status of the notification so that notifications on GitHub are automatically marked as read once you've read the corresponding email notification. To enable this sync, your email client must be able to view images from `notifications@github.com`, which your site administrator configures{% endif %}.
+> If you receive notifications both via email and on GitHub, you can automatically sync the read or unread status of the notification so that notifications on GitHub are automatically marked as read once you've read the corresponding email notification. To enable this sync, your email client must be able to view images from `notifications@github.com`.
 
 
 
@@ -152,7 +152,7 @@ GitHub will not always include the full email contents and will attempt to strip
 
 By default, anytime you gain access to a new repository, you will automatically begin watching that repository. Anytime you join a new team, you will automatically be subscribed to updates and receive notifications when that team is @mentioned. If you don't want to automatically be subscribed, you can unselect the automatic watching options in your notification settings.
 
-{% ifversion update-notification-settings-22 %}
+
 ![Screenshot of the toggles for "Automatically watch repositories" and "Automatically watch teams".](/assets/images/help/notifications-v2/automatically-watch-repos-and-teams.png)
 
 
@@ -160,7 +160,7 @@ If "Automatically watch repositories" is disabled, then you will not automatical
 
 For more information, see [Configuring Notifications](https://docs.github.com/en/subscriptions-and-notifications/get-started/configuring-notifications#choosing-your-notification-settings).
 
-{% endif %}
+
 
 ## Configuring your watch settings for an individual repository
 

@@ -20,7 +20,7 @@ The Container registry replaces GitHub's Docker registry.
 >[!NOTE] GitHub Enterprise Server 3.6 supports migration for Docker images stored in organizations. A future release will support migration of user-owned images.
 
 
-Any scripts or GitHub Actions workflows that use the namespace for the Docker registry, `docker.pkg.github.com`{% elsif ghes %}<code>docker.<em>HOSTNAME</em></code>, will continue to work after migration to the Container registry at `ghcr.io`{% elsif ghes %}<code>containers.<em>HOSTNAME</em></code>.
+Any scripts or GitHub Actions workflows that use the namespace for the Docker registry, `docker.pkg.github.com`, will continue to work after migration to the Container registry at `ghcr.io`.
  For more information about the impact of migration to the Container registry, see [Migrating To The Container Registry From The Docker Registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/migrating-to-the-container-registry-from-the-docker-registry#about-migration-from-the-docker-registry).
 
 ## Migrating organizations to the Container registry

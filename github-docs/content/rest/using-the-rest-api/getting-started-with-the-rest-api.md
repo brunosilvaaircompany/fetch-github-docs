@@ -8,9 +8,9 @@ This article describes how to use the GitHub REST API with GitHub CLI, `curl`, o
 
 
 
-Examples in this article send requests to `{% ifversion fpt or ghec %}https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3`. If you access GitHub at a different domain, such as `octocorp.ghe.com`, the endpoint for API requests will reflect that domain. For example: `https://api.octocorp.ghe.com/`.
+Examples in this article send requests to `https://api.github.com`. If you access GitHub at a different domain, such as `octocorp.ghe.com`, the endpoint for API requests will reflect that domain. For example: `https://api.octocorp.ghe.com/`.
 
-{% endif %}
+
 
 {% endcurl %}
 
@@ -255,7 +255,7 @@ gh api --method GET /events -F per_page=2 -F page=1
 The following example uses the ["Create an issue" endpoint](/rest/issues/issues#create-an-issue) to create a new issue in a specified repository. Replace `REPO-NAME` with the name of the repository where you want to create a new issue, and replace `REPO-OWNER` with the name of the account that owns the repository. In the response, find the `html_url` of your issue, and navigate to your issue in the browser.
 
 ```shell copy
-gh api --method POST /repos/REPO-OWNER/REPO-NAME/issues \
+gh api --method POST /repos/{% ifversion ghes %}REPO-OWNER/REPO-NAME{% else %}octocat/Spoon-Knife{% endif %}/issues \
 --header "Accept: application/vnd.github+json" \
 --header "X-GitHub-Api-Version: {{ defaultRestApiVersion }}" \
 -f title='Created with the REST API' \
@@ -297,7 +297,7 @@ Use the `curl` command to make your request. For more information, see [the curl
 Specify the following options and values in your request:
 
 * **`--request` or `-X`** followed by the HTTP method as the value. For more information, see [HTTP method](#http-method).
-* **`--url`** followed by the full path as the value. The full path is a URL that includes the base URL for the GitHub REST API (`https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3` or `https://api.SUBDOMAIN.ghe.com`, depending on where you access GitHub) and the path of the endpoint, like this: `https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3/PATH`. Replace `HOSTNAME` with the name of {% ifversion ghes %}your GitHub Enterprise Server instance.{% endif %} Replace `PATH` with the path of the endpoint. For more information, see [Path](#path).
+* **`--url`** followed by the full path as the value. The full path is a URL that includes the base URL for the GitHub REST API (`https://api.github.com` or `https://api.SUBDOMAIN.ghe.com`, depending on where you access GitHub) and the path of the endpoint, like this: `https://api.github.com/PATH`. Replace `HOSTNAME` with the name of your GitHub Enterprise Server instance. Replace `PATH` with the path of the endpoint. For more information, see [Path](#path).
 
   To use query parameters, add a `?` to the end of the path, then append your query parameter name and value in the form `parameter_name=value`. Separate multiple query parameters with `&`. If you need to send an array in the query string, use the query parameter once per array item, and append `[]` after the query parameter name. For example, to provide an array of two repository IDs, use `?repository_ids[]=REPOSITORY_A_ID&repository_ids[]=REPOSITORY_B_ID`. For more information, see [Query parameters](#query-parameters). For an example, see [Example request using query parameters](#example-request-using-query-parameters-1).
 * **`--header` or `-H`:**
@@ -323,7 +323,7 @@ The ["List public events" endpoint](/rest/activity/events#list-public-events) re
 
 ```shell copy
 curl --request GET \
---url "https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3/events?per_page=2&page=1" \
+--url "{% data variables.product.rest_url %}/events?per_page=2&page=1" \
 --header "Accept: application/vnd.github+json" \
 --header "X-GitHub-Api-Version: {{ defaultRestApiVersion }}" \
   https://api.github.com/events
@@ -331,7 +331,7 @@ curl --request GET \
 
 #### Example request using body parameters
 
-The following example uses the [Create an issue](/rest/issues/issues#create-an-issue) endpoint to create a new issue in a specified repository. Replace `HOSTNAME` with the name of {% ifversion ghes %}your GitHub Enterprise Server instance. Replace `REPO-NAME` with the name of the repository where you want to create a new issue, and replace `REPO-OWNER` with the name of the account that owns the repository.{% endif %} Replace `YOUR-TOKEN` with the authentication token you created in a previous step.
+The following example uses the [Create an issue](/rest/issues/issues#create-an-issue) endpoint to create a new issue in a specified repository. Replace `HOSTNAME` with the name of your GitHub Enterprise Server instance. Replace `REPO-NAME` with the name of the repository where you want to create a new issue, and replace `REPO-OWNER` with the name of the account that owns the repository. Replace `YOUR-TOKEN` with the authentication token you created in a previous step.
 
 > [!NOTE]
 > If you are using a fine-grained personal access token, you must replace `REPO-OWNER` and `REPO-NAME` with a repository that you own or that is owned by an organization that you are a member of. Your token must have access to that repository and have read and write permissions for repository issues. For more information, see [Managing Your Personal Access Tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).
@@ -339,7 +339,7 @@ The following example uses the [Create an issue](/rest/issues/issues#create-an-i
 ```shell copy
 curl \
 --request POST \
---url "https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3/repos/REPO-OWNER/REPO-NAME/issues" \
+--url "{% data variables.product.rest_url %}/repos/{% ifversion ghes %}REPO-OWNER/REPO-NAME{% else %}octocat/Spoon-Knife{% endif %}/issues" \
 --header "Accept: application/vnd.github+json" \
 --header "X-GitHub-Api-Version: {{ defaultRestApiVersion }}" \
 --header "Authorization: Bearer YOUR-TOKEN" \
@@ -379,11 +379,11 @@ Create an access token to authenticate your request. You can save your token and
 ### 4. Make a request with Octokit.js
 
 1. Import `octokit` in your script. For example, `import { Octokit } from "octokit";`. For other ways to import `octokit`, see [the Octokit.js README](https://github.com/octokit/octokit.js/#readme).
-1. Create an instance of `Octokit` with your token. Set the base URL to `{% ifversion fpt or ghec %}https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3`. Replace `HOSTNAME` with the name of your GitHub Enterprise Server instance.{% endif %} Replace `YOUR-TOKEN` with your token.
+1. Create an instance of `Octokit` with your token. Set the base URL to `https://api.github.com`. Replace `HOSTNAME` with the name of your GitHub Enterprise Server instance. Replace `YOUR-TOKEN` with your token.
 
    ```javascript copy
-   const octokit = new Octokit({ 
-     baseUrl: "{% ifversion fpt or ghec %}https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3",{% endif %}
+   const octokit = new Octokit({ {% ifversion ghes %}
+     baseUrl: "{% data variables.product.rest_url %}",{% endif %}
      auth: 'YOUR-TOKEN'
    });
    ```
@@ -400,8 +400,8 @@ Create an access token to authenticate your request. You can save your token and
 
    ```javascript copy
    await octokit.request("POST /repos/{owner}/{repo}/issues", {
-     owner: "REPO-OWNER",
-     repo: "REPO-NAME",
+     owner: "{% ifversion ghes %}REPO-OWNER{% else %}octocat{% endif %}",
+     repo: "{% ifversion ghes %}REPO-NAME{% else %}Spoon-Knife{% endif %}",
      title: "Created with the REST API",
      body: "This is a test issue created by the REST API",
    });
@@ -441,7 +441,7 @@ For example, this request gets a list of issues in a specified repository:
 ```shell
 gh api \
 --header 'Accept: application/vnd.github+json' \
---method GET /repos/REPO-OWNER/REPO-NAME/issues \
+--method GET /repos/{% ifversion ghes %}REPO-OWNER/REPO-NAME{% else %}octocat/Spoon-Knife{% endif %}/issues \
 -F per_page=2 --include
 ```
 
@@ -514,7 +514,7 @@ For example, this request gets a list of issues in a specified repository:
 
 ```shell
 curl --request GET \
---url "https://api.github.com/repos/REPO-OWNER/REPO-NAME/issues?per_page=2" \
+--url "https://api.github.com/repos/{% ifversion ghes %}REPO-OWNER/REPO-NAME{% else %}octocat/Spoon-Knife{% endif %}/issues?per_page=2" \
 --header "Accept: application/vnd.github+json" \
 --header "Authorization: Bearer YOUR-TOKEN" \
 --include
@@ -619,11 +619,11 @@ try {
 
 {% curl %}
 
-For example, you can use `>` to redirect the response to a file. In the following example, replace `REPO-OWNER` with the name of the account that owns the repository, and `REPO-NAME` with the name of the repository. Replace `HOSTNAME` with the name of {% ifversion ghes %}your GitHub Enterprise Server instance.{% endif %}
+For example, you can use `>` to redirect the response to a file. In the following example, replace `REPO-OWNER` with the name of the account that owns the repository, and `REPO-NAME` with the name of the repository. Replace `HOSTNAME` with the name of your GitHub Enterprise Server instance.
 
 ```shell copy
 curl --request GET \
---url "https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3/repos/REPO-OWNER/REPO-NAME/issues?per_page=2" \
+--url "{% data variables.product.rest_url %}/repos/REPO-OWNER/REPO-NAME/issues?per_page=2" \
 --header "Accept: application/vnd.github+json" \
 --header "Authorization: Bearer YOUR-TOKEN" > data.json
 ```

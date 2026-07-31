@@ -38,16 +38,14 @@ or
      1. To the right of the organization, click **Settings**.
    * For an app owned by an enterprise:
      1. If you use Enterprise Managed Users, click **Your enterprise** to go directly to the enterprise account settings.
-     1. If you use personal accounts, click **Your enterprises** and then to the right of the enterprise, click **Settings**.{% elsif ghes %}
-     1. Click **Enterprise settings**.
-
+     1. If you use personal accounts, click **Your enterprises** and then to the right of the enterprise, click **Settings**.
 
 
 1. Navigate to the GitHub App settings.
    * For an app owned by a personal account or organization:
      1. In the left sidebar, click **{% octicon "code" aria-hidden="true" aria-label="code" %} Developer settings**, then click **GitHub Apps**.
    * For an app owned by an enterprise:
-     1. In the left sidebar, under "Settings",{% elsif ghes %} click **Settings**, then click **GitHub Apps**.
+     1. In the left sidebar, under "Settings", click **GitHub Apps**.
 
 1. To the right of the GitHub App you want to modify, click **Edit**.
 

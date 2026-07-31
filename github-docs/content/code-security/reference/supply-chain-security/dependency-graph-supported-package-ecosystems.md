@@ -58,12 +58,10 @@ The following ecosystems are maintained by their upstream community maintainers.
 
 | Ecosystem | Maintained by |
 | --- | --- |
-| {% ifversion dependabot-julia-support %} |
+|  |
 | Julia | Julia community |
 |  |
 |  |
 | OpenTofu | OpenTofu community |
 |  |
 | pub | Dart community |
-
-{% endif %}

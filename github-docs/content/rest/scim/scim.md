@@ -8,7 +8,7 @@
 
 ### SCIM Provisioning for Organizations
 
-These endpoints are used by SCIM-enabled Identity Providers (IdPs) to automate provisioning of GitHub organization membership and are based on version 2.0 of the [SCIM standard](http://www.simplecloud.info/). IdPs should use the base URL `https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3/scim/v2/organizations/{org}/` for GitHub SCIM endpoints.
+These endpoints are used by SCIM-enabled Identity Providers (IdPs) to automate provisioning of GitHub organization membership and are based on version 2.0 of the [SCIM standard](http://www.simplecloud.info/). IdPs should use the base URL `https://api.github.com/scim/v2/organizations/{org}/` for GitHub SCIM endpoints.
 
 > [!NOTE]
 > * These endpoints are only available for individual organizations that use GitHub Enterprise Cloud with SAML SSO enabled. For more information about SCIM, see [About Scim For Organizations](https://docs.github.com/en/enterprise-cloud@latest/organizations/managing-saml-single-sign-on-for-your-organization/about-scim-for-organizations). For more information about authorizing a token for a SAML SSO organization, see [Authenticating To The Rest API](https://docs.github.com/en/rest/authentication/authenticating-to-the-rest-api).

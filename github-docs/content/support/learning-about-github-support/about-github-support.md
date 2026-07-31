@@ -172,7 +172,7 @@ To learn more about training options, including customized trainings, see [GitHu
 
 For standard non-urgent issues, we offer support in English 24 hours per day, 5 days per week, excluding weekends and national U.S. holidays.
 
-{% ifversion ghes %}
+
 For urgent issues, we are available 24 hours per day, 7 days per week, even during national U.S. holidays.
 
 
@@ -223,7 +223,7 @@ To ensure that your GitHub Enterprise Server instance is stable, you must instal
 
 
 
-{% endif %}
+
 
 
 

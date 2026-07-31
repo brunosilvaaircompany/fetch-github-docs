@@ -178,7 +178,7 @@ Additionally, these insights are available via the rule suites [REST API](/rest/
    ![Screenshot of the "Rule Insights" page. To the right of an event labeled "not-allowed," an icon of three horizontal dots is outlined in orange.](/assets/images/help/repository/view-rule-runs.png)
 
 
-{% ifversion push-rule-delegated-bypass %}
+
 
 ## Managing requests to bypass push rules
 
@@ -205,7 +205,3 @@ You can filter requests by approver (member of the bypass list), requester (cont
 When a contributor requests bypass privileges to push a commit containing restricted content, members of the bypass list all receive an email notification containing a link to the request. Members of the bypass list then have 7 days to review and either approve or deny the request before the request expires.
 
 The contributor is notified of the decision by email and must take the required action. If the request is approved, the contributor can push the commit containing the restricted content to the repository. If the request is denied, the contributor must remove the restricted content from the commit in order to successfully push the commit to the repository.
-
-
-
-{% endif %}

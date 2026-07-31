@@ -91,7 +91,7 @@ on:
 
 # Defines two custom environment variables for the workflow. These are used for the Container registry domain, and a name for the Docker image that this workflow builds.
 env:
-  REGISTRY: ghcr.io{% elsif ghes %}containers.HOSTNAME
+  REGISTRY: ghcr.io
 
   IMAGE_NAME: {% raw %}${{ github.repository }}{% endraw %}
 
@@ -207,7 +207,7 @@ env:
   IMAGE_NAME: ghtoken_product_demo
 #
 jobs:
-  # This pushes the image to GitHub Packages.
+  # This pushes the image to {% data variables.product.prodname_registry %}.
   push:
     runs-on: ubuntu-latest
     permissions:
@@ -215,8 +215,7 @@ jobs:
       contents: read
       #
     steps:
-      - uses: actions/checkout@v6
-
+      - uses: {% data reusables.actions.action-checkout %}
 
       - name: Build image
         run: docker build . --file Dockerfile --tag $IMAGE_NAME --label "runnumber=${GITHUB_RUN_ID}"

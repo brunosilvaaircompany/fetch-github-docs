@@ -16,12 +16,12 @@ We strongly recommend using a time-based one-time password (TOTP) application to
 
 After you configure 2FA, your account will enter a 28-day check up period. You can leave the check up period by successfully performing 2FA in those 28 days. Otherwise, you will be prompted to perform 2FA in an existing GitHub session on the 28th day. If you cannot perform 2FA to pass the checkup, you must use the provided shortcut to reconfigure your 2FA settings and retain access to GitHub.
 
-{% ifversion fpt or ghec %}
+
 
 If you're a member of an enterprise with managed users, you cannot configure 2FA for your managed user account account unless you're signed in as the setup user. For users other than the setup user, an administrator must configure 2FA on your identity provider (IdP).
 
 
-{% endif %}
+
 
 > [!WARNING]
 > * If you're an outside collaborator to a private repository of an organization that requires 2FA, you must leave the organization before you can disable 2FA.

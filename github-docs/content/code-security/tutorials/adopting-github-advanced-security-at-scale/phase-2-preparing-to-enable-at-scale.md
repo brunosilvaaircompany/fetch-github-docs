@@ -43,7 +43,7 @@ If a project communicates with an external service, it might use a token or priv
 
 Secret scanning alerts for partners runs automatically on public repositories and public npm packages to notify service providers about leaked secrets on GitHub.
 
-{% ifversion fpt or ghec %}Secret scanning alerts for users are available for free on all public repositories.{% endif %}
+Secret scanning alerts for users are available for free on all public repositories.
 
 ### Considerations when enabling secret scanning
 

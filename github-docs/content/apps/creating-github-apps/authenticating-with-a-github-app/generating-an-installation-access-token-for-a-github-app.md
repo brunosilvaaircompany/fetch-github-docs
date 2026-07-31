@@ -30,7 +30,7 @@ You should keep your installation access token secure. For more information, see
 
    ```shell
    curl --request POST \
-   --url "https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3/app/installations/INSTALLATION_ID/access_tokens" \
+   --url "https://api.github.com/app/installations/INSTALLATION_ID/access_tokens" \
    --header "Accept: application/vnd.github+json" \
    --header "Authorization: Bearer JWT" \
    --header "X-GitHub-Api-Version: {{ allVersions[currentVersion].latestApiVersion }}"

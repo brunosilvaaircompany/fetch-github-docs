@@ -6,7 +6,13 @@ GitHub has many features that help you improve and maintain the quality of your 
 
 Other security features require you to purchase one of GitHub's Advanced Security products:
 
-{% data reusables.advanced-security.ghas-products-bullets+ghas %}
+* **GitHub Secret Protection**, which includes features that help you detect and prevent secret leaks, such as secret scanning and push protection.
+* **GitHub Code Security**, which includes features that help you find and fix vulnerabilities, like code scanning, premium Dependabot features, and dependency review.
+
+
+
+Alternatively, you may have a GitHub Advanced Security license that includes all features in GitHub Secret Protection and GitHub Code Security.
+
 
 Some of these features, such as code scanning and secret scanning, are enabled for public repositories by default. To run the feature on your private or internal repositories, you must purchase the relevant GitHub Advanced Security product.
 
@@ -20,9 +26,9 @@ You get the following features with GitHub Code Security:
 
 * **CodeQL CLI**: Run CodeQL processes locally on software projects or to generate code scanning results for upload to GitHub.
 
-* **Copilot Autofix**: Get automatically generated fixes for code scanning alerts.{% ifversion ai-powered-security-detections %}
+* **Copilot Autofix**: Get automatically generated fixes for code scanning alerts.
 
-* **AI-powered security detections**: Find vulnerabilities in languages and frameworks not covered by CodeQL with an AI-based scanning engine that runs during pull request review.{% endif %}
+* **AI-powered security detections**: Find vulnerabilities in languages and frameworks not covered by CodeQL with an AI-based scanning engine that runs during pull request review.
 
 * **Security campaigns**: Reduce security debt at scale.
 
@@ -42,7 +48,7 @@ The table below summarizes the availability of GitHub Code Security features for
 | --- | --- | --- | --- |
 | Code scanning | {% octicon "check" aria-label="Yes" %} | {% octicon "x" aria-label="No" %} | {% octicon "check" aria-label="Yes" %} |
 | CodeQL CLI | {% octicon "check" aria-label="Yes" %} | {% octicon "x" aria-label="No" %} | {% octicon "check" aria-label="Yes" %} |
-|{% ifversion code-scanning-autofix %}|
+||
 | Copilot Autofix | {% octicon "check" aria-label="Yes" %} | {% octicon "x" aria-label="No" %} | {% octicon "check" aria-label="Yes" %} |
 ||
 ||
@@ -53,7 +59,7 @@ The table below summarizes the availability of GitHub Code Security features for
 | Security overview | {% octicon "x" aria-label="No" %} | {% octicon "x" aria-label="No" %} | {% octicon "check" aria-label="Yes" %} |
 {% endrowheaders %}
 
-{% endif %}
+
 
 For more information about features, see [GitHub Security Features](https://docs.github.com/en/code-security/getting-started/github-security-features).
 
@@ -80,7 +86,7 @@ The table below summarizes the availability of GitHub Secret Protection features
 | --- | --- | --- | --- |
 | Secret scanning   | {% octicon "check" aria-label="Yes" %} | {% octicon "x" aria-label="No" %} | {% octicon "check" aria-label="Yes" %} |
 | Push protection   | {% octicon "check" aria-label="Yes" %} | {% octicon "x" aria-label="No" %} | {% octicon "check" aria-label="Yes" %} |
-|{% ifversion secret-scanning-ai-generic-secret-detection %}|
+||
 | AI-detected secrets  | {% octicon "x" aria-label="No" %} | {% octicon "x" aria-label="No" %} | {% octicon "check" aria-label="Yes" %} |
 ||
 | Custom patterns   | {% octicon "x" aria-label="No" %} | {% octicon "x" aria-label="No" %} | {% octicon "check" aria-label="Yes" %} |
@@ -92,7 +98,7 @@ The table below summarizes the availability of GitHub Secret Protection features
 
 {% endrowheaders %}
 
-{% endif %}
+
 
 For more information about individual features, see [GitHub Security Features](https://docs.github.com/en/code-security/getting-started/github-security-features).
 

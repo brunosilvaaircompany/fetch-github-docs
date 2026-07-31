@@ -32,11 +32,11 @@ For the most reliable graph, you should use lock files (or their equivalent), be
 
 Some ecosystems resolve indirect dependencies at build time, so static analysis can't see the full dependency tree. When you enable automatic dependency submission for a repository, GitHub automatically identifies the transitive dependencies in the repository for supported ecosystems. See [Dependency Graph Supported Package Ecosystems](https://docs.github.com/en/code-security/reference/supply-chain-security/dependency-graph-supported-package-ecosystems).
 
-In the background, automatic dependency submission runs a GitHub Actions workflow that generates the complete tree and uploads it using the dependency submission API.{% ifversion fpt or ghec %} Automatic dependency submission runs on GitHub-hosted runners by default and counts toward your GitHub Actions minutes. Optionally, you can choose to run it on self-hosted runners or larger runners.
+In the background, automatic dependency submission runs a GitHub Actions workflow that generates the complete tree and uploads it using the dependency submission API. Automatic dependency submission runs on GitHub-hosted runners by default and counts toward your GitHub Actions minutes. Optionally, you can choose to run it on self-hosted runners or larger runners.
 
 To enable automatic dependency submission, see [Submit Dependencies Automatically](https://docs.github.com/en/code-security/how-tos/secure-your-supply-chain/secure-your-dependencies/submit-dependencies-automatically).
 
-{% endif %}
+
 
 
 

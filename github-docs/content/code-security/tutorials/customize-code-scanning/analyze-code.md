@@ -5,7 +5,7 @@
 
 
 > [!NOTE]
-> This article describes the features available with the CodeQL CLI 2.20.7{% elsif ghes < 3.19 %}2.21.4{% elsif ghes < 3.20 %}2.22.4{% elsif ghes < 3.21 %}2.23.9{% elsif ghes < 3.22 %}2.24.3 bundle included in the initial release of GitHub Enterprise Server {{ allVersions[currentVersion].currentRelease }}.
+> This article describes the features available with the CodeQL CLI 2.20.7 bundle included in the initial release of GitHub Enterprise Server {{ allVersions[currentVersion].currentRelease }}.
 >
 > If your site administrator has updated your CodeQL CLI version to a newer release, please see the [GitHub Enterprise Cloud version](/enterprise-cloud@latest/{{ currentArticle }}) of this article for information on the latest features.
 
@@ -83,7 +83,7 @@ This example analyzes a CodeQL database stored at `/codeql-dbs/example-repo` and
 ```shell
 $ codeql database analyze /codeql-dbs/example-repo \
     javascript-code-scanning.qls --sarif-category=javascript-typescript \
-    --format=sarif-latest --output=/temp/example-repo-js.sarif
+    --format={% ifversion fpt or ghec %}sarif-latest{% else %}sarifv2.1.0{% endif %} --output=/temp/example-repo-js.sarif
 
 > Running queries.
 > Compiling query plan for /codeql-home/codeql/qlpacks/codeql-javascript/AngularJS/DisablingSce.ql.
@@ -101,7 +101,7 @@ To include file coverage information with your code scanning results, add the `-
 ```shell
 $ codeql database analyze /codeql-dbs/example-repo \
     javascript-code-scanning.qls --sarif-category=javascript-typescript \
-    --sarif-add-baseline-file-info \ --format=sarif-latest \
+    --sarif-add-baseline-file-info \ --format={% ifversion fpt or ghec %}sarif-latest{% else %}sarifv2.1.0{% endif %} \
     --output=/temp/example-repo-js.sarif
 ```
 

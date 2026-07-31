@@ -35,7 +35,7 @@ People or teams who are mentioned in the issue will receive a notification letti
 To transfer an issue, use the `gh issue transfer` subcommand. Replace the `issue` parameter with the number or URL of the issue. Replace the `hostname/owner/repo` parameter with the URL of the repository that you want to transfer the issue to, such as `https://ghe.io/octocat/octo-repo`.
 
 ```shell
-gh issue transfer ISSUE HOSTNAME/OWNER/REPO
+gh issue transfer ISSUE {% ifversion ghes %}HOSTNAME/{% endif %}OWNER/REPO
 ```
 
 {% endcli %}

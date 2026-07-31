@@ -194,7 +194,7 @@ Avoid replicating conceptual information that is covered elsewhere, provide inli
 
 {% comment %}
 A step may require the user to perform several tasks - break those tasks down into chunks, allowing the user to scan quickly to find their place if they navigated away from this screen to perform the task.
-An example might be creating a {% endraw %}personal access token{% raw %} for the action to use and then storing it in secrets
+An example might be creating a {% endraw %}{% data variables.product.pat_generic %}{% raw %} for the action to use and then storing it in secrets
 For UI based tasks, include the button or options the users should click
 If the task adds code, include the code in context (don't just show `needs setup` show the entire `setup` and `dependent` jobs)
 {% endcomment %}
@@ -264,7 +264,7 @@ Avoid replicating conceptual information that is covered elsewhere, provide inli
 
 {% comment %}
 A step may require the user to perform several tasks - break those tasks down into chunks, allowing the user to scan quickly to find their place if they navigated away from this screen to perform the task.
-An example might be creating a {% endraw %}personal access token{% raw %} for the action to use and then storing it in secrets
+An example might be creating a {% endraw %}{% data variables.product.pat_generic %}{% raw %} for the action to use and then storing it in secrets
 For UI based tasks, include the button or options the users should click
 If the task adds code, include the code in context (don't just show `needs: setup` show the entire `setup` and `dependent` jobs)
 {% endcomment %}
@@ -414,11 +414,7 @@ If this content is for an AI platform service, then the title should be: "Platfo
 
 ## What is an application card? 
 
-
-GitHub’s application and platform cards are intended to help you understand how our AI technology works, the choices application owners can make that influence application performance and behavior, and the importance of considering the whole application, including the technology, the people, and the environment. Application cards are created for AI applications and platform cards are created for AI platform services. These resources can support the development or deployment of your own applications and can be shared with users or stakeholders impacted by them. 
-
-As part of its commitment to responsible AI, GitHub adheres to Microsoft's [six core principles](https://www.microsoft.com/en-us/ai/principles-and-approach/?msockid=3da790040c776d6f2b5485e40de56c06#ai-principles): fairness, reliability and safety, privacy and security, inclusiveness, transparency, and accountability. These principles are embedded in the [Responsible AI Standard](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/microsoft/final/en-us/microsoft-brand/documents/Microsoft-Responsible-AI-Standard-General-Requirements.pdf?culture=en-us&country=us), which guides teams in designing, building, and testing AI applications. Application and Platform Cards play a key role in operationalizing these principles by offering transparency around capabilities, intended uses, and limitations. For further insight, readers are encouraged to explore Microsoft’s [Responsible AI Transparency Report](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/microsoft/msc/documents/presentations/CSR/Responsible-AI-Transparency-Report-2025-vertical.pdf) and [GitHub Terms](https://docs.github.com/en/free-pro-team@latest/site-policy/github-terms).
-
+{% data reusables.rai.copilot.application-card-intro %}
 
 {% comment %}
 Instructions: For a platform service card, the heading for this section should be `## What is a platform service card?`
@@ -545,9 +541,7 @@ Keep the boilerplate language to introduce the section and replace APPLICATION-O
 
 ## 8. Evaluations
 
-
-Performance and safety evaluations assess whether AI applications are operating reliably and securely by examining factors like groundedness, relevance, and coherence while identifying the risks of generating harmful content. The following evaluations were conducted with safety components already in place, which are also described in [9. Safety components and mitigations](#9-safety-components-and-mitigations).
-
+{% data reusables.rai.copilot.application-card-evaluations %}
 
 
 ### Performance and quality evaluations
@@ -612,9 +606,7 @@ Use plain English, avoid technical jargon, and explain any acronyms. Keep the to
 
 ### Evaluation data for quality and safety
 
-
-Our evaluation data is custom-built to assess AI application performance across key areas of **safety** and **quality**, simulating real-world scenarios and risks. We begin by identifying relevant evaluation aspects of concern based on multi-disciplinary research and expert input. These concerns are translated into targeted evaluation objectives and guide formulation of evaluation metrics. For **safety**, we create adversarial prompts to elicit undesirable or edge-case responses, which are then scored using AI-assisted annotators trained to assess alignment with GitHub’s standards. For **quality**, we craft rubric-based prompts relevant to scenarios including evaluating retrieval-augmented generation (RAG) applications and agents. Datasets are curated from diverse sources including synthetic and public datasets to simulate real-world user scenarios. Using the curated datasets, both evaluations undergo iterative refinement and human alignment to improve metric efficacy and reliability. This methodology forms the foundation of repeatable, rigorous assessments that reflect how customers use evaluations to build better AI.
-
+{% data reusables.rai.copilot.application-card-evaluation-data-for-quality-and-safety %}
 
 ### Custom evaluations
 
@@ -652,19 +644,11 @@ Use plain English, avoid technical jargon, and explain any acronyms. Keep the to
 
 Responsible AI is a shared commitment between GitHub and its customers. While GitHub builds AI applications with safety, fairness, and transparency at the core, customers play a critical role in deploying and using these technologies responsibly within their own contexts. To support this partnership, we offer the following best practices for deployers and end users to help customers implement responsible AI effectively.
 
-- **Exercise caution and evaluate outcomes when using APPLICATION-OR-PLATFORM-SERVICE for consequential decisions or in sensitive domains**: 
-Consequential decisions are those that may have a legal or significant impact on a person's access to education, employment, financial platforms, government benefits, healthcare, housing, insurance, legal platforms, or that could result in physical, psychological, or financial harm. Sensitive domains—such as financial platforms, healthcare, and housing—require particular care due to the potential for disproportionate impact on different groups of people. When using AI for decisions in these areas, make sure that impacted stakeholders can understand how decisions are made, appeal decisions, and update any relevant input data.
-
-- **Evaluate legal and regulatory considerations**: 
-Customers need to evaluate potential specific legal and regulatory obligations when using any AI platforms and solutions, which may not be appropriate for use in every industry or scenario. Additionally, AI platforms or solutions are not designed for and may not be used in ways prohibited in applicable terms of service and relevant codes of conduct.
-
+- **Exercise caution and evaluate outcomes when using APPLICATION-OR-PLATFORM-SERVICE for consequential decisions or in sensitive domains**: {% data reusables.rai.copilot.application-card-consequential-decisions %}
+- **Evaluate legal and regulatory considerations**: {% data reusables.rai.copilot.application-card-evaluate-legal-regulatory %}
 - **Exercise human oversight when appropriate**: Human oversight is an important safeguard when interacting with AI applications. While we continuously improve our AI applications, AI might still make mistakes. The outputs generated may be inaccurate, incomplete, biased, misaligned, or irrelevant to your intended goals. This could happen due to various reasons, such as ambiguity in the inputs or limitations of the underlying models. As such, users should review the responses generated by APPLICATION-OR-PLATFORM-SERVICE and verify that they match their expectations and requirements.
-- **Be aware of the risk of overreliance**: 
-Overreliance on AI happens when users accept incorrect or incomplete AI outputs, mainly because mistakes in AI outputs may be hard to detect. For the end-user, overreliance could result in decreased productivity, loss of trust, application abandonment, financial loss, psychological harm, physical harm, among others. (e.g. a doctor accepts an incorrect AI output).
-
-- **Exercise caution when designing agentic AI in sensitive domains**: 
-Users should exercise caution when designing and/or deploying agentic AI applications in sensitive domains where agent actions are irreversible or highly consequential. Additional precautions should also be taken when creating autonomous agentic AI as described further in the [GitHub Terms](https://docs.github.com/en/free-pro-team@latest/site-policy/github-terms).
-
+- **Be aware of the risk of overreliance**: {% data reusables.rai.copilot.application-card-overreliance %}
+- **Exercise caution when designing agentic AI in sensitive domains**: {% data reusables.rai.copilot.application-card-agentic-ai-caution %}
 
 {% comment %}
 Instructions: Replace APPLICATION-OR-PLATFORM-SERVICE with the name of the AI application or platform service. The boilerplate bullet points above must not be modified. If there are additional best practices specific to this application or platform, add them as new bullet points below the boilerplate items. Format each best practice as such:

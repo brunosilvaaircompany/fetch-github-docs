@@ -28,12 +28,6 @@ To use Copilot, you’ll need a personal GitHub account with access to a Copilot
 
 For more information about the different plans for GitHub Copilot, see [Plans](https://docs.github.com/en/copilot/get-started/plans).
 
-{% elsif ghec %}
-
-## Prerequisites
-
-To use GitHub Copilot you must have been assigned a seat by your organization as part of a GitHub Copilot Business or GitHub Copilot Enterprise subscription, or you must have signed up for GitHub Copilot Pro on your personal GitHub account.
-
 
 
 
@@ -113,12 +107,6 @@ To use Copilot, you’ll need a personal GitHub account with access to a Copilot
 
 For more information about the different plans for GitHub Copilot, see [Plans](https://docs.github.com/en/copilot/get-started/plans).
 
-{% elsif ghec %}
-
-## Prerequisites
-
-To use GitHub Copilot you must have been assigned a seat by your organization as part of a GitHub Copilot Business or GitHub Copilot Enterprise subscription, or you must have signed up for GitHub Copilot Pro on your personal GitHub account.
-
 
 
 
@@ -195,12 +183,6 @@ To use Copilot, you’ll need a personal GitHub account with access to a Copilot
   > [!IMPORTANT] **Starting April 22, 2026**, new self-serve sign-ups for Copilot Business for organizations on GitHub Free and GitHub Team plans are temporarily paused.
 
 For more information about the different plans for GitHub Copilot, see [Plans](https://docs.github.com/en/copilot/get-started/plans).
-
-{% elsif ghec %}
-
-## Prerequisites
-
-To use GitHub Copilot you must have been assigned a seat by your organization as part of a GitHub Copilot Business or GitHub Copilot Enterprise subscription, or you must have signed up for GitHub Copilot Pro on your personal GitHub account.
 
 
 
@@ -286,12 +268,6 @@ To use Copilot, you’ll need a personal GitHub account with access to a Copilot
   > [!IMPORTANT] **Starting April 22, 2026**, new self-serve sign-ups for Copilot Business for organizations on GitHub Free and GitHub Team plans are temporarily paused.
 
 For more information about the different plans for GitHub Copilot, see [Plans](https://docs.github.com/en/copilot/get-started/plans).
-
-{% elsif ghec %}
-
-## Prerequisites
-
-To use GitHub Copilot you must have been assigned a seat by your organization as part of a GitHub Copilot Business or GitHub Copilot Enterprise subscription, or you must have signed up for GitHub Copilot Pro on your personal GitHub account.
 
 
 
@@ -382,12 +358,6 @@ To use Copilot, you’ll need a personal GitHub account with access to a Copilot
 
 For more information about the different plans for GitHub Copilot, see [Plans](https://docs.github.com/en/copilot/get-started/plans).
 
-{% elsif ghec %}
-
-## Prerequisites
-
-To use GitHub Copilot you must have been assigned a seat by your organization as part of a GitHub Copilot Business or GitHub Copilot Enterprise subscription, or you must have signed up for GitHub Copilot Pro on your personal GitHub account.
-
 
 
 
@@ -475,12 +445,6 @@ To use Copilot, you’ll need a personal GitHub account with access to a Copilot
   > [!IMPORTANT] **Starting April 22, 2026**, new self-serve sign-ups for Copilot Business for organizations on GitHub Free and GitHub Team plans are temporarily paused.
 
 For more information about the different plans for GitHub Copilot, see [Plans](https://docs.github.com/en/copilot/get-started/plans).
-
-{% elsif ghec %}
-
-## Prerequisites
-
-To use GitHub Copilot you must have been assigned a seat by your organization as part of a GitHub Copilot Business or GitHub Copilot Enterprise subscription, or you must have signed up for GitHub Copilot Pro on your personal GitHub account.
 
 
 
@@ -574,12 +538,6 @@ To use Copilot, you’ll need a personal GitHub account with access to a Copilot
   > [!IMPORTANT] **Starting April 22, 2026**, new self-serve sign-ups for Copilot Business for organizations on GitHub Free and GitHub Team plans are temporarily paused.
 
 For more information about the different plans for GitHub Copilot, see [Plans](https://docs.github.com/en/copilot/get-started/plans).
-
-{% elsif ghec %}
-
-## Prerequisites
-
-To use GitHub Copilot you must have been assigned a seat by your organization as part of a GitHub Copilot Business or GitHub Copilot Enterprise subscription, or you must have signed up for GitHub Copilot Pro on your personal GitHub account.
 
 
 

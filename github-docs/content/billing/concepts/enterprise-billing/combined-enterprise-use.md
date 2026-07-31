@@ -2,7 +2,7 @@
 
 ## About enterprise deployments
 
-GitHub Enterprise offers two deployment options. In addition to GitHub Enterprise Cloud, you can use GitHub Enterprise Server to host development work for your enterprise in your data center or a supported cloud.{% elsif ghes %}In addition to GitHub Enterprise Server, you can use GitHub Enterprise Cloud to host development work for your enterprise on GitHub.com. For more information, see [Githubs Plans](https://docs.github.com/en/get-started/learning-about-github/githubs-plans#github-enterprise).
+GitHub Enterprise offers two deployment options. In addition to GitHub Enterprise Cloud, you can use GitHub Enterprise Server to host development work for your enterprise in your data center or a supported cloud. For more information, see [Githubs Plans](https://docs.github.com/en/get-started/learning-about-github/githubs-plans#github-enterprise).
 
 
 If you use both GitHub Enterprise Cloud and GitHub Enterprise Server, you'll have **an enterprise account for each.** Even if you **only** use GitHub Enterprise Server, we recommend creating an enterprise account on GitHub Enterprise Cloud. This will make it easier to contact GitHub Enterprise Support and share support bundles with them. To create an additional enterprise account, contact [GitHub's Sales team](https://enterprise.github.com/contact).

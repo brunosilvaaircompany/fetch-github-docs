@@ -41,7 +41,7 @@ You can create a workflow status badge directly on the UI using the workflow fil
 You can build the URL for a workflow status badge using the name of the workflow file:
 
 ```text
-https://github.com/OWNER/REPOSITORY/actions/workflows/WORKFLOW-FILE/badge.svg
+{% ifversion fpt or ghec %}https://github.com{% else %}HOSTNAME{% endif %}/OWNER/REPOSITORY/actions/workflows/WORKFLOW-FILE/badge.svg
 ```
 
 To display the workflow status badge in your `README.md` file, use the Markdown markup for embedding images. For more information about image markup in Markdown, see [Basic Writing And Formatting Syntax](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#images).

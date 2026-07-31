@@ -7,7 +7,7 @@ To assign jobs to run on a runner scale set, you can specify the name of the sca
 For example, the following configuration for a runner scale set has the `INSTALLATION_NAME` value set to `arc-runner-set`.
 
 ```bash
-# Using a Personal Access Token (PAT)
+# Using a {% data variables.product.pat_generic_title_case %} (PAT)
 INSTALLATION_NAME="arc-runner-set"
 NAMESPACE="arc-runners"
 GITHUB_CONFIG_URL="https://github.com/<your_enterprise/org/repo>"

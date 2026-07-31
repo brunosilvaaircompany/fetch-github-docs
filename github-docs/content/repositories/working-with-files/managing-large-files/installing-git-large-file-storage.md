@@ -24,7 +24,7 @@
 
    ```shell
    $ ./install.sh
-   > Git LFS initialized.
+   > {% data variables.large_files.product_name_short %} initialized.
    ```
 
    > [!NOTE]
@@ -33,11 +33,11 @@
 1. Next, make required changes to your global Git config:
 
    ```shell
-   $ git lfs install
-   > Git LFS initialized.
+   $ git {% data variables.large_files.command_name %} install
+   > {% data variables.large_files.product_name_short %} initialized.
    ```
 
-1. If you don't see a message indicating that `git lfs install` was successful, please contact us through the [GitHub Support portal](https://support.github.com){% elsif ghes %}your site administrator. Be sure to include the name of your operating system.
+1. If you don't see a message indicating that `git lfs install` was successful, please contact us through the [GitHub Support portal](https://support.github.com). Be sure to include the name of your operating system.
 
 {% endmac %}
 
@@ -55,11 +55,11 @@
 1. Verify that the installation was successful:
 
    ```shell
-   $ git lfs install
-   > Git LFS initialized.
+   $ git {% data variables.large_files.command_name %} install
+   > {% data variables.large_files.product_name_short %} initialized.
    ```
 
-1. If you don't see a message indicating that `git lfs install` was successful, please contact us through the [GitHub Support portal](https://support.github.com){% elsif ghes %}your site administrator. Be sure to include the name of your operating system.
+1. If you don't see a message indicating that `git lfs install` was successful, please contact us through the [GitHub Support portal](https://support.github.com). Be sure to include the name of your operating system.
 
 {% endwindows %}
 
@@ -86,7 +86,7 @@
 
    ```shell
    $ ./install.sh
-   > Git LFS initialized.
+   > {% data variables.large_files.product_name_short %} initialized.
    ```
 
    > [!NOTE]
@@ -95,11 +95,11 @@
 1. Next, make required changes to your global Git config:
 
    ```shell
-   $ git lfs install
-   > Git LFS initialized.
+   $ git {% data variables.large_files.command_name %} install
+   > {% data variables.large_files.product_name_short %} initialized.
    ```
 
-1. If you don't see a message indicating that `git lfs install` was successful, please contact us through the [GitHub Support portal](https://support.github.com){% elsif ghes %}your site administrator. Be sure to include the name of your operating system.
+1. If you don't see a message indicating that `git lfs install` was successful, please contact us through the [GitHub Support portal](https://support.github.com). Be sure to include the name of your operating system.
 
 {% endlinux %}
 

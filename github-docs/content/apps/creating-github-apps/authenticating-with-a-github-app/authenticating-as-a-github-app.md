@@ -13,7 +13,7 @@ If a REST API endpoint requires you to authenticate as an app, the documentation
 
    ```shell
    curl --request GET \
-   --url "https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3/app/installations" \
+   --url "{% data variables.product.rest_url %}/app/installations" \
    --header "Accept: application/vnd.github+json" \
    --header "Authorization: Bearer YOUR_JWT" \
    --header "X-GitHub-Api-Version: {{ allVersions[currentVersion].latestApiVersion }}"

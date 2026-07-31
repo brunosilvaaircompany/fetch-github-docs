@@ -13,10 +13,10 @@ The following example shows a path-specific `actions.instructions.md` file that 
 applyTo: ".github/workflows/**/*.yml"
 ---
 
-When generating or improving GitHub Actions workflows:
+When generating or improving {% data variables.product.prodname_actions %} workflows:
 
 ## Security First
-- Use GitHub secrets for sensitive data, never hardcode credentials
+- Use {% data variables.product.prodname_dotcom %} secrets for sensitive data, never hardcode credentials
 - Pin third-party actions to specific commits by using the SHA value (e.g., `- uses: owner/some-action@a824008085750b8e136effc585c3cd6082bd575f`)
 - Configure minimal permissions for GITHUB_TOKEN required for the workflow
 

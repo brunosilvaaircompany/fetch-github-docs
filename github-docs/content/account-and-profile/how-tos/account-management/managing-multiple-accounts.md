@@ -22,7 +22,7 @@ Alternatively, if you want to use the HTTPS protocol for both accounts, you can 
 
      ```shell
      $ git credential-osxkeychain erase
-     host=github.com
+     host={% data variables.product.product_url %}
      protocol=https
      > [Press Return]
      >

@@ -35,7 +35,7 @@ Always include a security admonition above this procedure. This is either one of
 > [!NOTE]
 > When creating a runner group, you must choose a policy that defines which repositories and workflows have access to the runner group. To change which repositories and workflows can access the runner group, organization owners and users with the “Manage organization runners and runner groups” permission can set a policy for the organization. For more information, see [Manage Access](https://docs.github.com/en/actions/how-tos/manage-runners/self-hosted-runners/manage-access#changing-which-repositories-can-access-a-runner-group).
 
-All organizations have a single default runner group. Organization owners using the GitHub Team plan{% endif %} can create additional organization-level runner groups. For more information about custom organization roles, see [Permissions Of Custom Organization Roles](https://docs.github.com/en/organizations/managing-peoples-access-to-your-organization-with-roles/permissions-of-custom-organization-roles).
+All organizations have a single default runner group. Organization owners using the GitHub Team plan can create additional organization-level runner groups. For more information about custom organization roles, see [Permissions Of Custom Organization Roles](https://docs.github.com/en/organizations/managing-peoples-access-to-your-organization-with-roles/permissions-of-custom-organization-roles).
 
 If no group is specified during the registration process, runners are automatically added to the default group. You can later move the runner from the default group to a custom group.
 

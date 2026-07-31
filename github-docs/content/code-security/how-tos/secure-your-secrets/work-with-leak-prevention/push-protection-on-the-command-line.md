@@ -17,7 +17,7 @@ To resolve a blocked push, you must remove the secret from all of the commits it
 1. Examine the error message that displayed when you tried to push your branch, which lists all of the commits that contain the secret.
 
    ```text
-   remote:   —— GitHub Personal Access Token ——————————————————————
+   remote:   —— {% data variables.product.prodname_dotcom %} {% data variables.product.pat_generic_title_case %} ——————————————————————
    remote:    locations:
    remote:      - commit: 8728dbe67
    remote:        path: README.md:4

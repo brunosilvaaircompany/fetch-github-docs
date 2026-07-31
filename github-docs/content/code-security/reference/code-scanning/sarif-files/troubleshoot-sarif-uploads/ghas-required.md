@@ -3,9 +3,9 @@
 ## About this error
 
 ```text
-GitHub Code Security or GitHub Advanced Security not enabled
-GitHub Code Security or GitHub Advanced Security blocked by a policy
-403: GitHub Code Security or GitHub Advanced Security is not enabled
+{% data variables.product.prodname_GHAS_or_code_security %} not enabled
+{% data variables.product.prodname_GHAS_or_code_security %} blocked by a policy
+403: {% data variables.product.prodname_GHAS_or_code_security %} is not enabled
 ```
 
 This error is reported if a process attempts to upload a SARIF file to a repository where GitHub Code Security is not enabled or where use of this feature is blocked by a policy.

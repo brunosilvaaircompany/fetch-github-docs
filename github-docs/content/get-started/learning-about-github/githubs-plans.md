@@ -100,8 +100,8 @@ In addition to the features available with GitHub Free for organizations, GitHub
 
 
 * The option to enable or disable GitHub Codespaces
-  * Organization owners can choose to enable or disable GitHub Codespaces for the organization's private {% ifversion ghec %}and internal repositories, and can pay for the usage of members and collaborators. For more information, see [Enabling Or Disabling GitHub Codespaces For Your Organization](https://docs.github.com/en/codespaces/managing-codespaces-for-your-organization/enabling-or-disabling-github-codespaces-for-your-organization) and [Choosing Who Owns And Pays For Codespaces In Your Organization](https://docs.github.com/en/codespaces/managing-codespaces-for-your-organization/choosing-who-owns-and-pays-for-codespaces-in-your-organization).
-{%- endif %}
+  * Organization owners can choose to enable or disable GitHub Codespaces for the organization's private and internal repositories, and can pay for the usage of members and collaborators. For more information, see [Enabling Or Disabling GitHub Codespaces For Your Organization](https://docs.github.com/en/codespaces/managing-codespaces-for-your-organization/enabling-or-disabling-github-codespaces-for-your-organization) and [Choosing Who Owns And Pays For Codespaces In Your Organization](https://docs.github.com/en/codespaces/managing-codespaces-for-your-organization/choosing-who-owns-and-pays-for-codespaces-in-your-organization).
+
 
 GitHub bills for GitHub Team on a per-user basis. For more information, see [About per-user pricing](/free-pro-team@latest/billing/managing-the-plan-for-your-github-account/about-per-user-pricing).
 

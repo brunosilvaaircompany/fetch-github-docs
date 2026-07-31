@@ -31,6 +31,6 @@ If your workflow fails with `Error: "No source code was seen during the build"` 
    * Building using a distributed build system external to GitHub Actions, using a daemon process.
    * CodeQL isn't aware of the specific compiler you are using.
 
-  If you encounter another problem with your specific compiler or configuration, contact us through the [GitHub Support portal](https://support.github.com){% elsif ghes %}your site administrator.
+  If you encounter another problem with your specific compiler or configuration, contact us through the [GitHub Support portal](https://support.github.com).
 
 For more information about specifying build steps, see [Codeql For Compiled Languages](https://docs.github.com/en/code-security/how-tos/find-and-fix-code-vulnerabilities/manage-your-configuration/codeql-for-compiled-languages#specify-build-steps-manually).

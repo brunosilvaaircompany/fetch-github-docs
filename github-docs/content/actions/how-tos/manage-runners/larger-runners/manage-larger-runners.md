@@ -327,7 +327,7 @@ You can control the maximum number of jobs allowed to run concurrently for speci
 
 > * macOS larger runners do not support static IP addresses.
 
-You can enable static IP addresses for larger runners. When you do this, the larger runners are assigned static IP address ranges. All IP addresses in the range assigned are usable. By default, you can configure up to 10 larger runner pools with static IP address ranges for your account. If you would like to use more than 10 larger runner pools with static IP address ranges, please contact us through the [GitHub Support portal](https://support.github.com){% elsif ghes %}your site administrator.
+You can enable static IP addresses for larger runners. When you do this, the larger runners are assigned static IP address ranges. All IP addresses in the range assigned are usable. By default, you can configure up to 10 larger runner pools with static IP address ranges for your account. If you would like to use more than 10 larger runner pools with static IP address ranges, please contact us through the [GitHub Support portal](https://support.github.com).
 
 
 Each larger runner you create is not a single machine. It is a pool of runners that automatically scales out to handle concurrent jobs, up to the maximum concurrency you set when creating the runner. All jobs in the pool share the same static IP address range. This means a single larger runner with one static IP range can handle many jobs running at the same time without requiring additional runners.

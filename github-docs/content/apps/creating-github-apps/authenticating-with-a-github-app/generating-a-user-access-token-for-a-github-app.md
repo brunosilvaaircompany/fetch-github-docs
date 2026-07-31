@@ -74,7 +74,7 @@ If your app runs in the browser, you should use the web application flow to gene
 
    ```shell
    curl --request GET \
-   --url "https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3/user" \
+   --url "https://api.github.com/user" \
    --header "Accept: application/vnd.github+json" \
    --header "Authorization: Bearer USER_ACCESS_TOKEN" \
    --header "X-GitHub-Api-Version: {{ allVersions[currentVersion].latestApiVersion }}"
@@ -96,10 +96,10 @@ The device flow uses the [OAuth 2.0 Device Authorization Grant](https://datatrac
    --- | --- | ---
    `device_code` | `string` | A verification code that is used to verify the device. This code is 40 characters long.
    `user_code` | `string` | A verification code that your application should display so that the user can enter the code in a browser. This code is 8 characters with a hyphen in the middle. For example, `WDJB-MJHT`.
-   `verification_uri` | `string` | The URL where users need to enter their `user_code`. The URL is:  [`https://github.com/login/device`](https://github.com/login/device) {%- elsif ghes %} `http(s)://HOSTNAME/login/device` .
+   `verification_uri` | `string` | The URL where users need to enter their `user_code`. The URL is:  [`https://github.com/login/device`](https://github.com/login/device) .
    `expires_in` | `integer` | The number of seconds before the `device_code` and `user_code` expire. The default is 900 seconds (15 minutes).
    `interval` | `integer` | The minimum number of seconds that must pass before you can make a new access token request (`POST https://github.com/login/oauth/access_token`) to complete the device authorization. If you make a request before this interval passes, then you will hit the rate limit and receive a `slow_down` error. The default is 5 seconds.
-1. Prompt the user to enter the `user_code` from the previous step at  [`https://github.com/login/device`](https://github.com/login/device) {%- elsif ghes %} `http(s)://HOSTNAME/login/device` .
+1. Prompt the user to enter the `user_code` from the previous step at  [`https://github.com/login/device`](https://github.com/login/device) .
 
    If the user does not enter the code before the `expires_in` time passes, the code will be invalid. In this case, you should restart the device flow.
 1. Poll `POST https://github.com/login/oauth/access_token` along with the `client_id`, `device_code`, and `grant_type` query parameters (described below) until the device and user codes expire or the user has successfully authorized the app by entering the `user_code`.
@@ -142,7 +142,7 @@ The device flow uses the [OAuth 2.0 Device Authorization Grant](https://datatrac
 
    ```shell
    curl --request GET \
-   --url "https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3/user" \
+   --url "https://api.github.com/user" \
    --header "Accept: application/vnd.github+json" \
    --header "Authorization: Bearer USER_ACCESS_TOKEN" \
    --header "X-GitHub-Api-Version: {{ allVersions[currentVersion].latestApiVersion }}"
@@ -189,7 +189,7 @@ You can generate a user access token with this method regardless of whether the 
 
    ```shell
    curl --request GET \
-   --url "https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3/user" \
+   --url "https://api.github.com/user" \
    --header "Accept: application/vnd.github+json" \
    --header "Authorization: Bearer USER_ACCESS_TOKEN" \
    --header "X-GitHub-Api-Version: {{ allVersions[currentVersion].latestApiVersion }}"

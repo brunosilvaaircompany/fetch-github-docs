@@ -16,13 +16,13 @@ Notifications are optimized for polling with the `Last-Modified` header. If ther
 
 ``` shell
 # Add authentication to your requests
-$ curl -I https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3/notifications
+$ curl -I {% data variables.product.rest_url %}/notifications
 HTTP/2 200
 Last-Modified: Thu, 25 Oct 2012 15:16:27 GMT
 X-Poll-Interval: 60
 
 # Pass the Last-Modified header exactly
-$ curl -I https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3/notifications
+$ curl -I {% data variables.product.rest_url %}/notifications
 $    -H "If-Modified-Since: Thu, 25 Oct 2012 15:16:27 GMT"
 > HTTP/2 304
 > X-Poll-Interval: 60

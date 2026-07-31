@@ -46,7 +46,7 @@ For more information about the `GITHUB_TOKEN`, see [Authenticate With Github_Tok
 Use the following command to authenticate to GitHub Packages in a GitHub Actions workflow using the `GITHUB_TOKEN` instead of hardcoding a personal access token in a nuget.config file in the repository:
 
 ```shell
-dotnet nuget add source --username USERNAME --password {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/NAMESPACE/index.json"
+dotnet nuget add source --username USERNAME --password {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %} --store-password-in-clear-text --name github "https://{% ifversion fpt or ghec %}nuget.pkg.github.com{% else %}nuget.HOSTNAME{% endif %}/NAMESPACE/index.json"
 ```
 
 Replace `NAMESPACE` with the name of the personal account or organization to which your packages are scoped.
@@ -86,7 +86,7 @@ You must replace:
 * `USERNAME` with the name of your personal account on GitHub.
 * `TOKEN` with your personal access token (classic).
 * `NAMESPACE` with the name of the personal account or organization to which your packages are scoped.
-* `HOSTNAME` with the host name for {% ifversion ghes %}your GitHub Enterprise Server instance.{% endif %}
+* `HOSTNAME` with the host name for your GitHub Enterprise Server instance.
 
 If your instance has subdomain isolation enabled:
 
@@ -96,7 +96,7 @@ If your instance has subdomain isolation enabled:
 <configuration>
     <packageSources>
         <clear />
-        <add key="github" value="https://nuget.pkg.github.com/NAMESPACE/index.json" />
+        <add key="github" value="https://{% ifversion fpt or ghec %}nuget.pkg.github.com{% else %}nuget.HOSTNAME{% endif %}/NAMESPACE/index.json" />
     </packageSources>
     <packageSourceCredentials>
         <github>
@@ -142,7 +142,7 @@ You can publish a package to GitHub Packages by authenticating with a _nuget.con
 Replace `OWNER` with your username or company name, and `YOUR_GITHUB_PAT` with your personal access token.
 
 ```shell
-dotnet nuget add source --username OWNER --password {% raw %}YOUR_GITHUB_PAT{% endraw %} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/OWNER/index.json"
+dotnet nuget add source --username OWNER --password {% raw %}YOUR_GITHUB_PAT{% endraw %} --store-password-in-clear-text --name github "https://{% ifversion fpt or ghec %}nuget.pkg.github.com{% else %}nuget.HOSTNAME{% endif %}/OWNER/index.json"
 ```
 
 
@@ -206,7 +206,7 @@ When publishing, if you are linking your package to a repository, the `OWNER` of
    * `1.0.0` with the version number of the package.
    * `OWNER` with the name of the personal account or organization that owns the repository to which you want to link your package.
    * `REPOSITORY` with the name of the repository to which you want to connect your package.
-   * `HOSTNAME` with the host name for {% ifversion ghes %}your GitHub Enterprise Server instance.{% endif %}
+   * `HOSTNAME` with the host name for your GitHub Enterprise Server instance.
 
    ``` xml
    <Project Sdk="Microsoft.NET.Sdk">
@@ -219,7 +219,7 @@ When publishing, if you are linking your package to a repository, the `OWNER` of
        <Authors>AUTHORS</Authors>
        <Company>COMPANY_NAME</Company>
        <PackageDescription>PACKAGE_DESCRIPTION</PackageDescription>
-       <RepositoryUrl>https://github.com/OWNER/REPOSITORY</RepositoryUrl>
+       <RepositoryUrl>https://{% ifversion fpt or ghec %}github.com{% else %}HOSTNAME{% endif %}/OWNER/REPOSITORY</RepositoryUrl>
      </PropertyGroup>
 
    </Project>
@@ -257,7 +257,7 @@ The following example publishes the projects MY_APP and MY_OTHER_APP to the same
     <Authors>Octocat</Authors>
     <Company>GitHub</Company>
     <PackageDescription>This package adds a singing Octocat!</PackageDescription>
-    <RepositoryUrl>https://github.com/my-org/my-repo</RepositoryUrl>
+    <RepositoryUrl>https://{% ifversion fpt or ghec %}github.com{% else %}HOSTNAME{% endif %}/my-org/my-repo</RepositoryUrl>
   </PropertyGroup>
 
 </Project>
@@ -274,7 +274,7 @@ The following example publishes the projects MY_APP and MY_OTHER_APP to the same
     <Authors>Octocat</Authors>
     <Company>GitHub</Company>
     <PackageDescription>This package adds a dancing Octocat!</PackageDescription>
-    <RepositoryUrl>https://github.com/my-org/my-repo</RepositoryUrl>
+    <RepositoryUrl>https://{% ifversion fpt or ghec %}github.com{% else %}HOSTNAME{% endif %}/my-org/my-repo</RepositoryUrl>
   </PropertyGroup>
 
 </Project>
@@ -300,7 +300,7 @@ Using packages from GitHub in your project is similar to using packages from _nu
       <Authors>Octocat</Authors>
        <Company>GitHub</Company>
       <PackageDescription>This package adds an Octocat!</PackageDescription>
-       <RepositoryUrl>https://github.com/OWNER/REPOSITORY</RepositoryUrl>
+       <RepositoryUrl>https://{% ifversion fpt or ghec %}github.com{% else %}HOSTNAME{% endif %}/OWNER/REPOSITORY</RepositoryUrl>
      </PropertyGroup>
 
      <ItemGroup>
@@ -331,7 +331,7 @@ To avoid this, use [NuGet Package Source Mapping](https://learn.microsoft.com/nu
 Replace:
 * `NAMESPACE` with the name of the personal account or organization that owns your GitHub Packages NuGet feed.
 * `PACKAGE-ID-PREFIX` with the NuGet package ID prefix that you use for packages hosted on GitHub Packages. If you use multiple prefixes, add additional `<package>` entries for each prefix.
-* `HOSTNAME` with the host name for {% ifversion ghes %}your GitHub Enterprise Server instance.{% endif %}
+* `HOSTNAME` with the host name for your GitHub Enterprise Server instance.
 
 If your instance has subdomain isolation enabled:
 
@@ -340,7 +340,7 @@ If your instance has subdomain isolation enabled:
 <configuration>
     <packageSources>
         <add key="nuget.org" value="https://api.nuget.org/v3/index.json" />
-        <add key="github" value="https://nuget.pkg.github.com/NAMESPACE/index.json" />
+        <add key="github" value="https://{% ifversion fpt or ghec %}nuget.pkg.github.com{% else %}nuget.HOSTNAME{% endif %}/NAMESPACE/index.json" />
     </packageSources>
     <packageSourceMapping>
         <packageSource key="nuget.org">

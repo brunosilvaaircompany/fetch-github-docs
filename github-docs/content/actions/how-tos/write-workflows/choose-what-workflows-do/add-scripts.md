@@ -21,8 +21,7 @@ jobs:
         working-directory: ./scripts
     steps:
       - name: Check out the repository to the runner
-        uses: actions/checkout@v6
-
+        uses: {% data reusables.actions.action-checkout %}
       - name: Run a script
         run: ./my-script.sh
       - name: Run another script
@@ -40,8 +39,7 @@ jobs:
         working-directory: ./scripts
     steps:
       - name: Check out the repository to the runner
-        uses: actions/checkout@v6
-
+        uses: {% data reusables.actions.action-checkout %}
       - name: Make the script files executable
         run: chmod +x my-script.sh my-other-script.sh
       - name: Run the scripts

@@ -45,13 +45,11 @@ You can populate the runner tool cache by running a GitHub Actions workflow on G
              mv "{% raw %}${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"{% endraw %}
              mkdir -p "{% raw %}${{ runner.tool_cache }}{% endraw %}"
          - name: Setup Node 14
-           uses: actions/setup-node@v7
-
+           uses: {% data reusables.actions.action-setup-node %}
            with:
              node-version: 14.x
          - name: Setup Node 16
-           uses: actions/setup-node@v7
-
+           uses: {% data reusables.actions.action-setup-node %}
            with:
              node-version: 16.x
          - name: Archive tool cache
@@ -59,8 +57,7 @@ You can populate the runner tool cache by running a GitHub Actions workflow on G
              cd "{% raw %}${{ runner.tool_cache }}{% endraw %}"
              tar -czf tool_cache.tar.gz *
          - name: Upload tool cache artifact
-           uses: actions/upload-artifact@v4
-
+           uses: {% data reusables.actions.action-upload-artifact %}
            with:
              path: {% raw %}${{runner.tool_cache}}/tool_cache.tar.gz{% endraw %}
    ```

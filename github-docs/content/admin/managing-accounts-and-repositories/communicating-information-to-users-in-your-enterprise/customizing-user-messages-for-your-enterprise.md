@@ -25,7 +25,7 @@ You can use Markdown to format your message. For more information, see [About Wr
 
 1. At the top of the page, click {% octicon "gear" aria-hidden="true" aria-label="gear" %} **Settings**.
 
-1. Under **{% octicon "gear" aria-hidden="true" aria-label="gear" %} Settings**, click **Messages{% elsif ghec %}Announcement**.
+1. Under **{% octicon "gear" aria-hidden="true" aria-label="gear" %} Settings**, click **Messages**.
 
 1. To the right of "Sign in page", click **Add message** or **Edit message**.
 
@@ -47,7 +47,7 @@ You can use Markdown to format your message. For more information, see [About Wr
 
 1. At the top of the page, click {% octicon "gear" aria-hidden="true" aria-label="gear" %} **Settings**.
 
-1. Under **{% octicon "gear" aria-hidden="true" aria-label="gear" %} Settings**, click **Messages{% elsif ghec %}Announcement**.
+1. Under **{% octicon "gear" aria-hidden="true" aria-label="gear" %} Settings**, click **Messages**.
 
 1. To the right of "Sign out page", click **Add message** or **Edit message**.
 
@@ -67,7 +67,7 @@ On GitHub Enterprise Server, you can create a mandatory message that is displaye
 Mandatory messages have a variety of uses.
 
 * Providing onboarding information for new employees
-* Telling users how to get help with {% ifversion ghes %}your GitHub Enterprise Server instance
+* Telling users how to get help with your GitHub Enterprise Server instance
 * Ensuring that all users read your terms of service for using your GitHub Enterprise Server instance
 
 If you include Markdown checkboxes in the message, all checkboxes must be selected before the user can dismiss the message. For example, if you include your terms of service in the mandatory message, you can require that each user selects a checkbox to confirm the user has read the terms.
@@ -80,7 +80,7 @@ Each time a user sees a mandatory message, an audit log event is created. The ev
 
 1. At the top of the page, click {% octicon "gear" aria-hidden="true" aria-label="gear" %} **Settings**.
 
-1. Under **{% octicon "gear" aria-hidden="true" aria-label="gear" %} Settings**, click **Messages{% elsif ghec %}Announcement**.
+1. Under **{% octicon "gear" aria-hidden="true" aria-label="gear" %} Settings**, click **Messages**.
 
 1. To the right of "Mandatory message", click **Add mandatory message**.
 1. Under "Mandatory message", in the text box, type your message.
@@ -89,7 +89,7 @@ Each time a user sees a mandatory message, an audit log event is created. The ev
 1. Click **Save changes**.
 
 
-{% endif %}
+
 
 ## Creating a global announcement banner
 
@@ -107,7 +107,7 @@ You can also set an announcement banner in the administrative shell using a comm
 
 1. At the top of the page, click {% octicon "gear" aria-hidden="true" aria-label="gear" %} **Settings**.
 
-1. Under **{% octicon "gear" aria-hidden="true" aria-label="gear" %} Settings**, click **Messages{% elsif ghec %}Announcement**.
+1. Under **{% octicon "gear" aria-hidden="true" aria-label="gear" %} Settings**, click **Messages**.
 
 
 1. Optionally, to allow each user to dismiss the announcement, select **User dismissible**.

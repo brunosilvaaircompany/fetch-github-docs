@@ -19,7 +19,7 @@ If that worked, great! If not, you may need to [follow our troubleshooting guide
 Now, to clone the repository, you can run the following command:
 
 ```shell
-git clone ssh://git@ssh.github.com:443/YOUR-USERNAME/YOUR-REPOSITORY.git
+git clone ssh://git@ssh.{% data variables.product.product_url %}:443/YOUR-USERNAME/YOUR-REPOSITORY.git
 ```
 
 ## Enabling SSH connections over HTTPS
@@ -29,8 +29,8 @@ If you are able to SSH into `git@ssh.github.com` over port 443, you can override
 To set this in your SSH configuration file, edit the file at `~/.ssh/config`, and add this section:
 
 ```text
-Host github.com
-    Hostname ssh.github.com
+Host {% data variables.product.product_url %}
+    Hostname ssh.{% data variables.product.product_url %}
     Port 443
     User git
 ```
@@ -38,7 +38,7 @@ Host github.com
 You can test that this works by connecting once more to your GitHub Enterprise Server instance:
 
 ```bash
-$ ssh -T git@github.com
+$ ssh -T git@{% data variables.product.product_url %}
 # Hi USERNAME! You've successfully authenticated, but GitHub does not
 # provide shell access.
 ```

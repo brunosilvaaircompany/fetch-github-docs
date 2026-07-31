@@ -11,7 +11,7 @@ GitHub limits the size of files allowed in repositories. If you attempt to add o
 > [!NOTE]
 > If you add a file to a repository via a browser, the file can be no larger than 25 MiB. For more information, see [Adding A File To A Repository](https://docs.github.com/en/repositories/working-with-files/managing-files/adding-a-file-to-a-repository).
 
-By default, GitHub Enterprise Server blocks files larger than 100 MiB. However, a site administrator can configure a different limit for {% ifversion ghes %}your GitHub Enterprise Server instance. For more information, see [Enforcing Repository Management Policies In Your Enterprise](https://docs.github.com/en/admin/enforcing-policies/enforcing-policies-for-your-enterprise/enforcing-repository-management-policies-in-your-enterprise).{% endif %}
+By default, GitHub Enterprise Server blocks files larger than 100 MiB. However, a site administrator can configure a different limit for your GitHub Enterprise Server instance. For more information, see [Enforcing Repository Management Policies In Your Enterprise](https://docs.github.com/en/admin/enforcing-policies/enforcing-policies-for-your-enterprise/enforcing-repository-management-policies-in-your-enterprise).
 
 To track files beyond this limit, you must use Git Large File Storage (Git LFS). For more information, see [About Git Large File Storage](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage).
 

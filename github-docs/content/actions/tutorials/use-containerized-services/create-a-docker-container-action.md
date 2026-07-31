@@ -221,8 +221,7 @@ jobs:
       # To use this repository's private action,
       # you must check out the repository
       - name: Checkout
-        uses: actions/checkout@v6
-
+        uses: {% data reusables.actions.action-checkout %}
       - name: Hello world action step
         uses: ./ # Uses an action in the root directory
         id: hello
@@ -250,16 +249,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
-
+        uses: {% data reusables.actions.action-checkout %}
 
       # Output build artifacts to /github/workspace on the container.
       - name: Containerized Build
         uses: ./.github/actions/my-container-action
 
       - name: Upload Build Artifacts
-        uses: actions/upload-artifact@v4
-
+        uses: {% data reusables.actions.action-upload-artifact %}
         with:
           name: workspace_artifacts
           path: {% raw %}${{ github.workspace }}{% endraw %}

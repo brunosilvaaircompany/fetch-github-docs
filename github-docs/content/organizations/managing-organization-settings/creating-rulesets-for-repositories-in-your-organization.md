@@ -33,7 +33,7 @@ For more information about syntax options, see the [fnmatch documentation](https
 
 
 
-{% ifversion not fpt %}
+
 
 ## Using regular expressions for commit metadata
 
@@ -114,7 +114,7 @@ Does not match: `Add conditional logic to foo.bar`
 
 
 
-{% endif %}
+
 
 ## Using ruleset enforcement statuses
 

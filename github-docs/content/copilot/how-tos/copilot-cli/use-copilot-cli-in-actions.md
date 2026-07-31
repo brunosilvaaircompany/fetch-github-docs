@@ -36,8 +36,7 @@ jobs:
   copilot:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
-
+      - uses: {% data reusables.actions.action-checkout %}
       - name: Install Copilot CLI
         run: npm install -g @github/copilot
       - name: Run Copilot

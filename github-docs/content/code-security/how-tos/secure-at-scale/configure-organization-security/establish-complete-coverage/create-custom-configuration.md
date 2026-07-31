@@ -37,8 +37,8 @@ When creating a security configuration, keep in mind that:
 1. To configure groups of security features for your repositories, click **Custom configuration**.
 1. To help identify your custom security configuration and clarify its purpose on the "Security configurations" page, name your configuration and create a description.
 1. Optionally, enable "Secret Protection", a paid feature for private and internal  repositories. Enabling Secret Protection enables alerts for secret scanning. In addition, you can choose whether to enable, disable, or keep the existing settings for the following secret scanning features:
-    * **Validity checks**. To learn more about validity checks for partner patterns, see [Evaluating Alerts](https://docs.github.com/en/code-security/tutorials/remediate-leaked-secrets/evaluating-alerts#checking-a-secrets-validity).{% ifversion ghes > 3.19 %}
-       Your site administrator must enable validity checks before you can use this feature. See [Configure Secret Scanning](https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-enterprise-security/configure-specific-tools/configure-secret-scanning).{% endif %}
+    * **Validity checks**. To learn more about validity checks for partner patterns, see [Evaluating Alerts](https://docs.github.com/en/code-security/tutorials/remediate-leaked-secrets/evaluating-alerts#checking-a-secrets-validity).
+       Your site administrator must enable validity checks before you can use this feature. See [Configure Secret Scanning](https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-enterprise-security/configure-specific-tools/configure-secret-scanning).
     * **Extended metadata**. To learn more about extended metadata checks, see [About extended metadata checks](/code-security/concepts/secret-security/validity-checks#about-extended-metadata-checks) and [Evaluating Alerts](https://docs.github.com/en/code-security/tutorials/remediate-leaked-secrets/evaluating-alerts#reviewing-extended-metadata-for-a-token).
     > [!NOTE]
     > You can only enable extended metadata checks if validity checks are enabled.

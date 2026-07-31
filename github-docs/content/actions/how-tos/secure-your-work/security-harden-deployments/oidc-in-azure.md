@@ -83,11 +83,7 @@ The [`azure/login`](https://github.com/Azure/login) action receives a JWT from t
 The following example exchanges an OIDC ID token with Azure to receive an access token, which can then be used to access cloud resources.
 
 ```yaml copy
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
+{% data reusables.actions.actions-not-certified-by-github-comment %}
 name: Run Azure Login with OIDC
 on: [push]
 

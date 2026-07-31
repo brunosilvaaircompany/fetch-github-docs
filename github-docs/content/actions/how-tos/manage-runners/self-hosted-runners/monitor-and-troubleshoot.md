@@ -10,7 +10,7 @@
 
 You may not be able to create a self-hosted runner for an organization-owned repository.
 
-Enterprise owners and organization {% elsif fpt %}Organization owners can choose which repositories are allowed to create repository-level self-hosted runners. Users with the “Manage organization runners and runner groups” permission can only choose which repositories are allowed to create repository-level self-hosted runners for repositories in your organization.
+Enterprise owners and organization owners can choose which repositories are allowed to create repository-level self-hosted runners. Users with the “Manage organization runners and runner groups” permission can only choose which repositories are allowed to create repository-level self-hosted runners for repositories in your organization.
 
 For more information about custom organization roles, see [Permissions Of Custom Organization Roles](https://docs.github.com/en/organizations/managing-peoples-access-to-your-organization-with-roles/permissions-of-custom-organization-roles).
 
@@ -19,14 +19,12 @@ For more information, see [Enforcing Policies For GitHub Actions In Your Enterpr
 
 ## Checking the status of a self-hosted runner
 
-A self-hosted runner can be located in either your repository, organization, or enterprise account settings on GitHub{% elsif ghes %} enterprise settings on GitHub Enterprise Server. To manage a self-hosted runner, you must have the following permissions, depending on where the self-hosted runner was added:
+A self-hosted runner can be located in either your repository, organization, or enterprise account settings on GitHub. To manage a self-hosted runner, you must have the following permissions, depending on where the self-hosted runner was added:
 * **User repository:** You must be the repository owner.
 * **Organization:** You must be an organization owner.
 * **Organization repository:** You must be an organization owner, or have admin access to the repository.
 
 * **Enterprise account:** You must be an enterprise owner.
-{% elsif ghes %}
-* **Enterprise:** You must be a GitHub Enterprise site administrator.
 
 
 

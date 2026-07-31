@@ -54,7 +54,7 @@ Promoting a replica does not automatically set up replication for existing appli
     * On the new primary, remove the UUIDs using `ghe-repl-decommission`. Please replace `UUID` with the UUID you retrieved in the previous step.
 
       ```shell
-      ghe-repl-decommission UUID
+      {% ifversion ghes > 3.17 %}ghe-repl-decommission UUID{% else %}ghe-repl-teardown -u UUID{% endif %}
       ```
 
    > [!WARNING]

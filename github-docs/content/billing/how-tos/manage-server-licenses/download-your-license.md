@@ -20,7 +20,7 @@ There are two possible ways to download a license file for GitHub Enterprise Ser
 
 1. If you are an existing GitHub Enterprise customer with an enterprise account on GitHub Enterprise Cloud, or if you have GHE.com with metered license billing, you can download your license file from GitHub.com or GHE.com using the following instructions.
 
-If you have any questions about downloading your license, contact [GitHub's Sales team](https://github.com/enterprise/contact). For more information about enterprise accounts, see [Enterprise Accounts](https://docs.github.com/en/enterprise-cloud@latest/admin/concepts/enterprise-fundamentals/enterprise-accounts) in the GitHub Enterprise Cloud documentation.{% elsif ghec %}.
+If you have any questions about downloading your license, contact [GitHub's Sales team](https://github.com/enterprise/contact). For more information about enterprise accounts, see [Enterprise Accounts](https://docs.github.com/en/enterprise-cloud@latest/admin/concepts/enterprise-fundamentals/enterprise-accounts) in the GitHub Enterprise Cloud documentation.
 
 1. Navigate to GitHub Enterprise Cloud.
 1. In the top-right corner of GitHub, click your profile picture.
@@ -38,4 +38,4 @@ If you have any questions about downloading your license, contact [GitHub's Sale
 
 1. Scroll down to "Enterprise Server licenses". Next to the license you want to download, click **{% octicon "download" aria-hidden="true" aria-label="download" %} Download**.
 
-After you download your license file, you can upload the file to GitHub Enterprise Server to validate your application. For more information, see [Upload New License](https://docs.github.com/en/enterprise-server@latest/billing/how-tos/manage-server-licenses/upload-new-license) in the GitHub Enterprise Server documentation.{% elsif ghes %}[Upload New License](https://docs.github.com/en/enterprise-server@latest/billing/how-tos/manage-server-licenses/upload-new-license).
+After you download your license file, you can upload the file to GitHub Enterprise Server to validate your application. For more information, see [Upload New License](https://docs.github.com/en/enterprise-server@latest/billing/how-tos/manage-server-licenses/upload-new-license) in the GitHub Enterprise Server documentation.

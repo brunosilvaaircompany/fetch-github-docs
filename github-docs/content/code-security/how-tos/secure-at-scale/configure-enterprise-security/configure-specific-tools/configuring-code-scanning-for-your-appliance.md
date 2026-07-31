@@ -1,4 +1,4 @@
-# Configuring code scanning for your appliance{% elsif default-setup-self-hosted-runners-GHEC %}Configuring self-hosted runners for code scanning in your enterprise
+# Configuring code scanning for your appliance
 
 
 
@@ -36,14 +36,6 @@ You can identify if your enterprise has a license for Advanced Security products
 
 ### Provisioning a self-hosted runner
 
-{% elsif default-setup-self-hosted-runners-GHEC %}
-
-## Provisioning a self-hosted runner
-
-> [!NOTE]
-> * If your enterprise uses GitHub-hosted runners with GitHub Actions, proceed directly to configuring code scanning through GitHub.com. See [Configure Code Scanning](https://docs.github.com/en/code-security/how-tos/find-and-fix-code-vulnerabilities/configure-code-scanning/configure-code-scanning) and [Code Scanning At Scale](https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/configure-specific-tools/code-scanning-at-scale).
-> * With the exception of Swift analysis, default setup can now run on larger runners. See [Larger Runners](https://docs.github.com/en/actions/concepts/runners/larger-runners) and [Configure Larger Runners](https://docs.github.com/en/code-security/how-tos/find-and-fix-code-vulnerabilities/manage-your-configuration/configure-larger-runners).
-
 
 
 GitHub can run code scanning using a GitHub Actions workflow. First, you need to provision one or more self-hosted GitHub Actions runners in your environment. You can provision self-hosted runners at the repository, organization, or enterprise account level. See [Self Hosted Runners](https://docs.github.com/en/actions/concepts/runners/self-hosted-runners) and [Add Runners](https://docs.github.com/en/actions/how-tos/manage-runners/self-hosted-runners/add-runners).
@@ -76,7 +68,7 @@ You can use Actions Runner Controller to create a dedicated runner scale set for
 
 If you want to use actions to run code scanning on GitHub Enterprise Server, the actions must be available on your appliance.
 
-The CodeQL action is included in your installation of GitHub Enterprise Server. If both GitHub Enterprise Server {{ allVersions[currentVersion].currentRelease }} and your GitHub Actions runner have access to the internet, the action will automatically download the CodeQL {% ifversion ghes < 3.18 %}2.20.7{% elsif ghes < 3.19 %}2.21.4{% elsif ghes < 3.20 %}2.22.4{% elsif ghes < 3.21 %}2.23.9{% elsif ghes < 3.22 %}2.24.3 bundle required to perform analysis. Alternatively, you can use a synchronization tool to make the latest released version of the CodeQL analysis bundle available locally. See [Configuring CodeQL analysis on a server without internet access](#configuring-codeql-analysis-on-a-server-without-internet-access) below.
+The CodeQL action is included in your installation of GitHub Enterprise Server. If both GitHub Enterprise Server {{ allVersions[currentVersion].currentRelease }} and your GitHub Actions runner have access to the internet, the action will automatically download the CodeQL 2.20.7 bundle required to perform analysis. Alternatively, you can use a synchronization tool to make the latest released version of the CodeQL analysis bundle available locally. See [Configuring CodeQL analysis on a server without internet access](#configuring-codeql-analysis-on-a-server-without-internet-access) below.
 
 You can also make third-party actions available to users for code scanning, by setting up GitHub Connect. See [Configuring Code Scanning For Your Appliance](https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-enterprise-security/configure-specific-tools/configuring-code-scanning-for-your-appliance#configuring-github-connect-to-sync-github-actions) below.
 
@@ -98,4 +90,3 @@ If you configure the CodeQL action sync tool, you can use it to sync the latest 
 If you don't want to use GitHub Actions, you should run code scanning using the CodeQL CLI.
 
 The CodeQL CLI is a command-line tool that you use to analyze codebases on any machine, including a third-party CI/CD system. See [Use With Existing Ci System](https://docs.github.com/en/code-security/how-tos/find-and-fix-code-vulnerabilities/integrate-with-existing-tools/use-with-existing-ci-system).
-{% endif %}

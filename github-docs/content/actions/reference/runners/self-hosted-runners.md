@@ -153,7 +153,7 @@ Your access token will require the `manage_runners:enterprise` scope.
 Self-hosted runners connect to GitHub to receive job assignments and download new versions of the runner application.
 
 The GitHub Actions runner application is open source. You can contribute and file issues in the [runner](https://github.com/actions/runner) repository.
-  When a new version is released, the runner application automatically updates itself when a job is assigned to the runner, or within a week of release if the runner hasn't been assigned any jobs. {% else ifversion ghes %} When a new version is released, the runner application will automatically update within 24 hours.
+  When a new version is released, the runner application automatically updates itself when a job is assigned to the runner, or within a week of release if the runner hasn't been assigned any jobs. 
 
 ### Requirements for communication with GitHub
 
@@ -255,35 +255,4 @@ api.snapcraft.io
 
 In addition, your workflow may require access to other network resources.
 
-If you use an IP address allow list for your GitHub organization or enterprise account, you must add your self-hosted runner's IP address to the allow list. See [Managing allowed IP addresses for your organization](/{% ifversion fpt %}enterprise-cloud@latest/organizations/keeping-your-organization-secure/managing-allowed-ip-addresses-for-your-organization#using-github-actions-with-an-ip-allow-list) or [Enforcing Policies For Security Settings In Your Enterprise](https://docs.github.com/en/enterprise-cloud@latest/admin/policies/enforcing-policies-for-your-enterprise/enforcing-policies-for-security-settings-in-your-enterprise) in the GitHub Enterprise Cloud documentation.
-
-{% else %}
-
-### Communication with GitHub.com
-
-Self-hosted runners do not need to connect to GitHub.com unless you have enabled automatic access to GitHub.com actions for GitHub Enterprise Server. For more information, see [About Using Actions In Your Enterprise](https://docs.github.com/en/admin/managing-github-actions-for-your-enterprise/managing-access-to-actions-from-githubcom/about-using-actions-in-your-enterprise).
-
-If you want your runner to connect to GitHub.com, the host machine must be able to make outbound HTTP connections over port 80, or HTTPS connections over port 443. To ensure connectivity over HTTPS, configure TLS for GitHub Enterprise Server. See [Configuring Tls](https://docs.github.com/en/enterprise-server@latest/admin/configuring-settings/hardening-security-for-your-enterprise/configuring-tls).
-
-If you have enabled automatic access to GitHub.com actions, then the self-hosted runner will connect directly to GitHub.com to download actions. You must ensure that the machine has the appropriate network access to communicate with the GitHub URLs listed below.
-
-```shell copy
-github.com
-api.github.com
-codeload.github.com
-```
-
-You can use the REST API to get meta information about GitHub, including the IP addresses and domain details for GitHub services. The `actions_inbound` section of the API supports both fully qualified and wildcard domains. Fully qualified domains specify a complete domain name (e.g., `example.github.com`), while wildcard domains use a `*` to represent multiple possible subdomains (e.g., `*.github.com`). An example of the self-hosted runner requirements using wildcard domains has been listed below. For more information, see [Meta](https://docs.github.com/en/rest/meta/meta).
-
-```shell copy
-github.com
-*.github.com
-*.githubusercontent.com
-ghcr.io
-```
-
-> [!NOTE]
-> Some of the domains listed are configured using `CNAME` records. Some firewalls might require you to add rules recursively for all `CNAME` records. Note that the `CNAME` records might change in the future, and that only the domains listed will remain constant.
-
-
-{% endif %}
+If you use an IP address allow list for your GitHub organization or enterprise account, you must add your self-hosted runner's IP address to the allow list. See [Managing allowed IP addresses for your organization](/enterprise-cloud@latest/organizations/keeping-your-organization-secure/managing-allowed-ip-addresses-for-your-organization#using-github-actions-with-an-ip-allow-list) or [Enforcing Policies For Security Settings In Your Enterprise](https://docs.github.com/en/enterprise-cloud@latest/admin/policies/enforcing-policies-for-your-enterprise/enforcing-policies-for-security-settings-in-your-enterprise) in the GitHub Enterprise Cloud documentation.

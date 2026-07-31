@@ -187,7 +187,7 @@ Combine multiple permissions in the form `&contents=read&pull_requests=write&...
 | `starring` | Starring | `read`, `write` |
 | `watching` | Watching | `read`, `write` |
 
-{% ifversion copilot %}
+
 
 > [!NOTE]
 > The `copilot_requests` permission enables making Copilot requests for the given user. These requests count towards the user's premium request allowance. Additional requests beyond the allowance incur overage billing. For more information about Copilot requests and billing, see [Copilot Requests](https://docs.github.com/en/copilot/reference/copilot-billing/request-based-billing-legacy/copilot-requests).
@@ -270,7 +270,7 @@ Repository permissions work for both user and organization resource owners.
 | `organization_actions_variables` | Variables | `read`, `write` |
 | `organization_hooks` | Webhooks | `read`, `write` |
 
-{% endif %}
+
 
 ## Creating a personal access token (classic)
 
@@ -294,7 +294,7 @@ Repository permissions work for both user and organization resource owners.
 1. Optionally, to copy the new token to your clipboard, click {% octicon "copy" aria-label="Copy token" %}.
 
    ![Screenshot of the "Personal access tokens" page. Next to a blurred-out token, an icon of two overlapping squares is outlined in orange.](/assets/images/help/settings/personal-access-tokens-ghes.png)
-1. To use your token to access resources owned by an organization that uses SAML single sign-on, authorize the token. For more information, see [Authorizing A Personal Access Token For Use With Single Sign On](https://docs.github.com/en/enterprise-cloud@latest/authentication/authenticating-with-single-sign-on/authorizing-a-personal-access-token-for-use-with-single-sign-on){% ifversion fpt %} in the GitHub Enterprise Cloud documentation.{% endif %}
+1. To use your token to access resources owned by an organization that uses SAML single sign-on, authorize the token. For more information, see [Authorizing A Personal Access Token For Use With Single Sign On](https://docs.github.com/en/enterprise-cloud@latest/authentication/authenticating-with-single-sign-on/authorizing-a-personal-access-token-for-use-with-single-sign-on) in the GitHub Enterprise Cloud documentation.
 
 ## Deleting a personal access token
 
@@ -319,7 +319,7 @@ Once you have a personal access token, you can enter it instead of your password
 For example, to clone a repository on the command line you would enter the following `git clone` command. You would then be prompted to enter your username and password. When prompted for your password, enter your personal access token instead of a password.
 
 ```shell
-$ git clone https://github.com/USERNAME/REPO.git
+$ git clone https://{% data variables.product.product_url %}/USERNAME/REPO.git
 Username: YOUR-USERNAME
 Password: YOUR-PERSONAL-ACCESS-TOKEN
 ```

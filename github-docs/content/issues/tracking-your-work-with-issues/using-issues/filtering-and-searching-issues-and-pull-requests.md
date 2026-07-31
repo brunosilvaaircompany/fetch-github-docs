@@ -34,7 +34,7 @@ You can filter issues and pull requests to find:
 
 ## Building advanced filters for issues
 
-You can build advanced filters using boolean and nested queries on your repository's issues page{% ifversion issues-dashboard %} and the issues dashboard. As you type your filter, GitHub will show available qualifiers, suggest values, and warn when there is a problem with your filter.
+You can build advanced filters using boolean and nested queries on your repository's issues page and the issues dashboard. As you type your filter, GitHub will show available qualifiers, suggest values, and warn when there is a problem with your filter.
 
 ### Using boolean operators
 
@@ -66,7 +66,7 @@ You can nest filters using parentheses up to five levels deep. It's not currentl
 
 {% endwebui %}
 
-{% endif %}
+
 
 ## Filtering issues and pull requests by assignees
 

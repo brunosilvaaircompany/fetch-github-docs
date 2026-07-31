@@ -42,7 +42,7 @@ If you specifically opt in to permit GitHub to do so, GitHub will collect usage 
 **License notice:** If you don’t have a license for GitHub Code Security then, by installing this product, you are agreeing to the [GitHub CodeQL Terms and Conditions](https://github.com/github/codeql-cli-binaries/blob/main/LICENSE.md).
 
 For information about how you can try GitHub Advanced Security for free, see [Trial Advanced Security](https://docs.github.com/en/code-security/tutorials/trialing-github-advanced-security/trial-advanced-security).
-{% elsif fpt %}For information about how you can try GitHub Enterprise with GitHub Advanced Security for free, see [Setting Up A Trial Of GitHub Enterprise Cloud](https://docs.github.com/en/enterprise-cloud@latest/admin/overview/setting-up-a-trial-of-github-enterprise-cloud) and [Trial Advanced Security](https://docs.github.com/en/enterprise-cloud@latest/code-security/tutorials/trialing-github-advanced-security/trial-advanced-security#setting-up-your-trial-of-github-advanced-security) in the GitHub Enterprise Cloud documentation.
+
 
 
 

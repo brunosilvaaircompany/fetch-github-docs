@@ -13,7 +13,7 @@ If you create a new clone of the repository, you won't lose any of your Git hist
 1. Clone the repository that contains the subfolder.
 
    ```shell
-   git clone https://github.com/USERNAME/REPOSITORY-NAME
+   git clone https://{% data variables.product.product_url %}/USERNAME/REPOSITORY-NAME
    ```
 
 1. Change the current working directory to your cloned repository.
@@ -58,7 +58,7 @@ If you create a new clone of the repository, you won't lose any of your Git hist
 1. Add a new remote name with the URL you copied for your repository. For example, `origin` or `upstream` are two common choices.
 
    ```shell
-   git remote add origin https://github.com/USERNAME/REPOSITORY-NAME.git
+   git remote add origin https://{% data variables.product.product_url %}/USERNAME/REPOSITORY-NAME.git
    ```
 
 1. Verify that the remote URL was added with your new repository name.
@@ -66,8 +66,8 @@ If you create a new clone of the repository, you won't lose any of your Git hist
     ```shell
     $ git remote -v
     # Verify new remote URL
-    > origin  https://github.com/USERNAME/NEW-REPOSITORY-NAME.git (fetch)
-    > origin  https://github.com/USERNAME/NEW-REPOSITORY-NAME.git (push)
+    > origin  https://{% data variables.product.product_url %}/USERNAME/NEW-REPOSITORY-NAME.git (fetch)
+    > origin  https://{% data variables.product.product_url %}/USERNAME/NEW-REPOSITORY-NAME.git (push)
     ```
 
 1. Push your changes to the new repository on GitHub.

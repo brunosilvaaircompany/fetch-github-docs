@@ -62,26 +62,18 @@ Before starting this section, ensure you have followed steps **1 and 2** in [Con
 
 ### On GitHub Enterprise Server
 
-1. Sign in to {% ifversion ghes %}your GitHub Enterprise Server instance as a user with access to the Management Console.
+1. Sign in to your GitHub Enterprise Server instance as a user with access to the Management Console.
 1. Configure SAML using the information you have gathered. See [Configuring Saml Single Sign On For Your Enterprise](https://docs.github.com/en/admin/managing-iam/using-saml-for-enterprise-iam/configuring-saml-single-sign-on-for-your-enterprise#configuring-saml-sso).
 
 ## 2. Configure SCIM
 
 After configuring your SAML settings, you can proceed to configure provisioning settings.
 
-{% elsif ghec %}
-
-## Configuring SCIM
-
-After you have configured your SAML settings in Okta's app, you can proceed to configure provisioning settings. If you haven't already configured SAML settings, see [Configuring Saml Single Sign On With Okta For Enterprise Managed Users](https://docs.github.com/en/admin/managing-iam/configuring-authentication-for-enterprise-managed-users/configuring-saml-single-sign-on-with-okta-for-enterprise-managed-users).
-
-{% endif %}
 
 
-To configure provisioning, the setup user {% ifversion ghec %}with the **@<em>SHORT-CODE</em>_admin** username will need to provide a personal access token (classic) with the **scim:enterprise** scope. See [Getting Started With Enterprise Managed Users](https://docs.github.com/en/admin/managing-iam/understanding-iam-for-enterprises/getting-started-with-enterprise-managed-users#create-a-personal-access-token).
-{% else %}
-Before starting this section, ensure you have followed steps **1 to 4** in [Configuring Scim Provisioning For Users](https://docs.github.com/en/admin/managing-iam/provisioning-user-accounts-with-scim/configuring-scim-provisioning-for-users).
-{% endif %}
+
+To configure provisioning, the setup user with the **@<em>SHORT-CODE</em>_admin** username will need to provide a personal access token (classic) with the **scim:enterprise** scope. See [Getting Started With Enterprise Managed Users](https://docs.github.com/en/admin/managing-iam/understanding-iam-for-enterprises/getting-started-with-enterprise-managed-users#create-a-personal-access-token).
+
 
 1. Navigate to your GitHub Enterprise Managed User application on Okta.
 1. Click the **Provisioning** tab.
@@ -123,8 +115,6 @@ After you have configured authentication and provisioning, you will be able to p
 > [!NOTE]
 > 
 To avoid exceeding GitHub's rate limit, do not assign more than 1,000 users per hour to the SCIM integration on your IdP. If you use groups to assign users to the IdP application, do not add more than 1,000 users to each group per hour. If you exceed these thresholds, attempts to provision users may fail with a "rate limit" error. You can review your IdP logs to confirm if attempted SCIM provisioning or push operations failed due to a rate limit error. The response to a failed provisioning attempt will depend on the IdP.
-{% elsif ghes %}
-A site administrator may have enabled API rate limits on your instance. If you exceed these thresholds, attempts to provision users may fail with a "rate limit" error. You can review your IdP logs to confirm if attempted SCIM provisioning or push operations failed due to a rate limit error. The response to a failed provisioning attempt will depend on the IdP.
 
  For more information, see [Troubleshooting Identity And Access Management For Your Enterprise](https://docs.github.com/en/admin/managing-iam/understanding-iam-for-enterprises/troubleshooting-identity-and-access-management-for-your-enterprise#scim-provisioning-errors).
 

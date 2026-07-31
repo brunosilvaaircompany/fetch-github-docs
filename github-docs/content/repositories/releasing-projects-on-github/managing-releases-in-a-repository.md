@@ -74,7 +74,7 @@ You can choose whether Git Large File Storage (Git LFS) objects are included in 
   
 
    ```shell
-   gh release create v1.3.2 --title "v1.3.2 (beta)" --notes "this is a public preview release" --prerelease
+   gh release create v1.3.2 --title "v1.3.2 (beta)" --notes "this is a {% data variables.release-phases.public_preview %} release" --prerelease
    ```
 
 

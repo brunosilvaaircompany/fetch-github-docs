@@ -26,8 +26,7 @@ If Copilot cloud agent is available in the repository, the fastest way to resolv
 1. In the campaign view for the repository, select the alerts that you want to fix.
 1. Connect the security alerts to a working branch:
    * If at least one "Autofix" suggestion is available for the selected alerts, click **Commit autofix** and commit the changes either to a new branch or to an existing branch.
-   * If no autofix suggestions are available for the selected alerts, click **Create new branch** to create a new branch where you will work on fixing the alerts.{% elsif ghes %}
-1. Click **Create new branch** to create a new branch where you will work on fixing the alerts.
+   * If no autofix suggestions are available for the selected alerts, click **Create new branch** to create a new branch where you will work on fixing the alerts.
 1. When you have finished fixing the alerts and testing your solutions, create a pull request for your changes and request a review from the campaign manager.
 
 > [!TIP] If you have write permission for more than one repository in the campaign, click the link in the "Campaign progress" box in your repository to show the organization-level view of the campaign. When you open a repository from this view, the campaign alerts view is displayed.

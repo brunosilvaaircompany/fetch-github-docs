@@ -263,8 +263,8 @@ Applying this rule will block direct pushes because the ruleset workflows run as
 
 This rule should only be added to rulesets that target branches where all changes to the branch are performed by pull requests.
 
-{% ifversion repo-rules-ignorecheck %} Optionally, you can select "Do not require workflows checks on creation" if you wish to allow branch creation regardless of the status check result. 
-{% endif %}
+ Optionally, you can select "Do not require workflows checks on creation" if you wish to allow branch creation regardless of the status check result. 
+
 
 
 
@@ -280,7 +280,7 @@ Organizations on a GitHub Enterprise plan can access additional rules to control
 
 If a contributor tries to update a branch or tag with a commit that doesn't meet your requirements, the contributor will see an error telling them what was wrong with their commit. This error can appear both in the command line, when the user pushes, and on GitHub.com, when the user tries to make a commit or merge a pull request. Commits are immutable in Git: once a contributor has created a commit, they cannot edit the commit's metadata, so they may need to perform a rebase to rewrite their commit history with new commits before they can successfully contribute their work to the repository.
 
-Metadata restrictions are useful for enforcing consistency between the commits in a branch's history. This can be useful for enforcing adherence to best practices, such as the [Conventional Commits](https://www.conventionalcommits.org/) specification, or for integrating with tooling that relies on commit metadata. For example, it is easier to run scripts based on the contents of a commit message if each message conforms to a predictable format. {% ifversion ghes %}You may want to use metadata restrictions as an alternative for setting up custom pre-receive hook scripts. For more information, see [AUTOTITLE]
+Metadata restrictions are useful for enforcing consistency between the commits in a branch's history. This can be useful for enforcing adherence to best practices, such as the [Conventional Commits](https://www.conventionalcommits.org/) specification, or for integrating with tooling that relies on commit metadata. For example, it is easier to run scripts based on the contents of a commit message if each message conforms to a predictable format. You may want to use metadata restrictions as an alternative for setting up custom pre-receive hook scripts. For more information, see [AUTOTITLE]
 (/admin/policies/enforcing-policy-with-pre-receive-hooks/about-pre-receive-hooks).
 
 ### Important considerations for metadata restrictions
@@ -295,7 +295,7 @@ For metadata restrictions that apply to committer emails, to satisfy the restric
 
 When you add metadata restrictions to an existing branch or tag, the rules are enforced for new commits pushed to the branch or tag from that point forward, but they are not enforced against the existing history of the branch or tag.
 
-{% endif %}
+
 
 ## Restrict file paths
 

@@ -31,7 +31,7 @@ You can choose whether Git LFS objects are included in [source code archives](/r
 Git LFS's pointer file looks like this:
 
 ```text
-version https://git-lfs.github.com/spec/v1
+version {% data variables.large_files.version_name %}
 oid sha256:4cac19622fc3ada9c0fdeadb33f88f367b541f38b89102a3f1261ac81fd5bcb5
 size 84977953
 ```

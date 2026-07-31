@@ -52,11 +52,7 @@ In your GitHub Actions workflow file, ensure you are using the provider name and
 The following example uses the placeholders `YOUR_PROVIDER_NAME` and `YOUR_AUDIENCE`.
 
 ```yaml
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
+{% data reusables.actions.actions-not-certified-by-github-comment %}
 permissions:
   id-token: write
   contents: read
@@ -86,11 +82,7 @@ jobs:
 ### Using OIDC Credentials in other steps
 
 ```yaml
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
+{% data reusables.actions.actions-not-certified-by-github-comment %}
       - name: Sign in to Artifactory Docker registry
         uses: docker/login-action@v3
         with:

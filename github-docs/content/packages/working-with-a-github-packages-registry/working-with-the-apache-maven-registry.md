@@ -40,7 +40,7 @@ You can authenticate to GitHub Packages with Apache Maven by editing your _~/.m2
 
 In the `servers` tag, add a child `server` tag with an `id`, replacing USERNAME with your GitHub username, and TOKEN with your personal access token.
 
-In the `repositories` tag, configure a repository by mapping the `id` of the repository to the `id` you added in the `server` tag containing your credentials. Replace HOSTNAME with the host name of {% ifversion ghes %}your GitHub Enterprise Server instance, and{% endif %} OWNER with the name of the personal account or organization that owns the repository. Because uppercase letters aren't supported, you must use lowercase letters for the repository owner even if the GitHub user or organization name contains uppercase letters.
+In the `repositories` tag, configure a repository by mapping the `id` of the repository to the `id` you added in the `server` tag containing your credentials. Replace HOSTNAME with the host name of your GitHub Enterprise Server instance, and OWNER with the name of the personal account or organization that owns the repository. Because uppercase letters aren't supported, you must use lowercase letters for the repository owner even if the GitHub user or organization name contains uppercase letters.
 
 If you want to interact with multiple repositories, you can add each repository to separate `repository` children in the `repositories` tag, mapping the `id` of each to the credentials in the `servers` tag.
 
@@ -71,7 +71,7 @@ If your instance has subdomain isolation enabled:
         </repository>
         <repository>
           <id>github</id>
-          <url>https://maven.pkg.github.com/OWNER/REPOSITORY</url>
+          <url>https://{% ifversion fpt or ghec %}maven.pkg.github.com{% else %}maven.HOSTNAME{% endif %}/OWNER/REPOSITORY</url>
           <snapshots>
             <enabled>true</enabled>
           </snapshots>
@@ -146,7 +146,7 @@ If you would like to publish multiple packages to the same repository, you can i
 
 For more information on creating a package, see the [maven.apache.org documentation](https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html).
 
-1. Edit the `distributionManagement` element of the _pom.xml_ file located in your package directory, replacing HOSTNAME with the host name of {% ifversion ghes %}your GitHub Enterprise Server instance, {% endif %}`OWNER` with the name of the personal account or organization that owns the repository and `REPOSITORY` with the name of the repository containing your project.
+1. Edit the `distributionManagement` element of the _pom.xml_ file located in your package directory, replacing HOSTNAME with the host name of your GitHub Enterprise Server instance, `OWNER` with the name of the personal account or organization that owns the repository and `REPOSITORY` with the name of the repository containing your project.
 
    If your instance has subdomain isolation enabled:
 
@@ -155,7 +155,7 @@ For more information on creating a package, see the [maven.apache.org documentat
       <repository>
         <id>github</id>
         <name>GitHub OWNER Apache Maven Packages</name>
-        <url>https://maven.pkg.github.com/OWNER/REPOSITORY</url>
+        <url>https://{% ifversion fpt or ghec %}maven.pkg.github.com{% else %}maven.HOSTNAME{% endif %}/OWNER/REPOSITORY</url>
       </repository>
    </distributionManagement>
    ```

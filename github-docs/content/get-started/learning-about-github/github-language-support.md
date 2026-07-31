@@ -44,4 +44,4 @@ Some features are supported for additional languages or package managers. If you
 > The language support for GitHub Copilot varies depending on the volume and diversity of training data for that language.
 > The support of Gradle for the dependency graph and Dependabot alerts is limited to the upload of data obtained using the dependency submission API.
 
-[^1]: PHP and Scala {% elsif codeql-rust-public-preview %}PHP and Scala are supported for code scanning by third-party actions, but not by CodeQL.
+[^1]: PHP and Scala are supported for code scanning by third-party actions, but not by CodeQL.

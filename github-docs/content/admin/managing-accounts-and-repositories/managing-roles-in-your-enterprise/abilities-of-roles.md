@@ -32,7 +32,7 @@ People with collaborator access to repositories are listed in your enterprise's 
 Enterprise owners have complete control over the enterprise and can take every action, including:
 
 * Managing administrators
-* Adding and removing {% elsif ghes %}Managing organizations
+* Adding and removing  organizations
 * Removing enterprise members from all organizations
 * Managing enterprise settings
 * Enforcing policy across organizations

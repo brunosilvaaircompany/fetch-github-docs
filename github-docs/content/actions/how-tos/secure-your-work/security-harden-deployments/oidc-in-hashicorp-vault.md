@@ -40,8 +40,8 @@ To configure your Vault server to accept JSON Web Tokens (JWT) for authenticatio
 
    ```shell copy
    vault write auth/jwt/config \
-     bound_issuer="https://HOSTNAME/_services/token" \
-     oidc_discovery_url="https://HOSTNAME/_services/token"
+     bound_issuer="{% ifversion ghes %}https://HOSTNAME/_services/token{% else %}https://token.actions.githubusercontent.com{% endif %}" \
+     oidc_discovery_url="{% ifversion ghes %}https://HOSTNAME/_services/token{% else %}https://token.actions.githubusercontent.com{% endif %}"
    ```
 
    
@@ -129,11 +129,7 @@ This example demonstrates how to create a job that requests a secret from HashiC
 * `SECRET-PATH`: Replace this with the path to the secret you're retrieving from HashiCorp Vault. For example: `secret/data/production/ci npmToken`.
 
 ```yaml copy
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
+{% data reusables.actions.actions-not-certified-by-github-comment %}
 jobs:
   retrieve-secret:
     runs-on: ubuntu-latest
@@ -167,11 +163,7 @@ By default, the Vault server will automatically revoke access tokens when their 
 1. Add a step to call the [Revoke a Token (Self)](https://www.vaultproject.io/api/auth/token#revoke-a-token-self) Vault API to revoke the access token.
 
 ```yaml copy
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
+{% data reusables.actions.actions-not-certified-by-github-comment %}
 jobs:
   retrieve-secret:
     runs-on: ubuntu-latest

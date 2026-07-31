@@ -39,7 +39,7 @@ To authenticate as an installation with an installation access token, first use 
 
    ```shell
    curl --request POST \
-   --url "https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3/app/installations/INSTALLATION_ID/access_tokens" \
+   --url "https://api.github.com/app/installations/INSTALLATION_ID/access_tokens" \
    --header "Accept: application/vnd.github+json" \
    --header "Authorization: Bearer JWT" \
    --header "X-GitHub-Api-Version: {{ allVersions[currentVersion].latestApiVersion }}"
@@ -72,7 +72,7 @@ In the following example, replace `INSTALLATION_ACCESS_TOKEN` with an installati
 
 ```shell
 curl --request GET \
---url "https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3/meta" \
+--url "{% data variables.product.rest_url %}/meta" \
 --header "Accept: application/vnd.github+json" \
 --header "Authorization: Bearer INSTALLATION_ACCESS_TOKEN" \
 --header "X-GitHub-Api-Version: {{ allVersions[currentVersion].latestApiVersion }}"

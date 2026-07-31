@@ -13,7 +13,7 @@ Ensure that your own SSH key is set up and working. You can use [our guide on ge
 You can test that your local key works by entering `ssh -T git@hostname` in the terminal:
 
 ```shell
-$ ssh -T git@hostname
+$ ssh -T git@{% ifversion ghes %}hostname{% else %}github.com{% endif %}
 # Attempt to SSH in to github
 > Hi USERNAME! You've successfully authenticated, but GitHub does not provide
 > shell access.
@@ -49,7 +49,7 @@ If the variable is not set, it means that agent forwarding is not working:
 $ echo "$SSH_AUTH_SOCK"
 # Print out the SSH_AUTH_SOCK variable
 > [No output]
-$ ssh -T git@hostname
+$ ssh -T git@{% ifversion ghes %}hostname{% else %}github.com{% endif %}
 # Try to SSH to github
 > Permission denied (publickey).
 ```
@@ -64,7 +64,7 @@ SSH forwarding only works with SSH URLs, not HTTP(s) URLs. Check the `.git/confi
 
 ```shell
 [remote "origin"]
-  url = git@hostname:YOUR_ACCOUNT/YOUR_PROJECT.git
+  url = git@{% ifversion ghes %}hostname{% else %}github.com{% endif %}:YOUR_ACCOUNT/YOUR_PROJECT.git
   fetch = +refs/heads/*:refs/remotes/origin/*
 ```
 

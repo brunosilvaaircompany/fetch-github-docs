@@ -25,7 +25,7 @@ After you have installed GitHub Desktop, you can authenticate the application wi
 
 {% mac %}
 
-1. Before you can authenticate to GitHub or GitHub Enterprise, you will need an account. For more information, see [Creating An Account On GitHub](https://docs.github.com/en/account-and-profile/how-tos/account-management/creating-an-account-on-github). If you're part of an organization that uses Enterprise Managed Users and you do not have an account, contact your enterprise administrator.{% elsif ghes %} If you're a member of an organization that uses GitHub Enterprise Server and you do not have an account, contact your site administrator.
+1. Before you can authenticate to GitHub or GitHub Enterprise, you will need an account. For more information, see [Creating An Account On GitHub](https://docs.github.com/en/account-and-profile/how-tos/account-management/creating-an-account-on-github). If you're part of an organization that uses Enterprise Managed Users and you do not have an account, contact your enterprise administrator.
 1. In the menu bar, select **GitHub Desktop**, then click **Settings**.
 
    ![Screenshot of the menu bar on a Mac. Under the open "GitHub Desktop" dropdown menu, the cursor hovers over "Settings", which is highlighted in blue.](/assets/images/help/desktop/mac-choose-settings.png)
@@ -40,7 +40,7 @@ After you have installed GitHub Desktop, you can authenticate the application wi
 
 {% windows %}
 
-1. Before you can authenticate to GitHub or GitHub Enterprise, you will need an account. For more information, see [Creating An Account On GitHub](https://docs.github.com/en/account-and-profile/how-tos/account-management/creating-an-account-on-github). If you're part of an organization that uses Enterprise Managed Users and you do not have an account, contact your enterprise administrator.{% elsif ghes %} If you're a member of an organization that uses GitHub Enterprise Server and you do not have an account, contact your site administrator.
+1. Before you can authenticate to GitHub or GitHub Enterprise, you will need an account. For more information, see [Creating An Account On GitHub](https://docs.github.com/en/account-and-profile/how-tos/account-management/creating-an-account-on-github). If you're part of an organization that uses Enterprise Managed Users and you do not have an account, contact your enterprise administrator.
 1. Use the **File** menu, then click **Options**.
 
    ![Screenshot of the "GitHub Desktop" menu bar on Windows. In the expanded "File" dropdown menu, the "Options" item is outlined in orange.](/assets/images/help/desktop/windows-choose-options.png)

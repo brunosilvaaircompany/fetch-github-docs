@@ -39,4 +39,4 @@ Even when you use a supported browser, software or settings on your device or yo
 * **Retest in a different supported browser.** This helps you determine whether the issue is specific to one browser or environment.
 * **Try a different device or network.** Testing from another device, or from a different network such as a mobile connection, helps you determine whether the issue is specific to your device or network.
 
-If the behavior continues after you rule out these factors, your network or system administrators may be able to provide further assistance, as they manage settings such as proxies, firewalls, and content filters. If the issue persists, contact us through the [GitHub Support portal](https://support.github.com){% elsif ghes %}your site administrator.
+If the behavior continues after you rule out these factors, your network or system administrators may be able to provide further assistance, as they manage settings such as proxies, firewalls, and content filters. If the issue persists, contact us through the [GitHub Support portal](https://support.github.com).

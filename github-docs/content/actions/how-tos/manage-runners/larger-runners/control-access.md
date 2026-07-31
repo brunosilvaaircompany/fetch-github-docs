@@ -42,7 +42,7 @@ Always include a security admonition above this procedure. This is either one of
 > [!NOTE]
 > When creating a runner group, you must choose a policy that defines which repositories and workflows have access to the runner group. To change which repositories and workflows can access the runner group, organization owners and users with the “Manage organization runners and runner groups” permission can set a policy for the organization. For more information, see [Manage Access](https://docs.github.com/en/actions/how-tos/manage-runners/self-hosted-runners/manage-access#changing-which-repositories-can-access-a-runner-group).
 
-All organizations have a single default runner group. Organization owners using the GitHub Team plan{% endif %} can create additional organization-level runner groups. For more information about custom organization roles, see [Permissions Of Custom Organization Roles](https://docs.github.com/en/organizations/managing-peoples-access-to-your-organization-with-roles/permissions-of-custom-organization-roles).
+All organizations have a single default runner group. Organization owners using the GitHub Team plan can create additional organization-level runner groups. For more information about custom organization roles, see [Permissions Of Custom Organization Roles](https://docs.github.com/en/organizations/managing-peoples-access-to-your-organization-with-roles/permissions-of-custom-organization-roles).
 
 If no group is specified during the registration process, runners are automatically added to the default group. You can later move the runner from the default group to a custom group.
 
@@ -363,12 +363,12 @@ Always include a security admonition above this procedure. This is either one of
 You can use GitHub-hosted runners in an Azure VNET. This enables you to use GitHub-managed infrastructure for CI/CD while providing you with full control over the networking policies of your runners. For more information about Azure VNET, see [What is Azure Virtual Network?](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-overview) in the Azure documentation.
 
 
-If you have configured your {% ifversion ghec %}enterprise or organization to connect to an Azure VNET, you can give runner groups access to the virtual network. For more information, see [Private Networking](https://docs.github.com/en/actions/concepts/runners/private-networking#using-an-azure-virtual-network-vnet).
+If you have configured your enterprise or organization to connect to an Azure VNET, you can give runner groups access to the virtual network. For more information, see [Private Networking](https://docs.github.com/en/actions/concepts/runners/private-networking#using-an-azure-virtual-network-vnet).
 
 You cannot assign macOS larger runners to a runner group that has a network configuration. Similarly, you cannot add a network configuration to a runner group that contains macOS larger runners.
 
 
-{% endif %}
+
 
 ## Changing the name of a runner group
 

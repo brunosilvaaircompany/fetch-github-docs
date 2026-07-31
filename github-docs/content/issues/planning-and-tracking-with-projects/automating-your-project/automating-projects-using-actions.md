@@ -65,7 +65,7 @@ jobs:
           GH_TOKEN: {% raw %}${{ steps.generate-token.outputs.token }}{% endraw %}
           ORGANIZATION: YOUR_ORGANIZATION
           PROJECT_NUMBER: YOUR_PROJECT_NUMBER
-        # Uses [GitHub CLI manual](https://cli.github.com/manual/) to query the API for the ID of the project and return the name and ID of the first 20 fields in the project. `fields` returns a union and the query uses inline fragments (`... on`) to return information about any `ProjectV2Field` and `ProjectV2SingleSelectField` fields. The response is stored in a file called `project_data.json`.
+        # Uses [{% data variables.product.prodname_cli %} manual](https://cli.github.com/manual/) to query the API for the ID of the project and return the name and ID of the first 20 fields in the project. `fields` returns a union and the query uses inline fragments (`... on`) to return information about any `ProjectV2Field` and `ProjectV2SingleSelectField` fields. The response is stored in a file called `project_data.json`.
         run: |
           gh api graphql -f query='
             query($org: String!, $number: Int!) {
@@ -109,7 +109,7 @@ jobs:
         env:
           GH_TOKEN: {% raw %}${{ steps.generate-token.outputs.token }}{% endraw %}
           PR_ID: {% raw %}${{ github.event.pull_request.node_id }}{% endraw %}
-        # Uses [GitHub CLI manual](https://cli.github.com/manual/) and the API to add the pull request that triggered this workflow to the project. The `jq` flag parses the response to get the ID of the created item.
+        # Uses [{% data variables.product.prodname_cli %} manual](https://cli.github.com/manual/) and the API to add the pull request that triggered this workflow to the project. The `jq` flag parses the response to get the ID of the created item.
         run: |
           item_id="$( gh api graphql -f query='
             mutation($project:ID!, $pr:ID!) {
@@ -188,7 +188,7 @@ jobs:
     steps:
     # Sets environment variables for this step.
     #
-    # If you are using a personal access token, replace `YOUR_TOKEN` with the name of the secret that contains your personal access token.
+    # If you are using a {% data variables.product.pat_generic %}, replace `YOUR_TOKEN` with the name of the secret that contains your {% data variables.product.pat_generic %}.
     #
     # Replace `YOUR_ORGANIZATION` with the name of your organization. For example, `octo-org`.
     #
@@ -198,7 +198,7 @@ jobs:
           GH_TOKEN: {% raw %}${{ secrets.YOUR_TOKEN }}{% endraw %}
           ORGANIZATION: YOUR_ORGANIZATION
           PROJECT_NUMBER: YOUR_PROJECT_NUMBER
-        # Uses [GitHub CLI manual](https://cli.github.com/manual/) to query the API for the ID of the project and return the name and ID of the first 20 fields in the project. `fields` returns a union and the query uses inline fragments (`... on`) to return information about any `ProjectV2Field` and `ProjectV2SingleSelectField` fields. The response is stored in a file called `project_data.json`.
+        # Uses [{% data variables.product.prodname_cli %} manual](https://cli.github.com/manual/) to query the API for the ID of the project and return the name and ID of the first 20 fields in the project. `fields` returns a union and the query uses inline fragments (`... on`) to return information about any `ProjectV2Field` and `ProjectV2SingleSelectField` fields. The response is stored in a file called `project_data.json`.
         run: |
           gh api graphql -f query='
             query($org: String!, $number: Int!) {
@@ -237,12 +237,12 @@ jobs:
           echo 'STATUS_FIELD_ID='$(jq '.data.organization.projectV2.fields.nodes[] | select(.name== "Status") | .id' project_data.json) >> $GITHUB_ENV
           echo 'TODO_OPTION_ID='$(jq '.data.organization.projectV2.fields.nodes[] | select(.name== "Status") | .options[] | select(.name=="Todo") |.id' project_data.json) >> $GITHUB_ENV
 
-# Sets environment variables for this step. Replace `YOUR_TOKEN` with the name of the secret that contains your personal access token.
+# Sets environment variables for this step. Replace `YOUR_TOKEN` with the name of the secret that contains your {% data variables.product.pat_generic %}.
       - name: Add PR to project
         env:
           GH_TOKEN: {% raw %}${{ secrets.YOUR_TOKEN }}{% endraw %}
           PR_ID: {% raw %}${{ github.event.pull_request.node_id }}{% endraw %}
-        # Uses [GitHub CLI manual](https://cli.github.com/manual/) and the API to add the pull request that triggered this workflow to the project. The `jq` flag parses the response to get the ID of the created item.
+        # Uses [{% data variables.product.prodname_cli %} manual](https://cli.github.com/manual/) and the API to add the pull request that triggered this workflow to the project. The `jq` flag parses the response to get the ID of the created item.
         run: |
           item_id="$( gh api graphql -f query='
             mutation($project:ID!, $pr:ID!) {
@@ -260,7 +260,7 @@ jobs:
       - name: Get date
         run: echo "DATE=$(date +"%Y-%m-%d")" >> $GITHUB_ENV
 
-# Sets environment variables for this step. Replace `YOUR_TOKEN` with the name of the secret that contains your personal access token.
+# Sets environment variables for this step. Replace `YOUR_TOKEN` with the name of the secret that contains your {% data variables.product.pat_generic %}.
       - name: Set fields
         env:
           GH_TOKEN: {% raw %}${{ secrets.YOUR_TOKEN }}{% endraw %}

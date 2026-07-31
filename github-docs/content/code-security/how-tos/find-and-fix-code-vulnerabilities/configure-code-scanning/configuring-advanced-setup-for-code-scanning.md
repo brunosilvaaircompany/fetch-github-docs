@@ -22,8 +22,7 @@ If you do not need a highly customizable code scanning configuration, consider u
 Your repository is eligible for advanced setup if it meets these requirements.
 * It uses CodeQL-supported languages or you plan to generate code scanning results with a third-party tool.
 * GitHub Actions is enabled.
-* It is publicly visible, or GitHub Code Security is enabled.{%- elsif ghes %}
-* GitHub Code Security is enabled.
+* It is publicly visible, or GitHub Code Security is enabled.
 
 
 

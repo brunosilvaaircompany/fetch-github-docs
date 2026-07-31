@@ -27,7 +27,7 @@ To monitor results from code scanning across your repositories or your organizat
 
 
 Code scanning uses GitHub Actions, with each workflow run consuming GitHub Actions minutes. If you want to use code scanning on private repositories, you need a GitHub Code Security license. For more information, see [GitHub Actions](https://docs.github.com/en/billing/concepts/product-billing/github-actions). For information about how you can try GitHub Advanced Security for free, see [Trial Advanced Security](https://docs.github.com/en/code-security/tutorials/trialing-github-advanced-security/trial-advanced-security).
-{% elsif fpt %}For information about how you can try GitHub Enterprise with GitHub Advanced Security for free, see [Setting Up A Trial Of GitHub Enterprise Cloud](https://docs.github.com/en/enterprise-cloud@latest/admin/overview/setting-up-a-trial-of-github-enterprise-cloud) and [Trial Advanced Security](https://docs.github.com/en/enterprise-cloud@latest/code-security/tutorials/trialing-github-advanced-security/trial-advanced-security#setting-up-your-trial-of-github-advanced-security) in the GitHub Enterprise Cloud documentation.
+
 
 
 If you want to assess your organization's exposure to vulnerabilities before purchasing a license, you can run a free code security risk assessment. See [Risk Assessment](https://docs.github.com/en/code-security/concepts/code-scanning/risk-assessment).

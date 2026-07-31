@@ -12,7 +12,7 @@ This eliminates the need to:
  
 ## How automatic access works
  
-Dependabot uses its `GITHUB_TOKEN` to request `packages: read` permission when pulling from `*.pkg.github.com` and `ghcr.io`{% elsif ghes %}<code>containers.<em>HOSTNAME</em></code>. Any package that has granted your repository access through "Manage Actions access" accepts this token, the same way it would for a regular GitHub Actions workflow. See [Configuring A Packages Access Control And Visibility](https://docs.github.com/en/packages/learn-github-packages/configuring-a-packages-access-control-and-visibility#ensuring-workflow-access-to-your-package).git s
+Dependabot uses its `GITHUB_TOKEN` to request `packages: read` permission when pulling from `*.pkg.github.com` and `ghcr.io`. Any package that has granted your repository access through "Manage Actions access" accepts this token, the same way it would for a regular GitHub Actions workflow. See [Configuring A Packages Access Control And Visibility](https://docs.github.com/en/packages/learn-github-packages/configuring-a-packages-access-control-and-visibility#ensuring-workflow-access-to-your-package).git s
  
 This works for every GitHub Packages ecosystem that Dependabot supports.
  

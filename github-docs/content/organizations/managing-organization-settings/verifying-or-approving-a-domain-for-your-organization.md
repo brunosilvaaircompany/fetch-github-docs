@@ -5,8 +5,8 @@
 After verifying ownership of your organization's domains, a "Verified" badge will display on the organization's profile. If your organization has agreed to the GitHub Customer Agreement, organization owners will be able to verify the identity of organization members by viewing each member's email address within the verified domain. For more information, see [Organization Profile](https://docs.github.com/en/account-and-profile/concepts/organization-profile) and [Upgrading To The GitHub Customer Agreement](https://docs.github.com/en/organizations/managing-organization-settings/upgrading-to-the-github-customer-agreement).
 
 
-{% ifversion ghec %}If your organization is owned by an enterprise account, a "Verified" badge will display on your organization's profile for any domains verified for the enterprise account, in addition to any domains verified for the organization. Organization owners can view any domains that an enterprise owner has verified or approved, and edit the domains if the organization owner is also an enterprise owner. For more information, see [Verifying Or Approving A Domain For Your Enterprise](https://docs.github.com/en/admin/configuring-settings/configuring-user-applications-for-your-enterprise/verifying-or-approving-a-domain-for-your-enterprise).
-{% endif %}
+If your organization is owned by an enterprise account, a "Verified" badge will display on your organization's profile for any domains verified for the enterprise account, in addition to any domains verified for the organization. Organization owners can view any domains that an enterprise owner has verified or approved, and edit the domains if the organization owner is also an enterprise owner. For more information, see [Verifying Or Approving A Domain For Your Enterprise](https://docs.github.com/en/admin/configuring-settings/configuring-user-applications-for-your-enterprise/verifying-or-approving-a-domain-for-your-enterprise).
+
 
 To display a "Verified" badge, the website and email information shown on an organization's profile must match the verified domain or domains. If the website and email address shown on your organization's profile are hosted on different domains, you must verify both domains. If the website and email address use variants of the same domain, you must verify both variants. For example, if the profile shows the website `www.example.com` and the email address `info@example.com`, you would need to verify both `www.example.com` and `example.com`.
 
@@ -42,8 +42,8 @@ After you approve domains for your organization, you can restrict email notifica
 
 Enterprise owners cannot see which organization members or email addresses receive notifications within approved domains.
 
-Enterprise owners can also approve additional domains for organizations owned by the enterprise. {% ifversion ghec %}For more information, see [Verifying Or Approving A Domain For Your Enterprise](https://docs.github.com/en/enterprise-cloud@latest/admin/configuring-settings/configuring-user-applications-for-your-enterprise/verifying-or-approving-a-domain-for-your-enterprise).For more information, see [Verifying Or Approving A Domain For Your Enterprise](https://docs.github.com/en/admin/configuring-settings/configuring-user-applications-for-your-enterprise/verifying-or-approving-a-domain-for-your-enterprise).
-{% endif %}
+Enterprise owners can also approve additional domains for organizations owned by the enterprise. For more information, see [Verifying Or Approving A Domain For Your Enterprise](https://docs.github.com/en/enterprise-cloud@latest/admin/configuring-settings/configuring-user-applications-for-your-enterprise/verifying-or-approving-a-domain-for-your-enterprise).For more information, see [Verifying Or Approving A Domain For Your Enterprise](https://docs.github.com/en/admin/configuring-settings/configuring-user-applications-for-your-enterprise/verifying-or-approving-a-domain-for-your-enterprise).
+
 
 ## Verifying a domain for your organization
 

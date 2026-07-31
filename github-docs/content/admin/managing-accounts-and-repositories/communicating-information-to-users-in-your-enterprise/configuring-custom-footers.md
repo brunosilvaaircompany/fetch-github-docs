@@ -2,7 +2,7 @@
 
 ## About custom footers for your enterprise
 
-You can configure the web UI for your enterprise to display a custom footer with up to five additional links. The custom footer appears above the default GitHub footer, to all users and on all pages of your GitHub Enterprise Server instance{% elsif ghec %} to all enterprise members and collaborators, on all repository and organization pages for repositories and organizations that belong to the enterprise.
+You can configure the web UI for your enterprise to display a custom footer with up to five additional links. The custom footer appears above the default GitHub footer, to all users and on all pages of your GitHub Enterprise Server instance.
 
 ## Configuring custom footers
 

@@ -132,8 +132,7 @@ git:
 #### GitHub Actions syntax for checking out submodules
 
 ```yaml
-- uses: actions/checkout@v6
-
+- uses: {% data reusables.actions.action-checkout %}
   with:
     submodules: false
 ```
@@ -264,8 +263,7 @@ jobs:
   run_python:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/setup-python@v5
-
+      - uses: {% data reusables.actions.action-setup-python %}
         with:
           python-version: '3.7'
           architecture: 'x64'
@@ -293,8 +291,7 @@ cache: npm
 
 ```yaml
 - name: Cache node modules
-  uses: actions/cache@v4
-
+  uses: {% data reusables.actions.action-cache %}
   with:
     path: ~/.npm
     key: {% raw %}v1-npm-deps-${{ hashFiles('**/package-lock.json') }}{% endraw %}
@@ -350,11 +347,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
-
+      - uses: {% data reusables.actions.action-checkout %}
       - name: Use Node.js
-        uses: actions/setup-node@v7
-
+        uses: {% data reusables.actions.action-setup-node %}
         with:
           node-version: '16.x'
       - run: npm install

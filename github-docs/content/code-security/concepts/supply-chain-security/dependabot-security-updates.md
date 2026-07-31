@@ -57,8 +57,7 @@ When Dependabot raises pull requests, these pull requests could be for _security
 
 If you enable _Dependabot security updates_, parts of the configuration may also affect pull requests created for _Dependabot version updates_. This is because some configuration settings are common to both types of updates. For more information, see [Customizing Dependabot Security Prs](https://docs.github.com/en/code-security/how-tos/secure-your-supply-chain/manage-your-dependency-security/customizing-dependabot-security-prs).
 
-Pull requests opened by Dependabot can trigger workflows that run actions. For more information, see [Automate Dependabot With Actions](https://docs.github.com/en/code-security/tutorials/secure-your-dependencies/automate-dependabot-with-actions).{% elsif ghes %} Before you enable Dependabot updates, you must configure your GitHub Enterprise Server instance to use GitHub Actions with self-hosted runners.
- GitHub Actions is required for Dependabot version updates and Dependabot security updates to run on GitHub. For more information, see [Enabling Dependabot For Your Enterprise](https://docs.github.com/en/admin/configuring-settings/configuring-github-connect/enabling-dependabot-for-your-enterprise).
+Pull requests opened by Dependabot can trigger workflows that run actions. For more information, see [Automate Dependabot With Actions](https://docs.github.com/en/code-security/tutorials/secure-your-dependencies/automate-dependabot-with-actions).
 
 
 Dependabot security updates can fix vulnerable dependencies in GitHub Actions. When security updates are enabled, Dependabot will automatically raise a pull request to update vulnerable GitHub Actions used in your workflows to the minimum patched version.

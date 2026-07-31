@@ -63,8 +63,7 @@ jobs:
     steps:
       # Downloads a copy of the code in your repository before running CI tests
       - name: Check out repository code
-        uses: actions/checkout@v6
-
+        uses: {% data reusables.actions.action-checkout %}
 
       # Performs a clean installation of all dependencies in the `package.json` file
       # For more information, see https://docs.npmjs.com/cli/ci.html
@@ -127,8 +126,7 @@ The workflow performs the following steps:
 steps:
   # Downloads a copy of the code in your repository before running CI tests
   - name: Check out repository code
-    uses: actions/checkout@v6
-
+    uses: {% data reusables.actions.action-checkout %}
 
   # Performs a clean installation of all dependencies in the `package.json` file
   # For more information, see https://docs.npmjs.com/cli/ci.html
@@ -188,8 +186,7 @@ jobs:
     steps:
       # Downloads a copy of the code in your repository before running CI tests
       - name: Check out repository code
-        uses: actions/checkout@v6
-
+        uses: {% data reusables.actions.action-checkout %}
 
       # Performs a clean installation of all dependencies in the `package.json` file
       # For more information, see https://docs.npmjs.com/cli/ci.html
@@ -256,8 +253,7 @@ The workflow performs the following steps:
 steps:
   # Downloads a copy of the code in your repository before running CI tests
   - name: Check out repository code
-    uses: actions/checkout@v6
-
+    uses: {% data reusables.actions.action-checkout %}
 
   # Performs a clean installation of all dependencies in the `package.json` file
   # For more information, see https://docs.npmjs.com/cli/ci.html

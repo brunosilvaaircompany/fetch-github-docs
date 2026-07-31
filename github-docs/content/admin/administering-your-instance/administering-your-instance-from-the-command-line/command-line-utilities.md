@@ -753,7 +753,7 @@ Flag | Description
 
 ### ghe-snmpv3-add-user
 
-This utility adds a read-only user to the SNMPv3 configuration on your GitHub Enterprise Server instance.
+This utility adds a read-only user to the SNMPv3 configuration on {% data variables.location.product_location %}.
 
 ```shell
 ghe-snmpv3-add-user -A PASSPHRASE -X PASSPHRASE USERNAME
@@ -785,7 +785,7 @@ Flag | Description
 
 ### ghe-snmpv3-remove-user
 
-This utility removes a user from the SNMPv3 configuration on your GitHub Enterprise Server instance.
+This utility removes a user from the SNMPv3 configuration on {% data variables.location.product_location %}.
 
 ```shell
 ghe-snmpv3-remove-user USERNAME
@@ -793,7 +793,7 @@ ghe-snmpv3-remove-user USERNAME
 
 ### ghe-ssh-audit-login
 
-This utility retrieves authorized key users and fingerprints for SSH login auditing on your GitHub Enterprise Server instance.
+This utility retrieves authorized key users and fingerprints for SSH login auditing on {% data variables.location.product_location %}.
 
 ```shell
 ghe-ssh-audit-login
@@ -810,13 +810,13 @@ Flag | Description
 
 ### ghe-system-info
 
-This utility outputs system information for your GitHub Enterprise Server instance in JSON format.
+This utility outputs system information for {% data variables.location.product_location %} in JSON format.
 
 ```shell
 ghe-system-info
 ```
 
-
+{% ifversion ghes > 3.21 %}
 
 ## Backup and restore
 
@@ -836,7 +836,7 @@ This utility quickly confirms that GHES backups are being written, are recent, a
 ghe-backup-healthcheck
 ```
 
-
+{% endif %}
 
 ## Clustering
 
@@ -1051,7 +1051,7 @@ ghe-cluster-repl-status
 
 ### ghe-cluster-set-password
 
-This utility updates the administrator and Management Console password interactively on all cluster nodes.
+This utility updates the administrator and {% data variables.enterprise.management_console %} password interactively on all cluster nodes.
 
 ```shell
 ghe-cluster-set-password
@@ -1062,11 +1062,11 @@ You can use the following flags with `ghe-cluster-set-password`.
 Flag | Description
 ---- | ----------
 `--sync` | Copy password files to other servers without setting a new password.
-`--clear` | Clear the password for the administrator and Management Console on all servers.
+`--clear` | Clear the password for the administrator and {% data variables.enterprise.management_console %} on all servers.
 
 ### ghe-cluster-status
 
-Check the health of your nodes and services in a cluster deployment of GitHub Enterprise Server.
+Check the health of your nodes and services in a cluster deployment of {% data variables.product.prodname_ghe_server %}.
 
 ```shell
 ghe-cluster-status
@@ -1076,7 +1076,7 @@ ghe-cluster-status
 
 This utility creates a support bundle tarball containing important logs from each of the nodes in either a Geo-replication or Clustering configuration.
 
-By default, the command creates the tarball in _/tmp_, but you can also have it `cat` the tarball to `STDOUT` for easy streaming over SSH. This is helpful in the case where the web UI is unresponsive or downloading a support bundle from _/setup/support_ doesn't work. You must use this command if you want to generate an _extended_ bundle, containing older logs. You can also use this command to upload the cluster support bundle directly to GitHub Enterprise support.
+By default, the command creates the tarball in _/tmp_, but you can also have it `cat` the tarball to `STDOUT` for easy streaming over SSH. This is helpful in the case where the web UI is unresponsive or downloading a support bundle from _/setup/support_ doesn't work. You must use this command if you want to generate an _extended_ bundle, containing older logs. You can also use this command to upload the cluster support bundle directly to {% data variables.product.prodname_enterprise %} support.
 
 To create a standard bundle:
 
@@ -1096,13 +1096,13 @@ To create an extended bundle including data from the last 8 days:
 ssh -p 122 admin@HOSTNAME -- ghe-cluster-support-bundle -x -o' > cluster-support-bundle.tgz
 ```
 
-To send a bundle to GitHub Support:
+To send a bundle to {% data variables.contact.github_support %}:
 
 ```shell
 ssh -p 122 admin@HOSTNAME -- 'ghe-cluster-support-bundle -u'
 ```
 
-To send a bundle to GitHub Support and associate the bundle with a ticket:
+To send a bundle to {% data variables.contact.github_support %} and associate the bundle with a ticket:
 
 ```shell
 ssh -p 122 admin@HOSTNAME -- 'ghe-cluster-support-bundle -t TICKET_ID'
@@ -1126,7 +1126,7 @@ ghe-cluster-failover
 
 ### ghe-dpages
 
-This utility allows you to manage the distributed GitHub Pages server.
+This utility allows you to manage the distributed {% data variables.product.prodname_pages %} server.
 
 ```shell
 ghe-dpages
@@ -1138,7 +1138,7 @@ To show a summary of repository location and health:
 ghe-dpages status
 ```
 
-To evacuate a GitHub Pages storage service before evacuating a cluster node:
+To evacuate a {% data variables.product.prodname_pages %} storage service before evacuating a cluster node:
 
 ```shell
 ghe-dpages evacuate pages-server-UUID
@@ -1146,11 +1146,11 @@ ghe-dpages evacuate pages-server-UUID
 
 ### ghe-remove-node
 
-This utility removes a node from a cluster or an additional node from a high availability (HA) configuration. For a planned replacement of a functional cluster node, set up the replacement node before using this command to remove the old node. For more information, see [Replacing A Cluster Node](https://docs.github.com/en/admin/monitoring-and-managing-your-instance/configuring-clustering/replacing-a-cluster-node#replacing-a-functional-node). For the required HA checks and verification steps, see [Removing an additional node](/admin/monitoring-and-managing-your-instance/additional-nodes/configuring-additional-nodes#removing-an-additional-node).
+This utility removes a node from a cluster{% ifversion ghes > 3.17 %} or an additional node from a high availability (HA) configuration{% endif %}. For a planned replacement of a functional cluster node, set up the replacement node before using this command to remove the old node. For more information, see [Replacing A Cluster Node](https://docs.github.com/en/admin/monitoring-and-managing-your-instance/configuring-clustering/replacing-a-cluster-node#replacing-a-functional-node).{% ifversion ghes > 3.17 %} For the required HA checks and verification steps, see [Removing an additional node](/admin/monitoring-and-managing-your-instance/additional-nodes/configuring-additional-nodes#removing-an-additional-node).{% endif %}
 
 Before using this command for a planned removal, install the latest patch release for your feature release on every node. Every node must run the same exact release. Wait for any upgrade or configuration run to finish before starting removal. For emergency replacement of an unavailable cluster node, see [Replacing A Cluster Node](https://docs.github.com/en/admin/monitoring-and-managing-your-instance/configuring-clustering/replacing-a-cluster-node#replacing-a-node-in-an-emergency).
 
-You must run this command from the primary MySQL node, which is typically the node designated as `mysql-master` in the cluster configuration file (`cluster.conf`). In an HA configuration, run the command from the HA primary. You cannot remove the `mysql-master` or `redis-master` node. For more information, see [Initializing The Cluster](https://docs.github.com/en/admin/monitoring-and-managing-your-instance/configuring-clustering/initializing-the-cluster#about-the-cluster-configuration-file).
+You must run this command from the primary MySQL node, which is typically the node designated as `mysql-master` in the cluster configuration file (`cluster.conf`).{% ifversion ghes > 3.17 %} In an HA configuration, run the command from the HA primary.{% endif %} You cannot remove the `mysql-master` or `redis-master` node. For more information, see [Initializing The Cluster](https://docs.github.com/en/admin/monitoring-and-managing-your-instance/configuring-clustering/initializing-the-cluster#about-the-cluster-configuration-file).
 
 ```shell
 ghe-remove-node HOSTNAME
@@ -1160,7 +1160,7 @@ The command does the following things:
 
 * Evacuates data from any data services running on the node, so that the remaining nodes contain copies of the data
 * Drains workloads from the node
-* Removes the node from the configuration. If another non-primary node remains, the command runs `ghe-config-apply` and stops routing traffic to the removed node. If no non-primary node remains, the command removes cluster metadata and converts the primary to a standalone instance without running `ghe-config-apply`.
+* Removes the node from the configuration.{% ifversion ghes > 3.17 %} If another non-primary node remains, the command runs `ghe-config-apply` and stops routing traffic to the removed node. If no non-primary node remains, the command removes cluster metadata and converts the primary to a standalone instance without running `ghe-config-apply`.{% else %} The command runs `ghe-config-apply` and stops routing traffic to the removed node.{% endif %}
 
 You can run the command with the following flags.
 
@@ -1170,7 +1170,7 @@ Flag | Description
 `-v/--verbose` | Prints additional information to the console.
 
 > [!NOTE]
-> * In an HA configuration, you can use this command to remove an additional node. You cannot use it to remove the HA primary or a replica.
+> {% ifversion ghes > 3.17 %}* In an HA configuration, you can use this command to remove an additional node. You cannot use it to remove the HA primary or a replica.{% endif %}
 > * The target node must report `ready` in `nomad node status` to complete removal. The `--no-evacuate` flag does not remove an offline node from the configuration.
 > * This command does not support parallel execution. To remove multiple nodes, you must wait until this command has finished before running it for another node.
 
@@ -1204,14 +1204,14 @@ ghe-storage evacuate storage-server-UUID
 
 ### nes
 
-
+{% ifversion ghes > 3.21 %}
 
 > [!IMPORTANT]
-> The `nes` utility and Node Eligibility Service are closing down and will be removed in GitHub Enterprise Server 3.23. There is no replacement.
+> The `nes` utility and {% data variables.product.prodname_nes %} are closing down and will be removed in {% data variables.product.prodname_ghe_server %} 3.23. There is no replacement.
 
+{% endif %}
 
-
-This utility allows you to monitor the health of cluster nodes using Node Eligibility Service. By default, Node Eligibility Service is disabled. For more information, see [Monitoring The Health Of Your Cluster Nodes With Node Eligibility Service](https://docs.github.com/en/admin/monitoring-and-managing-your-instance/configuring-clustering/monitoring-the-health-of-your-cluster-nodes-with-node-eligibility-service).
+This utility allows you to monitor the health of cluster nodes using {% data variables.product.prodname_nes %}. By default, {% data variables.product.prodname_nes %} is disabled. For more information, see [Monitoring The Health Of Your Cluster Nodes With Node Eligibility Service](https://docs.github.com/en/admin/monitoring-and-managing-your-instance/configuring-clustering/monitoring-the-health-of-your-cluster-nodes-with-node-eligibility-service).
 
 To view the health of the cluster's nodes:
 
@@ -1239,19 +1239,19 @@ To set the TTL for the `warn` state in minutes:
 nes set-node-ttl warn TIME
 ```
 
-To review whether Node Eligibility Service can take administrative action when a node with the hostname HOSTNAME goes offline:
+To review whether {% data variables.product.prodname_nes %} can take administrative action when a node with the hostname HOSTNAME goes offline:
 
 ```shell
 nes get-node-adminaction HOSTNAME
 ```
 
-To allow Node Eligibility Service to automatically take administrative action when a node with the hostname HOSTNAME goes offline:
+To allow {% data variables.product.prodname_nes %} to automatically take administrative action when a node with the hostname HOSTNAME goes offline:
 
 ```shell
 nes set-node-adminaction approved HOSTNAME
 ```
 
-To revoke Node Eligibility Service's ability to take the node with hostname HOSTNAME offline:
+To revoke {% data variables.product.prodname_nes %}'s ability to take the node with hostname HOSTNAME offline:
 
 ```shell
 nes set-node-adminaction none HOSTNAME
@@ -1275,7 +1275,7 @@ ghe-btop [ <port number> | --help | --usage ]
 
 #### ghe-governor
 
-This utility helps to analyze Git traffic. It queries _Governor_ data files, located under `/data/user/governor/`. GitHub holds one hour of data per file, retained for two weeks. For more information, see [Analyze Git Traffic](https://docs.github.com/en/admin/monitoring-and-managing-your-instance/monitoring-your-instance/analyze-git-traffic).
+This utility helps to analyze Git traffic. It queries _Governor_ data files, located under `/data/user/governor/`. {% data variables.product.company_short %} holds one hour of data per file, retained for two weeks. For more information, see [Analyze Git Traffic](https://docs.github.com/en/admin/monitoring-and-managing-your-instance/monitoring-your-instance/analyze-git-traffic).
 
 ```bash
 ghe-governor <subcommand> <column> [options]
@@ -1308,7 +1308,7 @@ ghe-repo USERNAME/REPONAME
 
 ### ghe-repo-gc
 
-This utility manually repackages a repository network to optimize pack storage. If you have a large repository, running this command may help reduce its overall size. GitHub Enterprise automatically runs this command throughout your interaction with a repository network.
+This utility manually repackages a repository network to optimize pack storage. If you have a large repository, running this command may help reduce its overall size. {% data variables.product.prodname_enterprise %} automatically runs this command throughout your interaction with a repository network.
 
 ```shell
 ghe-repo-gc USERNAME/REPONAME
@@ -1322,11 +1322,11 @@ If you use a deployment topology with multiple nodes, to prevent sensitive data 
 ghe-cluster-each -r git -- "ghe-repo-gc --prune USERNAME/REPONAME"
 ```
 
-## GitHub Actions
+## {% data variables.product.prodname_actions %}
 
 ### ghe-actions-check
 
-This utility checks that all services for GitHub Actions are healthy. For more information, see [Getting Started With GitHub Actions For GitHub Enterprise Server](https://docs.github.com/en/admin/managing-github-actions-for-your-enterprise/getting-started-with-github-actions-for-your-enterprise/getting-started-with-github-actions-for-github-enterprise-server) and [Troubleshooting GitHub Actions For Your Enterprise](https://docs.github.com/en/admin/managing-github-actions-for-your-enterprise/advanced-configuration-and-troubleshooting/troubleshooting-github-actions-for-your-enterprise).
+This utility checks that all services for {% data variables.product.prodname_actions %} are healthy. For more information, see [Getting Started With GitHub Actions For GitHub Enterprise Server](https://docs.github.com/en/admin/managing-github-actions-for-your-enterprise/getting-started-with-github-actions-for-your-enterprise/getting-started-with-github-actions-for-github-enterprise-server) and [Troubleshooting GitHub Actions For Your Enterprise](https://docs.github.com/en/admin/managing-github-actions-for-your-enterprise/advanced-configuration-and-troubleshooting/troubleshooting-github-actions-for-your-enterprise).
 
 ```shell
 ghe-actions-check
@@ -1334,9 +1334,9 @@ ghe-actions-check
 
 ### ghe-actions-precheck
 
-This utility tests the blob storage configuration for GitHub Actions on your GitHub Enterprise Server instance. You can use the utility to verify your storage configuration before you enable GitHub Actions for your instance.
+This utility tests the blob storage configuration for {% data variables.product.prodname_actions %} on {% data variables.location.product_location %}. You can use the utility to verify your storage configuration before you enable {% data variables.product.prodname_actions %} for your instance.
 
-For more information about the configuration of GitHub Actions, see [Getting Started With GitHub Actions For GitHub Enterprise Server](https://docs.github.com/en/admin/managing-github-actions-for-your-enterprise/getting-started-with-github-actions-for-your-enterprise/getting-started-with-github-actions-for-github-enterprise-server).
+For more information about the configuration of {% data variables.product.prodname_actions %}, see [Getting Started With GitHub Actions For GitHub Enterprise Server](https://docs.github.com/en/admin/managing-github-actions-for-your-enterprise/getting-started-with-github-actions-for-your-enterprise/getting-started-with-github-actions-for-github-enterprise-server).
 
 > [!NOTE]
 > This utility only works with configurations that use a credentials-based connection to the storage provider. To test OpenID Connect (OIDC) configurations, use [`ghe-actions-test-storage-with-oidc`](#ghe-actions-test-storage-with-oidc).
@@ -1353,7 +1353,7 @@ All Storage tests passed
 
 ### ghe-actions-test-storage-with-oidc
 
-This utility checks that the blob storage provider for GitHub Actions on your GitHub Enterprise Server instance is valid when OpenID Connect (OIDC) is used.
+This utility checks that the blob storage provider for {% data variables.product.prodname_actions %} on {% data variables.location.product_location %} is valid when OpenID Connect (OIDC) is used.
 
 > [!NOTE]
 > This utility only works with configurations that use an OpenID Connect (OIDC) configuration. To test credentials-based configurations, use [`ghe-actions-precheck`](#ghe-actions-precheck).
@@ -1364,20 +1364,18 @@ ghe-actions-test-storage-with-oidc -p [PROVIDER] -cs ["CONNECTION-STRING"]
 
 ### ghe-actions-stop
 
-This utility stops GitHub Actions from running on your GitHub Enterprise Server instance.
+This utility stops {% data variables.product.prodname_actions %} from running on {% data variables.location.product_location %}.
 
 > [!NOTE]
-> * Typically, you will only execute this if you've [contacted support](https://support.github.com/) and they've asked you to do so.
-
+> * {% data reusables.enterprise_enterprise_support.support_will_ask_you_to_run_command %}
 > * In high availability configurations, run this command from the primary.
 
 ### ghe-actions-start
 
-This utility starts GitHub Actions on your GitHub Enterprise Server instance after it has been previously stopped.
+This utility starts {% data variables.product.prodname_actions %} on {% data variables.location.product_location %} after it has been previously stopped.
 
 > [!NOTE]
-> * Typically, you will only execute this if you've [contacted support](https://support.github.com/) and they've asked you to do so.
-
+> * {% data reusables.enterprise_enterprise_support.support_will_ask_you_to_run_command %}
 > * In high availability configurations, run this command from the primary.
 
 If your system is configured correctly, you'll see the following output:
@@ -1388,7 +1386,7 @@ Actions was enabled!
 
 ### ghe-actions-cache-disable
 
-This utility disables the GitHub Actions cache service on your GitHub Enterprise Server instance and stops the associated jobs.
+This utility disables the {% data variables.product.prodname_actions %} cache service on {% data variables.location.product_location %} and stops the associated jobs.
 
 ```shell
 ghe-actions-cache-disable
@@ -1403,7 +1401,7 @@ Flag | Description
 
 ### ghe-actions-cache-enable
 
-This utility enables the GitHub Actions cache service on your GitHub Enterprise Server instance and starts the associated jobs.
+This utility enables the {% data variables.product.prodname_actions %} cache service on {% data variables.location.product_location %} and starts the associated jobs.
 
 ```shell
 ghe-actions-cache-enable
@@ -1418,7 +1416,7 @@ Flag | Description
 
 ### ghe-actions-check-connectivity
 
-This utility checks network connectivity between GitHub Actions services on your GitHub Enterprise Server instance.
+This utility checks network connectivity between {% data variables.product.prodname_actions %} services on {% data variables.location.product_location %}.
 
 ```shell
 ghe-actions-check-connectivity
@@ -1431,11 +1429,11 @@ Flag | Description
 `-s/--source` | The name of the source service (`actions`, `mps`, `token`, `artifactcache`). Defaults to `token`.
 `-t/--target` | The name of the target service (`actions`, `mps`, `token`, `artifactcache`). Defaults to `mps`.
 
-
+{% ifversion ghes > 3.19 %}
 
 ### ghe-actions-diagnostics
 
-This utility collects diagnostic information specific to GitHub Actions on {% ifversion ghes %}your GitHub Enterprise Server instance that you can send to GitHub Support to help investigate issues.
+This utility collects diagnostic information specific to {% data variables.product.prodname_actions %} on {% data variables.location.product_location %} that you can send to {% data variables.contact.github_support %} to help investigate issues.
 
 ```shell
 ghe-actions-diagnostics
@@ -1445,7 +1443,7 @@ ghe-actions-diagnostics
 
 ### ghe-actions-dump
 
-This utility creates a dump of GitHub Actions services on your GitHub Enterprise Server instance. You can also use this command to upload the dump directly to GitHub Support.
+This utility creates a dump of {% data variables.product.prodname_actions %} services on {% data variables.location.product_location %}. You can also use this command to upload the dump directly to {% data variables.contact.github_support %}.
 
 ```shell
 ghe-actions-dump
@@ -1455,17 +1453,17 @@ You can use the following flags with `ghe-actions-dump`.
 
 Flag | Description
 ---- | ----------
-`-u/--upload` | Upload the bundle to GitHub Support.
-`-t/--ticket` | Upload the bundle to GitHub Support with a ticket ID.
+`-u/--upload` | Upload the bundle to {% data variables.contact.github_support %}.
+`-t/--ticket` | Upload the bundle to {% data variables.contact.github_support %} with a ticket ID.
 `-s/--service` | The service name (`actions`, `mps`, `token`, `artifactcache`, `launch-deployer`, `launch-receiver`, `launch-worker`, or `launch-hydro-consumer`). Defaults to `actions`.
 `-r/--role` | Role (`frontend`, `backend`, `none`). Defaults to `frontend`.
 `-y/--yes` | Skip the warning prompt.
 
-## GitHub Packages
+## {% data variables.product.prodname_registry %}
 
 ### ghe-check-blob-connection
 
-This utility checks that a blob storage provider for GitHub Packages is valid on your GitHub Enterprise Server instance.
+This utility checks that a blob storage provider for {% data variables.product.prodname_registry %} is valid on {% data variables.location.product_location %}.
 
 ```shell
 ghe-check-blob-connection --help
@@ -1485,7 +1483,7 @@ All Storage tests passed
 
 ### ghe-packages-precheck
 
-This utility checks that a blob storage provider for GitHub Packages is valid on your GitHub Enterprise Server instance. Use this to verify your storage configuration before enabling GitHub Packages.
+This utility checks that a blob storage provider for {% data variables.product.prodname_registry %} is valid on {% data variables.location.product_location %}. Use this to verify your storage configuration before enabling {% data variables.product.prodname_registry %}.
 
 ```shell
 ghe-packages-precheck -p PROVIDER -cs "CONNECTION-STRING"
@@ -1501,7 +1499,7 @@ Flag | Description
 
 ## High availability
 
-
+{% ifversion ghes > 3.17 %}
 
 ### ghe-repl-decommission
 
@@ -1511,14 +1509,13 @@ This command decommissions the database entries for the node with the specified 
 ghe-repl-decommission <UUID>
 ```
 
-
+{% endif %}
 
 ### ghe-repl-promote
 
 This command disables replication on an existing replica node and converts the replica node to a primary node using the same settings as the original primary node. All replication services are enabled. For more information, see [Initiating A Failover To Your Replica Appliance](https://docs.github.com/en/admin/monitoring-and-managing-your-instance/configuring-high-availability/initiating-a-failover-to-your-replica-appliance).
 
-Promoting a replica does not automatically set up replication for existing appliances. After promoting a replica, if desired, you can set up replication from the new primary to existing appliances and the previous primary.
-
+{% data reusables.enterprise_installation.promoting-a-replica %}
 
 ```shell
 ghe-repl-promote
@@ -1615,7 +1612,7 @@ This utility begins replication of all datastores on all replica nodes. Run this
 
 ### ghe-migrator
 
-`ghe-migrator` is a hi-fidelity tool to help you migrate from one GitHub instance to another. You can consolidate your instances or move your organization, users, teams, and repositories from GitHub.com to GitHub Enterprise.
+`ghe-migrator` is a hi-fidelity tool to help you migrate from one GitHub instance to another. You can consolidate your instances or move your organization, users, teams, and repositories from GitHub.com to {% data variables.product.prodname_enterprise %}.
 
 For more information, please see our guides on [migrating data to and from your enterprise](/migrations/using-ghe-migrator).
 
@@ -1667,7 +1664,7 @@ This utility lets you interact with your current active license, or with new lic
 
 You can review the possible commands and flags using `ghe-license -h`.
 
-Alternatively, you can manage licenses using the REST API or the GitHub CLI. See [Manage Ghes](https://docs.github.com/en/rest/enterprise-admin/manage-ghes) and [Administering Your Instance Using The GitHub CLI](https://docs.github.com/en/admin/administering-your-instance/administering-your-instance-from-the-command-line/administering-your-instance-using-the-github-cli).
+Alternatively, you can manage licenses using the REST API or the {% data variables.product.prodname_cli %}. See [Manage Ghes](https://docs.github.com/en/rest/enterprise-admin/manage-ghes) and [Administering Your Instance Using The GitHub CLI](https://docs.github.com/en/admin/administering-your-instance/administering-your-instance-from-the-command-line/administering-your-instance-using-the-github-cli).
 
 Display license information. Alternatively, use the `-j` flag for JSON formatting.
 
@@ -1720,13 +1717,13 @@ GHE_LICENSE_FILE=/path/license ghe-license import
 
 ### elm
 
-`elm` is the command-line tool for Enterprise Live Migrations, a tool for live migrations to GHE.com. See [Elm CLI Reference](https://docs.github.com/en/migrations/elm/elm-cli-reference).
+`elm` is the command-line tool for {% data variables.product.prodname_elm %}, a tool for live migrations to {% data variables.enterprise.data_residency_site %}. See [Elm CLI Reference](https://docs.github.com/en/migrations/elm/elm-cli-reference).
 
 ## Security
 
 ### ghe-find-insecure-git-operations
 
-This utility searches your instance's logs and identifies Git operations over SSH that use insecure algorithms or hash functions, including DSA, RSA-SHA-1, HMAC-SHA-1, and CBC ciphers. You can use the output to support each client's transition to a more secure SSH connection. For more information, see [the GitHub Blog](https://github.blog/2022-06-28-improving-git-protocol-security-on-github-enterprise-server) and [Configuring SSH Connections To Your Instance](https://docs.github.com/en/admin/configuring-settings/hardening-security-for-your-enterprise/configuring-ssh-connections-to-your-instance).
+This utility searches your instance's logs and identifies Git operations over SSH that use insecure algorithms or hash functions, including DSA, RSA-SHA-1, HMAC-SHA-1, and CBC ciphers. You can use the output to support each client's transition to a more secure SSH connection. For more information, see [{% data variables.product.prodname_blog %}](https://github.blog/2022-06-28-improving-git-protocol-security-on-github-enterprise-server) and [Configuring SSH Connections To Your Instance](https://docs.github.com/en/admin/configuring-settings/hardening-security-for-your-enterprise/configuring-ssh-connections-to-your-instance).
 
 ```shell
 ghe-find-insecure-git-operations
@@ -1738,7 +1735,7 @@ ghe-find-insecure-git-operations
 
 This utility performs a variety of checks and gathers information about your installation that you can send to support to help diagnose problems you're having.
 
-Currently, this utility's output is similar to downloading the diagnostics info in the Management Console, but may have additional improvements added to it over time that aren't available in the web UI. For more information, see [Providing Data To GitHub Support](https://docs.github.com/en/support/contacting-github-support/providing-data-to-github-support#creating-and-sharing-diagnostic-files).
+Currently, this utility's output is similar to downloading the diagnostics info in the {% data variables.enterprise.management_console %}, but may have additional improvements added to it over time that aren't available in the web UI. For more information, see [Providing Data To GitHub Support](https://docs.github.com/en/support/contacting-github-support/providing-data-to-github-support#creating-and-sharing-diagnostic-files).
 
 ```shell
 ghe-diagnostics
@@ -1746,11 +1743,10 @@ ghe-diagnostics
 
 ### ghe-diagnostics-io
 
-This utility gathers an I/O diagnostics bundle from your GitHub Enterprise Server instance. The bundle includes disk I/O performance data that can help GitHub Support investigate storage-related issues.
+This utility gathers an I/O diagnostics bundle from {% data variables.location.product_location %}. The bundle includes disk I/O performance data that can help {% data variables.contact.github_support %} investigate storage-related issues.
 
 > [!TIP]
-> Typically, you will only execute this if you've [contacted support](https://support.github.com/) and they've asked you to do so.
-
+> {% data reusables.enterprise_enterprise_support.support_will_ask_you_to_run_command %}
 
 ```shell
 ghe-diagnostics-io
@@ -1764,12 +1760,10 @@ ghe-diagnostics-io TIMEOUT
 
 ### ghe-support-bundle
 
-> [!NOTE]
-> If your GitHub Enterprise Server instance is in a geo-replication configuration, or if your instance is a cluster, you should use the `ghe-cluster-support-bundle` command to retrieve the support bundle. For more information, see [Command Line Utilities](https://docs.github.com/en/admin/administering-your-instance/administering-your-instance-from-the-command-line/command-line-utilities#ghe-cluster-support-bundle).
-
+{% data reusables.enterprise_enterprise_support.use_ghe_cluster_support_bundle %}
 This utility creates a support bundle tarball containing important logs from your instance.
 
-By default, the command creates the tarball in _/tmp_, but you can also have it `cat` the tarball to `STDOUT` for easy streaming over SSH. This is helpful in the case where the web UI is unresponsive or downloading a support bundle from _/setup/support_ doesn't work. You must use this command if you want to generate an _extended_ bundle, containing older logs. You can also use this command to upload the support bundle directly to GitHub Enterprise support.
+By default, the command creates the tarball in _/tmp_, but you can also have it `cat` the tarball to `STDOUT` for easy streaming over SSH. This is helpful in the case where the web UI is unresponsive or downloading a support bundle from _/setup/support_ doesn't work. You must use this command if you want to generate an _extended_ bundle, containing older logs. You can also use this command to upload the support bundle directly to {% data variables.product.prodname_enterprise %} support.
 
 To create a standard bundle:
 
@@ -1789,13 +1783,13 @@ To create an extended bundle including data from the last 8 days:
 ssh -p 122 admin@HOSTNAME -- 'ghe-support-bundle -x -o' > support-bundle.tgz
 ```
 
-To send a bundle to GitHub Support:
+To send a bundle to {% data variables.contact.github_support %}:
 
 ```shell
 ssh -p 122 admin@HOSTNAME -- 'ghe-support-bundle -u'
 ```
 
-To send a bundle to GitHub Support and associate the bundle with a ticket:
+To send a bundle to {% data variables.contact.github_support %} and associate the bundle with a ticket:
 
 ```shell
 ssh -p 122 admin@HOSTNAME -- 'ghe-support-bundle -t TICKET_ID'
@@ -1803,9 +1797,9 @@ ssh -p 122 admin@HOSTNAME -- 'ghe-support-bundle -t TICKET_ID'
 
 ### ghe-support-upload
 
-This utility sends information from your appliance to GitHub Enterprise support. You can either specify a local file, or provide a stream of up to 100MB of data via `STDIN`. The uploaded data can optionally be associated with a support ticket.
+This utility sends information from your appliance to {% data variables.product.prodname_enterprise %} support. You can either specify a local file, or provide a stream of up to 100MB of data via `STDIN`. The uploaded data can optionally be associated with a support ticket.
 
-To send a file to GitHub Support and associate the file with a ticket:
+To send a file to {% data variables.contact.github_support %} and associate the file with a ticket:
 
 ```shell
 ghe-support-upload -f FILE_PATH -t TICKET_ID
@@ -1817,14 +1811,13 @@ To upload data via `STDIN` and associating the data with a ticket:
 ghe-repl-status -vv | ghe-support-upload -t TICKET_ID -d "Verbose Replication Status"
 ```
 
-In this example, `ghe-repl-status -vv` sends verbose status information from a replica appliance. You should replace `ghe-repl-status -vv` with the specific data you'd like to stream to `STDIN`, and `Verbose Replication Status` with a brief description of the data. Typically, you will only execute this if you've [contacted support](https://support.github.com/) and they've asked you to do so.
+In this example, `ghe-repl-status -vv` sends verbose status information from a replica appliance. You should replace `ghe-repl-status -vv` with the specific data you'd like to stream to `STDIN`, and `Verbose Replication Status` with a brief description of the data. {% data reusables.enterprise_enterprise_support.support_will_ask_you_to_run_command %}
 
-
-## Upgrading GitHub Enterprise Server
+## Upgrading {% data variables.product.prodname_ghe_server %}
 
 ### ghe-check-background-upgrade-jobs
 
-During an upgrade to a feature release, this utility displays the status of background upgrade jobs, such as Elasticsearch index migrations, on your GitHub Enterprise Server instance. If you're running back-to-back upgrades, you should use this utility to check that all background jobs are complete before proceeding with the next feature upgrade.
+During an upgrade to a feature release, this utility displays the status of background upgrade jobs, such as Elasticsearch index migrations, on {% data variables.location.product_location %}. If you're running back-to-back upgrades, you should use this utility to check that all background jobs are complete before proceeding with the next feature upgrade.
 
 ```shell
 ghe-check-background-upgrade-jobs
@@ -1835,7 +1828,7 @@ ghe-check-background-upgrade-jobs
 
 ### ghe-migrations
 
-During an upgrade to a feature release, this utility displays the status of active database migrations on your GitHub Enterprise Server instance. The output includes a version identifier for the migration, the migration's name, the migration's status, and the current duration of the migration.
+During an upgrade to a feature release, this utility displays the status of active database migrations on {% data variables.location.product_location %}. The output includes a version identifier for the migration, the migration's name, the migration's status, and the current duration of the migration.
 
 To display the list of migrations:
 
@@ -1857,11 +1850,11 @@ ghe-migrations -refresh_rate SECONDS
 
 ### ghe-update-check
 
-This utility will check to see if a new patch release of GitHub Enterprise is available. If it is, and if space is available on your instance, it will download the package. By default, it's saved to _/var/lib/ghe-updates_. An administrator can then [perform the upgrade](/admin/monitoring-and-managing-your-instance/updating-the-virtual-machine-and-physical-resources).
+This utility will check to see if a new patch release of {% data variables.product.prodname_enterprise %} is available. If it is, and if space is available on your instance, it will download the package. By default, it's saved to _/var/lib/ghe-updates_. An administrator can then [perform the upgrade](/admin/monitoring-and-managing-your-instance/updating-the-virtual-machine-and-physical-resources).
 
 A file containing the status of the download is available at _/var/lib/ghe-updates/ghe-update-check.status_.
 
-To check for the latest GitHub Enterprise release, use the `-i` switch.
+To check for the latest {% data variables.product.prodname_enterprise %} release, use the `-i` switch.
 
 ```shell
 ssh -p 122 admin@HOSTNAME -- 'ghe-update-check'
@@ -1884,7 +1877,7 @@ ghe-upgrade UPGRADE-PACKAGE-FILENAME
 ```
 
 
-
+{% ifversion ghes > 3.20 %}
 
 Beginning with upgrades in version 3.21 operators may run many of the upgrade operations without requiring a maintenance window using phased execution. 
 
@@ -1900,18 +1893,11 @@ Once that is complete operators may complete the upgrade by running the final st
 ghe-upgrade --phase upgrade UPGRADE-PACKAGE-FILENAME
 ```
 
-The upgraded GitHub Enterprise host will be rebooted by this operation.
+The upgraded {% data variables.product.prodname_enterprise %} host will be rebooted by this operation.
 
+{% endif %}
 
-
-When rolling back an upgrade, you must use an upgrade package file with the _.pkg_ extension. Hotpatch package files with the _.hpkg_ extension are not supported.
-
-```shell
-ghe-upgrade --allow-patch-rollback EARLIER-RELEASE-UPGRADE-PACKAGE.pkg
-```
-
-A reboot is required after running the command. Rolling back does not affect the data partition, as migrations are not run on patch releases.
-
+{% data reusables.enterprise_installation.command-line-utilities-ghe-upgrade-rollback %}
 
 ### ghe-upgrade-scheduler
 
@@ -1942,7 +1928,7 @@ ghe-upgrade-scheduler -r UPGRADE PACKAGE FILENAME
 
 ### ghe-license usage
 
-This utility exports a list of the installation's users in JSON format. If your instance is connected to GitHub Enterprise Cloud, GitHub Enterprise Server uses this information for reporting licensing information to GitHub Enterprise Cloud. For more information, see [Enabling GitHub Connect For Githubcom](https://docs.github.com/en/admin/configuring-settings/configuring-github-connect/enabling-github-connect-for-githubcom).
+This utility exports a list of the installation's users in JSON format. If your instance is connected to {% data variables.product.prodname_ghe_cloud %}, {% data variables.product.prodname_ghe_server %} uses this information for reporting licensing information to {% data variables.product.prodname_ghe_cloud %}. For more information, see [Enabling GitHub Connect For Githubcom](https://docs.github.com/en/admin/configuring-settings/configuring-github-connect/enabling-github-connect-for-githubcom).
 
 By default, the list of users in the resulting JSON file is encrypted. Review optional flags via `ghe-license --help`.
 
@@ -2001,15 +1987,14 @@ ghe-user-unsuspend USERNAME
 ## Database and storage
 
 
-
+{% ifversion ghes > 3.17 %}
 
 ### ghe-elasticsearch-watermarks
 
 This utility configures Elasticsearch disk watermark settings via API. This is an emergency break-glass solution that allows modification of watermark settings without requiring a configuration run.
 
 > [!TIP]
-> Typically, you will only execute this if you've [contacted support](https://support.github.com/) and they've asked you to do so.
-
+> {% data reusables.enterprise_enterprise_support.support_will_ask_you_to_run_command %}
 
 To set watermark percentages:
 
@@ -2029,13 +2014,13 @@ To show current watermark settings:
 ghe-elasticsearch-watermarks status
 ```
 
+{% endif %}
 
-
-
+{% ifversion ghes > 3.20 %}
 
 ### ghe-es-repair-status
 
-This utility displays the status of Elasticsearch search index repair operations on {% ifversion ghes %}your GitHub Enterprise Server instance.
+This utility displays the status of Elasticsearch search index repair operations on {% data variables.location.product_location %}.
 
 ```shell
 ghe-es-repair-status
@@ -2045,7 +2030,7 @@ ghe-es-repair-status
 
 ### ghe-es-usage
 
-This utility calculates disk usage of indices in Elasticsearch on your GitHub Enterprise Server instance.
+This utility calculates disk usage of indices in Elasticsearch on {% data variables.location.product_location %}.
 
 ```shell
 ghe-es-usage
@@ -2061,11 +2046,10 @@ Flag | Description
 
 ### ghe-mssql-console
 
-This utility opens a Microsoft SQL Server database session on your GitHub Enterprise Server instance. The MSSQL database is used by GitHub Actions services.
+This utility opens a Microsoft SQL Server database session on {% data variables.location.product_location %}. The MSSQL database is used by {% data variables.product.prodname_actions %} services.
 
 > [!NOTE]
-> Typically, you will only execute this if you've [contacted support](https://support.github.com/) and they've asked you to do so.
-
+> {% data reusables.enterprise_enterprise_support.support_will_ask_you_to_run_command %}
 
 ```shell
 ghe-mssql-console
@@ -2084,11 +2068,10 @@ Flag | Description
 
 ### ghe-mssql-diagnostics
 
-This utility displays diagnostic information for Microsoft SQL Server to help GitHub Support investigate GitHub Actions issues.
+This utility displays diagnostic information for Microsoft SQL Server to help {% data variables.contact.github_support %} investigate {% data variables.product.prodname_actions %} issues.
 
 > [!NOTE]
-> Typically, you will only execute this if you've [contacted support](https://support.github.com/) and they've asked you to do so.
-
+> {% data reusables.enterprise_enterprise_support.support_will_ask_you_to_run_command %}
 
 ```shell
 ghe-mssql-diagnostics
@@ -2096,7 +2079,7 @@ ghe-mssql-diagnostics
 
 ### ghe-mssql-health-check
 
-This utility runs checks on the state of the Microsoft SQL Server instance on your GitHub Enterprise Server instance, including backups and transaction logs.
+This utility runs checks on the state of the Microsoft SQL Server instance on {% data variables.location.product_location %}, including backups and transaction logs.
 
 ```shell
 ghe-mssql-health-check
@@ -2107,7 +2090,7 @@ ghe-mssql-health-check
 
 ### ghe-dep-graph-enable
 
-This utility enables the Dependency Graph service on your GitHub Enterprise Server instance.
+This utility enables the Dependency Graph service on {% data variables.location.product_location %}.
 
 ```shell
 ghe-dep-graph-enable
@@ -2115,11 +2098,11 @@ ghe-dep-graph-enable
 
 ## Monitoring
 
-
+{% ifversion ghes > 3.17 %}
 
 ### ghe-otelcol-validate
 
-This utility validates the OpenTelemetry Collector configuration file on {% ifversion ghes %}your GitHub Enterprise Server instance.
+This utility validates the OpenTelemetry Collector configuration file on {% data variables.location.product_location %}.
 
 ```shell
 ghe-otelcol-validate

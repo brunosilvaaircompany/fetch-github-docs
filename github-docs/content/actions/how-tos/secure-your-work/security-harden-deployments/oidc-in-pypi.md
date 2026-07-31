@@ -48,21 +48,15 @@ The [`pypa/gh-action-pypi-publish`](https://github.com/marketplace/actions/pypi-
 The following example uses the `pypa/gh-action-pypi-publish` action to exchange an OIDC token for a PyPI API token, which is then used to upload a package's release distributions to PyPI.
 
 ```yaml copy
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
+{% data reusables.actions.actions-not-certified-by-github-comment %}
 jobs:
   release-build:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: {% data reusables.actions.action-checkout %}
 
-
-      - uses: actions/setup-python@v5
-
+      - uses: {% data reusables.actions.action-setup-python %}
         with:
           python-version: "3.x"
 
@@ -73,8 +67,7 @@ jobs:
           python -m build
 
       - name: upload windows dists
-        uses: actions/upload-artifact@v4
-
+        uses: {% data reusables.actions.action-upload-artifact %}
         with:
           name: release-dists
           path: dist/
@@ -88,8 +81,7 @@ jobs:
 
     steps:
       - name: Retrieve release distributions
-        uses: actions/download-artifact@v5
-
+        uses: {% data reusables.actions.action-download-artifact %}
         with:
           name: release-dists
           path: dist/

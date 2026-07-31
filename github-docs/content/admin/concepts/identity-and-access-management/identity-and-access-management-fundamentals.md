@@ -9,10 +9,6 @@ To control access to your enterprise's resources, you can allow people to use a 
 
 After learning more about authentication and provisioning for each of these options, to determine which method is best for your enterprise, see [Choose An Enterprise Type](https://docs.github.com/en/enterprise-onboarding/getting-started-with-your-enterprise/choose-an-enterprise-type).
 
-{% elsif ghes %}
-
-Administrators who configure a GitHub Enterprise Server instance can use local accounts and built-in authentication on the instance. Alternatively, to centralize identity and access for an enterprise's web applications, administrators can configure an external authentication method. If you use SAML, you can optionally provision user accounts on the instance from your identity provider (IdP) using System for Cross-domain Identity Management (SCIM).
-
 
 
 ## Which authentication method are available to me?
@@ -21,7 +17,7 @@ Administrators who configure a GitHub Enterprise Server instance can use local a
 
 When you create an enterprise on GitHub, you can decide how people authenticate to access your resources and who controls the user accounts.
 
-* [Authentication through {% ifversion ghes %}your GitHub Enterprise Server instance](#authentication-through-githubcom)
+* [Authentication through your GitHub Enterprise Server instance](#authentication-through-githubcom)
 * [Authentication through your GitHub Enterprise Server instance with additional SAML access restriction](#authentication-through-githubcom-with-additional-saml-access-restriction)
 * [Authentication with Enterprise Managed Users and federation](#authentication-with-enterprise-managed-users-and-federation)
 
@@ -39,47 +35,17 @@ You can choose between configuring SAML at the enterprise level, which applies t
 
 If you need more control of the accounts for your enterprise members on GitHub, you can use Enterprise Managed Users. With Enterprise Managed Users, you provision and manage accounts for your enterprise members on GitHub using your IdP. Each member signs into an account that you create, and your enterprise manages the account. Contributions outside the enterprise are restricted. For more information, see [Enterprise Managed Users](https://docs.github.com/en/admin/concepts/identity-and-access-management/enterprise-managed-users).
 
-{% elsif ghes %}
 
-The following authentication methods are available for GitHub Enterprise Server.
-
-* [Built-in authentication](#built-in-authentication)
-* [External authentication](#external-authentication)
-
-### Built-in authentication
-
-When you use built-in authentication for your GitHub Enterprise Server instance, each person creates a personal account from an invitation or by signing up.
- To access your instance, people authenticate with the credentials for the account. For more information, see [Configuring Built In Authentication](https://docs.github.com/en/admin/managing-iam/using-built-in-authentication/configuring-built-in-authentication).
-
-### External authentication
-
-If you use an external directory or identity provider (IdP) to centralize access to multiple web applications, you may be able to configure external authentication for your GitHub Enterprise Server instance. For more information, see the following articles.
-
-* [Using Cas For Enterprise Iam](https://docs.github.com/en/admin/managing-iam/using-cas-for-enterprise-iam)
-* [Using Ldap For Enterprise Iam](https://docs.github.com/en/admin/managing-iam/using-ldap-for-enterprise-iam)
-* [Using Saml For Enterprise Iam](https://docs.github.com/en/admin/managing-iam/using-saml-for-enterprise-iam)
-
-> [!NOTE]
-> You can use either SAML or LDAP, but not both.
-
-
-If you choose to use external authentication, you can also configure fallback authentication for people who don't have an account on your external authentication provider. For example, you may want to grant access to a contractor or machine user. For more information, see [Allowing Built In Authentication For Users Outside Your Provider](https://docs.github.com/en/admin/managing-iam/understanding-iam-for-enterprises/allowing-built-in-authentication-for-users-outside-your-provider).
-
-{% endif %}
 
 ## How does provisioning work?
 
 
 
-If you use [authentication through {% ifversion ghes %}your GitHub Enterprise Server instance with additional SAML access restriction](#authentication-through-githubcom-with-additional-saml-access-restriction), people create personal accounts on GitHub.com, and you can grant those personal accounts access to resources in your enterprise. You do not provision accounts.
+If you use [authentication through your GitHub Enterprise Server instance with additional SAML access restriction](#authentication-through-githubcom-with-additional-saml-access-restriction), people create personal accounts on GitHub.com, and you can grant those personal accounts access to resources in your enterprise. You do not provision accounts.
 
 Alternatively, if you use [Enterprise Managed Users](#authentication-with-enterprise-managed-users-and-federation), you must configure your IdP to provision user accounts within your enterprise on your GitHub Enterprise Server instance using System for Cross-domain Identity Management (SCIM). For more information, see [Provisioning User Accounts With Scim](https://docs.github.com/en/admin/managing-iam/provisioning-user-accounts-with-scim).
 
-{% elsif ghes %}
 
-If you configure built-in authentication, CAS, LDAP, or SAML, GitHub Enterprise Server creates a user account when an authorized person signs into the instance, or "just in time" (JIT). Optionally, if you use SAML, you can provision user accounts from your identity provider (IdP) using SCIM. For more information, see [User Provisioning With Scim On Ghes](https://docs.github.com/en/admin/managing-iam/provisioning-user-accounts-with-scim/user-provisioning-with-scim-on-ghes).
-
-{% endif %}
 
 
 

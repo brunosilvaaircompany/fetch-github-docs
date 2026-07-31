@@ -75,16 +75,14 @@ This tutorial will show you how to store the client ID and client secret in envi
      1. To the right of the organization, click **Settings**.
    * For an app owned by an enterprise:
      1. If you use Enterprise Managed Users, click **Your enterprise** to go directly to the enterprise account settings.
-     1. If you use personal accounts, click **Your enterprises** and then to the right of the enterprise, click **Settings**.{% elsif ghes %}
-     1. Click **Enterprise settings**.
-
+     1. If you use personal accounts, click **Your enterprises** and then to the right of the enterprise, click **Settings**.
 
 
 1. Navigate to the GitHub App settings.
    * For an app owned by a personal account or organization:
      1. In the left sidebar, click **{% octicon "code" aria-hidden="true" aria-label="code" %} Developer settings**, then click **GitHub Apps**.
    * For an app owned by an enterprise:
-     1. In the left sidebar, under "Settings",{% elsif ghes %} click **Settings**, then click **GitHub Apps**.
+     1. In the left sidebar, under "Settings", click **GitHub Apps**.
 
 1. Next to the GitHub App that you want to work with, click **Edit**.
 1. On the app's settings page, find the client ID for your app. You will add it to a `.env` file in a following step. Note that the client ID is different from the app ID.
@@ -128,7 +126,7 @@ These steps lead you through writing code to generate a user access token. To sk
 
    ```ruby copy
    get "/" do
-     link = '<a href="https://github.com/login/oauth/authorize?client_id=<%= CLIENT_ID %>">Login with GitHub</a>'
+     link = '<a href="{% data variables.product.oauth_host_code %}/login/oauth/authorize?client_id=<%= CLIENT_ID %>">Login with GitHub</a>'
      erb link
    end
    ```
@@ -159,7 +157,7 @@ These steps lead you through writing code to generate a user access token. To sk
    CLIENT_SECRET = ENV.fetch("CLIENT_SECRET")
 
    get "/" do
-     link = '<a href="https://github.com/login/oauth/authorize?client_id=<%= CLIENT_ID %>">Login with GitHub</a>'
+     link = '<a href="{% data variables.product.oauth_host_code %}/login/oauth/authorize?client_id=<%= CLIENT_ID %>">Login with GitHub</a>'
      erb link
    end
 
@@ -215,7 +213,7 @@ These steps lead you through writing code to generate a user access token. To sk
        "code" => code
      }
      result = Net::HTTP.post(
-       URI("https://github.com/login/oauth/access_token"),
+       URI("{% data variables.product.oauth_host_code %}/login/oauth/access_token"),
        URI.encode_www_form(params),
        {"Accept" => "application/json"}
      )
@@ -224,7 +222,7 @@ These steps lead you through writing code to generate a user access token. To sk
    end
 
    get "/" do
-     link = '<a href="https://github.com/login/oauth/authorize?client_id=<%= CLIENT_ID %>">Login with GitHub</a>'
+     link = '<a href="{% data variables.product.oauth_host_code %}/login/oauth/authorize?client_id=<%= CLIENT_ID %>">Login with GitHub</a>'
      erb link
    end
 
@@ -259,7 +257,7 @@ These steps lead you through writing code to generate a user access token. To sk
 
    ```ruby copy
    def user_info(token)
-     uri = URI("https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3/user")
+     uri = URI("{% data variables.product.rest_url %}/user")
 
      result = Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
        auth = "Bearer #{token}"
@@ -331,7 +329,7 @@ def exchange_code(code)
     "code" => code
   }
   result = Net::HTTP.post(
-    URI("https://github.com/login/oauth/access_token"),
+    URI("{% data variables.product.oauth_host_code %}/login/oauth/access_token"),
     URI.encode_www_form(params),
     {"Accept" => "application/json"}
   )
@@ -340,7 +338,7 @@ def exchange_code(code)
 end
 
 def user_info(token)
-  uri = URI("https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3/user")
+  uri = URI("{% data variables.product.rest_url %}/user")
 
   result = Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
     auth = "Bearer #{token}"
@@ -353,7 +351,7 @@ def user_info(token)
 end
 
 get "/" do
-  link = '<a href="https://github.com/login/oauth/authorize?client_id=<%= CLIENT_ID %>">Login with GitHub</a>'
+  link = '<a href="{% data variables.product.oauth_host_code %}/login/oauth/authorize?client_id=<%= CLIENT_ID %>">Login with GitHub</a>'
   erb link
 end
 

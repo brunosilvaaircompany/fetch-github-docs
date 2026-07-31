@@ -105,7 +105,7 @@ When you create a code campaign, all the alerts are automatically submitted to G
 
 
 
-The new campaign is shown in the sidebar of the **{% octicon "shield" aria-hidden="true" aria-label="shield" %} {% ifversion security-and-quality-tab %}Security and quality** tab for each repository included.
+The new campaign is shown in the sidebar of the **{% octicon "shield" aria-hidden="true" aria-label="shield" %} Security and quality** tab for each repository included.
 
 * **Code campaigns**: Anyone with **write** access to a repository included in the campaign is notified.
 * **Secret campaigns**: Anyone with access to see the alert list view for a repository included in the campaign is notified.
@@ -115,11 +115,7 @@ The new campaign is shown in the sidebar of the **{% octicon "shield" aria-hidde
 > You can assign a campaign alert to anyone with **write** access to the repository, see [Assigning alerts](/code-security/concepts/security-at-scale/about-security-campaigns#about-assigning-alerts-to-users-and-copilot-cloud-agent).
 
 
-{% else %}
 
-When a campaign is started, anyone with **write** access to a repository included in the campaign is notified.
-
-{% endif %}
 
 For more information about the developer experience, see [Fixing Alerts In Security Campaign](https://docs.github.com/en/code-security/how-tos/manage-security-alerts/remediate-alerts-at-scale/fixing-alerts-in-security-campaign).
 

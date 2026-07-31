@@ -83,8 +83,8 @@ The OAuth device flow is the default authentication method for interactive use. 
 
    ```text
    What account do you want to log into?
-    1. GitHub.com
-    2. GitHub Enterprise Cloud with data residency (*.ghe.com)
+    1. {% data variables.product.prodname_dotcom_the_website %}
+    2. {% data variables.product.prodname_ghe_cloud %} with data residency (*.ghe.com)
    ```
 
 1. The CLI displays a one-time user code and automatically copies it to your clipboard and opens your browser.
@@ -102,7 +102,7 @@ The OAuth device flow is the default authentication method for interactive use. 
 1. Return to your terminal. The CLI displays a success message when authentication is complete.
 
    ```text
-   Signed in successfully as Octocat. You can now use Copilot.
+   Signed in successfully as Octocat. You can now use {% data variables.product.prodname_copilot_short %}.
    ```
 
 ### Authenticate with `copilot login`

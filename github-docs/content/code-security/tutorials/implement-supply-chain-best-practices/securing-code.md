@@ -77,14 +77,7 @@ You can enable and configure additional scanning that will alert you about accid
    * Public repositories.
    * An organization using GitHub Team or GitHub Enterprise Cloud with a license for GitHub Secret Protection or GitHub Advanced Security. Secret scanning will also analyze your private repositories.
 
-{% elsif secret-scanning-user-owned-repos %}
-If your organization uses GitHub Secret Protection or GitHub Advanced Security, you can enable {% ifversion fpt or ghec %}secret scanning alerts for users on any repository owned by the organization, including private repositories. Additionally, secret scanning alerts for users is available and in public preview on user-owned repositories for GitHub Enterprise Cloud with Enterprise Managed Users.
 
-
-You can also define custom patterns to detect additional secrets at the repository, organization, or enterprise level. For more information, see [About Alerts](https://docs.github.com/en/code-security/concepts/secret-security/about-alerts#about-secret-scanning-alerts).
-{% else %}
-You can configure secret scanning to check for secrets issued by many service providers and to notify you when any are detected. You can also define custom patterns to detect additional secrets at the repository, organization, or enterprise level. For more information, see [Secret Scanning](https://docs.github.com/en/code-security/concepts/secret-security/secret-scanning) and [Supported Secret Scanning Patterns](https://docs.github.com/en/code-security/reference/secret-security/supported-secret-scanning-patterns).
-{% endif %}
 
 ### Secure storage of secrets you use on GitHub
 

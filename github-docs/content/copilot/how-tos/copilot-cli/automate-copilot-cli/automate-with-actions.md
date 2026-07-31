@@ -36,14 +36,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
-
+        uses: {% data reusables.actions.action-checkout %}
         with:
           fetch-depth: 0
 
       - name: Set up Node.js environment
-        uses: actions/setup-node@v7
-
+        uses: {% data reusables.actions.action-setup-node %}
 
       - name: Install Copilot CLI
         run: npm install -g @github/copilot
@@ -89,8 +87,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
-
+        uses: {% data reusables.actions.action-checkout %}
         with:
           fetch-depth: 0
 ```
@@ -103,8 +100,7 @@ In this example, the workflow installs GitHub Copilot CLI globally with npm.
 
 ```yaml copy
 - name: Set up Node.js environment
-  uses: actions/setup-node@v7
-
+  uses: {% data reusables.actions.action-setup-node %}
 
 - name: Install Copilot CLI
   run: npm install -g @github/copilot

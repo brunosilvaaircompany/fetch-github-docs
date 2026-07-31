@@ -49,8 +49,7 @@ job1:
 jobs:
   job1:
     steps:
-      - uses: actions/checkout@v6
-
+      - uses: {% data reusables.actions.action-checkout %}
       - run: echo "Run your script here"
 ```
 
@@ -289,8 +288,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Cache node modules
-      uses: actions/cache@v4
-
+      uses: {% data reusables.actions.action-cache %}
       with:
         path: ~/.npm
         key: {% raw %}v1-npm-deps-${{ hashFiles('**/package-lock.json') }}{% endraw %}
@@ -320,8 +318,7 @@ artifacts:
 
 ```yaml
 - name: Upload math result for job 1
-  uses: actions/upload-artifact@v4
-
+  uses: {% data reusables.actions.action-upload-artifact %}
   with:
     name: homework
     path: math-homework.txt
@@ -382,8 +379,7 @@ jobs:
 
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v6
-
+        uses: {% data reusables.actions.action-checkout %}
 
       # Performs a clean installation of all dependencies
       # in the `package.json` file

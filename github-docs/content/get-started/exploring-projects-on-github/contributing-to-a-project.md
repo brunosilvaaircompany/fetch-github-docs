@@ -59,13 +59,13 @@ You can clone your fork with the command line, GitHub CLI, or GitHub Desktop.
 1. Type `git clone`, and then paste the URL you copied earlier. It will look like this, with your GitHub username instead of `YOUR-USERNAME`:
 
    ```shell
-   git clone https://github.com/YOUR-USERNAME/Spoon-Knife
+   git clone https://{% data variables.product.product_url %}/YOUR-USERNAME/Spoon-Knife
    ```
 
 1. Press **Enter**. Your local clone will be created.
 
    ```shell
-   $ git clone https://github.com/YOUR-USERNAME/Spoon-Knife
+   $ git clone https://{% data variables.product.product_url %}/YOUR-USERNAME/Spoon-Knife
    > Cloning into `Spoon-Knife`...
    > remote: Counting objects: 10, done.
    > remote: Compressing objects: 100% (8/8), done.

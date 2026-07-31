@@ -26,7 +26,7 @@ To authenticate with an OAuth token from an OAuth app, you must first authorize 
 
 The REST API has numerous endpoints. With the GraphQL API, the endpoint remains constant, no matter what operation you perform. For GitHub.com, that endpoint is:
 
-<pre>https://api.github.com/graphql{% elsif ghes %}http(s)://HOSTNAME/api/graphql</pre>
+<pre>https://api.github.com/graphql</pre>
 
 
 
@@ -47,7 +47,7 @@ curl -H "Authorization: bearer TOKEN" -X POST -d " \
  { \
    \"query\": \"query { viewer { login }}\" \
  } \
-" https://api.github.com/graphql{% elsif ghes %}http(s)://HOSTNAME/api/graphql
+" {% data variables.product.graphql_url %}
 ```
 
 > [!NOTE]

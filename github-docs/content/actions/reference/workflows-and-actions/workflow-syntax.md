@@ -2303,11 +2303,9 @@ steps:
   # Reference a specific commit
   - uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3
   # Reference the major version of a release
-  - uses: actions/checkout@v6
-
+  - uses: {% data reusables.actions.action-checkout %}
   # Reference a specific version
-  - uses: actions/checkout@v6
-.2.0
+  - uses: {% data reusables.actions.action-checkout %}.2.0
   # Reference a branch
   - uses: actions/checkout@main
 ```
@@ -2471,8 +2469,7 @@ jobs:
   my_first_job:
     steps:
       - name: Check out repository
-        uses: actions/checkout@v6
-
+        uses: {% data reusables.actions.action-checkout %}
         with:
           repository: octocat/my-private-repo
           ref: v1.0
@@ -2855,8 +2852,7 @@ Each step in the group is subject to the same 10-step concurrency limit as other
 
 ```yaml
 steps:
-  - uses: actions/checkout@v6
-
+  - uses: {% data reusables.actions.action-checkout %}
 
   - parallel:
       - name: Build frontend
@@ -2912,8 +2908,7 @@ jobs:
       matrix:
         version: [10, 12, 14]
     steps:
-      - uses: actions/setup-node@v7
-
+      - uses: {% data reusables.actions.action-setup-node %}
         with:
           node-version: {% raw %}${{ matrix.version }}{% endraw %}
 ```
@@ -2938,8 +2933,7 @@ jobs:
         version: [10, 12, 14]
     runs-on: {% raw %}${{ matrix.os }}{% endraw %}
     steps:
-      - uses: actions/setup-node@v7
-
+      - uses: {% data reusables.actions.action-setup-node %}
         with:
           node-version: {% raw %}${{ matrix.version }}{% endraw %}
 ```
@@ -3370,7 +3364,7 @@ services:
 The location and version of a reusable workflow file to run as a job. Use one of the following syntaxes:
 
 * `$/.github/workflows/{filename}` for a reusable workflow in the same repository. This is the recommended syntax for referencing a reusable workflow in the same repository. This syntax is not available in GitHub Enterprise Server.
-* `{owner}/{repo}/.github/workflows/{filename}@{ref}` for reusable workflows in public and private{% elsif ghec or ghes %}public, internal and private repositories.
+* `{owner}/{repo}/.github/workflows/{filename}@{ref}` for reusable workflows in public and private repositories.
 * `./.github/workflows/{filename}` for reusable workflows in the same repository.
 
 When you reference a reusable workflow with `{owner}/{repo}` and `@{ref}`, the `{ref}` can be a SHA, a release tag, or a branch name. If a release tag and a branch have the same name, the release tag takes precedence over the branch name. Using the commit SHA is the safest option for stability and security. For more information, see [Secure Use](https://docs.github.com/en/actions/reference/security/secure-use#reusing-third-party-workflows).

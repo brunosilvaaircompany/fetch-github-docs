@@ -2,9 +2,9 @@
 
 ## About dormant users
 
-A user is considered active if the user has performed any of the following activities on your GitHub Enterprise Server instance{% elsif ghec %}your enterprise.
+A user is considered active if the user has performed any of the following activities on your GitHub Enterprise Server instance.
 
-* Authenticating to access your enterprise's resources via SAML SSO {% endif %}
+* Authenticating to access your enterprise's resources via SAML SSO
 * Creating a repository
 * Pushing to an internal repository via HTTPS
 * Pushing to an internal repository via SSH
@@ -44,19 +44,13 @@ A user will also be considered active if their account has been updated by LDAP.
 When assessing user dormancy, we only consider organizations, repositories, or sign-on events that are associated with the enterprise. For example, a user who has recently commented on an issue in a public repository outside of the enterprise may be considered dormant, while a user who has commented on an issue in a public repository within the enterprise will not be considered dormant.
 
 
-A user account is considered to be dormant if the user  hasn't performed any of the previous activities in the past 30 days.{% elsif ghes %} meets the following criteria:
-
-* The user's account has existed for longer than the dormancy threshold {% ifversion ghes %}your GitHub Enterprise Server instance.
-* The user hasn't performed any of the previous activities within the dormancy threshold.
-* The user is not a site administrator for the instance.
-
-You can customize the dormancy threshold for your GitHub Enterprise Server instance.{% endif %}
+A user account is considered to be dormant if the user  hasn't performed any of the previous activities in the past 30 days.
 
 Dormancy applies to both enterprise members and outside collaborators.
 
 
 
-Dormant users are not automatically suspended. Consider suspending dormant users to release {% ifversion enterprise-licensing-language %}licenses. See [Suspending And Unsuspending Users](https://docs.github.com/en/admin/managing-accounts-and-repositories/managing-users-in-your-enterprise/suspending-and-unsuspending-users).
+Dormant users are not automatically suspended. Consider suspending dormant users to release licenses. See [Suspending And Unsuspending Users](https://docs.github.com/en/admin/managing-accounts-and-repositories/managing-users-in-your-enterprise/suspending-and-unsuspending-users).
 
 ## Viewing dormant users
 
@@ -102,7 +96,7 @@ The dormancy threshold is the length of time a user must be inactive to be consi
 
 1. Under "Dormancy threshold", select the dropdown menu, and click the desired dormancy threshold.
 
-{% endif %}
+
 
 
 

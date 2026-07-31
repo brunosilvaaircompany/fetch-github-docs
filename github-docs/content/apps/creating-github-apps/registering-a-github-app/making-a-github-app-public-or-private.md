@@ -2,13 +2,13 @@
 
 ## About visibility for GitHub Apps
 
-A GitHub App can be public or private{% elsif enterprise-apps-public-beta %}public, private, or internal. If you set your GitHub App registration to public, any user on GitHub can install it and authorize it. If you set your GitHub App registration to private, it can only be installed on the account that owns the app. Only members of the organization that owns it can authorize it.
-
-{% elsif ghes %} If you set your GitHub App registration to public, anyone on your GitHub Enterprise Server instance can install it, but the app is not available outside of your instance. If you set your GitHub App registration to private, it can only be installed on the account that owns the app. 
+A GitHub App can be public or private. If you set your GitHub App registration to public, any user on GitHub can install it and authorize it. If you set your GitHub App registration to private, it can only be installed on the account that owns the app. Only members of the organization that owns it can authorize it.
 
 
-GitHub Apps owned by an enterprise account{% ifversion ghec %}, or by a managed user account in an enterprise, have "internal" visibility. Internal apps can only be installed by that enterprise and organizations within the enterprise and can only be authorized by users within the enterprise. Members of the enterprise and unaffiliated users can authorize these apps, but outside collaborators cannot.
-{% endif %}
+
+
+GitHub Apps owned by an enterprise account, or by a managed user account in an enterprise, have "internal" visibility. Internal apps can only be installed by that enterprise and organizations within the enterprise and can only be authorized by users within the enterprise. Members of the enterprise and unaffiliated users can authorize these apps, but outside collaborators cannot.
+
 
 If you want your organization-owned application to be installed on your enterprise, transfer it to the enterprise or make it `public` or `internal`. If it is `private` it can only be installed on the organization.
 
@@ -30,6 +30,4 @@ Private GitHub Apps can only be installed on the user or organization account of
 
 ### "Internal" installation flow
 
-Enterprise-owned GitHub Apps{% ifversion ghec %} and apps owned by managed user accounts can only be installed on that enterprise and organizations within the enterprise by using the installation URL. The app can not be installed on user accounts.
-
-{% endif %}
+Enterprise-owned GitHub Apps and apps owned by managed user accounts can only be installed on that enterprise and organizations within the enterprise by using the installation URL. The app can not be installed on user accounts.

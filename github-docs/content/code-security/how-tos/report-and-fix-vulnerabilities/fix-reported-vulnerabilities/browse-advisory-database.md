@@ -87,7 +87,7 @@ You can also suggest improvements to any advisory directly from your local advis
 ### Viewing vulnerable repositories for your instance
 
 
-Enterprise owners must enable Dependabot alerts for {% ifversion ghes %}your GitHub Enterprise Server instance before you can use this feature. For more information, see [Enabling Dependabot For Your Enterprise](https://docs.github.com/en/admin/configuring-settings/configuring-github-connect/enabling-dependabot-for-your-enterprise).
+Enterprise owners must enable Dependabot alerts for your GitHub Enterprise Server instance before you can use this feature. For more information, see [Enabling Dependabot For Your Enterprise](https://docs.github.com/en/admin/configuring-settings/configuring-github-connect/enabling-dependabot-for-your-enterprise).
 
 
 
@@ -99,5 +99,3 @@ In the local advisory database, you can see which repositories are affected by e
    ![Screenshot of a "global security advisory". The "Dependabot alerts" button is highlighted with an orange outline.](/assets/images/help/security/advisory-database-dependabot-alerts.png)
 1. Optionally, to filter the list, use the search bar or the drop-down menus. The "Organization" drop-down menu allows you to filter the Dependabot alerts per owner (organization or user).
 1. For more details about the advisory, and for advice on how to fix the vulnerable repository, click the repository name.
-
-{% endif %}

@@ -64,7 +64,7 @@ Check the value of `Cache-Control`. In this example, there's no `Cache-Control`.
 * If you own the server that's hosting the image, modify it so that it returns a `Cache-Control` of `no-cache` for images.
 * If you're using an external service for hosting images, contact support for that service.
 
-If `Cache-Control` _is_ set to `no-cache`, contact us through the [GitHub Support portal](https://support.github.com){% elsif ghes %}your site administrator or search the [GitHub Community discussions](https://github.com/orgs/community/discussions).
+If `Cache-Control` _is_ set to `no-cache`, contact us through the [GitHub Support portal](https://support.github.com) or search the [GitHub Community discussions](https://github.com/orgs/community/discussions).
 
 ### Removing an image from Camo's cache
 

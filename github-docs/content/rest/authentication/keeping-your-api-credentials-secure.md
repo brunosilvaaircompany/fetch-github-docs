@@ -46,12 +46,12 @@ Never hardcode authentication credentials like tokens, keys, or app-related secr
 
 If you find another user's personal access token exposed on GitHub or elsewhere, you can submit a revocation request through the REST API. See [Revoke](https://docs.github.com/en/rest/credentials/revoke#revoke-a-list-of-credentials).
 
-{% ifversion ghec %}
+
 > [!NOTE]
 > The credential revocation REST API is not currently available for enterprises that use GitHub Enterprise Cloud with data residency.
 
 
-{% endif %}
+
 
 When using a personal access token in a script, consider storing your token as a GitHub Actions secret and running your script through GitHub Actions. You can also store your token as a Codespaces secret and run your script in Codespaces. For more information, see [Use Secrets](https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets) and [Managing Your Account Specific Secrets For GitHub Codespaces](https://docs.github.com/en/codespaces/managing-your-codespaces/managing-your-account-specific-secrets-for-github-codespaces).
 

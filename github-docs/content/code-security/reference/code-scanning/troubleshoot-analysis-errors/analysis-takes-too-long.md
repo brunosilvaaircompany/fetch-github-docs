@@ -17,10 +17,6 @@ If you're using GitHub-hosted runners for your code scanning analysis, consider 
 
 If you're using self-hosted runners to run code scanning analysis, you can increase the memory or the number of cores on those runners. If you're using CodeQL with advanced setup for your analysis, review the recommended hardware resources for CodeQL to make sure your self-hosted runners meet those requirements. For more information, see [Hardware Resources For Codeql](https://docs.github.com/en/code-security/reference/code-scanning/codeql/hardware-resources-for-codeql).
 
-{% elsif ghes %}
-
-You can increase the memory or disk space available on your runners. If you're using CodeQL for your code scanning analysis, you can review the recommended hardware resources for CodeQL to make sure your runners meet those requirements. For more information, see [Hardware Resources For Codeql](https://docs.github.com/en/code-security/reference/code-scanning/codeql/hardware-resources-for-codeql).
-
 
 
 ## Use matrix builds to parallelize the analysis

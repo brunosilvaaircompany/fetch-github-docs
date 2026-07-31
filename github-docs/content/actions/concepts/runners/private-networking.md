@@ -32,7 +32,7 @@ If you don't want to maintain separate infrastructure for an API Gateway, you ca
 You can use GitHub-hosted runners in an Azure VNET. This enables you to use GitHub-managed infrastructure for CI/CD while providing you with full control over the networking policies of your runners. For more information about Azure VNET, see [What is Azure Virtual Network?](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-overview) in the Azure documentation.
 
 
-{% ifversion fpt %}
+
 
 Organization owners using the GitHub Team plan can configure Azure private networking for GitHub-hosted runners at the organization level. For more information, see [About Azure Private Networking For GitHub Hosted Runners In Your Organization](https://docs.github.com/en/organizations/managing-organization-settings/about-azure-private-networking-for-github-hosted-runners-in-your-organization).
 
@@ -41,6 +41,3 @@ Organization owners using the GitHub Team plan can configure Azure private netwo
 
 
 Enterprises and organizations on GitHub Enterprise Cloud or GitHub Team plans can configure Azure private networking for GitHub-hosted runners. For more information, see [About Azure Private Networking For GitHub Hosted Runners In Your Enterprise](https://docs.github.com/en/enterprise-cloud@latest/admin/configuring-settings/configuring-private-networking-for-hosted-compute-products/about-azure-private-networking-for-github-hosted-runners-in-your-enterprise) and [Configuring Private Networking For GitHub Hosted Runners In Your Enterprise](https://docs.github.com/en/admin/configuring-settings/configuring-private-networking-for-hosted-compute-products/configuring-private-networking-for-github-hosted-runners-in-your-enterprise#enabling-creation-of-network-configurations-for-organizations).
-
-
-{% endif %}

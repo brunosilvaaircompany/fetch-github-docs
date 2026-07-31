@@ -36,14 +36,14 @@ You can use the GitHub web interface or the REST API to manage organization webh
 
 Enterprise owners can create global webhooks to subscribe to events that occur within their enterprise or within organizations and repositories owned by the enterprise.
 
-You can create multiple webhooks in a single enterprise. However, you can only create up to {% ifversion ghes %}250 webhooks that subscribe to each individual event type. For example, in a single enterprise you could only create up to 250 different webhooks that each subscribe to the `membership` event.
+You can create multiple webhooks in a single enterprise. However, you can only create up to 250 webhooks that subscribe to each individual event type. For example, in a single enterprise you could only create up to 250 different webhooks that each subscribe to the `membership` event.
 
 You can use the GitHub web interface to manage global webhooks. For more information, see [Creating Webhooks](https://docs.github.com/en/webhooks/using-webhooks/creating-webhooks#creating-a-global-webhook-for-a-github-enterprise), [Editing Webhooks](https://docs.github.com/en/webhooks/using-webhooks/editing-webhooks#editing-a-global-webhook-for-a-github-enterprise), and [Disabling Webhooks](https://docs.github.com/en/webhooks/using-webhooks/disabling-webhooks#disabling-a-global-webhook-for-a-github-enterprise). 
 You can also use the REST API to manage global webhooks. For a complete list of endpoints, see [Global Webhooks](https://docs.github.com/en/rest/enterprise-admin/global-webhooks).
 
 
 
-{% endif %}
+
 
 
 

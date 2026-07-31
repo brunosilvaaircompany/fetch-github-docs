@@ -68,16 +68,14 @@ The following steps will guide you through registering a GitHub App with these s
      1. To the right of the organization, click **Settings**.
    * For an app owned by an enterprise:
      1. If you use Enterprise Managed Users, click **Your enterprise** to go directly to the enterprise account settings.
-     1. If you use personal accounts, click **Your enterprises** and then to the right of the enterprise, click **Settings**.{% elsif ghes %}
-     1. Click **Enterprise settings**.
-
+     1. If you use personal accounts, click **Your enterprises** and then to the right of the enterprise, click **Settings**.
 
 
 1. Navigate to the GitHub App settings.
    * For an app owned by a personal account or organization:
      1. In the left sidebar, click **{% octicon "code" aria-hidden="true" aria-label="code" %} Developer settings**, then click **GitHub Apps**.
    * For an app owned by an enterprise:
-     1. In the left sidebar, under "Settings",{% elsif ghes %} click **Settings**, then click **GitHub Apps**.
+     1. In the left sidebar, under "Settings", click **GitHub Apps**.
 
 1. Click **New GitHub App**.
 1. Under "GitHub App name", enter a name for your app. For example, `USERNAME-webhook-test-app` where `USERNAME` is your GitHub username.
@@ -120,13 +118,13 @@ Make sure that you are on a secure machine before performing these steps since y
 1. In your terminal, navigate to the directory where your clone is stored.
 1. Create a file called `.env` at the top level of this directory.
 1. Add `.env` to your `.gitignore` file. This will prevent you from accidentally committing your app's credentials.
-1. Add the following contents to your `.env` file. Replace `YOUR_HOSTNAME` with the name of {% ifversion ghes %}your GitHub Enterprise Server instance. You will update the other values in a later step.{% else %}You will update the values in a later step.{% endif %}
+1. Add the following contents to your `.env` file. Replace `YOUR_HOSTNAME` with the name of your GitHub Enterprise Server instance. You will update the other values in a later step.
 
    ```text copy
    APP_ID="YOUR_APP_ID"
    WEBHOOK_SECRET="YOUR_WEBHOOK_SECRET"
-   PRIVATE_KEY_PATH="YOUR_PRIVATE_KEY_PATH"
-   ENTERPRISE_HOSTNAME="YOUR_HOSTNAME"
+   PRIVATE_KEY_PATH="YOUR_PRIVATE_KEY_PATH"{% ifversion ghes %}
+   ENTERPRISE_HOSTNAME="YOUR_HOSTNAME"{% endif %}
    ```
 
 1. Navigate to the settings page for your app:
@@ -155,7 +153,7 @@ Add the following code to `app.js`. The code includes annotations that explain e
 //
 // You installed the `dotenv` and `octokit` modules earlier. The `@octokit/webhooks` is a dependency of the `octokit` module, so you don't need to install it separately. The `fs` and `http` dependencies are built-in Node.js modules.
 import dotenv from "dotenv";
-import {App, Octokit} from "octokit";
+import {App{% ifversion ghes %}, Octokit{% endif %}} from "octokit";
 import {createNodeMiddleware} from "@octokit/webhooks";
 import fs from "fs";
 import http from "http";
@@ -166,8 +164,8 @@ dotenv.config();
 // This assigns the values of your environment variables to local variables.
 const appId = process.env.APP_ID;
 const webhookSecret = process.env.WEBHOOK_SECRET;
-const privateKeyPath = process.env.PRIVATE_KEY_PATH;
-const enterpriseHostname = process.env.ENTERPRISE_HOSTNAME;
+const privateKeyPath = process.env.PRIVATE_KEY_PATH;{% ifversion ghes %}
+const enterpriseHostname = process.env.ENTERPRISE_HOSTNAME;{% endif %}
 
 // This reads the contents of your private key file.
 const privateKey = fs.readFileSync(privateKeyPath, "utf8");
@@ -178,16 +176,16 @@ const app = new App({
   privateKey: privateKey,
   webhooks: {
     secret: webhookSecret
-  },
+  },{% ifversion ghes %}
   Octokit: Octokit.defaults({
     baseUrl: `https://${enterpriseHostname}/api/v3`,
-  }),
+  }),{% endif %}
 });
 
 // This defines the message that your app will post to pull requests.
 const messageForNewPRs = "Thanks for opening a new PR! Please follow our contributing guidelines to make your PR easier to review.";
 
-// This adds an event handler that your code will call later. When this event handler is called, it will log the event to the console. Then, it will use GitHub's REST API to add a comment to the pull request that triggered the event.
+// This adds an event handler that your code will call later. When this event handler is called, it will log the event to the console. Then, it will use {% data variables.product.company_short %}'s REST API to add a comment to the pull request that triggered the event.
 async function handlePullRequestOpened({octokit, payload}) {
   console.log(`Received a pull request event for #${payload.pull_request.number}`);
 
@@ -209,7 +207,7 @@ async function handlePullRequestOpened({octokit, payload}) {
   }
 };
 
-// This sets up a webhook event listener. When your app receives a webhook event from GitHub with a `X-GitHub-Event` header value of `pull_request` and an `action` payload value of `opened`, it calls the `handlePullRequestOpened` event handler that is defined above.
+// This sets up a webhook event listener. When your app receives a webhook event from {% data variables.product.company_short %} with a `X-GitHub-Event` header value of `pull_request` and an `action` payload value of `opened`, it calls the `handlePullRequestOpened` event handler that is defined above.
 app.webhooks.on("pull_request.opened", handlePullRequestOpened);
 
 // This logs any errors that occur.
@@ -233,12 +231,12 @@ const localWebhookUrl = `http://${host}:${port}${path}`;
 //
 // Octokit's `createNodeMiddleware` function takes care of generating this middleware function for you. The resulting middleware function will:
 //
-// - Check the signature of the incoming webhook event to make sure that it matches your webhook secret. This verifies that the incoming webhook event is a valid GitHub event.
+// - Check the signature of the incoming webhook event to make sure that it matches your webhook secret. This verifies that the incoming webhook event is a valid {% data variables.product.company_short %} event.
 // - Parse the webhook event payload and identify the type of event.
 // - Trigger the corresponding webhook event handler.
 const middleware = createNodeMiddleware(app.webhooks, {path});
 
-// This creates a Node.js server that listens for incoming HTTP requests (including webhook payloads from GitHub) on the specified port. When the server receives a request, it executes the `middleware` function that you defined earlier. Once the server is running, it logs messages to the console to indicate that it is listening.
+// This creates a Node.js server that listens for incoming HTTP requests (including webhook payloads from {% data variables.product.company_short %}) on the specified port. When the server receives a request, it executes the `middleware` function that you defined earlier. Once the server is running, it logs messages to the console to indicate that it is listening.
 http.createServer(middleware).listen(port, () => {
   console.log(`Server is listening for events at: ${localWebhookUrl}`);
   console.log('Press Ctrl + C to quit.')

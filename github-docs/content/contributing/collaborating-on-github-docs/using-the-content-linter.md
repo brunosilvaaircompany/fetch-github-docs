@@ -210,7 +210,7 @@ Note, if you are placing the expired tags in an HTML `table` element, make sure 
 macOS
 </td>
 <td>
-The <code>macos-11</code> label is closing down and will no longer be available after 28 June 2024.
+The <code>macos-11</code> label is {% data variables.release-phases.closing_down %} and will no longer be available after 28 June 2024.
 </td>
 </tr>
 

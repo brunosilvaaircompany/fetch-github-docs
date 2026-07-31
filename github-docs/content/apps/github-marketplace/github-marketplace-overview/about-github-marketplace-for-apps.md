@@ -63,4 +63,4 @@ You can access metrics and transactions for your listing. For more information, 
 
 ## Contacting Support
 
-If you have questions about GitHub Marketplace, please contact us through the [GitHub Support portal](https://support.github.com){% elsif ghes %}your site administrator.
+If you have questions about GitHub Marketplace, please contact us through the [GitHub Support portal](https://support.github.com).

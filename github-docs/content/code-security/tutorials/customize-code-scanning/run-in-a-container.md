@@ -32,7 +32,7 @@ For information on using the latest version, see [Configuring Code Scanning For 
 This sample workflow uses GitHub Actions to run CodeQL analysis in a containerized environment. The value of `container.image` identifies the container to use. In this example the image is named `codeql-container`, with a tag of `f0f91db`. For more information, see [Workflow Syntax](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax#jobsjob_idcontainer).
 
 ```yaml
-name: "CodeQL"
+name: "{% data variables.product.prodname_codeql %}"
 
 on:
   push:
@@ -61,18 +61,15 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
-
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v4
-
+        uses: {% data reusables.actions.action-checkout %}
+      - name: Initialize {% data variables.product.prodname_codeql %}
+        uses: {% data reusables.actions.action-codeql-action-init %}
         with:
           languages: {% raw %}${{ matrix.language }}{% endraw %}
       - name: Build
         run: |
           ./configure
           make
-      - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v4
-
+      - name: Perform {% data variables.product.prodname_codeql %} Analysis
+        uses: {% data reusables.actions.action-codeql-action-analyze %}
 ```

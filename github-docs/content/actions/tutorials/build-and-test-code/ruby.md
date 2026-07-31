@@ -41,11 +41,7 @@ GitHub provides a workflow template for Ruby that should work for most Ruby proj
    If you don't find the "Ruby" workflow template, copy the following workflow code to a new file called `ruby.yml` in the `.github/workflows` directory of your repository.
 
    ```yaml copy
-   # This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
+   {% data reusables.actions.actions-not-certified-by-github-comment %}
    name: Ruby
 
    on:
@@ -65,8 +61,7 @@ GitHub provides a workflow template for Ruby that should work for most Ruby proj
            ruby-version: ['2.6', '2.7', '3.0']
 
        steps:
-       - uses: actions/checkout@v6
-
+       - uses: {% data reusables.actions.action-checkout %}
        - name: Set up Ruby
        # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
        # change this to (see https://github.com/ruby/setup-ruby#versioning):
@@ -100,14 +95,9 @@ Using Ruby's `ruby/setup-ruby` action is the recommended way of using Ruby with 
 The `setup-ruby` action takes a Ruby version as an input and configures that version on the runner.
 
 ```yaml
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
+{% data reusables.actions.actions-not-certified-by-github-comment %}
 steps:
-- uses: actions/checkout@v6
-
+- uses: {% data reusables.actions.action-checkout %}
 - uses: ruby/setup-ruby@ec02537da5712d66d4d50a0f33b7eb52773b5ed1
   with:
     ruby-version: '3.1' # Not needed with a .ruby-version file
@@ -136,16 +126,9 @@ Each version of Ruby specified in the `ruby-version` array creates a job that ru
 The full updated workflow with a matrix strategy could look like this:
 
 ```yaml
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
+{% data reusables.actions.actions-not-certified-by-github-comment %}
 
-
-# GitHub recommends pinning actions to a commit SHA.
-# To get a newer version, you will need to update the SHA.
-# You can also reference a tag or branch, but the action may change without warning.
-
+{% data reusables.actions.actions-use-sha-pinning-comment %}
 
 name: Ruby CI
 
@@ -165,8 +148,7 @@ jobs:
         ruby-version: ['3.1', '3.0', '2.7']
 
     steps:
-      - uses: actions/checkout@v6
-
+      - uses: {% data reusables.actions.action-checkout %}
       - name: {% raw %}Set up Ruby ${{ matrix.ruby-version }}{% endraw %}
         uses: ruby/setup-ruby@ec02537da5712d66d4d50a0f33b7eb52773b5ed1
         with:
@@ -182,14 +164,9 @@ jobs:
 The `setup-ruby` action will automatically install bundler for you. The version is determined by your `gemfile.lock` file. If no version is present in your lockfile, then the latest compatible version will be installed.
 
 ```yaml
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
+{% data reusables.actions.actions-not-certified-by-github-comment %}
 steps:
-- uses: actions/checkout@v6
-
+- uses: {% data reusables.actions.action-checkout %}
 - uses: ruby/setup-ruby@ec02537da5712d66d4d50a0f33b7eb52773b5ed1
   with:
     ruby-version: '3.1'
@@ -203,11 +180,7 @@ The `setup-ruby` actions provides a method to automatically handle the caching o
 To enable caching, set the following.
 
 ```yaml
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
+{% data reusables.actions.actions-not-certified-by-github-comment %}
 steps:
 - uses: ruby/setup-ruby@ec02537da5712d66d4d50a0f33b7eb52773b5ed1
   with:
@@ -222,8 +195,7 @@ For greater control over caching, you can use the `actions/cache` action directl
 
 ```yaml
 steps:
-- uses: actions/cache@v4
-
+- uses: {% data reusables.actions.action-cache %}
   with:
     path: vendor/bundle
     key: {% raw %}${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}{% endraw %}
@@ -239,8 +211,7 @@ If you're using a matrix build, you will want to include the matrix variables in
 
 ```yaml
 steps:
-- uses: actions/cache@v4
-
+- uses: {% data reusables.actions.action-cache %}
   with:
     path: vendor/bundle
     key: {% raw %}bundle-use-ruby-${{ matrix.os }}-${{ matrix.ruby-version }}-${{ hashFiles('**/Gemfile.lock') }}{% endraw %}
@@ -257,16 +228,9 @@ steps:
 The following example matrix tests all stable releases and head versions of MRI, JRuby and TruffleRuby on Ubuntu and macOS.
 
 ```yaml
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
+{% data reusables.actions.actions-not-certified-by-github-comment %}
 
-
-# GitHub recommends pinning actions to a commit SHA.
-# To get a newer version, you will need to update the SHA.
-# You can also reference a tag or branch, but the action may change without warning.
-
+{% data reusables.actions.actions-use-sha-pinning-comment %}
 
 name: Matrix Testing
 
@@ -286,8 +250,7 @@ jobs:
         ruby: [2.5, 2.6, 2.7, head, debug, jruby, jruby-head, truffleruby, truffleruby-head]
     continue-on-error: {% raw %}${{ endsWith(matrix.ruby, 'head') || matrix.ruby == 'debug' }}{% endraw %}
     steps:
-      - uses: actions/checkout@v6
-
+      - uses: {% data reusables.actions.action-checkout %}
       - uses: ruby/setup-ruby@ec02537da5712d66d4d50a0f33b7eb52773b5ed1
         with:
           ruby-version: {% raw %}${{ matrix.ruby }}{% endraw %}
@@ -300,16 +263,9 @@ jobs:
 The following example installs `rubocop` and uses it to lint all files. For more information, see [RuboCop](https://github.com/rubocop-hq/rubocop). You can [configure Rubocop](https://docs.rubocop.org/rubocop/configuration.html) to decide on the specific linting rules.
 
 ```yaml
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
+{% data reusables.actions.actions-not-certified-by-github-comment %}
 
-
-# GitHub recommends pinning actions to a commit SHA.
-# To get a newer version, you will need to update the SHA.
-# You can also reference a tag or branch, but the action may change without warning.
-
+{% data reusables.actions.actions-use-sha-pinning-comment %}
 
 name: Linting
 
@@ -319,8 +275,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
-
+      - uses: {% data reusables.actions.action-checkout %}
       - uses: ruby/setup-ruby@ec02537da5712d66d4d50a0f33b7eb52773b5ed1
         with:
           ruby-version: '2.6'
@@ -338,16 +293,9 @@ You can configure your workflow to publish your Ruby package to any package regi
 You can store any access tokens or credentials needed to publish your package using repository secrets. The following example creates and publishes a package to `GitHub Package Registry` and `RubyGems`.
 
 ```yaml
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
+{% data reusables.actions.actions-not-certified-by-github-comment %}
 
-
-# GitHub recommends pinning actions to a commit SHA.
-# To get a newer version, you will need to update the SHA.
-# You can also reference a tag or branch, but the action may change without warning.
-
+{% data reusables.actions.actions-use-sha-pinning-comment %}
 
 name: Ruby Gem
 
@@ -369,8 +317,7 @@ jobs:
       contents: read
 
     steps:
-      - uses: actions/checkout@v6
-
+      - uses: {% data reusables.actions.action-checkout %}
       - name: Set up Ruby 2.6
         uses: ruby/setup-ruby@ec02537da5712d66d4d50a0f33b7eb52773b5ed1
         with:

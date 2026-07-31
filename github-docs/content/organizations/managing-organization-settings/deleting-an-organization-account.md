@@ -10,12 +10,12 @@
 
 Deleting your organization account permanently removes all repositories, forks of private repositories, wikis, issues, pull requests, and project or organization pages. **This action is irreversible.**
 
-Billing for the organization will end. {% ifversion ghec %}If the organization is part of an enterprise account, billing will stop through the enterprise agreement. **Upon deletion, the organization name will not be available to use for another organization or user account for 90 days.** After the 90 days pass, the organization name will automatically become available for use on a new user or organization account.
+Billing for the organization will end. If the organization is part of an enterprise account, billing will stop through the enterprise agreement. **Upon deletion, the organization name will not be available to use for another organization or user account for 90 days.** After the 90 days pass, the organization name will automatically become available for use on a new user or organization account.
 
 > [!TIP]
 > If you would like to make your organization name available for reuse immediately, rename your organization instead of deleting it. For more information, see [Renaming An Organization](https://docs.github.com/en/organizations/managing-organization-settings/renaming-an-organization).
 
-{% endif %}
+
 
 
 
@@ -40,9 +40,9 @@ You can also archive an organization, instead of deleting it. Archiving an organ
 
 
 > [!NOTE]
-> If necessary, a site administrator for {% ifversion ghes %}your GitHub Enterprise Server instance may be able to partially restore a deleted organization. For more information, see [Restoring A Deleted Organization](https://docs.github.com/en/admin/managing-accounts-and-repositories/managing-organizations-in-your-enterprise/restoring-a-deleted-organization).
+> If necessary, a site administrator for your GitHub Enterprise Server instance may be able to partially restore a deleted organization. For more information, see [Restoring A Deleted Organization](https://docs.github.com/en/admin/managing-accounts-and-repositories/managing-organizations-in-your-enterprise/restoring-a-deleted-organization).
 
-{% endif %}
+
 
 ## Deleting your organization account
 

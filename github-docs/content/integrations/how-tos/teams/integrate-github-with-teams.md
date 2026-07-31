@@ -32,7 +32,7 @@ To use the GitHub integration for Teams, you need:
 1. Follow the prompts to sign in to Teams and approve access.
 1. In Teams, run `@GitHub Notifications signin` and follow the prompts to connect your GitHub account.
 
-{% ifversion ghec %}
+
 
 ### Installing the Teams app for GitHub Enterprise Cloud with data residency
 
@@ -40,7 +40,7 @@ If you use GitHub Enterprise Cloud with data residency on GHE.com, install the d
 
 
 
-{% endif %}
+
 
 
 

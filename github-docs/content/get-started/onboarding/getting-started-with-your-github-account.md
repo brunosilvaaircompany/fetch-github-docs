@@ -6,8 +6,6 @@ This guide will walk you through setting up your GitHub account and getting star
 
 
 The first steps in starting with GitHub are to create an account, choose a product that fits your needs best, verify your email, set up two-factor authentication, and view your profile.
-{% elsif ghes %}
-The first steps in starting with GitHub are to access your account, set up two-factor authentication, and view your profile.
 
 
 There are several types of accounts on GitHub.  Every person who uses GitHub has their own personal account, which can be part of multiple organizations and teams. Your personal account is your identity on your GitHub Enterprise Server instance and represents you as an individual.
@@ -47,7 +45,7 @@ Two-factor authentication, or 2FA, is an extra layer of security used when loggi
 
 Optionally, after you have configured 2FA, add a passkey to your account to enable a secure, passwordless login. See [Managing Your Passkeys](https://docs.github.com/en/authentication/authenticating-with-a-passkey/managing-your-passkeys).
 
-### 5.{% elsif ghes %}3. Viewing your GitHub profile and contribution graph
+### 5. Viewing your GitHub profile and contribution graph
 
 Your GitHub profile tells people the story of your work through the repositories and gists you've pinned, the organization memberships you've chosen to publicize, the contributions you've made, and the projects you've created. For more information, see [Personal Profile](https://docs.github.com/en/account-and-profile/concepts/personal-profile) and [Viewing Contributions On Your Profile](https://docs.github.com/en/account-and-profile/how-tos/contribution-settings/viewing-contributions-on-your-profile).
 
@@ -239,10 +237,8 @@ GitHub Sponsors allows you to make a monthly recurring payment to a developer or
 GitHub Support can help you troubleshoot issues you run into while using GitHub. For more information, see [About GitHub Support](https://docs.github.com/en/support/learning-about-github-support/about-github-support).
 
 
-{% ifversion fpt %}
+
 
 ## Further reading
 
 * [Getting Started With GitHub Team](https://docs.github.com/en/get-started/onboarding/getting-started-with-github-team)
-
-{% endif %}

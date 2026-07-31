@@ -55,7 +55,7 @@ You can use the default labels, or you can create a new label. For more informat
 
 ![Screenshot of the new issue form. In the right sidebar, the "Labels" section is outlined in dark orange.](/assets/images/help/issues/issue-with-label.png)
 
-{% ifversion issue-types %}
+
 
 ## Adding issue types
 
@@ -88,7 +88,7 @@ You can add sub-issues to an issue to quickly break down larger pieces of work i
 
    ![Screenshot of the sub-issues section below the issue description. The "View more sub-issue options" button is highlighted with an orange rectangle.](/assets/images/help/issues/sub-issue-drop-down.png)
 
-{% endif %}
+
 
 ## Adding issue dependencies
 

@@ -62,16 +62,9 @@ With this configuration, you can create a workflow that publishes your package t
 
 ```yaml copy
 
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
+{% data reusables.actions.actions-not-certified-by-github-comment %}
 
-
-# GitHub recommends pinning actions to a commit SHA.
-# To get a newer version, you will need to update the SHA.
-# You can also reference a tag or branch, but the action may change without warning.
-
+{% data reusables.actions.actions-use-sha-pinning-comment %}
 
 name: Publish package to the Maven Central Repository
 on:
@@ -81,11 +74,9 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
-
+      - uses: {% data reusables.actions.action-checkout %}
       - name: Set up Java
-        uses: actions/setup-java@v4
-
+        uses: {% data reusables.actions.action-setup-java %}
         with:
           java-version: '11'
           distribution: 'temurin'
@@ -151,16 +142,9 @@ With this configuration, you can create a workflow that publishes your package t
 
 ```yaml copy
 
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
+{% data reusables.actions.actions-not-certified-by-github-comment %}
 
-
-# GitHub recommends pinning actions to a commit SHA.
-# To get a newer version, you will need to update the SHA.
-# You can also reference a tag or branch, but the action may change without warning.
-
+{% data reusables.actions.actions-use-sha-pinning-comment %}
 
 name: Publish package to GitHub Packages
 on:
@@ -173,10 +157,8 @@ jobs:
       contents: read
       packages: write
     steps:
-      - uses: actions/checkout@v6
-
-      - uses: actions/setup-java@v4
-
+      - uses: {% data reusables.actions.action-checkout %}
+      - uses: {% data reusables.actions.action-setup-java %}
         with:
           java-version: '11'
           distribution: 'temurin'
@@ -247,16 +229,9 @@ With this configuration, you can create a workflow that publishes your package t
 
 ```yaml copy
 
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
+{% data reusables.actions.actions-not-certified-by-github-comment %}
 
-
-# GitHub recommends pinning actions to a commit SHA.
-# To get a newer version, you will need to update the SHA.
-# You can also reference a tag or branch, but the action may change without warning.
-
+{% data reusables.actions.actions-use-sha-pinning-comment %}
 
 name: Publish package to the Maven Central Repository and GitHub Packages
 on:
@@ -269,11 +244,9 @@ jobs:
       contents: read
       packages: write
     steps:
-      - uses: actions/checkout@v6
-
+      - uses: {% data reusables.actions.action-checkout %}
       - name: Set up Java
-        uses: actions/setup-java@v4
-
+        uses: {% data reusables.actions.action-setup-java %}
         with:
           java-version: '11'
           distribution: 'temurin'

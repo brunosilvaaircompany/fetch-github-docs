@@ -41,8 +41,7 @@ In this step, we'll add the dependency review workflow to your repository.
        runs-on: ubuntu-latest
        steps:
          - name: 'Checkout repository'
-           uses: actions/checkout@v6
-
+           uses: {% data reusables.actions.action-checkout %}
          - name: 'Dependency Review'
            uses: actions/dependency-review-action@v4
    ```
@@ -110,8 +109,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 'Checkout Repository'
-        uses: actions/checkout@v6
-
+        uses: {% data reusables.actions.action-checkout %}
       - name: Dependency Review
         uses: actions/dependency-review-action@v4
         with:

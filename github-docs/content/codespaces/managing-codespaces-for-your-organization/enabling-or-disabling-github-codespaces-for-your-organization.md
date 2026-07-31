@@ -56,7 +56,7 @@ Before removing users' access to GitHub Codespaces, you should **alert the affec
 When you remove a user's access, the user will immediately be unable to open existing codespaces they have created from your organization's private and internal repositories.
 
 * If you alert them first, they can push any unpublished work to a branch in the repository before they lose access.
-* Once a user loses access to a codespace, the codespace is retained for a period of 7 days, then it is permanently deleted. During this 7-day period, to recover unpublished work from the codespace, the user must contact us through the [GitHub Support portal](https://support.github.com){% elsif ghes %}your site administrator.
+* Once a user loses access to a codespace, the codespace is retained for a period of 7 days, then it is permanently deleted. During this 7-day period, to recover unpublished work from the codespace, the user must contact us through the [GitHub Support portal](https://support.github.com).
 
 If you were previously paying for codespaces the user had created from your organization's public repositories, ownership of these codespaces will transfer to the user.
 

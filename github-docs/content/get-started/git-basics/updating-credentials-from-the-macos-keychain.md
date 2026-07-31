@@ -30,7 +30,7 @@ Through the command line, you can use the credential helper directly to erase th
 
 ```shell
 $ git credential-osxkeychain erase
-host=github.com
+host={% data variables.product.product_url %}
 protocol=https
 > [Press Return]
 ```

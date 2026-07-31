@@ -128,7 +128,7 @@ The [Sentry MCP server](https://github.com/getsentry/sentry-mcp) gives Copilot a
       "env": {
         // We can specify an environment variable value as a string...
         "SENTRY_HOST": "https://contoso.sentry.io",
-        // or refer to a variable or secret in your Copilot environment
+        // or refer to a variable or secret in your {% data variables.product.prodname_copilot_short %} environment
         // with a name starting with `COPILOT_MCP_`
         "SENTRY_ACCESS_TOKEN": "$COPILOT_MCP_SENTRY_ACCESS_TOKEN"
       }
@@ -223,11 +223,7 @@ To use the Azure DevOps MCP server with Copilot cloud agent, you must update the
 1. Add an Azure login step to the `copilot-setup-steps` workflow job.
 
    ```yaml copy
-   # This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
+   {% data reusables.actions.actions-not-certified-by-github-comment %}
    on:
      workflow_dispatch:
    permissions:

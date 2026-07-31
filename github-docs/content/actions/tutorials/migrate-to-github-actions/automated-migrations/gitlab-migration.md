@@ -92,7 +92,7 @@ The `configure` CLI command is used to set required credentials and options for 
    $ gh actions-importer configure
    ✔ Which CI providers are you configuring?: GitLab
    Enter the following values (leave empty to omit):
-   ✔ Personal access token for GitHub: ***************
+   ✔ {% data variables.product.pat_generic_caps %} for GitHub: ***************
    ✔ Base url of the GitHub instance: https://github.com
    ✔ Private token for GitLab: ***************
    ✔ Base url of the GitLab instance: http://localhost

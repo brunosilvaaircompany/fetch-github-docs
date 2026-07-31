@@ -171,7 +171,7 @@ Additionally, these insights are available via the rule suites [REST API](/rest/
 
    ![Screenshot of the "Rule Insights" page. To the right of an event labeled "not-allowed," an icon of three horizontal dots is outlined in orange.](/assets/images/help/repository/view-rule-runs.png)
 
-{%- ifversion repo-rules-merge-queue %}
+
 1. Optionally, review merge queue details for corresponding pull requests in the same merge group.
 
 
@@ -203,7 +203,7 @@ To view the dashboard:
 
 
 
-{% endif %}
+
 
 
 

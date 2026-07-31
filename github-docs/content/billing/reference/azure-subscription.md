@@ -6,7 +6,7 @@ There’s no limit to the number of enterprises or cost centers you can connect 
 
 If you want to use multiple Azure subscriptions to pay for usage in one enterprise account, you need to create **cost centers**. You can connect each cost center to a different Azure subscription. If a cost center is not connected to an Azure subscription, the usage is charged to Azure subscription of the enterprise account. This also happens if a cost center becomes invalid or is deleted—any future usage from those resources is billed to the enterprise subscription.
 
-For details on how charges are applied to cost centers, see [Cost Center Allocation](https://docs.github.com/en/billing/reference/cost-center-allocation){% elsif ghes %}[Cost Center Allocation](https://docs.github.com/en/enterprise-cloud@latest/billing/reference/cost-center-allocation) in the GitHub Enterprise Cloud documentation.
+For details on how charges are applied to cost centers, see [Cost Center Allocation](https://docs.github.com/en/billing/reference/cost-center-allocation).
 
 ## Azure invoices
 

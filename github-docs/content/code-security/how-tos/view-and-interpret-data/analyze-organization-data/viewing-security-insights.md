@@ -29,7 +29,7 @@ You can download a CSV file of the overview dashboard data for your organization
 
 ## Viewing the security overview dashboard for your enterprise
 
-{% ifversion ghes %}1. In the top-right corner of GitHub Enterprise Server, click your profile picture, then click **Enterprise settings**.
+1. In the top-right corner of GitHub Enterprise Server, click your profile picture, then click **Enterprise settings**.
 
 1. At the top of the page, click the **{% octicon "shield" aria-hidden="true" aria-label="shield" %} Security and quality** tab.
 
@@ -49,7 +49,7 @@ You can download a CSV file of the overview dashboard data for your organization
 The enterprise security overview also includes a **Public monitoring** page, where you can view alerts for secrets leaked by enterprise members in public repositories outside your enterprise. See [Viewing Public Monitoring Alerts](https://docs.github.com/en/code-security/how-tos/view-and-interpret-data/analyze-organization-data/viewing-public-monitoring-alerts).
 
 
-{% endif %}
+
 
 ## Next steps
 

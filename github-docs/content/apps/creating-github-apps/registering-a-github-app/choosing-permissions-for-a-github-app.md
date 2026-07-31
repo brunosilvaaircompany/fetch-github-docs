@@ -30,9 +30,9 @@ Some webhooks and API access requires "Administration" permissions. If your app 
 
 You can modify the permissions for apps you own or manage at any time.
 
-* When an enterprise owner modifies the permissions of an app owned by an **enterprise account**, the changes are automatically accepted by organizations in the enterprise.{% ifversion enterprise-app-manager %}
+* When an enterprise owner modifies the permissions of an app owned by an **enterprise account**, the changes are automatically accepted by organizations in the enterprise.
 * When an enterprise app manager modifies the permissions of an app owned by an **enterprise account**, the changes are automatically accepted by organizations in the enterprise where the app manager is also an organization owner.
-* When you modify the permissions of an app owned by a **user or organization**,{% else %} When you do so,{% endif %} the owner of each account where the app was installed will be prompted to approve the new permissions. If the account owner does not approve the new permissions, their installation will continue to use the old permissions.
+* When you modify the permissions of an app owned by a **user or organization**, the owner of each account where the app was installed will be prompted to approve the new permissions. If the account owner does not approve the new permissions, their installation will continue to use the old permissions.
 
 For more information about modifying permissions, see [Modifying A GitHub App Registration](https://docs.github.com/en/apps/maintaining-github-apps/modifying-a-github-app-registration).
 

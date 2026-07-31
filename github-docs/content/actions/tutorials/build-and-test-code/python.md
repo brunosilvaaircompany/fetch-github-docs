@@ -69,11 +69,9 @@ GitHub provides a workflow template for Python that should work if your reposito
        runs-on: ubuntu-latest
 
        steps:
-       - uses: actions/checkout@v6
-
+       - uses: {% data reusables.actions.action-checkout %}
        - name: Set up Python 3.13
-         uses: actions/setup-python@v5
-
+         uses: {% data reusables.actions.action-setup-python %}
          with:
            python-version: "3.13"
        - name: Install dependencies
@@ -141,11 +139,9 @@ jobs:
         python-version: ["pypy3.10", "3.9", "3.10", "3.11", "3.12", "3.13"]
 
     steps:
-      - uses: actions/checkout@v6
-
+      - uses: {% data reusables.actions.action-checkout %}
       - name: Set up Python {% raw %}${{ matrix.python-version }}{% endraw %}
-        uses: actions/setup-python@v5
-
+        uses: {% data reusables.actions.action-setup-python %}
         with:
           python-version: {% raw %}${{ matrix.python-version }}{% endraw %}
       # You can test your matrix by printing the current Python version
@@ -168,12 +164,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v6
-
+      - uses: {% data reusables.actions.action-checkout %}
       - name: Set up Python
         # This is the version of the action for setting up Python, not the Python version.
-        uses: actions/setup-python@v5
-
+        uses: {% data reusables.actions.action-setup-python %}
         with:
           # Semantic version range syntax or exact version of a Python version
           python-version: '3.x'
@@ -228,11 +222,9 @@ You can also cache dependencies to speed up your workflow. For more information,
 
 ```yaml copy
 steps:
-- uses: actions/checkout@v6
-
+- uses: {% data reusables.actions.action-checkout %}
 - name: Set up Python
-  uses: actions/setup-python@v5
-
+  uses: {% data reusables.actions.action-setup-python %}
   with:
     python-version: '3.x'
 - name: Install dependencies
@@ -245,11 +237,9 @@ After you update `pip`, a typical next step is to install dependencies from `req
 
 ```yaml copy
 steps:
-- uses: actions/checkout@v6
-
+- uses: {% data reusables.actions.action-checkout %}
 - name: Set up Python
-  uses: actions/setup-python@v5
-
+  uses: {% data reusables.actions.action-setup-python %}
   with:
     python-version: '3.x'
 - name: Install dependencies
@@ -266,10 +256,8 @@ The following example caches dependencies for pip.
 
 ```yaml copy
 steps:
-- uses: actions/checkout@v6
-
-- uses: actions/setup-python@v5
-
+- uses: {% data reusables.actions.action-checkout %}
+- uses: {% data reusables.actions.action-setup-python %}
   with:
     python-version: '3.12'
     cache: 'pip'
@@ -291,11 +279,9 @@ This example installs or upgrades `pytest` and `pytest-cov`. Tests are then run 
 
 ```yaml copy
 steps:
-- uses: actions/checkout@v6
-
+- uses: {% data reusables.actions.action-checkout %}
 - name: Set up Python
-  uses: actions/setup-python@v5
-
+  uses: {% data reusables.actions.action-setup-python %}
   with:
     python-version: '3.x'
 - name: Install dependencies
@@ -321,11 +307,9 @@ The following example installs or upgrades `ruff` and uses it to lint all files.
 
 ```yaml copy
 steps:
-- uses: actions/checkout@v6
-
+- uses: {% data reusables.actions.action-checkout %}
 - name: Set up Python
-  uses: actions/setup-python@v5
-
+  uses: {% data reusables.actions.action-setup-python %}
   with:
     python-version: '3.x'
 - name: Install the code linting and formatting tool Ruff
@@ -357,11 +341,9 @@ jobs:
         python: ["3.9", "3.11", "3.13"]
 
     steps:
-      - uses: actions/checkout@v6
-
+      - uses: {% data reusables.actions.action-checkout %}
       - name: Setup Python
-        uses: actions/setup-python@v5
-
+        uses: {% data reusables.actions.action-setup-python %}
         with:
           python-version: {% raw %}${{ matrix.python }}{% endraw %}
       - name: Install tox and any other packages
@@ -391,11 +373,9 @@ jobs:
         python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
 
     steps:
-      - uses: actions/checkout@v6
-
+      - uses: {% data reusables.actions.action-checkout %}
       - name: Setup Python # Set Python version
-        uses: actions/setup-python@v5
-
+        uses: {% data reusables.actions.action-setup-python %}
         with:
           python-version: {% raw %}${{ matrix.python-version }}{% endraw %}
       # Install pip and pytest
@@ -406,8 +386,7 @@ jobs:
       - name: Test with pytest
         run: pytest tests.py --doctest-modules {% raw %}--junitxml=junit/test-results-${{ matrix.python-version }}.xml{% endraw %}
       - name: Upload pytest test results
-        uses: actions/upload-artifact@v4
-
+        uses: {% data reusables.actions.action-upload-artifact %}
         with:
           name: {% raw %}pytest-results-${{ matrix.python-version }}{% endraw %}
           path: {% raw %}junit/test-results-${{ matrix.python-version }}.xml{% endraw %}
@@ -422,16 +401,9 @@ You can configure your workflow to publish your Python package to PyPI once your
 The example workflow below uses [Trusted Publishing](https://docs.pypi.org/trusted-publishers/) to authenticate with PyPI, eliminating the need for a manually configured API token.
 
 ```yaml copy
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
+{% data reusables.actions.actions-not-certified-by-github-comment %}
 
-
-# GitHub recommends pinning actions to a commit SHA.
-# To get a newer version, you will need to update the SHA.
-# You can also reference a tag or branch, but the action may change without warning.
-
+{% data reusables.actions.actions-use-sha-pinning-comment %}
 
 name: Upload Python Package
 
@@ -447,11 +419,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: {% data reusables.actions.action-checkout %}
 
-
-      - uses: actions/setup-python@v5
-
+      - uses: {% data reusables.actions.action-setup-python %}
         with:
           python-version: "3.x"
 
@@ -462,8 +432,7 @@ jobs:
           python -m build
 
       - name: Upload distributions
-        uses: actions/upload-artifact@v4
-
+        uses: {% data reusables.actions.action-upload-artifact %}
         with:
           name: release-dists
           path: dist/
@@ -486,8 +455,7 @@ jobs:
 
     steps:
       - name: Retrieve release distributions
-        uses: actions/download-artifact@v5
-
+        uses: {% data reusables.actions.action-download-artifact %}
         with:
           name: release-dists
           path: dist/

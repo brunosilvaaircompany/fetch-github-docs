@@ -78,7 +78,7 @@ You can use Markdown tables to organize information. Here, you'll use a table to
    ```markdown
    ## About me
 
-   Hi, I'm Mona. You might recognize me as GitHub's mascot.
+   Hi, I'm Mona. You might recognize me as {% data variables.product.prodname_dotcom %}'s mascot.
    ```
 
 1. Two lines below this paragraph, insert a table by copying and pasting the following markup.
@@ -101,7 +101,7 @@ For more information, see [Organizing Information With Tables](https://docs.gith
 ```markdown
 ## About me
 
-Hi, I'm Mona. You might recognize me as GitHub's mascot.
+Hi, I'm Mona. You might recognize me as {% data variables.product.prodname_dotcom %}'s mascot.
 
 | Rank | Languages |
 |-----:|-----------|

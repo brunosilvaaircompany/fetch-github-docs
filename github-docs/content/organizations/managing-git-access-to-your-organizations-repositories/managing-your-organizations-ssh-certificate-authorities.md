@@ -41,7 +41,7 @@ If you add one certificate authority to an enterprise and another certificate au
 1. Optionally, to require members to use SSH certificates, select **Require SSH Certificates**, then click **Save**.
 
    > [!NOTE]
-   > When you require SSH certificates, users will not be able to authenticate to access the organization's repositories over HTTPS or with an unsigned SSH key.{% elsif ghec %}, regardless of whether the SSH key is authorized for an organization that requires authentication through an external identity system.
+   > When you require SSH certificates, users will not be able to authenticate to access the organization's repositories over HTTPS or with an unsigned SSH key.
    >
    > The requirement does not apply to authorized GitHub Apps (including user-to-server tokens), deploy keys, or to GitHub features such as GitHub Actions and Codespaces, which are trusted environments within the GitHub ecosystem.
 
@@ -67,7 +67,7 @@ Deleting an SSH CA from your organization immediately prevents GitHub from accep
 
 ## Upgrading an SSH certificate authority
 
-CAs uploaded to your organization {% ifversion ghec %}prior to March 27th, 2024,{% elsif ghes %}before GitHub Enterprise Server version 3.13 allow the use of non-expiring certificates. To learn more about why expirations are now required for new CAs, see [About SSH Certificate Authorities](https://docs.github.com/en/organizations/managing-git-access-to-your-organizations-repositories/about-ssh-certificate-authorities#issuing-certificates). You can upgrade an existing CA to prevent it from issuing non-expiring certificates. For best security, we strongly recommend upgrading all your CAs once you validate you're not reliant on non-expiring certificates.
+CAs uploaded to your organization prior to March 27th, 2024, allow the use of non-expiring certificates. To learn more about why expirations are now required for new CAs, see [About SSH Certificate Authorities](https://docs.github.com/en/organizations/managing-git-access-to-your-organizations-repositories/about-ssh-certificate-authorities#issuing-certificates). You can upgrade an existing CA to prevent it from issuing non-expiring certificates. For best security, we strongly recommend upgrading all your CAs once you validate you're not reliant on non-expiring certificates.
 
 1. In the upper-right corner of GitHub, click your profile picture, then click **{% octicon "organization" aria-hidden="true" aria-label="organization" %} Organizations**.
 
@@ -83,4 +83,3 @@ CAs uploaded to your organization {% ifversion ghec %}prior to March 27th, 2024,
 1. Read the warning, then click **Upgrade**.
 
 After upgrading the CA, non-expiring certificates signed by that CA will be rejected.
-{% endif %}

@@ -107,14 +107,14 @@ octo-repo:
   # Ignore the `/src/some-dir/kernel.rs` file.
   - "/src/some-dir/kernel.rs"
 
-# In the `primer/react` repository on GitHub:
+# In the `primer/react` repository on {% data variables.product.prodname_dotcom %}:
 https://github.com/primer/react.git:
   # Ignore files called `secrets.json` anywhere in this repository.
   - "secrets.json"
   # Ignore files called `temp.rb` in or below the `/src` directory.
   - "/src/**/temp.rb"
 
-# In the `copilot` repository of any GitHub organization:
+# In the `copilot` repository of any {% data variables.product.prodname_dotcom %} organization:
 git@github.com:*/copilot:
   # Ignore any files in or below the `/__tests__` directory.
   - "/__tests__/**"

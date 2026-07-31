@@ -176,7 +176,7 @@ The following properties are supported in `qlpack.yml` files.
 * Defines metadata that will be displayed on the packaging search page in the packages section of the account that the CodeQL pack is published to. For example:
 
   ```yaml
-  description: Human-readable description of the contents of the CodeQL pack.
+  description: Human-readable description of the contents of the {% data variables.product.prodname_codeql %} pack.
   ```
 
 #### `libraryPathDependencies`

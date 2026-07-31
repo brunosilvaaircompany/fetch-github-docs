@@ -34,7 +34,7 @@ If you only rewrite your history and force push it, the commits with sensitive d
 * Directly via their SHA-1 hashes in cached views on GitHub
 * Through any pull requests that reference them
 
-You cannot remove sensitive data from other users' clones of your repository; you will have to send them the instructions from [Make sure other copies are cleaned up: clones of colleagues](https://htmlpreview.github.io/?https://github.com/newren/git-filter-repo/blob/docs/html/git-filter-repo.html#_make_sure_other_copies_are_cleaned_up_clones_of_colleagues) in the `git-filter-repo` manual to have them do so themselves.  However, you can permanently remove cached views and references to the sensitive data in pull requests on GitHub by contacting us through the [GitHub Support portal](https://support.github.com){% elsif ghes %}your site administrator.
+You cannot remove sensitive data from other users' clones of your repository; you will have to send them the instructions from [Make sure other copies are cleaned up: clones of colleagues](https://htmlpreview.github.io/?https://github.com/newren/git-filter-repo/blob/docs/html/git-filter-repo.html#_make_sure_other_copies_are_cleaned_up_clones_of_colleagues) in the `git-filter-repo` manual to have them do so themselves.  However, you can permanently remove cached views and references to the sensitive data in pull requests on GitHub by contacting us through the [GitHub Support portal](https://support.github.com).
 
 
 
@@ -59,7 +59,7 @@ Consider these limitations and challenges in your decision to rewrite your repos
 1. Clone the repository to your local computer. See [Cloning A Repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository).
 
    ```shell
-   git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY
+   git clone https://{% data variables.product.product_url %}/YOUR-USERNAME/YOUR-REPOSITORY
    ```
 
 1. Navigate into the repository's working directory.
@@ -117,7 +117,7 @@ Consider these limitations and challenges in your decision to rewrite your repos
 
 After using `git-filter-repo` to remove the sensitive data and pushing your changes to GitHub, you must take a few more steps to fully remove the data from GitHub.
 
-1. Contact us through the [GitHub Support portal](https://support.github.com){% elsif ghes %}your site administrator, and provide the following information:
+1. Contact us through the [GitHub Support portal](https://support.github.com), and provide the following information:
 
     * The owner and repository name in question (e.g. YOUR-USERNAME/YOUR-REPOSITORY).
 

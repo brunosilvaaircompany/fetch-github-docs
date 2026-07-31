@@ -82,7 +82,7 @@ You can trigger Copilot cloud agent in several ways:
 1. Assign `GitHub Copilot` to the work item, or mention `@GitHub Copilot` in a comment. For example:
 
     ```text
-   @GitHub Copilot create a new API endpoint for user authentication in octo-org/octorepo
+   @{% data variables.product.prodname_copilot %} create a new API endpoint for user authentication in octo-org/octorepo
     ```
 
 1. If you have not previously connected the GitHub application in Jira to your GitHub account, follow the prompts to authorize the application for both GitHub and Atlassian.

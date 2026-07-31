@@ -22,7 +22,7 @@ You can override the default behavior in your repository settings, by specifying
 
 Depending on your configuration, you may see additional checks running on pull requests with code scanning configured. These are usually workflows that analyze the code or that upload code scanning results. These checks are useful for troubleshooting when there are problems with the analysis.
 
-For example, if the repository uses the CodeQL analysis workflow a **CodeQL / Analyze (LANGUAGE)** check is run for each language before the results check runs. The analysis check may fail if there are configuration problems, or if the pull request breaks the build for a language that the analysis compiles (for example, C/C++, C#, Go, Java, Kotlin, Rust, {% else ifversion codeql-rust-public-preview %}Rust (public preview), and Swift).
+For example, if the repository uses the CodeQL analysis workflow a **CodeQL / Analyze (LANGUAGE)** check is run for each language before the results check runs. The analysis check may fail if there are configuration problems, or if the pull request breaks the build for a language that the analysis compiles (for example, C/C++, C#, Go, Java, Kotlin, Rust, and Swift).
 
 As with other pull request checks, you can see full details of the check failure on the **Checks** tab. For more information about configuring and troubleshooting, see [Workflow Configuration Options](https://docs.github.com/en/code-security/reference/code-scanning/workflow-configuration-options) or [Troubleshoot Analysis Errors](https://docs.github.com/en/code-security/reference/code-scanning/troubleshoot-analysis-errors).
 
@@ -88,7 +88,7 @@ When Copilot Autofix is enabled for a repository, alerts are displayed in pull r
 > * Copilot Autofix supports a subset of CodeQL queries. For information about the availability of Copilot Autofix, see the query tables linked from [Codeql Queries](https://docs.github.com/en/code-security/reference/code-scanning/codeql/codeql-queries).
 > * When analysis is complete, all relevant results are published to the pull request at once. If at least one alert in your pull request has an Copilot Autofix suggestion, you should assume that the LLM has finished identifying potential fixes for your code.
 > * On alerts generated from queries that are not supported by Copilot Autofix, you will see a note telling you that the query is not supported. If a suggestion for a supported query fails to generate, you will see a note on the alert prompting you to try pushing another commit or to contact support.
-> * Copilot Autofix for code scanning alerts won't be able to generate a fix for every alert in every situation. The feature operates on a best-effort basis and is not guaranteed to succeed 100% of the time. For information about the limitations of automatically generated fixes, see [Limitations of suggestions](/{% ifversion ghes %}enterprise-cloud@latest/code-security/responsible-use/security-and-quality-ai-features#7-limitations).
+> * Copilot Autofix for code scanning alerts won't be able to generate a fix for every alert in every situation. The feature operates on a best-effort basis and is not guaranteed to succeed 100% of the time. For information about the limitations of automatically generated fixes, see [Limitations of suggestions](/enterprise-cloud@latest/code-security/responsible-use/security-and-quality-ai-features#7-limitations).
 
 Usually, when you suggest changes to a pull request, your comment contains changes for a single file that is changed in the pull request. The following screenshot shows an Copilot Autofix comment that suggests changes to the `index.js` file where the alert is displayed. Since the potential fix requires a new dependency on `escape-html`, the comment also suggests adding this dependency to the `package.json` file, even though the original pull request makes no changes to this file.
 
@@ -112,7 +112,7 @@ Each Copilot Autofix suggestion demonstrates a potential solution for a code sca
 
 If you decide to reject a Copilot Autofix suggestion, click **Dismiss suggestion** in the comment to dismiss the suggested fix.
 
-{% endif %}
+
 
 ## Dismissing an alert on your pull request
 

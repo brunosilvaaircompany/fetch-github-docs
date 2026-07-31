@@ -7,8 +7,6 @@ You can access GitHub's compliance reports in your enterprise settings.
 
 * SOC 1, Type 2
 * SOC 2, Type 2
-{%- elsif fpt %}
-* SOC 3
 
 * Cloud Security Alliance CAIQ self-assessment (CSA CAIQ - Level 1)
 * ISO/IEC 27001:2022 certification

@@ -50,7 +50,7 @@ Choose which package ecosystems you'd like to enable, disable, or set to read-on
 
 ## Step 5: Ensure you have a TLS certificate for your package host URL, if needed
 
-If subdomain isolation is enabled for your GitHub Enterprise Server instance, you will need to create and upload a TLS certificate that allows the package host URL for each ecosystem you want to use, such as `ghcr.io{% elsif ghes %}containers.HOSTNAME
+If subdomain isolation is enabled for your GitHub Enterprise Server instance, you will need to create and upload a TLS certificate that allows the package host URL for each ecosystem you want to use, such as `ghcr.io
 `. Make sure each package host URL includes `https://`.
 
   You can create the certificate manually, or you can use _Let's Encrypt_. If you already use _Let's Encrypt_, you must request a new TLS certificate after enabling GitHub Packages. For more information about package host URLs, see [Enabling Subdomain Isolation](https://docs.github.com/en/admin/configuring-settings/hardening-security-for-your-enterprise/enabling-subdomain-isolation). For more information about uploading TLS certificates to GitHub Enterprise Server, see [Configuring Tls](https://docs.github.com/en/admin/configuring-settings/hardening-security-for-your-enterprise/configuring-tls).

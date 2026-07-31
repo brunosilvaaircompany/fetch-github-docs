@@ -42,8 +42,7 @@ This procedure demonstrates how to create a workflow template and metadata file.
        runs-on: ubuntu-latest
 
        steps:
-         - uses: actions/checkout@v6
-
+         - uses: {% data reusables.actions.action-checkout %}
 
          - name: Run a one-line script
            run: echo Hello from Octo Organization

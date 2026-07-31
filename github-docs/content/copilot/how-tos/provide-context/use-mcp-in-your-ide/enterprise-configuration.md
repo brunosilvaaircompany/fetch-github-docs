@@ -40,7 +40,7 @@ For example, if your GitHub Enterprise Cloud instance is `https://octocorp.ghe.c
      "servers": {
        "github": {
          "type": "http",
-         "url": "https://copilot-api.SUBDOMAIN.ghe.com/mcp",
+         "url": "https://copilot-api.{% data variables.enterprise.data_residency_domain %}/mcp",
          "headers": {
            "Authorization": "Bearer ${input:github_mcp_pat}"
          }
@@ -64,7 +64,7 @@ For example, if your GitHub Enterprise Cloud instance is `https://octocorp.ghe.c
      "servers": {
        "github": {
          "type": "http",
-         "url": "https://copilot-api.SUBDOMAIN.ghe.com/mcp"
+         "url": "https://copilot-api.{% data variables.enterprise.data_residency_domain %}/mcp"
        }
      }
    }
@@ -77,7 +77,7 @@ For example, if your GitHub Enterprise Cloud instance is `https://octocorp.ghe.c
 
     ```json
     {
-      "github-enterprise.uri": "https://copilot-api.SUBDOMAIN.ghe.com/mcp"
+      "github-enterprise.uri": "https://copilot-api.{% data variables.enterprise.data_residency_domain %}/mcp"
     }
     ```
 

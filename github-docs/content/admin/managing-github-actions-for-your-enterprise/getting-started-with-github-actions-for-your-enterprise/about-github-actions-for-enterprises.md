@@ -13,7 +13,7 @@ GitHub Actions allows users in your enterprise to improve productivity by automa
 
 GitHub Actions helps your team work faster at scale. When large repositories start using GitHub Actions, pull requests are typically merged faster, allowing teams to merge more pull requests per day.
 
-You can create your own unique automations, or you can use and adapt workflows from our ecosystem of over 10,000 actions built by industry leaders and the open source community. For more information, see [Find And Customize Actions](https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/find-and-customize-actions)., or you can allow your developers to access actions on GitHub.com. For more information, see [About Using Actions In Your Enterprise](https://docs.github.com/en/admin/managing-github-actions-for-your-enterprise/managing-access-to-actions-from-githubcom/about-using-actions-in-your-enterprise).{% endif %}
+You can create your own unique automations, or you can use and adapt workflows from our ecosystem of over 10,000 actions built by industry leaders and the open source community. For more information, see [Find And Customize Actions](https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/find-and-customize-actions).
 
 GitHub Actions is developer friendly, because it's integrated directly into the familiar GitHub experience.
 
@@ -33,11 +33,9 @@ If you're migrating your enterprise to GitHub Actions from another provider, the
 
 
 GitHub Actions is not enabled for GitHub Enterprise Server by default.
- After you finish planning, you can follow the instructions for enabling GitHub Actions. For example, you may need to upgrade the CPU and memory resources for {% ifversion ghes %}your GitHub Enterprise Server instance. For more information, see [Getting Started With GitHub Actions For GitHub Enterprise Server](https://docs.github.com/en/admin/managing-github-actions-for-your-enterprise/getting-started-with-github-actions-for-your-enterprise/getting-started-with-github-actions-for-github-enterprise-server).
+ After you finish planning, you can follow the instructions for enabling GitHub Actions. For example, you may need to upgrade the CPU and memory resources for your GitHub Enterprise Server instance. For more information, see [Getting Started With GitHub Actions For GitHub Enterprise Server](https://docs.github.com/en/admin/managing-github-actions-for-your-enterprise/getting-started-with-github-actions-for-your-enterprise/getting-started-with-github-actions-for-github-enterprise-server).
 
-{% else %}
-After you finish planning, you can follow the instructions for getting started with GitHub Actions. For more information, see [Getting Started With GitHub Actions For GitHub Enterprise Cloud](https://docs.github.com/en/admin/managing-github-actions-for-your-enterprise/getting-started-with-github-actions-for-your-enterprise/getting-started-with-github-actions-for-github-enterprise-cloud).
-{% endif %}
+
 
 ## Further reading
 

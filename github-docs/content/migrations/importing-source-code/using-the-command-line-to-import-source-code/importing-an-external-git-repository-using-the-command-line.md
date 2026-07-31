@@ -25,8 +25,8 @@ Before you start, make sure you know:
 
    ```shell
    $ cd REPO.git
-   $ git push --mirror https://github.com/USER/REPO.git
-   # Pushes the mirror to the new repository on your GitHub Enterprise Server instance
+   $ git push --mirror https://{% data variables.product.product_url %}/USER/REPO.git
+   # Pushes the mirror to the new repository on {% data variables.location.product_location %}
    ```
 
 1. Remove the temporary local repository.

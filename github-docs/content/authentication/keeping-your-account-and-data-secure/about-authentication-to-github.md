@@ -15,15 +15,11 @@ You can access your resources in GitHub in a variety of ways: in the browser, vi
 
 
 
-If you're a member of an enterprise with managed users, you will authenticate to GitHub in your browser using your IdP. For more information, see [Enterprise Managed Users](https://docs.github.com/en/enterprise-cloud@latest/admin/concepts/identity-and-access-management/enterprise-managed-users#how-do-managed-user-accounts-authenticate-to-github){% ifversion fpt %} in the GitHub Enterprise Cloud documentation.
+If you're a member of an enterprise with managed users, you will authenticate to GitHub in your browser using your IdP. For more information, see [Enterprise Managed Users](https://docs.github.com/en/enterprise-cloud@latest/admin/concepts/identity-and-access-management/enterprise-managed-users#how-do-managed-user-accounts-authenticate-to-github) in the GitHub Enterprise Cloud documentation.
 
 If you're not a member of an enterprise with managed users, you will authenticate using your GitHub username and password, or a passkey. You may also use two-factor authentication and SAML single sign-on, which can be required by organization and enterprise owners.
 
-{% else %}
 
-You can authenticate to GitHub in your browser in a number of ways.
-
-{% endif %}
 
 
 > [!NOTE]
@@ -63,13 +59,13 @@ If you need to use multiple accounts on your GitHub Enterprise Server instance, 
 * **External authentication**
   * Your site administrator may configure your GitHub Enterprise Server instance to use external authentication instead of a username and password. For more information, see [Identity And Access Management Fundamentals](https://docs.github.com/en/admin/concepts/identity-and-access-management/identity-and-access-management-fundamentals#external-authentication).
 * **SAML single sign-on**
-  * Before you can access resources owned by an organization or enterprise account that uses SAML single sign-on, you may need to also authenticate through an IdP. For more information, see [About Authentication With Single Sign On](https://docs.github.com/en/authentication/authenticating-with-single-sign-on/about-authentication-with-single-sign-on){% ifversion fpt %} in the GitHub Enterprise Cloud documentation.{% endif %}
+  * Before you can access resources owned by an organization or enterprise account that uses SAML single sign-on, you may need to also authenticate through an IdP. For more information, see [About Authentication With Single Sign On](https://docs.github.com/en/authentication/authenticating-with-single-sign-on/about-authentication-with-single-sign-on) in the GitHub Enterprise Cloud documentation.
 
 ### Session cookies
 
 GitHub uses cookies to provide services and increase security. You can review details about GitHub's cookies in [GitHub Cookies](https://docs.github.com/en/free-pro-team@latest/site-policy/privacy-policies/github-cookies).
 
-* The gist.github.com{% elsif ghes %}HOSTNAME domain and github.com domains{% elsif ghes %}base domain for your instance use separate cookies.
+* The gist.github.com and github.com domains use separate cookies.
 * GitHub typically marks a user session for deletion after two weeks of inactivity.
 * GitHub does not immediately delete a session when you sign out. Periodically, GitHub automatically deletes expired sessions.
 
@@ -110,17 +106,7 @@ You can work with all repositories on GitHub over HTTPS, even if you are behind 
 If you authenticate with GitHub CLI, you can either authenticate with a personal access token or via the web browser. For more information about authenticating with GitHub CLI, see [`gh auth login`](https://cli.github.com/manual/gh_auth_login).
 
 If you authenticate without GitHub CLI, you must authenticate with a personal access token. When Git prompts you for your password, enter your personal access token. Alternatively, you can use a credential helper like [Git Credential Manager](https://github.com/GitCredentialManager/git-credential-manager/blob/main/README.md). Password-based authentication for Git has been removed in favor of more secure authentication methods. For more information, see [Managing Your Personal Access Tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).
- Every time you use Git to authenticate with GitHub, you'll be prompted to enter your credentials, unless you cache them with a [credential helper](/get-started/git-basics/caching-your-github-credentials-in-git).{% elsif ghes %}you can use authentication methods whose availability depend on your IdP.
-
-The table outlines the available authentication methods based on the IdP configured for your instance. Different IdPs may impose specific restrictions or enable certain features, such as disabling password authentication. For more details, see [Managing Iam](https://docs.github.com/en/admin/managing-iam).
-
-| IdP | Available authentication methods | More information |
-| :- | :- | :- |
-| SAML | Personal access token | Password authentication disabled |
-| LDAP | Personal access token or Username / Password | Password authentication can be disabled by the site administrator |
-| Built-in authentication | Personal access token or Username / Password | Password authentication cannot be disabled |
-
-
+ Every time you use Git to authenticate with GitHub, you'll be prompted to enter your credentials, unless you cache them with a [credential helper](/get-started/git-basics/caching-your-github-credentials-in-git).
 
 ### SSH
 
@@ -134,7 +120,7 @@ If you authenticate without GitHub CLI, you will need to generate an SSH public/
 
 ### Authorizing for SAML single sign-on
 
-To use a personal access token or SSH key to access resources owned by an organization that uses SAML single sign-on, you must also authorize the personal token or SSH key. For more information, see [Authorizing A Personal Access Token For Use With Single Sign On](https://docs.github.com/en/enterprise-cloud@latest/authentication/authenticating-with-single-sign-on/authorizing-a-personal-access-token-for-use-with-single-sign-on) or [Authorizing An SSH Key For Use With Single Sign On](https://docs.github.com/en/enterprise-cloud@latest/authentication/authenticating-with-single-sign-on/authorizing-an-ssh-key-for-use-with-single-sign-on){% ifversion fpt %} in the GitHub Enterprise Cloud documentation.{% endif %}
+To use a personal access token or SSH key to access resources owned by an organization that uses SAML single sign-on, you must also authorize the personal token or SSH key. For more information, see [Authorizing A Personal Access Token For Use With Single Sign On](https://docs.github.com/en/enterprise-cloud@latest/authentication/authenticating-with-single-sign-on/authorizing-a-personal-access-token-for-use-with-single-sign-on) or [Authorizing An SSH Key For Use With Single Sign On](https://docs.github.com/en/enterprise-cloud@latest/authentication/authenticating-with-single-sign-on/authorizing-an-ssh-key-for-use-with-single-sign-on) in the GitHub Enterprise Cloud documentation.
 
 ## GitHub's token formats
 

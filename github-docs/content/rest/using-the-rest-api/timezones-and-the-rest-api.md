@@ -24,7 +24,7 @@ An example of this is the API to manage commits. For more information, see [Comm
 It is possible to supply a `Time-Zone` header, which defines a timezone according to the [list of names from the Olson database](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
 
 ```shell
-curl -H "Time-Zone: Europe/Amsterdam" -X POST https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3/repos/github-linguist/linguist/contents/new_file.md
+curl -H "Time-Zone: Europe/Amsterdam" -X POST {% data variables.product.rest_url %}/repos/github-linguist/linguist/contents/new_file.md
 ```
 
 This means that we generate a timestamp for the moment your API call is made, in the timezone this header defines.

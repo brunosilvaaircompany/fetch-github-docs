@@ -389,7 +389,7 @@ Here's a complete example that incorporates all the best practices from this tut
 
 ## Purpose
 
-These instructions guide Copilot code review across all files in this repository.
+These instructions guide {% data variables.copilot.copilot_code-review_short %} across all files in this repository.
 Language-specific rules are in separate instruction files.
 
 ## Security Critical Issues

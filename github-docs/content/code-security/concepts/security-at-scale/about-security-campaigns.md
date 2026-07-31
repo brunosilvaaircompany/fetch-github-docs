@@ -21,8 +21,8 @@ A security campaign has many benefits over other ways of encouraging developers 
 * Each campaign has a named point of contact for questions, reviews, and collaboration.  
 * For code scanning alerts, GitHub Copilot Autofix is automatically triggered to suggest a resolution. 
 
-* For both code scanning and secret scanning, you can assign alerts in a campaign to users with write access{% ifversion copilot %} or to Copilot cloud agent to automatically generate pull requests with fixes.
-{%- endif %}
+* For both code scanning and secret scanning, you can assign alerts in a campaign to users with write access or to Copilot cloud agent to automatically generate pull requests with fixes.
+
 
 You can use one of the templates to select a group of closely related alerts for a campaign. This allows developers to build on the knowledge gained by resolving one alert and use it to fix several more, providing them with an incentive to fix multiple alerts.
 
@@ -50,23 +50,18 @@ The creation workflow is the same for all campaigns, but you will notice a few d
 | Alerts available for inclusion | {% octicon "check" aria-label="Supported" %} Default branch only | {% octicon "check" aria-label="Supported" %}
 | Repository tracking issues | {% octicon "check" aria-label="Supported" %} | {% octicon "x" aria-label="Not supported" %} |
 | Developer notifications | {% octicon "check" aria-label="Supported" %} Requires write access to repository | {% octicon "check" aria-label="Supported" %} Requires view access to alerts list |
-| {% ifversion code-secret-alert-assignees %} |
+|  |
 | Alert assignment | {% octicon "check" aria-label="Supported" %} | {% octicon "check" aria-label="Supported" %} May raise permissions |
 |  |
 | Automatic remediation support | {% octicon "check" aria-label="Supported" %} GitHub Copilot Autofix | {% octicon "x" aria-label="Not supported" %} |
 
 {% endrowheaders %}
 
-{% endif %}
 
 
 
-## About assigning alerts{% ifversion security-campaigns-assign-to-cca %} to users and Copilot cloud agent
 
-{% elsif ghes = 3.20 %}
-
->[!NOTE]
-> The option to assign code scanning and secret scanning alerts is currently in public preview and is subject to change.
+## About assigning alerts to users and Copilot cloud agent
 
 
 
@@ -91,7 +86,7 @@ If an autofix has been generated for alerts in a security campaign, you can sele
 
 
 
-{% endif %}
+
 
 ## Next steps
 

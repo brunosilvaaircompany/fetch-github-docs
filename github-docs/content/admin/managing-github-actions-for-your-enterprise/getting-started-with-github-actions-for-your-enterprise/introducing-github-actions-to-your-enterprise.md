@@ -11,10 +11,10 @@ Before you introduce GitHub Actions to a large enterprise, you first need to pla
 
 You should create a plan to govern your enterprise's use of GitHub Actions and meet your compliance obligations.
 
-Determine which actions and reusable workflows your developers will be allowed to use. First, decide whether you'll enable access to actions {% ifversion actions-workflow-policy %}and reusable workflows from outside your instance. If users in your enterprise need access to other actions from GitHub.com or GitHub Marketplace, there are a few configuration options.
+Determine which actions and reusable workflows your developers will be allowed to use. First, decide whether you'll enable access to actions and reusable workflows from outside your instance. If users in your enterprise need access to other actions from GitHub.com or GitHub Marketplace, there are a few configuration options.
  For more information, see [About Using Actions In Your Enterprise](https://docs.github.com/en/admin/managing-github-actions-for-your-enterprise/managing-access-to-actions-from-githubcom/about-using-actions-in-your-enterprise).
 
-Then,{% else %}First,{% endif %} decide whether you'll allow third-party actions and reusable workflows that were not created by GitHub. You can configure the actions and reusable workflows that are allowed to run at the repository, organization, and enterprise levels and can choose to only allow actions that are created by GitHub. If you do allow third-party actions and reusable workflows, you can limit allowed actions to those created by verified creators or a list of specific actions and reusable workflows.
+Then, decide whether you'll allow third-party actions and reusable workflows that were not created by GitHub. You can configure the actions and reusable workflows that are allowed to run at the repository, organization, and enterprise levels and can choose to only allow actions that are created by GitHub. If you do allow third-party actions and reusable workflows, you can limit allowed actions to those created by verified creators or a list of specific actions and reusable workflows.
 
 For more information, see [Managing GitHub Actions Settings For A Repository](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository#managing-github-actions-permissions-for-your-repository), [Disabling Or Limiting GitHub Actions For Your Organization](https://docs.github.com/en/organizations/managing-organization-settings/disabling-or-limiting-github-actions-for-your-organization#managing-github-actions-permissions-for-your-organization), and [Enforcing Policies For GitHub Actions In Your Enterprise](https://docs.github.com/en/admin/enforcing-policies/enforcing-policies-for-your-enterprise/enforcing-policies-for-github-actions-in-your-enterprise#enforcing-a-policy-to-restrict-the-use-of-github-actions-in-your-enterprise).
 
@@ -76,8 +76,8 @@ You should plan for how you'll manage the resources required to use GitHub Actio
 
 ### Hardware requirements
 
-You may need to upgrade the CPU and memory resources for {% ifversion ghes %}your GitHub Enterprise Server instance to handle the load from GitHub Actions without causing performance loss. For more information, see [Getting Started With GitHub Actions For GitHub Enterprise Server](https://docs.github.com/en/admin/managing-github-actions-for-your-enterprise/getting-started-with-github-actions-for-your-enterprise/getting-started-with-github-actions-for-github-enterprise-server#review-hardware-requirements).
-{% endif %}
+You may need to upgrade the CPU and memory resources for your GitHub Enterprise Server instance to handle the load from GitHub Actions without causing performance loss. For more information, see [Getting Started With GitHub Actions For GitHub Enterprise Server](https://docs.github.com/en/admin/managing-github-actions-for-your-enterprise/getting-started-with-github-actions-for-your-enterprise/getting-started-with-github-actions-for-github-enterprise-server#review-hardware-requirements).
+
 
 ### Runners
 

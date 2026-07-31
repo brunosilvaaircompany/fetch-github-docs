@@ -9,7 +9,7 @@
 The following example shows custom instructions to guide GitHub Copilot to create well-structured, actionable GitHub issues and provide effective issue management.
 
 ```markdown copy
-When creating or managing GitHub issues:
+When creating or managing {% data variables.product.prodname_dotcom %} issues:
 
 ## Bug Report Essentials
 **Description**: Clear, concise summary of the problem

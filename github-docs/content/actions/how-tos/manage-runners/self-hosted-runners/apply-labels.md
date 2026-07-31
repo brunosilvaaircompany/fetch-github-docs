@@ -8,14 +8,12 @@
 
 For information on how to use labels to route jobs to specific types of self-hosted runners, see [Use In A Workflow](https://docs.github.com/en/actions/how-tos/manage-runners/self-hosted-runners/use-in-a-workflow). You can also route jobs to runners in a specific group. For more information, see [Choose The Runner For A Job](https://docs.github.com/en/actions/how-tos/write-workflows/choose-where-workflows-run/choose-the-runner-for-a-job#choosing-runners-in-a-group).
 
-A self-hosted runner can be located in either your repository, organization, or enterprise account settings on GitHub{% elsif ghes %} enterprise settings on GitHub Enterprise Server. To manage a self-hosted runner, you must have the following permissions, depending on where the self-hosted runner was added:
+A self-hosted runner can be located in either your repository, organization, or enterprise account settings on GitHub. To manage a self-hosted runner, you must have the following permissions, depending on where the self-hosted runner was added:
 * **User repository:** You must be the repository owner.
 * **Organization:** You must be an organization owner.
 * **Organization repository:** You must be an organization owner, or have admin access to the repository.
 
 * **Enterprise account:** You must be an enterprise owner.
-{% elsif ghes %}
-* **Enterprise:** You must be a GitHub Enterprise site administrator.
 
 
 

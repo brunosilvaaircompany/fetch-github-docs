@@ -228,8 +228,7 @@ jobs:
     permissions:
       contents: read # for actions/checkout
     steps:
-      - uses: actions/checkout@v6
-
+      - uses: {% data reusables.actions.action-checkout %}
         with:
           lfs: true
 ```

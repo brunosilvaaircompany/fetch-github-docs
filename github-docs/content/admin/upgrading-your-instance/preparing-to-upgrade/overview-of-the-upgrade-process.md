@@ -42,11 +42,11 @@ Check if you need to upgrade the following applications:
 
 * GitHub Actions runners must be updated if your GitHub Enterprise Server instance uses ephemeral self-hosted runners for GitHub Actions and automatic updates are disabled. Upgrade runners to the minimum version of application required by your upgraded instance, before performing your upgrade. To find the minimum required version for your release, see [All Releases](https://docs.github.com/en/admin/all-releases#minimum-github-actions-runner-application-versions).
 
-* GitHub Enterprise Server Backup Utilities. Your GitHub Enterprise Server Backup Utilities version needs to be the same version as, or at most two versions ahead of {% ifversion ghes %}your GitHub Enterprise Server instance.
+* GitHub Enterprise Server Backup Utilities. Your GitHub Enterprise Server Backup Utilities version needs to be the same version as, or at most two versions ahead of your GitHub Enterprise Server instance.
   * You may also want to plan to upgrade GitHub Enterprise Server Backup Utilities to a newer version after upgrading your instance.
      See [About The Backup Service For GitHub Enterprise Server](https://docs.github.com/en/admin/backing-up-and-restoring-your-instance/about-the-backup-service-for-github-enterprise-server).
   * The same does not apply to GitHub Enterprise Server Backup Service, which is bundled with the appliance.
-{% endif %}
+
 
 
 ### Plan a maintenance window

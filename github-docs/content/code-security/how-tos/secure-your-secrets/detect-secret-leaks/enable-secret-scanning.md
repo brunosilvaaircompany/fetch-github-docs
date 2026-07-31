@@ -4,9 +4,9 @@
 
 
 
-{% ifversion fpt or ghec %}Secret scanning alerts for users can be enabled on any free public repository that you own.
+Secret scanning alerts for users can be enabled on any free public repository that you own.
 
-{% endif %}
+
 
 Secret scanning alerts for users can be enabled for any repository that is owned by an organization, and for repositories owned by user accounts when using GitHub Enterprise Cloud with Enterprise Managed Users.
 

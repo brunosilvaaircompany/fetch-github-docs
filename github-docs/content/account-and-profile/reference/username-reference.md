@@ -8,17 +8,13 @@ The following list contains limitations and considerations when changing your Gi
 
 
 
-{% ifversion ghec %}
+
 
 Members of an enterprise with managed users cannot change usernames. Your enterprise's IdP administrator controls your GitHub username. For more information, see [Enterprise Managed Users](https://docs.github.com/en/admin/concepts/identity-and-access-management/enterprise-managed-users).
 
-{% elsif ghes %}
 
-If you sign into {% ifversion ghes %}your GitHub Enterprise Server instance with LDAP credentials or single sign-on (SSO), only your local administrator can change your username. For more information about authentication methods for GitHub Enterprise Server, see [Understanding Iam For Enterprises](https://docs.github.com/en/admin/managing-iam/understanding-iam-for-enterprises).
 
-{% endif %}
 
-{% endif %}
 
 
 

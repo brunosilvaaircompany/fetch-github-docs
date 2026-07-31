@@ -4,7 +4,7 @@
 
 
 
-If your enterprise members manage their own user accounts on {% ifversion ghes %}your GitHub Enterprise Server instance, you can configure SAML authentication as an additional access restriction for your enterprise or organization. Single sign-on (SSO) gives organization owners and enterprise owners a way to control and secure access to organization resources like repositories, issues, and pull requests.
+If your enterprise members manage their own user accounts on your GitHub Enterprise Server instance, you can configure SAML authentication as an additional access restriction for your enterprise or organization. Single sign-on (SSO) gives organization owners and enterprise owners a way to control and secure access to organization resources like repositories, issues, and pull requests.
 
 
 If you configure SAML SSO, members of your organization will continue to sign into their personal accounts on GitHub.com. When a member accesses most resources within your organization, GitHub redirects the member to your IdP to authenticate. After successful authentication, your IdP redirects the member back to GitHub. For more information, see [About Authentication With Single Sign On](https://docs.github.com/en/enterprise-cloud@latest/authentication/authenticating-with-single-sign-on/about-authentication-with-single-sign-on).
@@ -39,29 +39,19 @@ If you use Microsoft Entra ID (previously known as Azure AD) as your IdP, you ca
 There are special considerations when enabling SAML SSO for your enterprise account if any of the organizations owned by the enterprise account are already configured to use SAML SSO.
  For more information, see [Switching Your Saml Configuration From An Organization To An Enterprise Account](https://docs.github.com/en/admin/managing-iam/using-saml-for-enterprise-iam/switching-your-saml-configuration-from-an-organization-to-an-enterprise-account).
 
-{% elsif ghes %}
 
-SAML SSO allows people to authenticate and access your GitHub Enterprise Server instance through an external system for identity management.
-
-SAML is an XML-based standard for authentication and authorization. When you configure SAML for your GitHub Enterprise Server instance, the external system for authentication is called an identity provider (IdP). Your instance acts as a SAML service provider (SP). For more information about the SAML standard, see [Security Assertion Markup Language](https://en.wikipedia.org/wiki/Security_Assertion_Markup_Language) on Wikipedia.
-
-> [!NOTE]
-> You can use either SAML or LDAP, but not both.
-
-
-{% endif %}
 
 
 
 When using SAML or CAS, two-factor authentication is not supported or managed on the GitHub Enterprise Server instance, but may be supported by the external authentication provider. Two-factor authentication enforcement on organizations is not available. For more information about enforcing two-factor authentication on organizations, see [Requiring Two Factor Authentication In Your Organization](https://docs.github.com/en/organizations/keeping-your-organization-secure/managing-two-factor-authentication-for-your-organization/requiring-two-factor-authentication-in-your-organization).
 
 
-After you configure SAML, people who use {% ifversion ghes %}your GitHub Enterprise Server instance must use a personal access token to authenticate API requests. For more information, see [Managing Your Personal Access Tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).
+After you configure SAML, people who use your GitHub Enterprise Server instance must use a personal access token to authenticate API requests. For more information, see [Managing Your Personal Access Tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).
 
 If you want to allow authentication for some people who don't have an account on your external authentication provider, you can allow fallback authentication to local accounts on your GitHub Enterprise Server instance. For more information, see [Allowing Built In Authentication For Users Outside Your Provider](https://docs.github.com/en/admin/managing-iam/understanding-iam-for-enterprises/allowing-built-in-authentication-for-users-outside-your-provider).
 
 
-{% endif %}
+
 
 For more information about the configuration of SAML SSO on GitHub, see [Configuring Saml Single Sign On For Your Enterprise](https://docs.github.com/en/admin/managing-iam/using-saml-for-enterprise-iam/configuring-saml-single-sign-on-for-your-enterprise).
 
@@ -71,7 +61,7 @@ For more information about the configuration of SAML SSO on GitHub, see [Configu
 
 By default, your IdP does not communicate with GitHub automatically when you assign or unassign the application. GitHub provisions access to your resources on using SAML Just-in-Time (JIT) provisioning the first time someone navigates to your enterprise's resources on GitHub and signs in by authenticating through your IdP. You may need to manually notify users when you grant access to GitHub, and you must manually deprovision access GitHub during offboarding.
 
-Alternatively, instead of SAML JIT provisioning, you can use SCIM to provision or deprovision{% elsif ghes %}create or suspend access to organizations owned by your enterprise on GitHub  automatically after you assign or unassign the application on your IdP. SCIM for GitHub Enterprise Server is currently in public public preview and is subject to change.
+Alternatively, instead of SAML JIT provisioning, you can use SCIM to provision or deprovision access to organizations owned by your enterprise on GitHub automatically after you assign or unassign the application on your IdP. SCIM for GitHub Enterprise Server is currently in public public preview and is subject to change.
  For more information, see [User Provisioning With Scim On Ghes](https://docs.github.com/en/admin/managing-iam/provisioning-user-accounts-with-scim/user-provisioning-with-scim-on-ghes).
 
 
@@ -81,7 +71,7 @@ With JIT provisioning, if you remove a user from your IdP, you must also manuall
 
 
 
-{% endif %}
+
 
 ## Supported IdPs
 
@@ -97,25 +87,6 @@ Okta | {% octicon "check" aria-label="Supported" %} | {% octicon "x" aria-label=
 OneLogin | {% octicon "check" aria-label="Supported" %} | {% octicon "x" aria-label="Not supported" %} |
 PingOne | {% octicon "check" aria-label="Supported" %} | {% octicon "x" aria-label="Not supported" %} |
 Shibboleth | {% octicon "check" aria-label="Supported" %} | {% octicon "x" aria-label="Not supported" %} |
-
-{% elsif ghes %}
-
-GitHub supports SAML SSO with IdPs that implement the SAML 2.0 standard. For more information, see the [SAML Wiki](https://wiki.oasis-open.org/security) on the OASIS website.
-
-GitHub officially supports and internally tests the following IdPs for SAML. For more information about the IdPs that are supported for SCIM on GitHub Enterprise Server, see [User Provisioning With Scim On Ghes](https://docs.github.com/en/admin/managing-iam/provisioning-user-accounts-with-scim/user-provisioning-with-scim-on-ghes#supported-identity-providers).
-
-* Microsoft Active Directory Federation Services (AD FS)
-* Microsoft Entra ID (previously known as Azure AD)
-* Okta
-* OneLogin
-* PingOne
-* Shibboleth
-
-
-If your IdP supports encrypted assertions, you can configure encrypted assertions on GitHub Enterprise Server for increased security during the authentication process.
-
-GitHub does not support SAML Single Logout. To terminate an active SAML session, users should log out directly on your SAML IdP.
-
 
 
 

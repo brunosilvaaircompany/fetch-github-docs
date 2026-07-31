@@ -8,10 +8,10 @@
 
 ## About GitHub Actions permissions for your repository
 
-By default, after GitHub Actions is enabled on GitHub Enterprise Server, it{% elsif fpt or ghec %}GitHub Actions is enabled on all repositories and organizations. You can choose to disable GitHub Actions or limit it to actions and reusable workflows in your enterprise.
+By default, after GitHub Actions is enabled on GitHub Enterprise Server, it is enabled on all repositories and organizations. You can choose to disable GitHub Actions or limit it to actions and reusable workflows in your enterprise.
  For more information about GitHub Actions, see [Write Workflows](https://docs.github.com/en/actions/how-tos/write-workflows).
 
-You can enable GitHub Actions for your repository. When you enable GitHub Actions, workflows are able to run actions and reusable workflows located within your repository and any other public{% elsif ghec or ghes %} public or internal repository.
+You can enable GitHub Actions for your repository. When you enable GitHub Actions, workflows are able to run actions and reusable workflows located within your repository and any other public repository.
  You can disable GitHub Actions for your repository altogether. When you disable GitHub Actions, no workflows run in your repository.
 
 
@@ -151,7 +151,7 @@ For more information about approving workflow runs that this policy applies to, 
 
 ## Enabling workflows for forks of private repositories
 
-If you rely on using forks of your private repositories, you can configure policies that control how users can run workflows on `pull_request` events. Available to private repositories only, you can configure these policy settings for organizations or repositories., organizations, or repositories.{% endif %}
+If you rely on using forks of your private repositories, you can configure policies that control how users can run workflows on `pull_request` events. Available to private repositories only, you can configure these policy settings for organizations or repositories.
 
 
 If a policy is disabled for an enterprise or organization, it cannot be enabled for a repository.
@@ -230,7 +230,7 @@ By default, when you create a new repository in your personal account, workflows
 
 ## Allowing access to components in an internal repository
 
-{% ifversion internal-actions %}Actions and reusable workflows in your internal repositories can be shared with internal and private repositories in the same organization or enterprise. For information about internal repositories, see [About Repositories](https://docs.github.com/en/repositories/creating-and-managing-repositories/about-repositories#about-internal-repositories).
+Actions and reusable workflows in your internal repositories can be shared with internal and private repositories in the same organization or enterprise. For information about internal repositories, see [About Repositories](https://docs.github.com/en/repositories/creating-and-managing-repositories/about-repositories#about-internal-repositories).
 
 You can use the steps below to configure whether actions and reusable workflows in an internal repository can be accessed from outside the repository. For more information, see [Share With Your Enterprise](https://docs.github.com/en/actions/how-tos/reuse-automations/share-with-your-enterprise). Alternatively, you can use the REST API to set, or get details of the level of access. For more information, see [Permissions](https://docs.github.com/en/rest/actions/permissions#get-the-level-of-access-for-workflows-outside-of-the-repository) and [Permissions](https://docs.github.com/en/rest/actions/permissions#set-the-level-of-access-for-workflows-outside-of-the-repository).
 
@@ -246,7 +246,7 @@ You can use the steps below to configure whether actions and reusable workflows 
    * **Accessible from repositories in the 'ORGANIZATION NAME' organization** - Workflows in other repositories that are part of the 'ORGANIZATION NAME' organization can access the actions and reusable workflows in this repository. Access is allowed only from private or internal repositories.
    * **Accessible from repositories in the 'ENTERPRISE NAME' enterprise** - Workflows in other repositories that are part of the 'ENTERPRISE NAME' enterprise can access the actions and reusable workflows in this repository. Access is allowed only from private or internal repositories.
 1. Click **Save** to apply the settings.
-{% endif %}
+
 
 ## Allowing access to components in a private repository
 

@@ -7,7 +7,7 @@
 
 If you know your password, you can sign in with your password to unlink your email address.
 
-1. Navigate to  [`https://github.com/login`](https://github.com/login) {%- elsif ghes %} `http(s)://HOSTNAME/login` .
+1. Navigate to  [`https://github.com/login`](https://github.com/login) .
 1. To prompt two-factor authentication, type your username and password, then click **Sign in**.
 
 

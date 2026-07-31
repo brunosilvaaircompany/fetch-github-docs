@@ -3,8 +3,8 @@
 ## About this error
 
 ```text
-GitHub Code Security or GitHub Advanced Security must be enabled for this repository to use code scanning
-403: GitHub Code Security or GitHub Advanced Security is not enabled
+{% data variables.product.prodname_GHAS_or_code_security %} must be enabled for this repository to use code scanning
+403: {% data variables.product.prodname_GHAS_or_code_security %} is not enabled
 ```
 
 This error is reported if you try to run code scanning in a repository where GitHub Code Security is not enabled or where use of this feature is blocked by a policy.

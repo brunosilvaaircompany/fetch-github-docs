@@ -34,9 +34,9 @@ You can view the usage of your personal account and download the usage data for 
 
 
 
-## Viewing usage for your organization{% elsif ghec or ghes %}enterprise
+## Viewing usage for your organization
 
-Organization **owners**{% elsif ghec or ghes %}Enterprise **owners** and **billing managers** can view the usage of your organization{% elsif ghec or ghes %}enterprise members and download the usage data for further analysis.
+Organization **owners** and **billing managers** can view the usage of your organization members and download the usage data for further analysis.
 
 
 
@@ -49,15 +49,6 @@ Organization **owners**{% elsif ghec or ghes %}Enterprise **owners** and **billi
 
 
 1. On the left side of the page, in the organization sidebar, click **{% octicon "credit-card" aria-hidden="true" aria-label="credit-card" %} Billing & Licensing**.
-
-
-{% elsif ghec %}
-
-
-1. In the top-right corner of GitHub Enterprise Server, click your profile picture, then click **Enterprise settings**.
-
-
-1. At the top of the page, click **{% octicon "credit-card" aria-hidden="true" aria-label="credit-card" %} Billing and licensing**.
 
 
 
@@ -81,7 +72,7 @@ Organization **owners**{% elsif ghec or ghes %}Enterprise **owners** and **billi
 
 ## Viewing license usage
 
-You can view the license usage of your organization{% elsif ghec or ghes %}enterprise members and download the usage data for further analysis.
+You can view the license usage of your organization members and download the usage data for further analysis.
 
 
 
@@ -94,23 +85,6 @@ You can view the license usage of your organization{% elsif ghec or ghes %}enter
 
 
 1. On the left side of the page, in the organization sidebar, click **{% octicon "credit-card" aria-hidden="true" aria-label="credit-card" %} Billing & Licensing**.
-
-
-{% elsif ghec %}
-
-The following license types are available:
-
-* User
-* GitHub Secret Protection and GitHub Code Security
-* GitHub Enterprise
-
-You can also view your active GitHub Enterprise instances and users.
-
-
-1. In the top-right corner of GitHub Enterprise Server, click your profile picture, then click **Enterprise settings**.
-
-
-1. At the top of the page, click **{% octicon "credit-card" aria-hidden="true" aria-label="credit-card" %} Billing and licensing**.
 
 
 

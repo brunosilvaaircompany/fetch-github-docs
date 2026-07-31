@@ -55,8 +55,6 @@ Before you can create your site, you must have a repository for your site on Git
 
 > [!WARNING]
 > GitHub Pages sites are publicly available on the internet, even if the repository for the site is private (if your plan or organization allows it). If you have sensitive data in your site's repository, you may want to remove the data before publishing. For more information, see [About Repositories](https://docs.github.com/en/repositories/creating-and-managing-repositories/about-repositories#about-repository-visibility).
-{% elsif ghec %}> Unless your enterprise uses Enterprise Managed Users, GitHub Pages sites are publicly available on the internet by default, even if the repository for the site is private or internal. You can publish a site privately by managing access control for the site. Otherwise, if you have sensitive data in your site's repository, you may want to remove the data before publishing. For more information, see [About Repositories](https://docs.github.com/en/repositories/creating-and-managing-repositories/about-repositories#about-repository-visibility) and [Changing The Visibility Of Your GitHub Pages Site](https://docs.github.com/en/pages/getting-started-with-github-pages/changing-the-visibility-of-your-github-pages-site).
-{% elsif ghes %}> If your site administrator has enabled Public Pages, GitHub Pages sites are publicly available on the internet, even if the repository for the site is private or internal. If you have sensitive data in your site's repository, you may want to remove the data before publishing. For more information, see [Configuring GitHub Pages For Your Enterprise](https://docs.github.com/en/admin/configuring-settings/configuring-user-applications-for-your-enterprise/configuring-github-pages-for-your-enterprise#enabling-public-sites-for-github-pages) and [About Repositories](https://docs.github.com/en/repositories/creating-and-managing-repositories/about-repositories#about-repository-visibility).
 
 
 
@@ -149,9 +147,11 @@ Before you can create your site, you must have a repository for your site on Git
 1. Add your repository on your GitHub Enterprise Server instance as a remote, replacing HOSTNAME with your enterprise's hostname, USER with the account that owns the repository, and REPOSITORY with the name of the repository.
 
    ```shell
-   
+   {% ifversion fpt or ghec %}
    git remote add origin https://github.com/USER/REPOSITORY.git
-   
+   {% else %}
+   git remote add origin https://HOSTNAME/USER/REPOSITORY.git
+   {% endif %}
    ```
 
 1. Push the repository to GitHub, replacing BRANCH with the name of the branch you're working on.

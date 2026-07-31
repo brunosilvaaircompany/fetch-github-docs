@@ -187,9 +187,11 @@ When there are differences between plans, you can use Liquid conditionals to ver
 
 ```markdown
 {% raw %}
-
+{% ifversion fpt or ghec %}
 ![An image of foo bar for GitHub Free, GitHub Pro, GitHub Team, and GitHub Enterprise Cloud](/assets/images/foo/bar.png)
-{% endraw %}
+{% else %}
+![An image of foo bar for GHES](/assets/images/enterprise/foo/bar.png)
+{% endif %}{% endraw %}
 ```
 
 ### Example: An image is updated in a new GitHub Enterprise Server release
@@ -200,11 +202,13 @@ Your Liquid conditional would look like this:
 
 ```markdown
 {% raw %}
-
+{% ifversion fpt or ghec %}
 ![An image of foo bar](/assets/images/foo/bar.png)
 {% elsif ghes < 3.10 %}
 ![An image of foo bar for GHES 3.9 and lower](/assets/images/enterprise/3.5/foo/bar.png)
-{% endraw %}
+{% else %}
+![An image of foo bar for GHES 3.10+](/assets/images/enterprise/foo/bar.png)
+{% endif %}{% endraw %}
 ```
 
 When the 3.10 release is closing down, the `/assets/images/enterprise/3.10` directory will be removed.

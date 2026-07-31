@@ -21,7 +21,7 @@ The report will be emailed to the default email address associated with your Git
 1. In the top-right corner of GitHub Enterprise Server, click your profile picture, then click **Enterprise settings**.
 
 
-1. Under **{% octicon "gear" aria-hidden="true" aria-label="gear" %} Settings**, click **Licensing{% elsif ghes %}License**.
+1. Under **{% octicon "gear" aria-hidden="true" aria-label="gear" %} Settings**, click **Licensing**.
 
 
 The page shows a summary of the licenses your enterprise is using for GitHub Enterprise and GitHub Advanced Security. Use links on the page to view more detailed information.

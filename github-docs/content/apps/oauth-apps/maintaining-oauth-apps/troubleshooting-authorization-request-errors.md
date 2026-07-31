@@ -9,7 +9,7 @@ If the OAuth app you set up has been suspended (due to reported abuse, spam, or 
       &error_uri=/apps/building-integrations/setting-up-and-registering-oauth-apps/troubleshooting-authorization-request-errors/%23application-suspended
       &state=xyz
 
-To solve issues with suspended applications, please contact us through the [GitHub Support portal](https://support.github.com){% elsif ghes %}your site administrator.
+To solve issues with suspended applications, please contact us through the [GitHub Support portal](https://support.github.com).
 
 ## Redirect URI mismatch
 

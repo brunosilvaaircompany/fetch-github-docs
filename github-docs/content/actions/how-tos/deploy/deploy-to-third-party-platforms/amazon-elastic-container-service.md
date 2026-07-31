@@ -68,16 +68,9 @@ If you configured a deployment environment, change the value of `environment` to
 
 
 ```yaml copy
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
+{% data reusables.actions.actions-not-certified-by-github-comment %}
 
-
-# GitHub recommends pinning actions to a commit SHA.
-# To get a newer version, you will need to update the SHA.
-# You can also reference a tag or branch, but the action may change without warning.
-
+{% data reusables.actions.actions-use-sha-pinning-comment %}
 
 name: Deploy to Amazon ECS
 
@@ -104,8 +97,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
-
+        uses: {% data reusables.actions.action-checkout %}
 
       {% raw %}- name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@0e613a0980cbf65ed5b322eb7a1e075d28913a83

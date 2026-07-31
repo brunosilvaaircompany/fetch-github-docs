@@ -53,11 +53,7 @@ The [`OctopusDeploy/login`](https://github.com/OctopusDeploy/login) action recei
 The following example exchanges an OIDC ID token with your Octopus Deploy instance to receive an access token, which can then be used to access your Octopus Deploy resources. Be sure to replace the `server` and `service_account_id` details appropriately for your scenario.
 
 ```yaml copy
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
+{% data reusables.actions.actions-not-certified-by-github-comment %}
 
 jobs:
   create_release_in_octopus:

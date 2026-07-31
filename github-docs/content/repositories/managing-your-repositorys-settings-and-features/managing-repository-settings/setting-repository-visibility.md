@@ -18,10 +18,10 @@ We recommend reviewing the following caveats before you change the visibility of
 > [!WARNING]
 > Changes to the visibility of a large repository or repository network may affect data integrity. Visibility changes can also have unintended effects on forks. GitHub recommends the following before changing the visibility of a repository network.
 >
-> * Wait for a period of reduced activity on {% ifversion ghes %}your GitHub Enterprise Server instance.
+> * Wait for a period of reduced activity on your GitHub Enterprise Server instance.
 > * Contact your site administrator before proceeding. Your site administrator can contact us for further assistance by visiting [GitHub Enterprise Support](https://support.github.com).
 
-{% endif %}
+
 
 ### Making a repository private
 

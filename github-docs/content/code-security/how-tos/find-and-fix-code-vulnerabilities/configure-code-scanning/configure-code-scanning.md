@@ -7,8 +7,7 @@ We recommend that you start using code scanning with default setup. After you've
 Your repository is eligible for default setup for code scanning if:
 
 * GitHub Actions is enabled.
-* It is publicly visible, or GitHub Code Security is enabled.{%- elsif ghes %}
-* GitHub Code Security is enabled.
+* It is publicly visible, or GitHub Code Security is enabled.
 
 
 ## Configuring default setup for a repository

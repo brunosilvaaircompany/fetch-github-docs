@@ -52,22 +52,22 @@ When you issue each certificate, you must include an extension that specifies wh
 To use the `login` to identify the user, use `extension:login`:
 
 ```shell
-ssh-keygen -s ./ca-key -V '+1d' -I KEY-IDENTITY -O extension:login@github.com=USERNAME ./user-key.pub
+ssh-keygen -s ./ca-key -V '+1d' -I KEY-IDENTITY -O extension:login@{% data variables.product.product_url %}=USERNAME ./user-key.pub
 ```
 
 
 To use the user ID, use `extension:id`:
 
 ```shell
-ssh-keygen -s ./ca-key -V '+1d' -I KEY-IDENTITY -O extension:id@{% ifversion fpt or ghec %}github.com=ID ./user-key.pub
+ssh-keygen -s ./ca-key -V '+1d' -I KEY-IDENTITY -O extension:id@{% data variables.product.product_url %}=ID ./user-key.pub
 ```
 
-{% endif %}
+
 
 > [!WARNING]
 > After a certificate has been signed and issued, the certificate cannot be revoked.
 
-For CAs uploaded after March 27th, 2024{% elsif ghes %}to GitHub Enterprise Server version 3.13 or later, you must use the `-V` flag to configure a lifetime less than 366 days for the certificate. For CAs uploaded before this date{% elsif ghes %}before version 3.13, the `-V` flag is optional, and you can create certificates that are irrevocable and live forever.
+For CAs uploaded after March 27th, 2024, you must use the `-V` flag to configure a lifetime less than 366 days for the certificate. For CAs uploaded before this date, the `-V` flag is optional, and you can create certificates that are irrevocable and live forever.
 
 
 If you have legacy CAs that are exempt from the expiration requirement, you can upgrade the CA to enforce the requirement. To learn more, see [Managing Your Organizations SSH Certificate Authorities](https://docs.github.com/en/organizations/managing-git-access-to-your-organizations-repositories/managing-your-organizations-ssh-certificate-authorities) and [Enforcing Policies For Security Settings In Your Enterprise](https://docs.github.com/en/admin/enforcing-policies/enforcing-policies-for-your-enterprise/enforcing-policies-for-security-settings-in-your-enterprise#managing-ssh-certificate-authorities-for-your-enterprise).
@@ -84,7 +84,7 @@ ssh-keygen -s ./ca-key -V '+1d' -I KEY-IDENTITY -O extension:login@github.com=US
 You can restrict the IP addresses from which an organization member can access your organization's resources by using a `source-address` extension. The extension accepts a specific IP address or a range of IP addresses using CIDR notation. You can specify multiple addresses or ranges by separating the values with commas. For more information, see [Classless Inter-Domain Routing](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) on Wikipedia.
 
 ```shell
-ssh-keygen -s ./ca-key -V '+1d' -I KEY-IDENTITY -O extension:login@github.com=USERNAME -O source-address=COMMA-SEPARATED-LIST-OF-IP-ADDRESSES-OR-RANGES ./user-key.pub
+ssh-keygen -s ./ca-key -V '+1d' -I KEY-IDENTITY -O extension:login@{% data variables.product.product_url %}=USERNAME -O source-address=COMMA-SEPARATED-LIST-OF-IP-ADDRESSES-OR-RANGES ./user-key.pub
 ```
 
 ## Certificate revocation and CA rotation

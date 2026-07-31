@@ -232,7 +232,7 @@ Example:
 ```yaml
 journeyTracks:
   - id: 'getting_started'
-    title: 'Getting started with GitHub Actions'
+    title: 'Getting started with {% data variables.product.prodname_actions %}'
     description: 'Learn the basics of GitHub Actions.'
     timeCommitment: '2-4 hours'
     guides:
@@ -241,7 +241,7 @@ journeyTracks:
         alternativeNextStep: 'Want to skip ahead? See [Using Workflows](https://docs.github.com/en/actions/using-workflows).'
       - href: '/actions/using-workflows'
   - id: 'advanced'
-    title: 'Advanced GitHub Actions'
+    title: 'Advanced {% data variables.product.prodname_actions %}'
     description: 'Dive deeper into advanced features.'
     guides:
       - href: '/actions/using-workflows/workflow-syntax-for-github-actions'

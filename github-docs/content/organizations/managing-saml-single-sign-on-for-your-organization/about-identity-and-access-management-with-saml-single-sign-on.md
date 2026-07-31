@@ -45,7 +45,7 @@ The first time a member uses SAML SSO to access your organization, GitHub automa
 
 If members are signed in with a SAML SSO session when they create a new repository, the default visibility of that repository is private. Otherwise, the default visibility is public. For more information on repository visibility, see [About Repositories](https://docs.github.com/en/repositories/creating-and-managing-repositories/about-repositories#about-repository-visibility).
 
-Organization members must also have an active SAML session to authorize an OAuth app. You can opt out of this requirement by contacting us through the [GitHub Support portal](https://support.github.com){% elsif ghes %}your site administrator. GitHub does not recommend opting out of this requirement, which will expose your organization to a higher risk of account takeovers and potential data loss.
+Organization members must also have an active SAML session to authorize an OAuth app. You can opt out of this requirement by contacting us through the [GitHub Support portal](https://support.github.com). GitHub does not recommend opting out of this requirement, which will expose your organization to a higher risk of account takeovers and potential data loss.
 
 GitHub does not support SAML Single Logout. To terminate an active SAML session, users should log out directly on your SAML IdP.
 

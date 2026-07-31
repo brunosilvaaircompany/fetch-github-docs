@@ -68,11 +68,9 @@ GitHub provides a workflow template for Node.js that should work for most Node.j
            # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
        steps:
-       - uses: actions/checkout@v6
-
+       - uses: {% data reusables.actions.action-checkout %}
        - name: Use Node.js {% raw %}${{ matrix.node-version }}{% endraw %}
-         uses: actions/setup-node@v7
-
+         uses: {% data reusables.actions.action-setup-node %}
          with:
            node-version: {% raw %}${{ matrix.node-version }}{% endraw %}
            cache: 'npm'
@@ -106,11 +104,9 @@ strategy:
     node-version: ['18.x', '20.x']
 
 steps:
-- uses: actions/checkout@v6
-
+- uses: {% data reusables.actions.action-checkout %}
 - name: Use Node.js {% raw %}${{ matrix.node-version }}{% endraw %}
-  uses: actions/setup-node@v7
-
+  uses: {% data reusables.actions.action-setup-node %}
   with:
     node-version: {% raw %}${{ matrix.node-version }}{% endraw %}
 ```
@@ -136,11 +132,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v6
-
+      - uses: {% data reusables.actions.action-checkout %}
       - name: Use Node.js
-        uses: actions/setup-node@v7
-
+        uses: {% data reusables.actions.action-setup-node %}
         with:
           node-version: '20.x'
       - run: npm ci
@@ -163,11 +157,9 @@ This example installs the versions in the `package-lock.json` or `npm-shrinkwrap
 
 ```yaml copy
 steps:
-- uses: actions/checkout@v6
-
+- uses: {% data reusables.actions.action-checkout %}
 - name: Use Node.js
-  uses: actions/setup-node@v7
-
+  uses: {% data reusables.actions.action-setup-node %}
   with:
     node-version: '20.x'
 - name: Install dependencies
@@ -178,11 +170,9 @@ Using `npm install` installs the dependencies defined in the `package.json` file
 
 ```yaml copy
 steps:
-- uses: actions/checkout@v6
-
+- uses: {% data reusables.actions.action-checkout %}
 - name: Use Node.js
-  uses: actions/setup-node@v7
-
+  uses: {% data reusables.actions.action-setup-node %}
   with:
     node-version: '20.x'
 - name: Install dependencies
@@ -195,11 +185,9 @@ This example installs the dependencies defined in the `yarn.lock` file and preve
 
 ```yaml copy
 steps:
-- uses: actions/checkout@v6
-
+- uses: {% data reusables.actions.action-checkout %}
 - name: Use Node.js
-  uses: actions/setup-node@v7
-
+  uses: {% data reusables.actions.action-setup-node %}
   with:
     node-version: '20.x'
 - name: Install dependencies
@@ -210,11 +198,9 @@ Alternatively, you can install the dependencies defined in the `package.json` fi
 
 ```yaml copy
 steps:
-- uses: actions/checkout@v6
-
+- uses: {% data reusables.actions.action-checkout %}
 - name: Use Node.js
-  uses: actions/setup-node@v7
-
+  uses: {% data reusables.actions.action-setup-node %}
   with:
     node-version: '20.x'
 - name: Install dependencies
@@ -234,11 +220,9 @@ Before installing dependencies, use the `setup-node` action to create the `.npmr
 
 ```yaml copy
 steps:
-- uses: actions/checkout@v6
-
+- uses: {% data reusables.actions.action-checkout %}
 - name: Use Node.js
-  uses: actions/setup-node@v7
-
+  uses: {% data reusables.actions.action-setup-node %}
   with:
     always-auth: true
     node-version: '20.x'
@@ -266,10 +250,8 @@ The following example caches dependencies for npm.
 
 ```yaml copy
 steps:
-- uses: actions/checkout@v6
-
-- uses: actions/setup-node@v7
-
+- uses: {% data reusables.actions.action-checkout %}
+- uses: {% data reusables.actions.action-setup-node %}
   with:
     node-version: '20'
     cache: 'npm'
@@ -281,10 +263,8 @@ The following example caches dependencies for Yarn.
 
 ```yaml copy
 steps:
-- uses: actions/checkout@v6
-
-- uses: actions/setup-node@v7
-
+- uses: {% data reusables.actions.action-checkout %}
+- uses: {% data reusables.actions.action-setup-node %}
   with:
     node-version: '20'
     cache: 'yarn'
@@ -295,22 +275,16 @@ steps:
 The following example caches dependencies for pnpm (v6.10+).
 
 ```yaml copy
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
+{% data reusables.actions.actions-not-certified-by-github-comment %}
 
 # NOTE: pnpm caching support requires pnpm version >= 6.10.0
 
 steps:
-- uses: actions/checkout@v6
-
+- uses: {% data reusables.actions.action-checkout %}
 - uses: pnpm/action-setup@0609f0983b7a228f052f81ef4c3d6510cae254ad
   with:
     version: 6.10.0
-- uses: actions/setup-node@v7
-
+- uses: {% data reusables.actions.action-setup-node %}
   with:
     node-version: '20'
     cache: 'pnpm'
@@ -326,11 +300,9 @@ You can use the same commands that you use locally to build and test your code. 
 
 ```yaml copy
 steps:
-- uses: actions/checkout@v6
-
+- uses: {% data reusables.actions.action-checkout %}
 - name: Use Node.js
-  uses: actions/setup-node@v7
-
+  uses: {% data reusables.actions.action-setup-node %}
   with:
     node-version: '20.x'
 - run: npm install

@@ -59,16 +59,9 @@ If you configured a deployment environment, change the value of `environment` to
 
 
 ```yaml copy
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
+{% data reusables.actions.actions-not-certified-by-github-comment %}
 
-
-# GitHub recommends pinning actions to a commit SHA.
-# To get a newer version, you will need to update the SHA.
-# You can also reference a tag or branch, but the action may change without warning.
-
+{% data reusables.actions.actions-use-sha-pinning-comment %}
 
 name: Build and deploy JAR app to Azure Web App
 
@@ -86,12 +79,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v6
-
+      - uses: {% data reusables.actions.action-checkout %}
 
       - name: Set up Java version
-        uses: actions/setup-java@v4
-
+        uses: {% data reusables.actions.action-setup-java %}
         with:
           java-version: {% raw %}${{ env.JAVA_VERSION }}{% endraw %}
           cache: 'maven'
@@ -100,8 +91,7 @@ jobs:
         run: mvn clean install
 
       - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v4
-
+        uses: {% data reusables.actions.action-upload-artifact %}
         with:
           name: java-app
           path: '{% raw %}${{ github.workspace }}{% endraw %}/target/*.jar'
@@ -115,8 +105,7 @@ jobs:
 
     steps:
       - name: Download artifact from build job
-        uses: actions/download-artifact@v5
-
+        uses: {% data reusables.actions.action-download-artifact %}
         with:
           name: java-app
 

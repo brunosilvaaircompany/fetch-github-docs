@@ -39,7 +39,7 @@ For example, the following OIDC token is for a job that was part of a called wor
 {
   "jti": "example-id",
   "sub": "repo:octo-org/octo-repo:environment:prod",
-  "aud": "https://HOSTNAME/octo-org",
+  "aud": "{% ifversion ghes %}https://HOSTNAME{% else %}https://github.com{% endif %}/octo-org",
   "ref": "refs/heads/main",
   "sha": "example-sha",
   "repository": "octo-org/octo-repo",
@@ -57,7 +57,7 @@ For example, the following OIDC token is for a job that was part of a called wor
   "event_name": "workflow_dispatch",
   "ref_type": "branch",
   "job_workflow_ref": "octo-org/octo-automation/.github/workflows/oidc.yml@refs/heads/main",
-  "iss": "https://HOSTNAME/_services/token",
+  "iss": "{% ifversion ghes %}https://HOSTNAME/_services/token{% else %}https://token.actions.githubusercontent.com{% endif %}",
   "nbf": 1632492967,
   "exp": 1632493867,
   "iat": 1632493567

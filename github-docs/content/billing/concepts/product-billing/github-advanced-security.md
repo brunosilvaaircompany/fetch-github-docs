@@ -4,7 +4,13 @@
 
 The Advanced Security product has two license SKUs (stock keeping units):
 
-{% data reusables.advanced-security.ghas-products-bullets+ghas %}
+* **GitHub Secret Protection**, which includes features that help you detect and prevent secret leaks, such as secret scanning and push protection.
+* **GitHub Code Security**, which includes features that help you find and fix vulnerabilities, like code scanning, premium Dependabot features, and dependency review.
+
+
+
+Alternatively, you may have a GitHub Advanced Security license that includes all features in GitHub Secret Protection and GitHub Code Security.
+
 
 For more information, see [feature summary and pricing information](https://github.com/enterprise/advanced-security#pricing) and [About GitHub Advanced Security](https://docs.github.com/en/get-started/learning-about-github/about-github-advanced-security).
 
@@ -30,7 +36,7 @@ You can see the active and unique committers to an organization on the Global se
 GitHub makes some Advanced Security features available free of charge on GitHub.com.
 
 * **All public repositories** have access to code scanning, secret scanning, and dependency review.
-* **Secret risk assessment** is available for organizations on GitHub.com. See [Viewing Your Security Risk Assessment Reports](https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/configure-specific-tools/viewing-your-security-risk-assessment-reports){% elsif ghes %}[Viewing Your Security Risk Assessment Reports](https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-at-scale/configure-organization-security/configure-specific-tools/viewing-your-security-risk-assessment-reports) in the GitHub Enterprise Cloud documentation.
+* **Secret risk assessment** is available for organizations on GitHub.com. See [Viewing Your Security Risk Assessment Reports](https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/configure-specific-tools/viewing-your-security-risk-assessment-reports).
 * **Code security risk assessment** is available for organizations on  GitHub.com. See [Risk Assessment](https://docs.github.com/en/code-security/concepts/code-scanning/risk-assessment).
 
 For full details of available features, see [About GitHub Advanced Security](https://docs.github.com/en/get-started/learning-about-github/about-github-advanced-security).
@@ -62,7 +68,7 @@ There are two different ways to pay for licenses.
 
 * **Volume/subscription billing** available for GitHub Enterprise plans only
 
-  * Purchase a specific number of GitHub Secret Protection, GitHub Code Security, or GitHub Advanced Security licenses that last for a defined period, typically at least a year, see [Buy Advanced Security](https://docs.github.com/en/billing/how-tos/products/buy-advanced-security){% elsif ghes %}[Buy Advanced Security](https://docs.github.com/en/enterprise-cloud@latest/billing/how-tos/products/buy-advanced-security) in the GitHub Enterprise Cloud documentation.
+  * Purchase a specific number of GitHub Secret Protection, GitHub Code Security, or GitHub Advanced Security licenses that last for a defined period, typically at least a year, see [Buy Advanced Security](https://docs.github.com/en/billing/how-tos/products/buy-advanced-security).
   * If the usage of Advanced Security by active committers exceeds the number of licenses purchased, you need to purchase additional licenses to cover this overage usage.
 
 To view your current license usage, see [View Productlicense Use](https://docs.github.com/en/billing/how-tos/products/view-productlicense-use).
@@ -96,7 +102,6 @@ The options available for managing committers and costs depend on your billing m
 
 You can control usage and costs with budgets and alerts. If you use GitHub Enterprise Cloud, then you can also use cost centers and policies to control costs.
 See [Set Up Budgets](https://docs.github.com/en/billing/how-tos/set-up-budgets) and [Enforcing Policies For Code Security And Analysis For Your Enterprise](https://docs.github.com/en/admin/enforcing-policies/enforcing-policies-for-your-enterprise/enforcing-policies-for-code-security-and-analysis-for-your-enterprise)
-{% elsif ghes %}[Set Up Budgets](https://docs.github.com/en/enterprise-cloud@latest/billing/how-tos/set-up-budgets) in the GitHub Enterprise Cloud docs
 
 .
 
@@ -127,7 +132,7 @@ If your enterprise uses Advanced Security on both GitHub Enterprise Server and G
 
 ### Volume/subscription billing
 
-Each license specifies a maximum number of accounts that can use Advanced Security. Each active committer to at least one repository with the product enabled consumes one license. When you remove a user from your organization{% elsif ghec or ghes %}enterprise account, the user's license is freed within 24 hours.
+Each license specifies a maximum number of accounts that can use Advanced Security. Each active committer to at least one repository with the product enabled consumes one license. When you remove a user from your organization account, the user's license is freed within 24 hours.
 
 As soon as you make licenses available, by disabling GitHub Secret Protection, GitHub Code Security, or GitHub Advanced Security in some repositories, or by increasing your license size, the options for enabling GitHub Secret Protection, GitHub Code Security, and GitHub Advanced Security will work again as normal.
 

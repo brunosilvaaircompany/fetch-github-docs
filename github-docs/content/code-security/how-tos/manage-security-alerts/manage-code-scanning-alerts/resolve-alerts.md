@@ -43,7 +43,7 @@ Copilot cloud agent validates fixes on a best-effort basis. If it can't validate
 
 ## Generating a suggested fix
 
-{% ifversion copilot %}If Copilot cloud agent isn't available in your repository, you can still use GitHub Copilot Autofix to generate a one-step suggested fix for the alert.
+If Copilot cloud agent isn't available in your repository, you can still use GitHub Copilot Autofix to generate a one-step suggested fix for the alert.
 
 
 
@@ -72,7 +72,7 @@ You can also use the Autofix API for historical alerts endpoints to generate, ge
 
 Copilot Autofix for code scanning alerts won't be able to generate a fix for every alert in every situation. The feature operates on a best-effort basis and is not guaranteed to succeed 100% of the time. For information about the limitations of automatically generated fixes, see [Limitations of suggestions](/enterprise-cloud@latest/code-security/responsible-use/security-and-quality-ai-features#7-limitations).
 
-{% endif %}
+
 
 ## Fixing an alert manually
 

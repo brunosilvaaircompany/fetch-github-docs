@@ -46,7 +46,7 @@ Organizations that use GitHub Enterprise Cloud can use team synchronization to a
 
 ## Creating teams with LDAP Sync enabled
 
-Instances using LDAP for user authentication can use LDAP Sync to manage a team's members. Setting the group's **Distinguished Name** (DN) in the **LDAP group** field will map a team to an LDAP group on your LDAP server. If you use LDAP Sync to manage a team's members, you won't be able to manage your team within {% ifversion ghes %}your GitHub Enterprise Server instance. The mapped team will sync its members in the background and periodically at the interval configured when LDAP Sync is enabled. For more information, see [Using Ldap](https://docs.github.com/en/admin/managing-iam/using-ldap-for-enterprise-iam/using-ldap#enabling-ldap-sync).
+Instances using LDAP for user authentication can use LDAP Sync to manage a team's members. Setting the group's **Distinguished Name** (DN) in the **LDAP group** field will map a team to an LDAP group on your LDAP server. If you use LDAP Sync to manage a team's members, you won't be able to manage your team within your GitHub Enterprise Server instance. The mapped team will sync its members in the background and periodically at the interval configured when LDAP Sync is enabled. For more information, see [Using Ldap](https://docs.github.com/en/admin/managing-iam/using-ldap-for-enterprise-iam/using-ldap#enabling-ldap-sync).
 
 You must be a site admin and an organization owner to create a team with LDAP sync enabled.
 
@@ -81,6 +81,3 @@ As part of its optimization configuration, LDAP Sync will not transfer your nest
 1. Optionally, if you're creating a child team, under "Parent team", select the **Select a parent team** dropdown menu and click a parent team. For more information about child teams, see [About Teams](https://docs.github.com/en/organizations/organizing-members-into-teams/about-teams#nested-teams).
 
 1. Click **Create team**.
-
-
-{% endif %}

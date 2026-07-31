@@ -44,7 +44,7 @@ You can also manage team synchronization with the API. For more information, see
 
 After you connect a team to an IdP group, team synchronization will add each member of the IdP group to the corresponding team on GitHub only if:
 
-{%- ifversion team-sync-manage-org-invites %}
+
 * If team synchronization is not allowed to invite non-members to your organization, the person is already a member of the organization on GitHub.
 
 * The person has already logged in with their personal account on GitHub and authenticated to the organization or enterprise account via SAML single sign-on at least once.
@@ -56,7 +56,7 @@ A removed team member can be added back to a team automatically once they have a
 
 To avoid unintentionally removing team members, we recommend enforcing SAML SSO in your organization or enterprise account, creating new teams to synchronize membership data, and checking IdP group membership before synchronizing existing teams. For more information, see [Enforcing Saml Single Sign On For Your Organization](https://docs.github.com/en/organizations/managing-saml-single-sign-on-for-your-organization/enforcing-saml-single-sign-on-for-your-organization) and [Configuring Saml Single Sign On For Your Enterprise](https://docs.github.com/en/enterprise-cloud@latest/admin/managing-iam/using-saml-for-enterprise-iam/configuring-saml-single-sign-on-for-your-enterprise).
 
-{% endif %}
+
 
 ## Prerequisites
 
@@ -70,10 +70,7 @@ To avoid unintentionally removing team members, visit the administrative portal 
 
 You must authenticate using SAML SSO. For more information, see [Authenticating With Single Sign On](https://docs.github.com/en/authentication/authenticating-with-single-sign-on).
 
-{% elsif ghes %}
-You must configure user provisioning with SCIM for {% ifversion ghes %}your GitHub Enterprise Server instance. For more information, see [User Provisioning With Scim On Ghes](https://docs.github.com/en/admin/managing-iam/provisioning-user-accounts-with-scim/user-provisioning-with-scim-on-ghes).
 
-{% endif %}
 
 ## Connecting an IdP group to a team
 

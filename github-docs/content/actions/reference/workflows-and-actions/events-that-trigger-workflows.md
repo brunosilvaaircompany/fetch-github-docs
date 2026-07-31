@@ -738,11 +738,8 @@ For pull requests from a forked repository to a private repository, workflows on
 | Webhook event payload | Activity types | `GITHUB_SHA` | `GITHUB_REF` |
 | --------------------- | -------------- | ------------ | -------------|
 |  |
-| [`pull_request`](/webhooks/webhook-events-and-payloads#pull_request) | - `assigned`<br/>- `unassigned`<br/>- `labeled`<br/>- `unlabeled`<br/>- `opened`<br/>- `edited`<br/>- `closed`<br/>- `reopened`<br/>- `synchronize`<br/>- `converted_to_draft`<br/>- `ready_for_review`<br/>- `locked`<br/>- `unlocked` <br/>{% ifversion fpt or ghec %}- `enqueued`<br/>- `dequeued`<br/>- `review_requested` <br/>- `review_request_removed` <br/>- `auto_merge_enabled` <br/>- `auto_merge_disabled` | Last commit on the PR base branch | PR base branch |
-| {% else %} |
-| [`pull_request`](/webhooks/webhook-events-and-payloads#pull_request) | - `assigned`<br/>- `unassigned`<br/>- `labeled`<br/>- `unlabeled`<br/>- `opened`<br/>- `edited`<br/>- `closed`<br/>- `reopened`<br/>- `synchronize`<br/>- `converted_to_draft`<br/>- `locked`<br/>- `unlocked`<br/>- `enqueued`<br/>- `dequeued`<br/>- `milestoned`<br/>- `demilestoned`<br/>- `ready_for_review`<br/>- `review_requested`<br/>- `review_request_removed`<br/>- `auto_merge_enabled`<br/>- `auto_merge_disabled` 
- | Last commit on default branch | Default branch |
-| {% endif %} |
+| [`pull_request`](/webhooks/webhook-events-and-payloads#pull_request) | - `assigned`<br/>- `unassigned`<br/>- `labeled`<br/>- `unlabeled`<br/>- `opened`<br/>- `edited`<br/>- `closed`<br/>- `reopened`<br/>- `synchronize`<br/>- `converted_to_draft`<br/>- `ready_for_review`<br/>- `locked`<br/>- `unlocked` <br/>- `enqueued`<br/>- `dequeued`<br/>- `review_requested` <br/>- `review_request_removed` <br/>- `auto_merge_enabled` <br/>- `auto_merge_disabled` | Last commit on the PR base branch | PR base branch |
+|  |
 
 > [!NOTE]
 > More than one activity type triggers this event.
@@ -1389,8 +1386,7 @@ jobs:
         run: |
           mkdir -p ./pr
           echo $PR_NUMBER > ./pr/pr_number
-      - uses: actions/upload-artifact@v4
-
+      - uses: {% data reusables.actions.action-upload-artifact %}
         with:
           name: pr_number
           path: pr/
@@ -1413,8 +1409,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 'Download artifact'
-        uses: actions/download-artifact@v5
-
+        uses: {% data reusables.actions.action-download-artifact %}
         with:
           name: pr_number
           # do not extract in the workspace dir that may contain executable scripts
@@ -1423,8 +1418,7 @@ jobs:
           github-token: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
 
       - name: 'Comment on PR'
-        uses: actions/github-script@v8
-
+        uses: {% data reusables.actions.action-github-script %}
         with:
           github-token: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
           script: |

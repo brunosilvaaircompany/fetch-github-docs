@@ -16,7 +16,7 @@ If you have a _very good reason_ you must use `sudo`, then ensure you are using 
 To make sure you are connecting to the right domain, you can enter the following command:
 
 ```shell copy
-ssh -vT git@github.com
+ssh -vT git@{% data variables.product.product_url %}
 ```
 
 You should see this output:
@@ -26,7 +26,7 @@ You should see this output:
 > debug1: Reading configuration data /Users/YOU/.ssh/config
 > debug1: Reading configuration data /etc/ssh/ssh_config
 > debug1: /etc/ssh/ssh_config line 47: Applying options for *
-> debug1: Connecting to github.com port 22.
+> debug1: Connecting to {% data variables.product.product_url %} port 22.
 ```
 
 The connection should be made on port 22, unless you're overriding settings to use [SSH over HTTPS](/authentication/troubleshooting-ssh/using-ssh-over-the-https-port).
@@ -36,7 +36,7 @@ The connection should be made on port 22, unless you're overriding settings to u
 All connections, including those for remote URLs, must be made as the "git" user. If you try to connect with your GitHub username, it will fail:
 
 ```shell
-$ ssh -T GITHUB-USERNAME@github.com
+$ ssh -T GITHUB-USERNAME@{% data variables.product.product_url %}
 > Permission denied (publickey).
 ```
 
@@ -45,7 +45,7 @@ If your connection failed and you're using a remote URL with your GitHub usernam
 You should verify your connection by typing:
 
 ```shell copy
-ssh -T git@github.com
+ssh -T git@{% data variables.product.product_url %}
 ```
 
 You should see this output:
@@ -61,7 +61,7 @@ You should see this output:
 
 >
 > ```shell
-> ssh -T octocorp@octocorp.ghe.com
+> ssh -T {% data variables.enterprise.data_residency_example_git_ssh %}
 > ```
 
 
@@ -144,7 +144,7 @@ The `ssh-add` command _should_ print out a long string of numbers and letters. I
 You can also check that the key is being used by trying to connect to `git@github.com`:
 
 ```shell copy
-ssh -vT git@github.com
+ssh -vT git@{% data variables.product.product_url %}
 ```
 
 You'll see output like this:
@@ -268,4 +268,4 @@ You must provide your public key to GitHub to establish a secure connection.
 If you don't see your public key in GitHub, you'll need to [add your SSH key to GitHub](/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account) to associate it with your computer.
 
 > [!WARNING]
-> If you see an SSH key you're not familiar with on GitHub, delete it immediately and contact us through the [GitHub Support portal](https://support.github.com){% elsif ghes %}your site administrator for further help. An unidentified public key may indicate a possible security concern. For more information, see [Reviewing Your SSH Keys](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/reviewing-your-ssh-keys).
+> If you see an SSH key you're not familiar with on GitHub, delete it immediately and contact us through the [GitHub Support portal](https://support.github.com) for further help. An unidentified public key may indicate a possible security concern. For more information, see [Reviewing Your SSH Keys](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/reviewing-your-ssh-keys).

@@ -15,8 +15,8 @@ Like OAuth apps, GitHub Apps use OAuth 2.0 and can act on behalf of a user. Unli
 GitHub Apps can be installed directly on enterprises, organizations and personal accounts and granted access to specific repositories. They come with built-in webhooks and narrow, specific permissions.
 
 
-You can also create an enterprise-owned GitHub App that can only be installed on{% ifversion enterprise-installed-apps %} the enterprise itself or organizations within your enterprise, and can only be authorized by members of your enterprise. For more information, see [Creating GitHub Apps For Your Enterprise](https://docs.github.com/en/admin/managing-github-apps-for-your-enterprise/creating-github-apps-for-your-enterprise).
-{% endif %}
+You can also create an enterprise-owned GitHub App that can only be installed on the enterprise itself or organizations within your enterprise, and can only be authorized by members of your enterprise. For more information, see [Creating GitHub Apps For Your Enterprise](https://docs.github.com/en/admin/managing-github-apps-for-your-enterprise/creating-github-apps-for-your-enterprise).
+
 
 By default, only organization owners can manage the settings of GitHub Apps in an organization. To allow additional users to change the developer settings of GitHub Apps owned by the organization, an owner can grant them GitHub App manager permissions. GitHub App Managers can't manage third-party applications. For more information about adding and removing GitHub App managers in your organization, see [Roles In An Organization](https://docs.github.com/en/organizations/managing-peoples-access-to-your-organization-with-roles/roles-in-an-organization#github-app-managers).
 
@@ -33,7 +33,7 @@ To use your GitHub App, you need to install it on your enterprise, organization 
 
 * If your GitHub App is **private**, you can only install it on the account that owns the app.
 * If your GitHub App is **public**, other accounts can also install it.
-* If your GitHub App is owned by an **enterprise**, you can install it on {% ifversion enterprise-installed-apps %}the enterprise itself or any organization within that enterprise.{% endif %} Only members of the enterprise can sign in to it.
+* If your GitHub App is owned by an **enterprise**, you can install it on the enterprise itself or any organization within that enterprise. Only members of the enterprise can sign in to it.
 
 For more information, see [Installing Your Own GitHub App](https://docs.github.com/en/apps/using-github-apps/installing-your-own-github-app) and [Sharing Your GitHub App](https://docs.github.com/en/apps/sharing-github-apps/sharing-your-github-app).
 

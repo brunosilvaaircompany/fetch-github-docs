@@ -17,7 +17,7 @@ To use a JWT, pass it in the `Authorization` header of an API request. For examp
 
 ```shell
 curl --request GET \
---url "https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3/app" \
+--url "{% data variables.product.rest_url %}/app" \
 --header "Accept: application/vnd.github+json" \
 --header "Authorization: Bearer YOUR_JWT" \
 --header "X-GitHub-Api-Version: {{ allVersions[currentVersion].latestApiVersion }}"
@@ -54,9 +54,11 @@ payload = {
   iat: Time.now.to_i - 60,
   # JWT expiration time (10 minute maximum)
   exp: Time.now.to_i + (10 * 60),
-  
-# GitHub App's client ID
-  iss: "YOUR_CLIENT_ID"
+  {% ifversion client-id-for-app %}
+# {% data variables.product.prodname_github_app %}'s client ID
+  iss: "YOUR_CLIENT_ID"{% else %}
+# {% data variables.product.prodname_github_app %}'s app ID
+  iss: "YOUR_APP_ID"{% endif %}
 }
 
 jwt = JWT.encode(payload, private_key, "RS256")
@@ -82,13 +84,19 @@ if len(sys.argv) > 1:
 else:
     pem = input("Enter path of private PEM file: ")
 
-
+{% ifversion client-id-for-app %}
 # Get the Client ID
 if len(sys.argv) > 2:
     client_id = sys.argv[2]
 else:
     client_id = input("Enter your Client ID: ")
-
+{% else %}
+# Get the App ID
+if len(sys.argv) > 2:
+    app_id = sys.argv[2]
+else:
+    app_id = input("Enter your APP ID: ")
+{% endif %}
 
 # Open PEM
 with open(pem, 'rb') as pem_file:
@@ -99,9 +107,11 @@ payload = {
     'iat': int(time.time()),
     # JWT expiration time (10 minutes maximum)
     'exp': int(time.time()) + 600,
-    
-    # GitHub App's client ID
-    'iss': client_id
+    {% ifversion client-id-for-app %}
+    # {% data variables.product.prodname_github_app %}'s client ID
+    'iss': client_id{% else %}
+    # {% data variables.product.prodname_github_app %}'s app ID
+    'iss': app_id{% endif %}
 
 }
 
@@ -121,9 +131,11 @@ This script will prompt you for the file path where your private key is stored a
 ```bash copy
 #!/usr/bin/env bash
 
-
+{% ifversion client-id-for-app %}
 client_id=$1 # Client ID as first argument
-
+{% else %}
+app_id=$1 # App ID as first argument
+{% endif %}
 pem=$( cat $2 ) # file path of the private key as second argument
 
 now=$(date +%s)
@@ -142,7 +154,7 @@ header=$( echo -n "${header_json}" | b64enc )
 payload_json="{
     \"iat\":${iat},
     \"exp\":${exp},
-    \"iss\":\"${client_id}\"
+    {% ifversion client-id-for-app %}\"iss\":\"${client_id}\"{% else %}\"iss\":\"${app_id}\"{% endif %}
 }"
 # Payload encode
 payload=$( echo -n "${payload_json}" | b64enc )
@@ -166,9 +178,11 @@ In the following example, replace `YOUR_PATH_TO_PEM` with the file path where yo
 ```powershell copy
 #!/usr/bin/env pwsh
 
-
+{% ifversion client-id-for-app %}
 $client_id = YOUR_CLIENT_ID
-
+{% else %}
+$app_id = YOUR_APP_ID
+{% endif %}
 $private_key_path = "YOUR_PATH_TO_PEM"
 
 $header = [Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes((ConvertTo-Json -InputObject @{
@@ -179,7 +193,7 @@ $header = [Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes((Conve
 $payload = [Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes((ConvertTo-Json -InputObject @{
   iat = [System.DateTimeOffset]::UtcNow.AddSeconds(-10).ToUnixTimeSeconds()
   exp = [System.DateTimeOffset]::UtcNow.AddMinutes(10).ToUnixTimeSeconds()
-  iss = $client_id
+  {% ifversion client-id-for-app %}iss = $client_id{% else %}iss = $app_id{% endif %}
 }))).TrimEnd('=').Replace('+', '-').Replace('/', '_');
 
 $rsa = [System.Security.Cryptography.RSA]::Create()

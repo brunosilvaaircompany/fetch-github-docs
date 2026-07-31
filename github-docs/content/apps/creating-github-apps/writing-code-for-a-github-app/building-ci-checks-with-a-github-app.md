@@ -134,16 +134,14 @@ The following steps will guide you through configuring a GitHub App with these s
      1. To the right of the organization, click **Settings**.
    * For an app owned by an enterprise:
      1. If you use Enterprise Managed Users, click **Your enterprise** to go directly to the enterprise account settings.
-     1. If you use personal accounts, click **Your enterprises** and then to the right of the enterprise, click **Settings**.{% elsif ghes %}
-     1. Click **Enterprise settings**.
-
+     1. If you use personal accounts, click **Your enterprises** and then to the right of the enterprise, click **Settings**.
 
 
 1. Navigate to the GitHub App settings.
    * For an app owned by a personal account or organization:
      1. In the left sidebar, click **{% octicon "code" aria-hidden="true" aria-label="code" %} Developer settings**, then click **GitHub Apps**.
    * For an app owned by an enterprise:
-     1. In the left sidebar, under "Settings",{% elsif ghes %} click **Settings**, then click **GitHub Apps**.
+     1. In the left sidebar, under "Settings", click **GitHub Apps**.
 
 1. Click **New GitHub App**.
 1. Under "GitHub App name", enter a name for your app. For example, `USERNAME-ci-test-app` where `USERNAME` is your GitHub username.
@@ -167,7 +165,7 @@ Make sure that you are on a secure machine before performing these steps, since 
 1. In your terminal, navigate to the directory where your clone is stored.
 1. Create a file called `.env` at the top level of this directory.
 1. Add `.env` to your `.gitignore` file. This will prevent you from accidentally committing your app's credentials.
-1. Add the following contents to your `.env` file. Replace `YOUR_HOSTNAME` with the name of {% ifversion ghes %}your GitHub Enterprise Server instance. You will update the other values in a later step.{% else %}You will update the values in a later step.{% endif %}
+1. Add the following contents to your `.env` file. Replace `YOUR_HOSTNAME` with the name of your GitHub Enterprise Server instance. You will update the other values in a later step.
 
    ```shell copy
    GITHUB_APP_IDENTIFIER="YOUR_APP_ID"

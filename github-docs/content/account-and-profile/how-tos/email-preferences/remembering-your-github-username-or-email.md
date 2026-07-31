@@ -41,8 +41,8 @@ If you have any local copies of personal repositories you have created or forked
 $ cd YOUR-REPOSITORY
 # Change directories to the initialized Git repository
 $ git remote -v
-origin	https://github.com/YOUR-USERNAME/YOUR-REPOSITORY.git (fetch)
-origin	https://github.com/YOUR-USERNAME/YOUR-REPOSITORY.git (push)
+origin	https://{% data variables.product.product_url %}/YOUR-USERNAME/YOUR-REPOSITORY.git (fetch)
+origin	https://{% data variables.product.product_url %}/YOUR-USERNAME/YOUR-REPOSITORY.git (push)
 ```
 
 Your username is what immediately follows the `https://github.com/`.

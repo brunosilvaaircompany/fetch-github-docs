@@ -242,4 +242,4 @@ GitHub will promptly respond to requests that are issued via U.S. court by way o
 
 ## Questions
 
-Do you have other questions, comments or suggestions? Please contact us through the [GitHub Support portal](https://support.github.com){% elsif ghes %}your site administrator.
+Do you have other questions, comments or suggestions? Please contact us through the [GitHub Support portal](https://support.github.com).

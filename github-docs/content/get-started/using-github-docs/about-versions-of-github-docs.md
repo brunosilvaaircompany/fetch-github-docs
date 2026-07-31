@@ -11,7 +11,7 @@ At the top of a page on GitHub Docs, select the dropdown menu and click a plan. 
 ![Screenshot of the header of GitHub Docs. The "Version" dropdown menu is expanded and highlighted with an orange outline.](/assets/images/help/docs/version-picker.png)
 
 > [!NOTE]
-> You can try changing the version now. You're viewing a **Free, Pro, & Team{% elsif ghec %}GitHub Enterprise Cloud{% elsif ghes %}GitHub Enterprise Server** version of this article.
+> You can try changing the version now. You're viewing a **Free, Pro, & Team** version of this article.
 
 ## Determining which GitHub product you use
 

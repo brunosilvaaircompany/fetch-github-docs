@@ -65,11 +65,9 @@ GitHub provides a workflow template for Ant that should work for most Java with 
        runs-on: ubuntu-latest
 
        steps:
-       - uses: actions/checkout@v6
-
+       - uses: {% data reusables.actions.action-checkout %}
        - name: Set up JDK 11
-         uses: actions/setup-java@v4
-
+         uses: {% data reusables.actions.action-setup-java %}
          with:
            java-version: '11'
            distribution: 'temurin'
@@ -118,10 +116,8 @@ If you use different commands to build your project, or you want to run a differ
 
 ```yaml copy
 steps:
-  - uses: actions/checkout@v6
-
-  - uses: actions/setup-java@v4
-
+  - uses: {% data reusables.actions.action-checkout %}
+  - uses: {% data reusables.actions.action-setup-java %}
     with:
       java-version: '17'
       distribution: 'temurin'
@@ -137,17 +133,14 @@ Ant will usually create output files like JARs, EARs, or WARs in the `build/jar`
 
 ```yaml copy
 steps:
-  - uses: actions/checkout@v6
-
-  - uses: actions/setup-java@v4
-
+  - uses: {% data reusables.actions.action-checkout %}
+  - uses: {% data reusables.actions.action-setup-java %}
     with:
       java-version: '17'
       distribution: 'temurin'
 
   - run: ant -noinput -buildfile build.xml
-  - uses: actions/upload-artifact@v4
-
+  - uses: {% data reusables.actions.action-upload-artifact %}
     with:
       name: Package
       path: build/jar

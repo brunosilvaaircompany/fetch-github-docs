@@ -1,22 +1,22 @@
 # Publishing and using CodeQL packs
 
-## Working with CodeQL packs on {% ifversion ghec %}GitHub Enterprise Cloud with data residency{% elsif ghes %}GitHub Enterprise Server
+## Working with CodeQL packs on GitHub Enterprise Cloud with data residency
 
-By default, the CodeQL CLI expects to download CodeQL packs from and publish packs to the Container registry on GitHub.com. However, you can also work with CodeQL packs in a Container registry on GitHub Enterprise Cloud with data residency{% elsif ghes %}GitHub Enterprise Server by creating a `qlconfig.yml` file to tell the CLI which Container registry to use for each pack.
+By default, the CodeQL CLI expects to download CodeQL packs from and publish packs to the Container registry on GitHub.com. However, you can also work with CodeQL packs in a Container registry on GitHub Enterprise Cloud with data residency by creating a `qlconfig.yml` file to tell the CLI which Container registry to use for each pack.
 
 Create a `~/.codeql/qlconfig.yml` file on Linux/MacOS or `%HOMEPATH%\.codeql\qlconfig.yml` on Windows using your preferred text editor, and add entries to specify which registry to use for one or more package name patterns.
-For example, the following `qlconfig.yml` file associates all packs with the Container registry at `SUBDOMAIN.ghe.com{% elsif ghes %}https://GHE_HOSTNAME`, except packs matching `codeql/\*` or the `other-org/*` organization, which are associated with the Container registry on GitHub.com:
+For example, the following `qlconfig.yml` file associates all packs with the Container registry at `SUBDOMAIN.ghe.com`, except packs matching `codeql/\*` or the `other-org/*` organization, which are associated with the Container registry on GitHub.com:
 
 ```yaml
 registries:
 - packages:
   - 'codeql/*'
   - 'other-org/*'
-  # Container registry on GitHub.com
+  # {% data variables.product.prodname_container_registry %} on {% data variables.product.prodname_dotcom_the_website %}
   url: https://ghcr.io/v2/
 - packages: '*'
-  # Container registry hosted at `SUBDOMAIN.ghe.com{% elsif ghes %}https://GHE_HOSTNAME`
-  url: https://containers.GHE_HOSTNAME/v2/{% elsif ghec %}https://containers.SUBDOMAIN.ghe.com
+  # {% data variables.product.prodname_container_registry %} hosted at `{% data variables.enterprise.gh_enterprise_domain %}`
+  url: {% data variables.enterprise.gh_enterprise_container_registry %}
 ```
 
 The CodeQL CLI will determine which registry to use for a given package name by finding the first item in the `registries` list with a `packages` property that matches that package name.
@@ -24,9 +24,9 @@ This means that you’ll generally want to define the most specific package name
 
 The `registries` list can also be placed inside a `codeql-workspace.yml` file. Doing so will allow you to define the registries to be used within a specific workspace, so that it can be shared amongst other CodeQL users of the workspace. The `registries` list in `codeql-workspace.yml` will be merged with and take precedence over the list in the global `qlconfig.yml`. For more information about `codeql-workspace.yml`, see [Codeql Workspaces](https://docs.github.com/en/code-security/concepts/code-scanning/codeql/codeql-workspaces#about-codeql-workspaces).
 
-You can now use `codeql pack publish`, `codeql pack download`, and `codeql database analyze` to manage packs on GitHub Enterprise Cloud with data residency{% elsif ghes %}GitHub Enterprise Server.
+You can now use `codeql pack publish`, `codeql pack download`, and `codeql database analyze` to manage packs on GitHub Enterprise Cloud with data residency.
 
-{% endif %}
+
 
 ## Authenticating to GitHub Container registries
 
@@ -45,26 +45,26 @@ You can authenticate to the Container registry in two ways:
 
 
 
-### Authenticating to Container registries on {% ifversion ghec %}GitHub Enterprise Cloud with data residency{% elsif ghes %}GitHub Enterprise Server
+### Authenticating to Container registries on GitHub Enterprise Cloud with data residency
 
-Similarly, you can authenticate to a Container registry on GitHub Enterprise Cloud with data residency{% elsif ghes %}GitHub Enterprise Server, or authenticate to multiple registries simultaneously (for example, to download or run private packs from multiple registries) in two ways:
+Similarly, you can authenticate to a Container registry on GitHub Enterprise Cloud with data residency, or authenticate to multiple registries simultaneously (for example, to download or run private packs from multiple registries) in two ways:
 
 1. Pass the `--registries-auth-stdin` option to the CodeQL CLI, then supply a registry authentication string via standard input.
 1. Set the `CODEQL_REGISTRIES_AUTH` environment variable to a registry authentication string.
 
-A registry authentication string is a comma-separated list of `<registry-url>=<token>` pairs, where `registry-url` is a Container registry URL, such as `https://containers.GHE_HOSTNAME/v2/{% elsif ghec %}https://containers.SUBDOMAIN.ghe.com`, and `token` is a GitHub Apps token or personal access token for that Container registry.
+A registry authentication string is a comma-separated list of `<registry-url>=<token>` pairs, where `registry-url` is a Container registry URL, such as `https://containers.GHE_HOSTNAME/v2/`, and `token` is a GitHub Apps token or personal access token for that Container registry.
 This ensures that each token is only passed to the Container registry you specify.
 
 For example, the following registry authentication string specifies that the CodeQL CLI should authenticate as follows:
 
 * Use the token `<token1>` to authenticate to Container registry on GitHub.com.
-* Use the token `<token2>` to authenticate to the Container registry for the enterprise at `https://containers.GHE_HOSTNAME/v2/{% elsif ghec %}https://containers.SUBDOMAIN.ghe.com`.
+* Use the token `<token2>` to authenticate to the Container registry for the enterprise at `https://containers.GHE_HOSTNAME/v2/`.
 
 ```shell
-https://ghcr.io/v2/=<token1>,https://containers.GHE_HOSTNAME/v2/{% elsif ghec %}https://containers.SUBDOMAIN.ghe.com=<token2>
+https://ghcr.io/v2/=<token1>,{% data variables.enterprise.gh_enterprise_container_registry %}=<token2>
 ```
 
-{% endif %}
+
 
 ## Publishing your CodeQL pack
 
@@ -75,7 +75,7 @@ To share your CodeQL pack with other people, you can publish it to the Container
 
 
 > [!NOTE]
-> This article describes the features available with the CodeQL CLI 2.20.7{% elsif ghes < 3.19 %}2.21.4{% elsif ghes < 3.20 %}2.22.4{% elsif ghes < 3.21 %}2.23.9{% elsif ghes < 3.22 %}2.24.3 bundle included in the initial release of GitHub Enterprise Server {{ allVersions[currentVersion].currentRelease }}.
+> This article describes the features available with the CodeQL CLI 2.20.7 bundle included in the initial release of GitHub Enterprise Server {{ allVersions[currentVersion].currentRelease }}.
 >
 > If your site administrator has updated your CodeQL CLI version to a newer release, please see the [GitHub Enterprise Cloud version](/enterprise-cloud@latest/{{ currentArticle }}) of this article for information on the latest features.
 

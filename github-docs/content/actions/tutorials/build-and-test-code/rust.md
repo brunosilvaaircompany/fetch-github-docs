@@ -60,8 +60,7 @@ GitHub provides a Rust workflow template that should work for most basic Rust pr
        runs-on: ubuntu-latest
 
        steps:
-       - uses: actions/checkout@v6
-
+       - uses: {% data reusables.actions.action-checkout %}
        - name: Build
          run: cargo build --verbose
        - name: Run tests
@@ -96,8 +95,7 @@ You can cache and restore dependencies using the Cache action. This example assu
 
 ```yaml copy
       - name: Cache
-        uses: actions/cache@v4
-
+        uses: {% data reusables.actions.action-cache %}
         with:
           path: |
             ~/.cargo/registry
@@ -122,8 +120,7 @@ jobs:
     outputs:
       release_built: {% raw %}${{ steps.set-output.outputs.release_built }}{% endraw %}
     steps:
-      - uses: actions/checkout@v6
-
+      - uses: {% data reusables.actions.action-checkout %}
       - name: Build binaries in "{% raw %}${{ matrix.BUILD_TARGET }}{% endraw %}" mode
         run: cargo build --profile ${% raw %}{{ matrix.BUILD_TARGET }}{% endraw %}
       - name: Run tests in "${% raw %}{{ matrix.BUILD_TARGET }}{% endraw %}" mode
@@ -155,8 +152,7 @@ After a workflow completes, you can upload the resulting artifacts for analysis 
 
 ```yaml copy
       - name: Upload release artifact
-        uses: actions/upload-artifact@v4
-
+        uses: {% data reusables.actions.action-upload-artifact %}
         with:
           name: {% raw %}<my-app>{% endraw %}
           path: {% raw %}target/${{ matrix.BUILD_TARGET }}/<my-app>{% endraw %}

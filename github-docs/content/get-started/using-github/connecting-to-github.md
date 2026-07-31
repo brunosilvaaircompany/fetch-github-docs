@@ -24,12 +24,12 @@ For a tutorial to help you get started with making changes in the browser, see [
 
 ## Making more complex changes in the browser
 
-Working directly on {% ifversion ghes %}your GitHub Enterprise Server instance is best for small, simple changes, often targeting a single file in a repository. If you want to work in the browser but need to make more complex changes, such as moving content between files, you can choose from the following tools to open a repository in a dedicated editor.
+Working directly on your GitHub Enterprise Server instance is best for small, simple changes, often targeting a single file in a repository. If you want to work in the browser but need to make more complex changes, such as moving content between files, you can choose from the following tools to open a repository in a dedicated editor.
 
 * If you want an editor where you can quickly open or create files, you can press the `.` key in any repository to open the github.dev editor. This is a lightweight web-based editor that includes many of the features of Visual Studio Code, such as a search bar and buttons for Git commands. For more information, see [The Githubdev Web Based Editor](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor).
 * If you want to stay in the browser but need to do things like run commands, create a test build of your project, or install dependencies, you can open a repository in a codespace. A codespace is a remote development environment with storage and compute power. It includes an editor and integrated terminal, and comes preinstalled with common tools you may need to work with a project, including Git. For more information, see [Quickstart](https://docs.github.com/en/codespaces/quickstart).
 
-Alternatively, you can connect to GitHub from your desktop, and work with a local copy of the repository.{% else %}Working directly in the browser is best for small, simple changes, often targeting a single file in a repository. If you want to make more complex changes, you may need to connect to GitHub from the desktop, and work with a local copy of the repository.{% endif %}
+Alternatively, you can connect to GitHub from your desktop, and work with a local copy of the repository.
 
 ## Working from the desktop
 

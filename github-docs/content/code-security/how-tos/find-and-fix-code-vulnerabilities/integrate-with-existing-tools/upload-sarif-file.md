@@ -76,11 +76,9 @@ jobs:
     steps:
       # This step checks out a copy of your repository.
       - name: Checkout repository
-        uses: actions/checkout@v6
-
+        uses: {% data reusables.actions.action-checkout %}
       - name: Upload SARIF file
-        uses: github/codeql-action/upload-sarif@v4
-
+        uses: {% data reusables.actions.action-codeql-action-upload-sarif %}
         with:
           # Path to SARIF file relative to the root of the repository
           sarif_file: results.sarif
@@ -117,8 +115,7 @@ jobs:
       actions: read
       contents: read
     steps:
-      - uses: actions/checkout@v6
-
+      - uses: {% data reusables.actions.action-checkout %}
       - name: Run npm install
         run: npm install
       # Runs the ESlint code analysis
@@ -126,8 +123,7 @@ jobs:
         # eslint exits 1 if it finds anything to report
         run: node_modules/.bin/eslint build docs lib script spec-main -f node_modules/@microsoft/eslint-formatter-sarif/sarif.js -o results.sarif || true
       # Uploads results.sarif to GitHub repository using the upload-sarif action
-      - uses: github/codeql-action/upload-sarif@v4
-
+      - uses: {% data reusables.actions.action-codeql-action-upload-sarif %}
         with:
           # Path to SARIF file relative to the root of the repository
           sarif_file: results.sarif

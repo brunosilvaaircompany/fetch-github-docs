@@ -95,7 +95,7 @@ You can also use the REST API to create deploy keys. For more information, see [
 You can then interact with the repository using SSH. For example:
 
 ```bash
-git clone git@github.com:OWNER/REPO.git
+git clone git@{% ifversion fpt or ghec %}github.com{% else %}my-GHE-hostname.com{% endif %}:OWNER/REPO.git
 ```
 
 
@@ -104,7 +104,7 @@ git clone git@github.com:OWNER/REPO.git
 
 >
 > ```bash
-> git clone octocorp@octocorp.ghe.com:OWNER/REPO.git
+> git clone {% data variables.enterprise.data_residency_example_git_ssh %}:OWNER/REPO.git
 > ```
 
 
@@ -116,12 +116,12 @@ If you use multiple repositories on one server, you will need to generate a dedi
 In the server's SSH configuration file (usually `~/.ssh/config`), add an alias entry for each repository. For example:
 
 ```bash
-Host github.com-repo-0
-        Hostname github.com
+Host {% ifversion fpt or ghec %}github.com{% else %}my-GHE-hostname.com{% endif %}-repo-0
+        Hostname {% ifversion fpt or ghec %}github.com{% else %}my-GHE-hostname.com{% endif %}
         IdentityFile=/home/user/.ssh/repo-0_deploy_key
 
-Host github.com-repo-1
-        Hostname github.com
+Host {% ifversion fpt or ghec %}github.com{% else %}my-GHE-hostname.com{% endif %}-repo-1
+        Hostname {% ifversion fpt or ghec %}github.com{% else %}my-GHE-hostname.com{% endif %}
         IdentityFile=/home/user/.ssh/repo-1_deploy_key
 ```
 
@@ -132,7 +132,7 @@ Host github.com-repo-1
 You can then use the hostname's alias to interact with the repository using SSH, which will use the unique deploy key assigned to that alias. For example:
 
 ```bash
-git clone git@github.com-repo-1:OWNER/repo-1.git
+git clone git@{% ifversion fpt or ghec %}github.com{% else %}my-GHE-hostname.com{% endif %}-repo-1:OWNER/repo-1.git
 ```
 
 ## GitHub App installation access tokens

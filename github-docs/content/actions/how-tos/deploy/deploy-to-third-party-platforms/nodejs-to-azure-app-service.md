@@ -59,16 +59,9 @@ If you configured a deployment environment, change the value of `environment` to
 
 
 ```yaml copy
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
+{% data reusables.actions.actions-not-certified-by-github-comment %}
 
-
-# GitHub recommends pinning actions to a commit SHA.
-# To get a newer version, you will need to update the SHA.
-# You can also reference a tag or branch, but the action may change without warning.
-
+{% data reusables.actions.actions-use-sha-pinning-comment %}
 
 on:
   push:
@@ -84,12 +77,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v6
-
+    - uses: {% data reusables.actions.action-checkout %}
 
     - name: Set up Node.js
-      uses: actions/setup-node@v7
-
+      uses: {% data reusables.actions.action-setup-node %}
       with:
         node-version: {% raw %}${{ env.NODE_VERSION }}{% endraw %}
         cache: 'npm'
@@ -100,8 +91,7 @@ jobs:
         npm run build --if-present
         npm run test --if-present
     - name: Upload artifact for deployment job
-      uses: actions/upload-artifact@v4
-
+      uses: {% data reusables.actions.action-upload-artifact %}
       with:
         name: node-app
         path: .
@@ -115,8 +105,7 @@ jobs:
 
     steps:
     - name: Download artifact from build job
-      uses: actions/download-artifact@v5
-
+      uses: {% data reusables.actions.action-download-artifact %}
       with:
         name: node-app
 

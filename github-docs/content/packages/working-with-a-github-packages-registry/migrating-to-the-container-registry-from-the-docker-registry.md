@@ -26,9 +26,9 @@ The Container registry replaces GitHub's Docker registry.
 After a Docker image has been migrated to the Container registry, you'll see the following changes to the details for the package.
 
 * The package icon will be the Container registry logo (a {% octicon "container" aria-label="The container icon" %} icon) instead of the Docker logo.
-* The domain in the pull URL will be `ghcr.io`{% elsif ghes %}<code>containers.<em>HOSTNAME</em></code> instead of `docker.pkg.github.com`{% elsif ghes %}<code>docker.<em>HOSTNAME</em></code>.
+* The domain in the pull URL will be `ghcr.io` instead of `docker.pkg.github.com`.
 
-Any scripts or GitHub Actions workflows that use the namespace for the Docker registry, `docker.pkg.github.com`{% elsif ghes %}<code>docker.<em>HOSTNAME</em></code>, will continue to work after migration to the Container registry at `ghcr.io`{% elsif ghes %}<code>containers.<em>HOSTNAME</em></code>.
+Any scripts or GitHub Actions workflows that use the namespace for the Docker registry, `docker.pkg.github.com`, will continue to work after migration to the Container registry at `ghcr.io`.
 
 
 After migration, you'll no longer be able to use the GraphQL API to query for packages with a `PackageType` of "DOCKER". Instead, you can use the REST API to query for packages with a `package_type` of "container". For more information, see [Packages](https://docs.github.com/en/rest/packages).

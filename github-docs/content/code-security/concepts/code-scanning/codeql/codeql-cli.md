@@ -15,7 +15,7 @@ You can use the CodeQL CLI to:
 The CodeQL CLI can analyze:
 
 * Dynamic languages, for example, JavaScript and Python.
-* Compiled languages, for example, C/C++, C#, Go, Java, Kotlin, Rust, {% else ifversion codeql-rust-public-preview %}Rust (public preview), and Swift
+* Compiled languages, for example, C/C++, C#, Go, Java, Kotlin, Rust, and Swift
 * Codebases written in a mixture of languages.
 
 ## About using the CodeQL CLI for code scanning
@@ -29,10 +29,7 @@ For an overview of all the options for using CodeQL analysis for code scanning, 
 
 > [!NOTE] 
 > * The CodeQL CLI is free to use on public repositories. The CodeQL CLI is also available in private repositories owned by organizations that use GitHub Team or GitHub Enterprise Cloud and have a license for GitHub Code Security. For information, see [GitHub CodeQL Terms and Conditions](https://securitylab.github.com/tools/codeql/license) and [CodeQL CLI](https://codeql.github.com/docs/codeql-cli/).
-{%- elsif ghec %}
-> * The CodeQL CLI is free to use on public repositories that are maintained on GitHub.com, and available to use on private repositories that are owned by customers with an GitHub Code Security license. For information, see [GitHub CodeQL Terms and Conditions](https://securitylab.github.com/tools/codeql/license) and [CodeQL CLI](https://codeql.github.com/docs/codeql-cli/).
-{%- elsif ghes %}
-> * The CodeQL CLI is available to customers with a GitHub Code Security license.
+
 > * The CodeQL CLI is currently not compatible with non-glibc Linux distributions such as (musl-based) Alpine Linux.
 
 
@@ -75,8 +72,8 @@ codeql database analyze codeql-dbs/python python-code-scanning.qls \
     --format=sarif-latest --sarif-category=python --output=python-results.sarif
 
 # Upload the SARIF file with the Java results: 'java-results.sarif'
-# The GitHub App or personal access token created for authentication
-# with GitHub's REST API is available in the `GITHUB_TOKEN` environment variable.
+# The {% data variables.product.prodname_github_app %} or {% data variables.product.pat_generic %} created for authentication
+# with {% data variables.product.company_short %}'s REST API is available in the `GITHUB_TOKEN` environment variable.
 
 codeql github upload-results \
     --repository=my-org/example-repo \
@@ -100,7 +97,7 @@ The CodeQL CLI uses special programs, called extractors, to extract information 
 **License notice:** If you don’t have a license for GitHub Code Security then, by installing this product, you are agreeing to the [GitHub CodeQL Terms and Conditions](https://github.com/github/codeql-cli-binaries/blob/main/LICENSE.md).
 
 For information about how you can try GitHub Advanced Security for free, see [Trial Advanced Security](https://docs.github.com/en/code-security/tutorials/trialing-github-advanced-security/trial-advanced-security).
-{% elsif fpt %}For information about how you can try GitHub Enterprise with GitHub Advanced Security for free, see [Setting Up A Trial Of GitHub Enterprise Cloud](https://docs.github.com/en/enterprise-cloud@latest/admin/overview/setting-up-a-trial-of-github-enterprise-cloud) and [Trial Advanced Security](https://docs.github.com/en/enterprise-cloud@latest/code-security/tutorials/trialing-github-advanced-security/trial-advanced-security#setting-up-your-trial-of-github-advanced-security) in the GitHub Enterprise Cloud documentation.
+
 
 
 

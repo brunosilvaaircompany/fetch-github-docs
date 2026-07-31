@@ -121,7 +121,7 @@ Before adding a new SSH key to the ssh-agent to manage your keys, you should hav
    * Open your `~/.ssh/config` file, then modify the file to contain the following lines. If your SSH key file has a different name or path than the example code, modify the filename or path to match your current setup.
 
      ```text copy
-     Host HOSTNAME
+     Host {% ifversion ghes %}HOSTNAME{% else %}github.com{% endif %}
        AddKeysToAgent yes
        UseKeychain yes
        IdentityFile ~/.ssh/id_ed25519
@@ -132,7 +132,7 @@ Before adding a new SSH key to the ssh-agent to manage your keys, you should hav
      > * If you see a `Bad configuration option: usekeychain` error, add an additional line to the configuration's' `Host *.HOSTNAME` section.
      >
      > ```text copy
-     > Host HOSTNAME
+     > Host {% ifversion ghes %}HOSTNAME{% else %}github.com{% endif %}
      >   IgnoreUnknown UseKeychain
      > ```
 

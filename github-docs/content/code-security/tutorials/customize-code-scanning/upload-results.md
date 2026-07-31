@@ -26,19 +26,19 @@ If you have installed the CodeQL CLI in a third-party CI system, you can also us
 1. When you have decided on the most secure and reliable method for your configuration, run `codeql github upload-results` on each SARIF results file and include `--github-auth-stdin` unless the token is available in the environment variable `GITHUB_TOKEN`.
 
    ```shell
-   # GitHub App or personal access token available from a secret store
+   # {% data variables.product.prodname_github_app %} or {% data variables.product.pat_generic %} available from a secret store
    <call-to-retrieve-secret> | codeql github upload-results \
        --repository=<repository-name> \
        --ref=<ref> --commit=<commit> \
-       --sarif=<file> --github-url=<URL> \
-       --github-auth-stdin
+       --sarif=<file> {% ifversion ghes %}--github-url=<URL> \
+       {% endif %}--github-auth-stdin
 
-   # GitHub App or personal access token available in GITHUB_TOKEN
+   # {% data variables.product.prodname_github_app %} or {% data variables.product.pat_generic %} available in GITHUB_TOKEN
    codeql github upload-results \
        --repository=<repository-name> \
        --ref=<ref> --commit=<commit> \
-       --sarif=<file> --github-url=<URL> \
-       
+       --sarif=<file> {% ifversion ghes %}--github-url=<URL> \
+       {% endif %}
    ```
 
 | Option | Required | Usage |
@@ -65,8 +65,8 @@ The following example uploads results from the SARIF file `temp/example-repo-js.
 codeql github upload-results \
     --repository=my-org/example-repo \
     --ref=refs/heads/main --commit=deb275d2d5fe9a522a0b7bd8b6b6a1c939552718 \
-    --sarif=/temp/example-repo-js.sarif --github-url=https://HOSTNAME \
-    
+    --sarif=/temp/example-repo-js.sarif {% ifversion ghes %}--github-url=https://HOSTNAME \
+    {% endif %}
 ```
 
 There is no output from this command unless the upload was unsuccessful. The command prompt returns when the upload is complete and data processing has begun. On smaller codebases, you should be able to explore the code scanning alerts in GitHub shortly afterward. You can see alerts directly in the pull request or on the **{% octicon "shield" aria-hidden="true" aria-label="shield" %} Security and quality** tab for branches, depending on the code you checked out. 
@@ -85,7 +85,7 @@ You can create a SARIF file for the failed analysis using [Database Export Diagn
 
 ```shell
 $ codeql database export-diagnostics codeql-dbs/example-repo \
-    --sarif-category=javascript-typescript --format=sarif-latest \
+    --sarif-category=javascript-typescript --format={% ifversion fpt or ghec %}sarif-latest{% else %}sarifv2.1.0{% endif %} \
     --output=/temp/example-repo-js.sarif
 ```
 
@@ -99,8 +99,8 @@ You can make this diagnostic information available on the tool status page by up
 codeql github upload-results \
     --repository=my-org/example-repo \
     --ref=refs/heads/main --commit=deb275d2d5fe9a522a0b7bd8b6b6a1c939552718 \
-    --sarif=/temp/example-repo-js.sarif --github-url=https://HOSTNAME \
-    
+    --sarif=/temp/example-repo-js.sarif {% ifversion ghes %}--github-url=https://HOSTNAME \
+    {% endif %}
 ```
 
 This is the same as the process for uploading SARIF files from successful analyses.

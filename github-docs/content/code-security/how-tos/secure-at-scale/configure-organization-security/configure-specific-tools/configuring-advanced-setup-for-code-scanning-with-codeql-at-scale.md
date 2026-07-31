@@ -4,7 +4,7 @@
 
 For repositories that are not eligible for default setup, you can use a bulk configuration script to enable advanced setup across multiple repositories.
 
-> [!NOTE] To successfully execute the script, GitHub Actions must be enabled for the organization{% elsif ghec %}organization or enterprise{% elsif ghes %}instance.
+> [!NOTE] To successfully execute the script, GitHub Actions must be enabled for the organization.
 
 1. Identify a group of repositories that can be analyzed using the same code scanning configuration. For example, all repositories that build Java artifacts using the production environment.
 1. Create and test a GitHub Actions workflow to call the CodeQL action with the appropriate configuration. For more information, see [Configuring Advanced Setup For Code Scanning](https://docs.github.com/en/code-security/how-tos/find-and-fix-code-vulnerabilities/configure-code-scanning/configuring-advanced-setup-for-code-scanning#configuring-advanced-setup-for-code-scanning-with-codeql).

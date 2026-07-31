@@ -1,8 +1,6 @@
 # Managing the publication of GitHub Pages sites for your organization
 
 You can choose to allow or disallow organization members from publishing GitHub Pages sites. Organizations that use GitHub Enterprise Cloud can also choose to allow publicly published sites, privately published sites, both, or neither. For more information, see [the GitHub Enterprise Cloud documentation](/enterprise-cloud@latest/organizations/managing-organization-settings/managing-the-publication-of-github-pages-sites-for-your-organization).
-{% elsif ghec %}
-You can choose to allow organization members to create publicly published sites, privately published sites, both, or neither. For more information about access control for GitHub Pages sites, see [Changing The Visibility Of Your GitHub Pages Site](https://docs.github.com/en/pages/getting-started-with-github-pages/changing-the-visibility-of-your-github-pages-site).
 
 
 If you disallow publication of GitHub Pages sites, any sites that are already published will remain published. You can manually unpublish the site. For more information, see [Unpublishing A GitHub Pages Site](https://docs.github.com/en/pages/getting-started-with-github-pages/unpublishing-a-github-pages-site).
@@ -19,8 +17,6 @@ If you disallow publication of GitHub Pages sites, any sites that are already pu
 
 
 1. Under "Pages creation, select or deselect **Public**.
-{% elsif ghec %}
-1. Under "Pages creation", select the visibilities you want to allow and deselect the visibilities you want to disallow.
 
 
 

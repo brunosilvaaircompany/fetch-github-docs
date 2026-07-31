@@ -79,11 +79,7 @@ This example demonstrates using the `actions-sync` tool to sync an individual ac
 1. After the action repository is created in your enterprise, people in your enterprise can use the destination repository to reference the action in their workflows. For the example action shown above:
 
    ```yaml
-   # This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
+   {% data reusables.actions.actions-not-certified-by-github-comment %}
    uses: synced-actions/actions-stale@v1
    ```
 

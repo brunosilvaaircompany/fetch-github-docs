@@ -184,7 +184,7 @@ After a migration, you may find that your source or destination repositories are
 The process for unlocking a repository depends on the GitHub product where the repository is stored.
 
 * If the locked repository is on GitHub Enterprise Server, a site administrator can unlock the repository using the site admin dashboard. For more information, see [Locking A Repository](https://docs.github.com/en/enterprise-server@latest/admin/user-management/managing-repositories-in-your-enterprise/locking-a-repository).
-* If the locked repository is on GitHub.com, you can contact us through the [GitHub Support portal](https://support.github.com){% elsif ghes %}your site administrator to unlock the repository.
+* If the locked repository is on GitHub.com, you can contact us through the [GitHub Support portal](https://support.github.com) to unlock the repository.
 
 > [!NOTE]
 > If your migration failed, not all of your data was migrated. If you choose to unlock and use the repository, there will be data loss. Deleting the locked repository and retrying the migration may be a better option.

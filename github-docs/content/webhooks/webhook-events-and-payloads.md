@@ -43,9 +43,9 @@ You can choose to have payloads delivered in JSON format (`application/json`) or
 ```shell
 > POST /payload HTTP/1.1
 
-> X-GitHub-Delivery: 72d3162e-cc78-11e3-81ab-4c9367dc0958
+> X-GitHub-Delivery: 72d3162e-cc78-11e3-81ab-4c9367dc0958{% ifversion ghes %}
 > X-GitHub-Enterprise-Version: 2.15.0
-> X-GitHub-Enterprise-Host: example.com
+> X-GitHub-Enterprise-Host: example.com{% endif %}
 > X-Hub-Signature: sha1=7d38cdd689735b008b3c702edd92eea23791c5f6
 > X-Hub-Signature-256: sha256=d57c68ca6f92289e6987922ff26938930f6e66a2d161ef06abdf1859230aa23c
 > User-Agent: GitHub-Hookshot/044aadd
@@ -59,7 +59,7 @@ You can choose to have payloads delivered in JSON format (`application/json`) or
 > {
 >   "action": "opened",
 >   "issue": {
->     "url": "https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3/repos/octocat/Hello-World/issues/1347",
+>     "url": "{% data variables.product.rest_url %}/repos/octocat/Hello-World/issues/1347",
 >     "number": 1347,
 >     ...
 >   },

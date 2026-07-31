@@ -23,8 +23,6 @@ You enable Dependabot version updates by checking a `dependabot.yml` configurati
 
 
 Dependabot and all related features are covered by [GitHub's Terms of Service](/free-pro-team@latest/site-policy/github-terms/github-terms-of-service).
-{% elsif ghec %}
-Dependabot and all related features are covered by your license agreement. For more information, see [GitHub Enterprise Customer Terms](https://github.com/customer-terms).
 
 
 

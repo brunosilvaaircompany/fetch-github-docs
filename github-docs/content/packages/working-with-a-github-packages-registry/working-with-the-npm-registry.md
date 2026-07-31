@@ -58,14 +58,14 @@ You must use a personal access token (classic) with the appropriate scopes to pu
 
 You can authenticate to GitHub Packages with npm by either editing your per-user `~/.npmrc` file to include your personal access token (classic) or by logging in to npm on the command line using your username and personal access token.
 
-To authenticate by adding your personal access token (classic) to your `~/.npmrc` file, edit the `~/.npmrc` file for your project to include the following line, replacing HOSTNAME with the host name of {% ifversion ghes %}your GitHub Enterprise Server instance and {% endif %}TOKEN with your personal access token. Create a new `~/.npmrc` file if one doesn't exist.
+To authenticate by adding your personal access token (classic) to your `~/.npmrc` file, edit the `~/.npmrc` file for your project to include the following line, replacing HOSTNAME with the host name of your GitHub Enterprise Server instance and TOKEN with your personal access token. Create a new `~/.npmrc` file if one doesn't exist.
 
 
 If your instance has subdomain isolation enabled:
 
 
 ```shell
-//npm.pkg.github.com/:_authToken=TOKEN
+//{% ifversion fpt or ghec %}npm.pkg.github.com{% else %}npm.HOSTNAME/{% endif %}/:_authToken=TOKEN
 ```
 
 
@@ -88,7 +88,7 @@ If your instance has subdomain isolation enabled:
 
 
 ```shell
-$ npm login --scope=@NAMESPACE --auth-type=legacy --registry=https://npm.pkg.github.com
+$ npm login --scope=@NAMESPACE --auth-type=legacy --registry=https://{% ifversion fpt or ghec %}npm.pkg.github.com{% else %}npm.HOSTNAME/{% endif %}
 
 > Username: USERNAME
 > Password: TOKEN
@@ -176,7 +176,7 @@ You can use `publishConfig` element in the `package.json` file to specify the re
 
    ```shell
    "publishConfig": {
-     "registry": "https://npm.pkg.github.com"
+     "registry": "https://{% ifversion fpt or ghec %}npm.pkg.github.com{% else %}npm. HOSTNAME/{% endif %}"
    },
    ```
 
@@ -208,7 +208,7 @@ To ensure the repository's URL is correct, replace `REPOSITORY` with the name of
 GitHub Packages will match the repository based on the URL.
 
 ```shell
-"repository":"https://github.com/OWNER/REPOSITORY",
+"repository":"https://{% ifversion fpt or ghec %}github.com{% else %}HOSTNAME{% endif %}/OWNER/REPOSITORY",
 ```
 
 ## Installing a package
@@ -257,15 +257,15 @@ You also need to add the `.npmrc` file to your project so that all requests to i
 
 ### Installing packages from other organizations
 
-By default, you can only use GitHub Packages packages from one organization. If you'd like to route package requests to multiple organizations and users, you can add additional lines to your `.npmrc` file, replacing `HOSTNAME` with the host name of {% ifversion ghes %}your GitHub Enterprise Server instance and {% endif %}`NAMESPACE` with the name of the personal account or organization to which the package is scoped.
+By default, you can only use GitHub Packages packages from one organization. If you'd like to route package requests to multiple organizations and users, you can add additional lines to your `.npmrc` file, replacing `HOSTNAME` with the host name of your GitHub Enterprise Server instance and `NAMESPACE` with the name of the personal account or organization to which the package is scoped.
 
 
 If your instance has subdomain isolation enabled:
 
 
 ```shell
-@NAMESPACE:registry=https://npm.pkg.github.com
-@NAMESPACE:registry=https://npm.pkg.github.com
+@NAMESPACE:registry=https://{% ifversion fpt or ghec %}npm.pkg.github.com{% else %}npm.HOSTNAME{% endif %}
+@NAMESPACE:registry=https://{% ifversion fpt or ghec %}npm.pkg.github.com{% else %}npm.HOSTNAME{% endif %}
 ```
 
 

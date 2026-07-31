@@ -10,7 +10,7 @@ After creating a token, you can authenticate your request by sending the token i
 
 ```shell
 curl --request GET \
---url "https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3/octocat" \
+--url "{% data variables.product.rest_url %}/octocat" \
 --header "Authorization: Bearer YOUR-TOKEN" \
 --header "X-GitHub-Api-Version: {{ allVersions[currentVersion].latestApiVersion }}"
 ```
@@ -63,7 +63,7 @@ For example:
 
 ```shell
 curl --request POST \
---url "https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3/applications/YOUR_CLIENT_ID/token" \
+--url "{% data variables.product.rest_url %}/applications/YOUR_CLIENT_ID/token" \
 --user "YOUR_CLIENT_ID:YOUR_CLIENT_SECRET" \
 --header "Accept: application/vnd.github+json" \
 --header "X-GitHub-Api-Version: {{ allVersions[currentVersion].latestApiVersion }}" \
@@ -99,7 +99,7 @@ If this is not possible, you can store your token as a secret and use the name o
 
 To make an authenticated request to the API in a GitHub Actions workflow using GitHub CLI, you can store the value of `GITHUB_TOKEN` as an environment variable, and use the `run` keyword to execute the GitHub CLI `api` subcommand. For more information about the `run` keyword, see [Workflow Syntax](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax#jobsjob_idstepsrun).
 
-In the following example workflow, replace `PATH` with the path of the endpoint. For more information about the path, see [Getting Started With The Rest Api?Tool=Cli](https://docs.github.com/en/rest/using-the-rest-api/getting-started-with-the-rest-api?tool=cli#path). Replace `HOSTNAME` with the name of {% ifversion ghes %}your GitHub Enterprise Server instance.{% endif %}
+In the following example workflow, replace `PATH` with the path of the endpoint. For more information about the path, see [Getting Started With The Rest Api?Tool=Cli](https://docs.github.com/en/rest/using-the-rest-api/getting-started-with-the-rest-api?tool=cli#path). Replace `HOSTNAME` with the name of your GitHub Enterprise Server instance.
 
 ```yaml
 jobs:
@@ -117,7 +117,7 @@ jobs:
 
 To make an authenticated request to the API in a GitHub Actions workflow using `curl`, you can store the value of `GITHUB_TOKEN` as an environment variable, and use the `run` keyword to execute a `curl` request to the API. For more information about the `run` keyword, see [Workflow Syntax](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax#jobsjob_idstepsrun).
 
-In the following example workflow, replace `PATH` with the path of the endpoint. For more information about the path, see [Getting Started With The Rest Api?Tool=Cli](https://docs.github.com/en/rest/using-the-rest-api/getting-started-with-the-rest-api?tool=cli#path). Replace `HOSTNAME` with the name of {% ifversion ghes %}your GitHub Enterprise Server instance.{% endif %}
+In the following example workflow, replace `PATH` with the path of the endpoint. For more information about the path, see [Getting Started With The Rest Api?Tool=Cli](https://docs.github.com/en/rest/using-the-rest-api/getting-started-with-the-rest-api?tool=cli#path). Replace `HOSTNAME` with the name of your GitHub Enterprise Server instance.
 
 ```yaml copy
 jobs:
@@ -129,7 +129,7 @@ jobs:
           GH_TOKEN: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
         run: |
           curl --request GET \
-          --url "https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3/PATH" \
+          --url "{% data variables.product.rest_url %}/PATH" \
           --header "Authorization: Bearer $GH_TOKEN"
 ```
 
@@ -145,16 +145,12 @@ GitHub recommends that you use a token to authenticate to the REST API instead o
 
 ```shell
 curl --request GET \
---url "{% ifversion fpt or ghec %}https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3/user" \
+--url "{% data variables.product.rest_url %}/user" \
 --user USERNAME:PASSWORD \
 --header "X-GitHub-Api-Version: {{ allVersions[currentVersion].latestApiVersion }}"
 ```
 
-{% else %}
 
-Authentication with username and password is not supported. If you try to authenticate with user name and password, you will receive a 4xx error.
-
-{% endif %}
 
 ## Further reading
 

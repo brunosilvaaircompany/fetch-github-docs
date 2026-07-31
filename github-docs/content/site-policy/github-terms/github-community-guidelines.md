@@ -32,7 +32,7 @@ While some disagreements can be resolved with direct, respectful communication b
 
 * **Limit Interactions** - If your public project is getting unwanted attention, being trolled, spammed, or otherwise, you have the option of setting [temporary interaction limits](/communities/moderating-comments-and-conversations/limiting-interactions-in-your-repository) to keep certain users from interacting with your repository. You can even set [code review limits](https://github.blog/2021-11-01-github-keeps-getting-better-for-open-source-maintainers/#preventing-drive-by-pull-request-approvals-and-requested-changes) to ensure quality contributions on your projects.
 
-While we are passionate about empowering maintainers to moderate their own projects, please contact us through the [GitHub Support portal](https://support.github.com){% elsif ghes %}your site administrator if you need additional support in dealing with a situation.
+While we are passionate about empowering maintainers to moderate their own projects, please contact us through the [GitHub Support portal](https://support.github.com) if you need additional support in dealing with a situation.
 
 ## What happens if someone violates GitHub's policies?
 

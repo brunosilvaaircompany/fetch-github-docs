@@ -49,7 +49,7 @@ For more information, see [View Workflow Run History](https://docs.github.com/en
 
 GitHub-hosted runners include the operating system's default built-in tools, in addition to the packages listed in the above references. For example, Ubuntu and macOS runners include `grep`, `find`, and `which`, among other default tools.
 
-{% ifversion actions-sbom %}
+
 
 You can also view a software bill of materials (SBOM) for each build of the Windows and Ubuntu runner images. For more information, see [Secure Use](https://docs.github.com/en/actions/reference/security/secure-use#reviewing-the-supply-chain-for-github-hosted-runners).
 
@@ -92,6 +92,3 @@ In addition, if the workflow run has been successfully queued, but has not been 
 ## The `etc/hosts` file
 
 GitHub-hosted runners are provisioned with an `etc/hosts` file that blocks network access to various cryptocurrency mining pools and malicious sites. Hosts such as MiningMadness.com and cpu-pool.com are rerouted to localhost so that they do not present a significant security risk.
-
-
-{% endif %}

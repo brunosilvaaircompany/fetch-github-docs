@@ -27,13 +27,13 @@ You must install and import `octokit` in order to use the Octokit.js library. Th
 
 If you want to use the GitHub REST API for personal use, you can create a personal access token. For more information about creating a personal access token, see [Managing Your Personal Access Tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).
 
-First, import `Octokit` from `octokit`. Then, pass your personal access token when you create an instance of `Octokit`. In the following example, replace `YOUR-TOKEN` with a reference to your personal access token. Replace `HOSTNAME` with the name of {% ifversion ghes %}your GitHub Enterprise Server instance.{% endif %}
+First, import `Octokit` from `octokit`. Then, pass your personal access token when you create an instance of `Octokit`. In the following example, replace `YOUR-TOKEN` with a reference to your personal access token. Replace `HOSTNAME` with the name of your GitHub Enterprise Server instance.
 
 ```javascript copy
 import { Octokit } from "octokit";
 
-const octokit = new Octokit({ 
-  baseUrl: "{% ifversion fpt or ghec %}https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3",{% endif %}
+const octokit = new Octokit({ {% ifversion ghes %}
+  baseUrl: "{% data variables.product.rest_url %}",{% endif %}
   auth: 'YOUR-TOKEN',
 });
 ```
@@ -42,16 +42,16 @@ const octokit = new Octokit({
 
 If you want to use the API on behalf of an organization or another user, GitHub recommends that you use a GitHub App. If an endpoint is available to GitHub Apps, the REST reference documentation for that endpoint will indicate what type of GitHub App token is required. For more information, see [Registering A GitHub App](https://docs.github.com/en/apps/creating-github-apps/registering-a-github-app/registering-a-github-app) and [About Authentication With A GitHub App](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/about-authentication-with-a-github-app).
 
-Instead of importing `Octokit` from `octokit`, import `App`. In the following example, replace `APP_ID` with a reference to your app's ID. Replace `PRIVATE_KEY` with a reference to your app's private key. Replace `INSTALLATION_ID` with the ID of the installation of your app that you want to authenticate on behalf of. You can find your app's ID and generate a private key on the settings page for your app. For more information, see [Managing Private Keys For GitHub Apps](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/managing-private-keys-for-github-apps). You can get an installation ID with the `GET /users/{username}/installation`, `GET /repos/{owner}/{repo}/installation`, or `GET /orgs/{org}/installation` endpoints. For more information, see [Apps](https://docs.github.com/en/rest/apps/apps). Replace `HOSTNAME` with the name of {% ifversion ghes %}your GitHub Enterprise Server instance.{% endif %}
+Instead of importing `Octokit` from `octokit`, import `App`. In the following example, replace `APP_ID` with a reference to your app's ID. Replace `PRIVATE_KEY` with a reference to your app's private key. Replace `INSTALLATION_ID` with the ID of the installation of your app that you want to authenticate on behalf of. You can find your app's ID and generate a private key on the settings page for your app. For more information, see [Managing Private Keys For GitHub Apps](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/managing-private-keys-for-github-apps). You can get an installation ID with the `GET /users/{username}/installation`, `GET /repos/{owner}/{repo}/installation`, or `GET /orgs/{org}/installation` endpoints. For more information, see [Apps](https://docs.github.com/en/rest/apps/apps). Replace `HOSTNAME` with the name of your GitHub Enterprise Server instance.
 
 ```javascript copy
 import { App } from "octokit";
 
 const app = new App({
   appId: APP_ID,
-  privateKey: PRIVATE_KEY,
+  privateKey: PRIVATE_KEY,{% ifversion ghes %}
   Octokit: Octokit.defaults({
-    baseUrl: "{% ifversion fpt or ghec %}https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3",
+    baseUrl: "{% data variables.product.rest_url %}",
   }),{% endif %}
 });
 
@@ -81,21 +81,21 @@ The script that the workflow runs uses `process.env.TOKEN` to authenticate:
 ```javascript copy
 import { Octokit } from "octokit";
 
-const octokit = new Octokit({ 
-  baseUrl: "{% ifversion fpt or ghec %}https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3",{% endif %}
+const octokit = new Octokit({ {% ifversion ghes %}
+  baseUrl: "{% data variables.product.rest_url %}",{% endif %}
   auth: process.env.TOKEN,
 });
 ```
 
 ### Instantiating without authentication
 
-You can use the REST API without authentication, although you will have a lower rate limit and will not be able to use some endpoints. To create an instance of `Octokit` without authenticating, do not pass the `auth` argument. Set the base URL to `{% ifversion fpt or ghec %}https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3`. Replace `[hostname]` with the name of your GitHub Enterprise Server instance.{% endif %}
+You can use the REST API without authentication, although you will have a lower rate limit and will not be able to use some endpoints. To create an instance of `Octokit` without authenticating, do not pass the `auth` argument. Set the base URL to `https://api.github.com`. Replace `[hostname]` with the name of your GitHub Enterprise Server instance.
 
 ```javascript copy
 import { Octokit } from "octokit";
 
-const octokit = new Octokit({ 
-  baseUrl: "{% ifversion fpt or ghec %}https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3",
+const octokit = new Octokit({ {% ifversion ghes %}
+  baseUrl: "{% data variables.product.rest_url %}",
 {% endif %}});
 ```
 
@@ -350,8 +350,8 @@ The `getChangedFiles` function gets all of the files changed for a pull request.
 ```javascript copy
 import { Octokit } from "octokit";
 
-const octokit = new Octokit({ 
-  baseUrl: "{% ifversion fpt or ghec %}https://api.github.com{% elsif ghes %}http(s)://HOSTNAME/api/v3",{% endif %}
+const octokit = new Octokit({ {% ifversion ghes %}
+  baseUrl: "{% data variables.product.rest_url %}",{% endif %}
   auth: 'YOUR-TOKEN',
 });
 

@@ -94,9 +94,9 @@ The `configure` CLI command is used to set required credentials and options for 
    $ gh actions-importer configure
    ✔ Which CI providers are you configuring?: Travis CI
    Enter the following values (leave empty to omit):
-   ✔ Personal access token for GitHub: ***************
+   ✔ {% data variables.product.pat_generic_caps %} for GitHub: ***************
    ✔ Base url of the GitHub instance: https://github.com
-   ✔ Personal access token for Travis CI: ***************
+   ✔ {% data variables.product.pat_generic_caps %} for Travis CI: ***************
    ✔ Base url of the Travis CI instance: https://travis-ci.com
    ✔ Travis CI organization name: actions-importer-labs
    Environment variables successfully updated.

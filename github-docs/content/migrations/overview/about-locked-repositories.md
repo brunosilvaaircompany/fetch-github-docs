@@ -64,4 +64,4 @@ If the import succeeded, you can unlock the repository with the `unlockImportedR
 
 If the import failed, you cannot unlock the repository yourself. Because a failed migration means that not all of your data has been migrated, we recommend deleting the repository and retrying the migration, to prevent data loss.
 
-If you’re sure you want to unlock the repository, contact us through the [GitHub Support portal](https://support.github.com){% elsif ghes %}your site administrator.
+If you’re sure you want to unlock the repository, contact us through the [GitHub Support portal](https://support.github.com).

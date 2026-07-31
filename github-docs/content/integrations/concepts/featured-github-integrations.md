@@ -14,17 +14,17 @@ With the GitHub for Visual Studio Code extension, you can review and manage GitH
 
 ## Project management tools
 
-You can integrate your personal or organization account on {% ifversion ghes %}your GitHub Enterprise Server instance with third-party project management tools, such as Jira.
+You can integrate your personal or organization account on your GitHub Enterprise Server instance with third-party project management tools, such as Jira.
 
 ### Jira Cloud and GitHub.com integration
 
 You can integrate Jira Cloud with your personal or organization account to scan commits and pull requests, creating relevant metadata and hyperlinks in any mentioned Jira issues. For more information, visit the [Jira integration app](https://github.com/marketplace/jira-software-github) in the marketplace.
 
-{% endif %}
+
 
 ## Team communication tools
 
-You can integrate your personal{% elsif ghes %}user or organization account on your GitHub Enterprise Server instance with third-party team communication tools, such as Slack or Microsoft Teams.
+You can integrate your personal or organization account on your GitHub Enterprise Server instance with third-party team communication tools, such as Slack or Microsoft Teams.
 
 ### Slack and GitHub integration
 

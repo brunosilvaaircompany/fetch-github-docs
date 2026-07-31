@@ -43,8 +43,7 @@ The GitHub Enterprise Server release notes will state when a REST API version is
 You should use the `X-GitHub-Api-Version` header to specify an API version. For example:
 
 ```shell
-curl --header "X-GitHub-Api-Version:{{ allVersions[currentVersion].latestApiVersion }}"
- https://api.github.com/zen
+curl {% data reusables.rest-api.version-header %} https://api.github.com/zen
 ```
 
 Requests without the `X-GitHub-Api-Version` header will default to use the `{{ defaultRestApiVersion }}` version.

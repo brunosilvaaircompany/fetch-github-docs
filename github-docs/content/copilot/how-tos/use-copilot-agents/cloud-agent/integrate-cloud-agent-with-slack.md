@@ -59,19 +59,19 @@ You can ask Copilot to create GitHub issues directly from Slack, turning convers
    To create a single issue:
 
    ```text
-   @GitHub In octo-org/octo-repo, create a feature request to add fuzzy matching to search.
+   @{% data variables.product.github %} In octo-org/octo-repo, create a feature request to add fuzzy matching to search.
    ```
 
    To create multiple issues at once:
 
    ```text
-   @GitHub In octo-org/octo-repo, open separate issues for adding fuzzy matching to search, paginating the results list, and caching search queries.
+   @{% data variables.product.github %} In octo-org/octo-repo, open separate issues for adding fuzzy matching to search, paginating the results list, and caching search queries.
    ```
 
    To create issues with child-parent relationships:
 
    ```text
-   @GitHub In octo-org/octo-repo, create an epic to redesign search, with child issues for fuzzy matching, pagination, and query caching.
+   @{% data variables.product.github %} In octo-org/octo-repo, create an epic to redesign search, with child issues for fuzzy matching, pagination, and query caching.
    ```
 
    > [!NOTE] You can only use Copilot to create issues in repositories where you already have permission to create issues. This feature doesn't change your access or bypass repository permissions.

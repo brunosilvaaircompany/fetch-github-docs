@@ -26,7 +26,7 @@ After you authenticate to perform a sensitive action, your session is temporaril
 
 ## Confirming access for sudo mode
 
-To confirm access for sudo mode, you can authenticate with your password. Optionally, you can use a different authentication method, like a passkey, a security key, GitHub Mobile, or a 2FA code{% elsif ghes %}a security key or a 2FA code.
+To confirm access for sudo mode, you can authenticate with your password. Optionally, you can use a different authentication method, like a passkey, a security key, GitHub Mobile, or a 2FA code.
 
 * [Confirming access using a passkey](#confirming-access-using-a-passkey)
 

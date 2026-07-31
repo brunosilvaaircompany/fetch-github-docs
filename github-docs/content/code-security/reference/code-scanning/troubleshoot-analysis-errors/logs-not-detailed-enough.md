@@ -51,8 +51,7 @@ You can create CodeQL debugging artifacts by using a flag in your workflow. For 
 
 ```yaml
 - name: Initialize CodeQL
-  uses: github/codeql-action/init@v4
-
+  uses: {% data reusables.actions.action-codeql-action-init %}
   with:
     debug: true
 ```

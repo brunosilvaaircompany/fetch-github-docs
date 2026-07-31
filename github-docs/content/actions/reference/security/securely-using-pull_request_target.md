@@ -25,8 +25,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
-
+      - uses: {% data reusables.actions.action-checkout %}
         with:
           ref: {% raw %}${{ github.event.pull_request.head.sha }}{% endraw %}
       - name: Test
@@ -73,6 +72,4 @@ This protection only covers fork pull request refs. Checking out other untrusted
 
 ## Restricting the use of pull_request_target
 
-If a repository has no legitimate use for `pull_request_target`, restricting the event removes the risk regardless of how individual workflows are written. Administrators can use workflow execution protections to control which events and actors can trigger workflows. For more information, see the workflow execution protections documentation for repositories ([Workflow Execution Protections](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/actions-policies/workflow-execution-protections)){% ifversion ghec %}, organizations ([Workflow Execution Protections](https://docs.github.com/en/organizations/managing-organization-settings/actions-policies/workflow-execution-protections)), and across your enterprise ([Workflow Execution Protections](https://docs.github.com/en/admin/enforcing-policies/enforcing-policies-for-your-enterprise/actions-policies/workflow-execution-protections)).
-
-{% endif %}
+If a repository has no legitimate use for `pull_request_target`, restricting the event removes the risk regardless of how individual workflows are written. Administrators can use workflow execution protections to control which events and actors can trigger workflows. For more information, see the workflow execution protections documentation for repositories ([Workflow Execution Protections](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/actions-policies/workflow-execution-protections)), organizations ([Workflow Execution Protections](https://docs.github.com/en/organizations/managing-organization-settings/actions-policies/workflow-execution-protections)), and across your enterprise ([Workflow Execution Protections](https://docs.github.com/en/admin/enforcing-policies/enforcing-policies-for-your-enterprise/actions-policies/workflow-execution-protections)).

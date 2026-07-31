@@ -67,13 +67,13 @@ Your cloned repository includes `.env` in the `.gitignore` file. This will preve
 
 1. Navigate to the directory where your clone of [github/github-app-js-sample](https://github.com/github/github-app-js-sample) is stored.
 1. Create a file called `.env` at the top level of this directory.
-1. Add the following contents to your `.env` file. Replace `YOUR_HOSTNAME` with the name of {% ifversion ghes %}your GitHub Enterprise Server instance. You will update the other values in a later step.{% else %}You will update the values in a later step.{% endif %}
+1. Add the following contents to your `.env` file. Replace `YOUR_HOSTNAME` with the name of your GitHub Enterprise Server instance. You will update the other values in a later step.
 
    ```text copy
    APP_ID="YOUR_APP_ID"
    WEBHOOK_SECRET="YOUR_WEBHOOK_SECRET"
-   PRIVATE_KEY_PATH="YOUR_PRIVATE_KEY_PATH"
-   HOSTNAME="YOUR_HOSTNAME"
+   PRIVATE_KEY_PATH="YOUR_PRIVATE_KEY_PATH"{% ifversion ghes %}
+   HOSTNAME="YOUR_HOSTNAME"{% endif %}
    ```
 
 ### Navigate to your app settings
@@ -88,9 +88,7 @@ If you navigated away from your app settings after creating your app, navigate t
      1. To the right of the organization, click **Settings**.
    * For an app owned by an enterprise:
      1. If you use Enterprise Managed Users, click **Your enterprise** to go directly to the enterprise account settings.
-     1. If you use personal accounts, click **Your enterprises** and then to the right of the enterprise, click **Settings**.{% elsif ghes %}
-     1. Click **Enterprise settings**.
-
+     1. If you use personal accounts, click **Your enterprises** and then to the right of the enterprise, click **Settings**.
 
 1. In the left sidebar, click **{% octicon "code" aria-hidden="true" aria-label="code" %} Developer settings**.
 

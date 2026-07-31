@@ -69,11 +69,9 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
-
+      - uses: {% data reusables.actions.action-checkout %}
       - name: Set up Maven Central Repository
-        uses: actions/setup-java@v4
-
+        uses: {% data reusables.actions.action-setup-java %}
         with:
           java-version: '11'
           distribution: 'temurin'
@@ -140,10 +138,8 @@ jobs:
       contents: read
       packages: write
     steps:
-      - uses: actions/checkout@v6
-
-      - uses: actions/setup-java@v4
-
+      - uses: {% data reusables.actions.action-checkout %}
+      - uses: {% data reusables.actions.action-setup-java %}
         with:
           java-version: '11'
           distribution: 'temurin'
@@ -180,11 +176,9 @@ jobs:
       contents: read
       packages: write
     steps:
-      - uses: actions/checkout@v6
-
+      - uses: {% data reusables.actions.action-checkout %}
       - name: Set up Java for publishing to Maven Central Repository
-        uses: actions/setup-java@v4
-
+        uses: {% data reusables.actions.action-setup-java %}
         with:
           java-version: '11'
           distribution: 'temurin'
@@ -197,8 +191,7 @@ jobs:
           MAVEN_USERNAME: {% raw %}${{ secrets.OSSRH_USERNAME }}{% endraw %}
           MAVEN_PASSWORD: {% raw %}${{ secrets.OSSRH_TOKEN }}{% endraw %}
       - name: Set up Java for publishing to GitHub Packages
-        uses: actions/setup-java@v4
-
+        uses: {% data reusables.actions.action-setup-java %}
         with:
           java-version: '11'
           distribution: 'temurin'

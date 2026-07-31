@@ -50,20 +50,18 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
+    {% ifversion artifact-attestations %}permissions:
       contents: read
-      id-token: write
+      id-token: write{% endif %}
     steps:
-      - uses: actions/checkout@v6
-
+      - uses: {% data reusables.actions.action-checkout %}
       # Setup .npmrc file to publish to npm
-      - uses: actions/setup-node@v7
-
+      - uses: {% data reusables.actions.action-setup-node %}
         with:
           node-version: '20.x'
           registry-url: 'https://registry.npmjs.org'
       - run: npm ci
-      - run: npm publish --provenance --access public
+      - run: npm publish {% ifversion artifact-attestations %}--provenance --access public{% endif %}
         env:
           NODE_AUTH_TOKEN: {% raw %}${{ secrets.NPM_TOKEN }}{% endraw %}
 ```
@@ -121,11 +119,9 @@ jobs:
       contents: read
       packages: write
     steps:
-      - uses: actions/checkout@v6
-
+      - uses: {% data reusables.actions.action-checkout %}
       # Setup .npmrc file to publish to GitHub Packages
-      - uses: actions/setup-node@v7
-
+      - uses: {% data reusables.actions.action-setup-node %}
         with:
           node-version: '20.x'
           registry-url: 'https://npm.pkg.github.com'
@@ -158,11 +154,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
-
+      - uses: {% data reusables.actions.action-checkout %}
       # Setup .npmrc file to publish to npm
-      - uses: actions/setup-node@v7
-
+      - uses: {% data reusables.actions.action-setup-node %}
         with:
           node-version: '20.x'
           registry-url: 'https://registry.npmjs.org'

@@ -26,7 +26,7 @@ For more information on supply chain features available on GitHub, see [Supply C
 
 ## Enabling dependency review
 
-The dependency review feature becomes available when you enable the dependency graph. For more information, see [Enabling the dependency graph](/code-security/how-tos/secure-your-supply-chain/secure-your-dependencies/enable-dependency-graph#enabling-the-dependency-graph-for-a-repository){% elsif ghes %}[Enabling the dependency graph for your enterprise](/code-security/how-tos/secure-at-scale/configure-enterprise-security/configure-specific-tools/enable-dependency-graph).
+The dependency review feature becomes available when you enable the dependency graph. For more information, see [Enabling the dependency graph](/code-security/how-tos/secure-your-supply-chain/secure-your-dependencies/enable-dependency-graph#enabling-the-dependency-graph-for-a-repository).
 
 ## About the dependency review action
 

@@ -42,8 +42,7 @@ jobs:
     runs-on: macos-latest
 
     steps:
-    - uses: actions/checkout@v6
-
+    - uses: {% data reusables.actions.action-checkout %}
     - name: Set default Xamarin SDK versions
       run: |
         $VM_ASSETS/select-xamarin-sdk-v2.sh --mono=6.12 --ios=14.10
@@ -55,8 +54,7 @@ jobs:
         sudo xcode-select -s $XCODE_ROOT
 
     - name: Setup .NET Core SDK 5.0.x
-      uses: actions/setup-dotnet@v4
-
+      uses: {% data reusables.actions.action-setup-dotnet %}
       with:
         dotnet-version: '5.0.x'
 
@@ -82,15 +80,13 @@ jobs:
     runs-on: macos-latest
 
     steps:
-    - uses: actions/checkout@v6
-
+    - uses: {% data reusables.actions.action-checkout %}
     - name: Set default Xamarin SDK versions
       run: |
         $VM_ASSETS/select-xamarin-sdk-v2.sh --mono=6.10 --android=10.2
 
     - name: Setup .NET Core SDK 5.0.x
-      uses: actions/setup-dotnet@v4
-
+      uses: {% data reusables.actions.action-setup-dotnet %}
       with:
         dotnet-version: '5.0.x'
 

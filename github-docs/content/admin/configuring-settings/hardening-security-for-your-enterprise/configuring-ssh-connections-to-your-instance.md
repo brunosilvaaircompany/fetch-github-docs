@@ -13,9 +13,9 @@ To accommodate the SSH clients in your environment, you can configure the types 
 
 
 
-You can also configure the cryptographic algorithms (ciphers, MAC algorithms, key exchange algorithms, and signature types) that {% ifversion ghes %}your GitHub Enterprise Server instance uses for SSH connections. For more information, see [Configuring Tls And SSH Ciphers](https://docs.github.com/en/admin/configuring-settings/hardening-security-for-your-enterprise/configuring-tls-and-ssh-ciphers).
+You can also configure the cryptographic algorithms (ciphers, MAC algorithms, key exchange algorithms, and signature types) that your GitHub Enterprise Server instance uses for SSH connections. For more information, see [Configuring Tls And SSH Ciphers](https://docs.github.com/en/admin/configuring-settings/hardening-security-for-your-enterprise/configuring-tls-and-ssh-ciphers).
 
-{% endif %}
+
 
 ## Configuring SSH connections with RSA keys
 

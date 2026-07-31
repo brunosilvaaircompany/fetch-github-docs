@@ -1,6 +1,6 @@
 # Deprovisioning and reinstating users with SCIM
 
-If you use Enterprise Managed Users{% endif %}, you will use SCIM to:
+If you use Enterprise Managed Users, you will use SCIM to:
 
 * Deprovision users and groups to remove their access.
 * Reprovision users that were previously deprovisioned.

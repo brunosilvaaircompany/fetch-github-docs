@@ -8,10 +8,10 @@
 
 ## About GitHub Actions permissions for your organization
 
-By default, after GitHub Actions is enabled on GitHub Enterprise Server, it{% elsif fpt or ghec %}GitHub Actions is enabled on all repositories and organizations. You can choose to disable GitHub Actions or limit it to actions and reusable workflows in your enterprise.
+By default, after GitHub Actions is enabled on GitHub Enterprise Server, it is enabled on all repositories and organizations. You can choose to disable GitHub Actions or limit it to actions and reusable workflows in your enterprise.
  For more information about GitHub Actions, see [Write Workflows](https://docs.github.com/en/actions/how-tos/write-workflows).
 
-You can enable GitHub Actions for all repositories in your organization. When you enable GitHub Actions, workflows are able to run actions and reusable workflows located within your repository and any other public{% elsif ghec or ghes %} public or internal repository.
+You can enable GitHub Actions for all repositories in your organization. When you enable GitHub Actions, workflows are able to run actions and reusable workflows located within your repository and any other public repository.
  You can disable GitHub Actions for all repositories in your organization. When you disable GitHub Actions, no workflows run in your repository.
 
 
@@ -205,7 +205,7 @@ For more information about approving workflow runs that this policy applies to, 
 
 ## Enabling workflows for private repository forks
 
-If you rely on using forks of your private repositories, you can configure policies that control how users can run workflows on `pull_request` events. Available to private repositories only, you can configure these policy settings for organizations or repositories., organizations, or repositories.{% endif %}
+If you rely on using forks of your private repositories, you can configure policies that control how users can run workflows on `pull_request` events. Available to private repositories only, you can configure these policy settings for organizations or repositories.
 
 
 If a policy is disabled for an enterprise, it cannot be enabled for organizations. If a policy is disabled for an organization, it cannot be enabled for repositories. If an organization enables a policy, the policy can be disabled for individual repositories.

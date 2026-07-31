@@ -44,13 +44,11 @@ strategy:
         build-mode: none # analyzes Java only
 steps:
 - name: Checkout repository
-  uses: actions/checkout@v6
-
+  uses: {% data reusables.actions.action-checkout %}
 
 # Initializes CodeQL tools and creates a codebase for analysis.
 - name: Initialize CodeQL
-  uses: github/codeql-action/init@v4
-
+  uses: {% data reusables.actions.action-codeql-action-init %}
   with:
     languages: {% raw %}${{ matrix.language }}{% endraw %}
 - if: {% raw %}${{ matrix.build-mode == 'manual' }}{% endraw %}
@@ -82,8 +80,7 @@ For example, the following settings would enable dependency caching for the Code
 ```yaml
     # Initializes CodeQL with dependency caching enabled
     - name: Initialize CodeQL
-      uses: github/codeql-action/init@v4
-
+      uses: {% data reusables.actions.action-codeql-action-init %}
       with:
         languages: java
         dependency-caching: true
@@ -127,8 +124,7 @@ strategy:
         build-mode: autobuild
 
 steps:
-  - uses: github/codeql-action/init@v4
-
+  - uses: {% data reusables.actions.action-codeql-action-init %}
     with:
       languages: {% raw %}${{ matrix.language }}{% endraw %}
       build-mode: {% raw %}${{ matrix.build-mode }}{% endraw %}
@@ -139,14 +135,12 @@ steps:
 ```yaml
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
-      uses: github/codeql-action/init@v4
-
+      uses: {% data reusables.actions.action-codeql-action-init %}
       with:
         languages: {% raw %}${{ matrix.language }}{% endraw %}
 
     - name: Autobuild
-      uses: github/codeql-action/autobuild@v4
-
+      uses: {% data reusables.actions.action-codeql-action-autobuild %}
 ```
 
 ## Specify build steps manually
@@ -166,13 +160,11 @@ Update your workflow to define the `build-mode` as `manual`.
 ```yaml
 # Initializes the CodeQL tools for scanning.
 - name: Initialize CodeQL
-- uses: github/codeql-action/init@v4
-
+- uses: {% data reusables.actions.action-codeql-action-init %}
   with:
     languages: {% raw %}${{ matrix.language }}{% endraw %}
     build-mode: manual
-- uses: github/codeql-action/analyze@v4
-
+- uses: {% data reusables.actions.action-codeql-action-analyze %}
   with:
     category: {% raw %}"/language:${{ matrix.language }}"{% endraw %}
 ```
@@ -182,8 +174,7 @@ Alternatively, update your workflow to comment out the "Autobuild" step.
 ```yaml
     # Autobuild attempts to build any compiled languages.
     # - name: Autobuild
-    #  uses: github/codeql-action/autobuild@v4
-
+    #  uses: {% data reusables.actions.action-codeql-action-autobuild %}
 ```
 
 ### Add build commands
@@ -200,4 +191,4 @@ For more information about the `run` keyword, see [Workflow Syntax](https://docs
 
 
 
-If you added manual build steps for compiled languages and code scanning is still not working on your repository, contact us through the [GitHub Support portal](https://support.github.com){% elsif ghes %}your site administrator.
+If you added manual build steps for compiled languages and code scanning is still not working on your repository, contact us through the [GitHub Support portal](https://support.github.com).

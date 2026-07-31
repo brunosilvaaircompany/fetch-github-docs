@@ -60,7 +60,7 @@ Use interactive rebase to change older or multiple commit messages.
 See [Interactive mode](https://git-scm.com/docs/git-rebase#_interactive_mode) in the Git manual.
 
 > [!WARNING]
-> If a commit message included sensitive information, force pushing an amended commit might not remove the original commit from GitHub. Contact us through the [GitHub Support portal](https://support.github.com){% elsif ghes %}your site administrator with the old commit ID to have it purged from the remote repository.
+> If a commit message included sensitive information, force pushing an amended commit might not remove the original commit from GitHub. Contact us through the [GitHub Support portal](https://support.github.com) with the old commit ID to have it purged from the remote repository.
 
 ## Further reading
 

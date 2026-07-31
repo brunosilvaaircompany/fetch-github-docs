@@ -5,7 +5,7 @@
 > To edit a global advisory in the GitHub Advisory Database, see [Edit Advisory Database](https://docs.github.com/en/code-security/how-tos/report-and-fix-vulnerabilities/fix-reported-vulnerabilities/edit-advisory-database).
 
 
-If you publish a security advisory in error, you can delete the security advisory by contacting us through the [GitHub Support portal](https://support.github.com){% elsif ghes %}your site administrator.
+If you publish a security advisory in error, you can delete the security advisory by contacting us through the [GitHub Support portal](https://support.github.com).
 
 ## Further reading
 

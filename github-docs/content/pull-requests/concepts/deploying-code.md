@@ -37,8 +37,6 @@ As merging gets busier, teams add controls to keep merges safe and predictable:
 > 
 Pull request merge queues are available in any public repository owned by an organization, or in private repositories owned by organizations using GitHub Enterprise Cloud. See [Githubs Plans](https://docs.github.com/en/get-started/learning-about-github/githubs-plans).
 
-{% elsif ghes %}
-Pull request merge queues are available in any organization-owned repository on GitHub Enterprise Server.
 
 
 

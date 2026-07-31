@@ -5,8 +5,8 @@
 GitHub Actions allows users in your enterprise to improve productivity by automating every phase of the software development workflow.
  For more information, see [About GitHub Actions For Enterprises](https://docs.github.com/en/admin/managing-github-actions-for-your-enterprise/getting-started-with-github-actions-for-your-enterprise/about-github-actions-for-enterprises).
 
-With GitHub Actions, developers can write and combine individual tasks called actions to create custom workflows. To enable GitHub Actions for  {% ifversion ghes %}your GitHub Enterprise Server instance, you must host at least one machine to execute jobs.{% endif %} You can host your own runner machine to execute jobs, and this{% elsif ghes %}This machine is called a self-hosted runner. Your runner machine connects to GitHub using the GitHub Actions self-hosted runner application.
- All{% elsif ghes %}Self-hosted runners can run Linux, Windows, or macOS. For more information, see [Self Hosted Runners](https://docs.github.com/en/actions/concepts/runners/self-hosted-runners).
+With GitHub Actions, developers can write and combine individual tasks called actions to create custom workflows. To enable GitHub Actions for  your GitHub Enterprise Server instance, you must host at least one machine to execute jobs. You can host your own runner machine to execute jobs, and this machine is called a self-hosted runner. Your runner machine connects to GitHub using the GitHub Actions self-hosted runner application.
+ All runners can run Linux, Windows, or macOS. For more information, see [Self Hosted Runners](https://docs.github.com/en/actions/concepts/runners/self-hosted-runners).
 
 
 
@@ -24,7 +24,7 @@ This guide shows you how to apply a centralized management approach to self-host
 
 You'll also find additional information about how to monitor and secure your self-hosted runners, how to access actions from GitHub.com, and how to customize the software on your runner machines.
 
-After you finish the guide, members of your enterprise{% elsif ghes %}users of {% ifversion ghes %}your GitHub Enterprise Server instance{% endif %} will be able to run workflow jobs from GitHub Actions on a self-hosted runner machine.
+After you finish the guide, members of your enterprise will be able to run workflow jobs from GitHub Actions on a self-hosted runner machine.
 
 ## Prerequisites
 
@@ -42,7 +42,7 @@ After you finish the guide, members of your enterprise{% elsif ghes %}users of {
 
 ## 1. Configure policies for GitHub Actions
 
-First, enable GitHub Actions for all organizations, and configure a policy to restrict the actions and reusable workflows that can run within your enterprise{% elsif ghes %}on {% ifversion ghes %}your GitHub Enterprise Server instance{% endif %}. Optionally, organization owners can further restrict these policies for each organization.
+First, enable GitHub Actions for all organizations, and configure a policy to restrict the actions and reusable workflows that can run within your enterprise. Optionally, organization owners can further restrict these policies for each organization.
 
 
 1. In the top-right corner of GitHub Enterprise Server, click your profile picture, then click **Enterprise settings**.
@@ -57,11 +57,11 @@ First, enable GitHub Actions for all organizations, and configure a policy to re
 , then select **Allow actions created by GitHub**.
 1. Click **Save**.
 
-You can configure additional policies to restrict the actions available to enterprise members{% elsif ghes %}users of {% ifversion ghes %}your GitHub Enterprise Server instance{% endif %}. For more information, see [Enforcing Policies For GitHub Actions In Your Enterprise](https://docs.github.com/en/admin/enforcing-policies/enforcing-policies-for-your-enterprise/enforcing-policies-for-github-actions-in-your-enterprise#allowing-select-actions-to-run).
+You can configure additional policies to restrict the actions available to enterprise members. For more information, see [Enforcing Policies For GitHub Actions In Your Enterprise](https://docs.github.com/en/admin/enforcing-policies/enforcing-policies-for-your-enterprise/enforcing-policies-for-github-actions-in-your-enterprise#allowing-select-actions-to-run).
 
 ## 2. Deploy the self-hosted runner for your enterprise
 
-Next, add a self-hosted runner to your enterprise. GitHub will guide you through installation of the necessary software on the runner machine. After you deploy the runner, you can verify connectivity between the runner machine and your enterprise{% elsif ghes %}{% ifversion ghes %}your GitHub Enterprise Server instance{% endif %}.
+Next, add a self-hosted runner to your enterprise. GitHub will guide you through installation of the necessary software on the runner machine. After you deploy the runner, you can verify connectivity between the runner machine and your enterprise.
 
 ### Adding the self-hosted runner
 
@@ -98,7 +98,7 @@ Next, add a self-hosted runner to your enterprise. GitHub will guide you through
 
 ### Checking that your self-hosted runner was successfully added
 
-After completing the steps to add a self-hosted runner, the runner and its status are now listed under "Runners"{% elsif ghes %}"Self-hosted runners".
+After completing the steps to add a self-hosted runner, the runner and its status are now listed under "Runners".
 
 The self-hosted runner application must be active for the runner to accept jobs. When the runner application is connected to GitHub and ready to receive jobs, you will see the following message on the machine's terminal.
 
@@ -172,7 +172,7 @@ With ARC, you can create runner scale sets that automatically scale based on the
 
 * GitHub recommends that you review security considerations for self-hosted runner machines. For more information, see [Secure Use](https://docs.github.com/en/actions/reference/security/secure-use#hardening-for-self-hosted-runners).
 
-* If you use GitHub Enterprise Server, you{% elsif ghes %}You can manually sync repositories on GitHub.com containing actions to your enterprise on GitHub Enterprise Server. Alternatively, you can allow members of your enterprise to automatically access actions from GitHub.com by using GitHub Connect. For more information, see the following.
+* If you use GitHub Enterprise Server, you can manually sync repositories on GitHub.com containing actions to your enterprise on GitHub Enterprise Server. Alternatively, you can allow members of your enterprise to automatically access actions from GitHub.com by using GitHub Connect. For more information, see the following.
 
   * [Manually Syncing Actions From Githubcom](https://docs.github.com/en/enterprise-server@latest/admin/github-actions/managing-access-to-actions-from-githubcom/manually-syncing-actions-from-githubcom) in the GitHub Enterprise Server documentation
   * [Enabling Automatic Access To Githubcom Actions Using GitHub Connect](https://docs.github.com/en/enterprise-server@latest/admin/github-actions/managing-access-to-actions-from-githubcom/enabling-automatic-access-to-githubcom-actions-using-github-connect) in the GitHub Enterprise Server documentation

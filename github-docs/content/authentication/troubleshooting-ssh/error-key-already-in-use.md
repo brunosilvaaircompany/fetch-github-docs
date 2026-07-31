@@ -5,8 +5,8 @@
 To determine where the key has already been used, open a terminal and type the `ssh` command. Use the `-i` flag to provide the path to the key you want to check:
 
 ```shell
-$ ssh -T -ai ~/.ssh/id_rsa git@github.com
-# Connect to your GitHub Enterprise Server instance using a specific ssh key
+$ ssh -T -ai ~/.ssh/id_rsa git@{% data variables.product.product_url %}
+# Connect to {% data variables.location.product_location %} using a specific ssh key
 > Hi USERNAME! You've successfully authenticated, but GitHub does not
 > provide shell access.
 ```
@@ -16,7 +16,7 @@ The _username_ in the response is the account on your GitHub Enterprise Server i
 To force SSH to use only the key provided on the command line, use `-o` to add the `IdentitiesOnly=yes` option:
 
 ```shell
-ssh -v -o "IdentitiesOnly=yes" -i ~/.ssh/id_rsa git@github.com
+ssh -v -o "IdentitiesOnly=yes" -i ~/.ssh/id_rsa git@{% data variables.product.product_url %}
 ```
 
 ## Fixing the issue
