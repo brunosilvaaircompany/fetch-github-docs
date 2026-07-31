@@ -272,8 +272,9 @@
 }
 
 /* ── Overview mode (ESC): força todos os slides visíveis ── */
-.reveal.overview .slides section,
-.reveal.overview .slides section > section {
+.reveal.overview .slides > section,
+.reveal.overview .slides > section > section {
+  opacity: 1 !important;
   visibility: visible !important;
   pointer-events: auto;
 }
