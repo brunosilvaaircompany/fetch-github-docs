@@ -100,3 +100,94 @@ Spaces sempre reflete a documentação atualizada, sem esforço manual.
 - Se a GitHub reestruturar o repositório `github/docs` (mudar nomes de
   pastas), os caminhos de `--section` podem precisar de ajuste — rode
   `--list` ou `--search` de novo para confirmar.
+
+## Automação para detectar slides HTML desatualizados
+
+Este repositório também inclui um fluxo para detectar quando seus
+slides em HTML ficaram desatualizados em relação à documentação
+Markdown sincronizada.
+
+Arquivos adicionados para isso:
+
+- `.github/workflows/check-slides-freshness.yml`
+- `scripts/check_slides_freshness.py`
+- `slides/slide-sources.yml`
+- `slides/.freshness-state.json`
+
+### Como configurar o mapeamento
+
+No arquivo `slides/slide-sources.yml`, cada slide define:
+
+- `slide`: caminho do arquivo HTML
+- `sources`: lista de arquivos Markdown fonte
+- `selectors` (opcional): recortes relevantes (`headings` e/ou
+  `regex_patterns`) para que a checagem considere apenas conteúdo que
+  realmente alimenta o slide
+
+Se você não informar `selectors`, o script considera o conteúdo inteiro
+do arquivo Markdown fonte.
+
+### Como inicializar/atualizar baseline
+
+Depois de criar ou revisar slides, rode:
+
+```bash
+python3 scripts/check_slides_freshness.py \
+  --manifest slides/slide-sources.yml \
+  --state slides/.freshness-state.json \
+  --write-state \
+  --summary-file slides/.freshness-summary.md
+```
+
+Isso grava no `slides/.freshness-state.json` os hashes atuais do
+conteúdo relevante.
+
+### Comportamento da automação
+
+O workflow `check-slides-freshness.yml` roda:
+
+- semanalmente (segunda-feira, 07:00 UTC)
+- manualmente (`workflow_dispatch`)
+- após a conclusão com sucesso do workflow de sync (`fetch-docs.yml`)
+
+Quando detectar desatualização:
+
+- gera resumo no `GitHub Actions Job Summary`
+- cria (ou comenta) issue aberta com label `slides-stale` e título
+  `Slides HTML desatualizados`
+- comenta em uma issue fixa de alerta (opcional)
+- cria discussion de alerta (opcional)
+- envia e-mail de alerta (quando os secrets SMTP estiverem configurados)
+
+### Configurando alerta por e-mail
+
+Para habilitar envio de e-mail no workflow, configure estes secrets no
+repositório:
+
+- `SMTP_SERVER`
+- `SMTP_PORT`
+- `SMTP_USERNAME`
+- `SMTP_PASSWORD`
+- `ALERT_EMAIL_TO` (pode ter múltiplos destinos separados por vírgula)
+- `ALERT_EMAIL_FROM`
+
+Se houver slide stale e esses secrets não estiverem preenchidos, o
+workflow continua abrindo issue normalmente e apenas registra aviso no
+`Job Summary`.
+
+### Configurando comentário automático em issue
+
+Para também comentar em uma issue específica (por exemplo, uma issue de
+monitoramento central), configure:
+
+- `ALERT_ISSUE_NUMBER` (somente o número da issue, ex: `123`)
+
+### Configurando criação automática de Discussion
+
+Para criar uma Discussion automaticamente a cada detecção de stale,
+configure:
+
+- `DISCUSSION_CATEGORY_ID` (ID GraphQL da categoria de Discussions)
+
+Dica para descobrir o ID da categoria: use `gh api graphql` consultando
+as categorias do repositório e copie o `id` da categoria desejada.

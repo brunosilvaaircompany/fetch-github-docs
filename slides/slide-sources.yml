@@ -1,0 +1,15 @@
+slides: []
+
+# Exemplo de configuracao:
+# slides:
+#   - slide: slides/copilot-introducao.html
+#     sources:
+#       - path: github-docs/content/copilot/about-github-copilot.md
+#         selectors:
+#           headings:
+#             - About GitHub Copilot
+#             - Getting started
+#       - path: github-docs/content/copilot/using-github-copilot/getting-code-suggestions-in-your-ide-with-github-copilot.md
+#         selectors:
+#           regex_patterns:
+#             - "(?i)code suggestions?"
