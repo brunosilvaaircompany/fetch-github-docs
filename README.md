@@ -19,7 +19,7 @@ pip install -r requirements.txt
 `--section` é obrigatório — você sempre informa qual parte da doc quer baixar:
 
 ```bash
-python3 kb_sync.py --section content/github-cli/github-cli
+python3 scripts/kb_sync.py --section content/github-cli/github-cli
 ```
 
 Isso cria a pasta `./github-docs/github-cli/` com os arquivos `.md`
@@ -39,10 +39,10 @@ repositório. Para isso, use os modos de descoberta (não exigem `--section`):
 
 ```bash
 # Ver as categorias de nível superior da documentação do GitHub
-python3 kb_sync.py --list
+python3 scripts/kb_sync.py --list
 
 # Buscar uma seção específica por palavra-chave (ex: "webhooks", "codespaces")
-python3 kb_sync.py --search webhooks
+python3 scripts/kb_sync.py --search webhooks
 ```
 
 O `--search` devolve o caminho pronto para copiar e colar em `--section`.
@@ -51,13 +51,13 @@ O `--search` devolve o caminho pronto para copiar e colar em `--section`.
 
 ```bash
 # Baixar mais de uma seção de uma vez (separadas por vírgula)
-python3 kb_sync.py --section content/webhooks,content/rest/webhooks
+python3 scripts/kb_sync.py --section content/webhooks,content/rest/webhooks
 
 # Escolher outra pasta de saída
-python3 kb_sync.py --section content/codespaces --output ./minha-pasta
+python3 scripts/kb_sync.py --section content/codespaces --output ./minha-pasta
 
 # Manter os arquivos brutos baixados (útil para depurar)
-python3 kb_sync.py --section content/codespaces --keep-raw
+python3 scripts/kb_sync.py --section content/codespaces --keep-raw
 ```
 
 Esses dois modos de descoberta consultam a API do GitHub primeiro
