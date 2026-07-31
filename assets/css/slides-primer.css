@@ -1,7 +1,8 @@
 :root {
   --bg: #0d1117;
   --surface: #161b22;
-  --border: #30363d;
+  --surface-strong: #21262d;
+  --border: #3b434c;
   --accent: #2f81f7;
   --accent-light: #58a6ff;
   --text: #e6edf3;
@@ -11,7 +12,10 @@
 }
 
 .reveal-viewport {
-  background: var(--bg);
+  background:
+    radial-gradient(1400px 680px at 10% -10%, rgba(88, 166, 255, 0.18), transparent 55%),
+    radial-gradient(1200px 650px at 95% 0%, rgba(99, 102, 241, 0.16), transparent 58%),
+    var(--bg);
 }
 
 .reveal {
@@ -62,7 +66,7 @@
 }
 
 .reveal a:hover {
-  color: #0550ae;
+  color: #79c0ff;
 }
 
 .reveal ul,
@@ -90,10 +94,10 @@
 }
 
 .reveal pre {
-  background: var(--surface);
+  background: linear-gradient(180deg, rgba(33, 38, 45, 0.95), rgba(22, 27, 34, 0.95));
   border: 1px solid var(--border);
   border-radius: 8px;
-  box-shadow: none;
+  box-shadow: 0 8px 24px rgba(1, 4, 9, 0.4);
   width: 100%;
 }
 
@@ -106,7 +110,7 @@
 }
 
 .reveal blockquote {
-  background: var(--surface);
+  background: linear-gradient(180deg, rgba(33, 38, 45, 0.92), rgba(22, 27, 34, 0.92));
   border-left: 4px solid var(--accent);
   border-radius: 0 8px 8px 0;
   padding: 0.6em 1em;
@@ -180,7 +184,7 @@
 .gh-footer img {
   width: 18px;
   height: 18px;
-  filter: invert(0.7);
+  filter: invert(0.85);
 }
 
 .octocat {
@@ -214,7 +218,7 @@
 }
 
 .agenda th {
-  background: var(--surface);
+  background: var(--surface-strong);
   color: var(--accent-light);
   padding: 0.5em 0.8em;
   border-bottom: 2px solid var(--accent);
@@ -227,7 +231,7 @@
 }
 
 .agenda tr:hover td {
-  background: var(--surface);
+  background: rgba(33, 38, 45, 0.75);
 }
 
 .agenda .min {
@@ -257,7 +261,7 @@
 }
 
 .icon-card {
-  background: var(--surface);
+  background: linear-gradient(180deg, rgba(33, 38, 45, 0.92), rgba(22, 27, 34, 0.92));
   border: 1px solid var(--border);
   border-radius: 10px;
   padding: 0.6em 1em;
