@@ -613,6 +613,7 @@ HTTP 201 em Express.js + TypeScript</code></pre>
 </div><!-- /.slides -->
 </div><!-- /.reveal -->
 
+<script src="slide-editor.js"></script>
 <!-- Reveal.js CDN -->
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/highlight/highlight.js"></script>
@@ -632,6 +633,9 @@ HTTP 201 em Express.js + TypeScript</code></pre>
       theme: "github-dark"
     }
   });
+  if (typeof window.initSlideEditor === "function") {
+    window.initSlideEditor(Reveal);
+  }
 </script>
 </body>
 </html>

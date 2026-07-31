@@ -140,6 +140,19 @@ Estrutura padrão de 60 minutos:
 3. Adicione imagens em `slides/images/` e referencie com caminho relativo (`images/nome.png`).
 4. Registre o novo slide em `slides/slide-sources.yml` para ativar o monitoramento de desatualização.
 
+### Editando slides direto no navegador
+
+Os decks em `slides/` agora incluem um modo de edição embutido no próprio HTML:
+
+- **Editar slide**: abre o painel lateral para editar o HTML do slide atual.
+- **+ Slide**: adiciona um novo slide após o slide atual.
+- **Duplicar**: cria uma cópia do slide atual.
+- **Fechar slide**: remove o slide atual da apresentação.
+- **Exportar HTML**: baixa um arquivo `.html` com as alterações aplicadas.
+- **Resetar**: restaura o deck para a versão original do arquivo.
+
+As alterações são salvas automaticamente no `localStorage` do navegador (por deck e por dispositivo). Para compartilhar mudanças com outras pessoas, use **Exportar HTML** e versione o arquivo exportado no repositório.
+
 ---
 
 ## Pilar 3 — Detecção de slides desatualizados

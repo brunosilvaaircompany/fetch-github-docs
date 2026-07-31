@@ -829,6 +829,7 @@ copilot --allow-all --enable-all-github-mcp-tools</code></pre>
 </div>
 </div>
 
+<script src="../slide-editor.js"></script>
 <!-- Reveal.js CDN -->
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/highlight/highlight.js"></script>
@@ -843,6 +844,9 @@ copilot --allow-all --enable-all-github-mcp-tools</code></pre>
     center: true,
     plugins: [ RevealHighlight ]
   });
+  if (typeof window.initSlideEditor === "function") {
+    window.initSlideEditor(Reveal);
+  }
 </script>
 </body>
 </html>
