@@ -13,6 +13,8 @@ Kit completo para times que treinam e usam **GitHub Copilot**: sincroniza automa
 | 🔔 **Detecção de desatualização** | Alerta automaticamente quando os slides ficam defasados em relação à documentação sincronizada |
 | 🌐 **GitHub Pages** | Galeria web com todos os slides disponíveis — acessível via `index.html` na raiz |
 
+> **Publicação estática:** o repositório usa `.nojekyll` na raiz para o GitHub Pages servir os HTML diretamente, sem processar os arquivos Markdown em `github-docs/`.
+
 ## Estrutura
 
 ```
