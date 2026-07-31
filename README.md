@@ -147,12 +147,12 @@ Os decks em `slides/` agora incluem um modo de edição embutido no próprio HTM
 - **Novo deck (na galeria inicial)**: cria um deck local com template inicial, título, descrição e tags.
 - **Deck**: altera os metadados (título, descrição e tags) do deck atual.
 - **Excluir deck**: remove um deck salvo localmente (decks base não são excluídos).
-- **Editar texto**: ativa a edição inline no slide atual, direto na apresentação.
+- **Editar slide**: ativa a edição inline no slide atual, direto na apresentação.
 - **Editar HTML**: abre o editor de HTML do slide atual.
 - **Editar CSS**: abre o editor de CSS da apresentação.
 - **+ Slide**: adiciona um novo slide após o slide atual.
 - **Templates**: insere páginas prontas e permite cadastrar templates do usuário.
-- **Imagens**: abre biblioteca unificada (imagens do repositório + uploads locais) para trocar/inserir imagens.
+- **Imagens**: abre biblioteca unificada (imagens do repositório + uploads locais); a inserção no slide exige **Editar slide** ativo e usa a posição atual do cursor.
 - **Duplicar**: cria uma cópia do slide atual.
 - **Fechar slide**: remove o slide atual da apresentação.
 - **Exportar HTML**: baixa um arquivo `.html` com as alterações aplicadas.

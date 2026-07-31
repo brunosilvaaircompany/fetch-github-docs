@@ -525,11 +525,13 @@
      const status     = document.getElementById('filter-status');
      const emptyState = document.getElementById('grid-empty');
      const clearBtn   = document.getElementById('clear-filter');
-     const tagBtns    = document.querySelectorAll('.filter-tag-btn');
+     const tagsWrap   = document.querySelector('.filter-tags');
 
      let activeTag  = 'all';
      let searchText = '';
      let cards = [];
+     const baseTags = ['cli', 'reveal.js', '60 min', 'template'];
+     let tagValues = ['all'].concat(baseTags);
 
      function normalizeTags(tags) {
        if (Array.isArray(tags)) {
@@ -632,6 +634,40 @@
        });
 
        cards = Array.from(document.querySelectorAll('.grid .card'));
+       updateFilterTags(decks);
+     }
+
+     function updateFilterTags(decks) {
+       if (!tagsWrap) {
+         return;
+       }
+
+       const dynamicTags = [];
+       decks.forEach(function (deck) {
+         const tags = Array.isArray(deck.tags) ? deck.tags : [];
+         tags.forEach(function (tag) {
+           const normalized = String(tag || '').trim().toLowerCase();
+           if (normalized && dynamicTags.indexOf(normalized) < 0 && baseTags.indexOf(normalized) < 0) {
+             dynamicTags.push(normalized);
+           }
+         });
+       });
+       dynamicTags.sort();
+
+       tagValues = ['all'].concat(baseTags, dynamicTags);
+       if (tagValues.indexOf(activeTag) < 0) {
+         activeTag = 'all';
+       }
+
+       tagsWrap.innerHTML = '';
+       tagValues.forEach(function (value) {
+         const button = document.createElement('button');
+         button.type = 'button';
+         button.className = 'filter-tag-btn' + (value === activeTag ? ' active' : '');
+         button.dataset.filter = value;
+         button.textContent = value === 'all' ? 'Todos' : value;
+         tagsWrap.appendChild(button);
+       });
      }
 
      function createDeckFlow() {
@@ -714,21 +750,32 @@
         applyFilter();
       });
 
-      tagBtns.forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          tagBtns.forEach(function (b) { b.classList.remove('active'); });
-          btn.classList.add('active');
+      if (tagsWrap) {
+        tagsWrap.addEventListener('click', function (event) {
+          const btn = event.target.closest('.filter-tag-btn');
+          if (!btn) {
+            return;
+          }
           activeTag = btn.dataset.filter;
+          const currentButtons = Array.from(tagsWrap.querySelectorAll('.filter-tag-btn'));
+          currentButtons.forEach(function (b) { b.classList.remove('active'); });
+          btn.classList.add('active');
           applyFilter();
         });
-      });
+      }
 
       clearBtn.addEventListener('click', function () {
         input.value = '';
         searchText  = '';
         activeTag   = 'all';
-        tagBtns.forEach(function (b) { b.classList.remove('active'); });
-        document.querySelector('[data-filter="all"]').classList.add('active');
+        if (tagsWrap) {
+          const currentButtons = Array.from(tagsWrap.querySelectorAll('.filter-tag-btn'));
+          currentButtons.forEach(function (b) { b.classList.remove('active'); });
+          const allButton = tagsWrap.querySelector('[data-filter="all"]');
+          if (allButton) {
+            allButton.classList.add('active');
+          }
+        }
         applyFilter();
       });
     })();

@@ -39,6 +39,7 @@
   let inlineEditing = false;
   let editableSlide = null;
   let selectedImageElement = null;
+  let lastCaretRange = null;
   let codeMode = null;
   let codePanel = null;
   let codeTextarea = null;
@@ -206,7 +207,7 @@
     } else if (codeMode === "css") {
       modeLabel = " - edicao de CSS ativa";
     } else if (inlineEditing) {
-      modeLabel = " - edicao de texto ativa";
+      modeLabel = " - edicao de slide ativa";
     } else if (selectedImageElement) {
       modeLabel = " - imagem selecionada";
     }
@@ -235,8 +236,22 @@
 
   function setInlineEditing(enabled) {
     inlineEditing = enabled;
-    toggleButton.textContent = inlineEditing ? "Parar edicao" : "Editar texto";
+    toggleButton.textContent = inlineEditing ? "Parar edicao" : "Editar slide";
+    if (!inlineEditing) {
+      lastCaretRange = null;
+    }
     setEditableSlide(getCurrentSlide());
+  }
+
+  function captureCaretRange() {
+    if (!inlineEditing || !editableSlide) {
+      return;
+    }
+    const selection = window.getSelection();
+    if (!selection || selection.rangeCount === 0 || !editableSlide.contains(selection.anchorNode)) {
+      return;
+    }
+    lastCaretRange = selection.getRangeAt(0).cloneRange();
   }
 
   function openCodeEditor(mode) {
@@ -297,7 +312,7 @@
 
   function createSlideElement(customHtml) {
     const section = document.createElement("section");
-    section.innerHTML = customHtml || "<h2>Novo slide</h2><p>Clique em 'Editar texto' para editar diretamente neste slide.</p>";
+    section.innerHTML = customHtml || "<h2>Novo slide</h2><p>Clique em 'Editar slide' para editar diretamente neste slide.</p>";
     return section;
   }
 
@@ -681,26 +696,42 @@
   }
 
   function applyImageToSelectedSlide(asset) {
+    if (!inlineEditing || !editableSlide) {
+      window.alert("Ative 'Editar slide' para adicionar imagens.");
+      return;
+    }
+
     const current = getCurrentSlide();
     if (!current) {
       window.alert("Sem slide selecionado.");
       return;
     }
 
-    let target = selectedImageElement;
-    if (!target || !current.contains(target)) {
-      target = current.querySelector("img");
-    }
-    if (!target) {
-      target = document.createElement("img");
-      target.alt = asset.name || "Imagem";
-      target.style.maxWidth = "56%";
-      target.style.marginTop = "14px";
-      current.appendChild(target);
-    }
+    const target = document.createElement("img");
+    target.alt = asset.name || "Imagem";
     target.src = asset.src;
-    if (!target.alt || target.alt.trim().length === 0) {
-      target.alt = asset.name || "Imagem";
+    target.style.maxWidth = "56%";
+
+    const selection = window.getSelection();
+    let insertionRange = null;
+    if (selection && selection.rangeCount > 0 && editableSlide.contains(selection.anchorNode)) {
+      insertionRange = selection.getRangeAt(0).cloneRange();
+    } else if (lastCaretRange && editableSlide.contains(lastCaretRange.commonAncestorContainer)) {
+      insertionRange = lastCaretRange.cloneRange();
+    }
+
+    if (insertionRange) {
+      insertionRange.deleteContents();
+      insertionRange.insertNode(target);
+      insertionRange.setStartAfter(target);
+      insertionRange.collapse(true);
+      if (selection) {
+        selection.removeAllRanges();
+        selection.addRange(insertionRange);
+      }
+      lastCaretRange = insertionRange.cloneRange();
+    } else {
+      editableSlide.appendChild(target);
     }
 
     setSelectedImage(target);
@@ -880,7 +911,6 @@
       }
       .slide-editor-image-target {
         outline: 2px dashed #3fb950;
-        outline-offset: 4px;
       }
       .slide-editor-code-panel,
       .slide-editor-side-panel {
@@ -1058,7 +1088,7 @@
     statusText.className = "slide-editor-status";
 
     toggleButton = document.createElement("button");
-    toggleButton.textContent = "Editar texto";
+    toggleButton.textContent = "Editar slide";
     toggleButton.type = "button";
     toggleButton.addEventListener("click", () => {
       closeCodeEditor();
@@ -1347,7 +1377,7 @@
     imageList.className = "slide-editor-image-list";
 
     const imageFooter = document.createElement("footer");
-    imageFooter.textContent = "Clique em uma imagem no slide para substitui-la, ou insira no slide atual.";
+    imageFooter.textContent = "Ative 'Editar slide' para inserir a imagem na posicao atual do cursor.";
 
     imagePanel.appendChild(imageHeader);
     imagePanel.appendChild(uploadWrap);
@@ -1362,9 +1392,13 @@
       if (!editableSlide.contains(event.target)) {
         return;
       }
+      captureCaretRange();
       syncRevealLayout();
       queueSave();
     });
+
+    slidesRoot.addEventListener("keyup", captureCaretRange);
+    slidesRoot.addEventListener("mouseup", captureCaretRange);
 
     slidesRoot.addEventListener("click", (event) => {
       const clickedImage = event.target.closest("img");
