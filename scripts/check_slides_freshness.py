@@ -199,6 +199,24 @@ def render_summary(report: dict[str, Any]) -> str:
             lines.append("  - Fontes alteradas:")
             for src in item["changed_sources"]:
                 lines.append(f"    - `{src['path']}`")
+    lines.extend(
+        [
+            "",
+            "## Como concluir a atualizacao (obrigatorio)",
+            "",
+            "Depois de atualizar os slides HTML, atualize tambem o baseline:",
+            "",
+            "```bash",
+            "python3 scripts/check_slides_freshness.py \\",
+            "  --manifest slides/slide-sources.yml \\",
+            "  --state slides/.freshness-state.json \\",
+            "  --write-state \\",
+            "  --summary-file slides/.freshness-summary.md",
+            "```",
+            "",
+            "Inclua `slides/.freshness-state.json` no mesmo commit da atualizacao dos slides.",
+        ]
+    )
     return "\n".join(lines) + "\n"
 
 
