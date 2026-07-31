@@ -50,7 +50,7 @@ In some cases, you may need to use multiple accounts on GitHub. For example, you
 
 To learn how to manage multiple accounts, see [Managing Multiple Accounts](https://docs.github.com/en/free-pro-team@latest/account-and-profile/how-tos/account-management/managing-multiple-accounts).
 
-You cannot use a managed user account to contribute to public projects on your GitHub Enterprise Server instance, so you must contribute to those resources using your personal account. For more information, see [About Enterprise Managed Users](/enterprise-cloud@latest/admin/identity-and-access-management/using-enterprise-managed-users-for-iam/about-enterprise-managed-users) in the GitHub Enterprise Cloud documentation.{% elsif ghec %}.
+You cannot use a managed user account to contribute to public projects on your GitHub Enterprise Server instance, so you must contribute to those resources using your personal account. For more information, see [About Enterprise Managed Users](/enterprise-cloud@latest/admin/identity-and-access-management/using-enterprise-managed-users-for-iam/about-enterprise-managed-users) in the GitHub Enterprise Cloud documentation.
 
 If you need to use multiple accounts, you can stay signed in to your accounts and switch between them. For example, switching between a personal account and a service account. For more information, see [Switching Between Accounts](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/switching-between-accounts).
 
