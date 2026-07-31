@@ -13,3 +13,15 @@ slides: []
 #         selectors:
 #           regex_patterns:
 #             - "(?i)code suggestions?"
+#     # Campo opcional: fontes do hands-on vinculado a este slide.
+#     # Quando presente, o sistema verifica se o conteudo do hands-on
+#     # foi alterado. Se sim, o slide e marcado como desatualizado com
+#     # o motivo "hands-on alterado", indicando que o slide de
+#     # apresentacao precisa ser revisado.
+#     hands_on:
+#       - path: github-docs/content/copilot/hands-on/exercicio-copilot-chat.md
+#         selectors:
+#           headings:
+#             - Exercicio 1
+#             - Exercicio 2
+#       - path: github-docs/content/copilot/hands-on/exercicio-agente.md
