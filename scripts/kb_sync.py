@@ -56,6 +56,7 @@ except ImportError:
 
 REPO_TARBALL_URL = "https://codeload.github.com/github/docs/tar.gz/refs/heads/main"
 REPO_TREE_API_URL = "https://api.github.com/repos/github/docs/git/trees/main?recursive=1"
+ALLOWED_TEMPLATE_REFERENCE_PATH_FRAGMENTS = ("content/contributing/writing-for-github-docs/",)
 
 
 # --------------------------------------------------------------------------
@@ -174,11 +175,9 @@ def extract_paths(tar_bytes: bytes, prefixes: list[str], dest_root: str) -> None
 # --------------------------------------------------------------------------
 
 class LiquidResolver:
-    TAG_RE = re.compile(r"\{%\-?\s*data\s+([\w.\-]+)\s*\-?%\}")
-    IFVERSION_RE = re.compile(
-        r"\{%-?\s*ifversion\s+.*?-?%\}(.*?)\{%-?\s*endif\s*-?%\}", re.DOTALL
-    )
-    ELSE_SPLIT_RE = re.compile(r"\{%-?\s*else\s*-?%\}")
+    TAG_RE = re.compile(r"\{%\-?\s*data\s+([\w.\-+]+)\s*\-?%\}")
+    IF_OPEN_RE = re.compile(r"\{%-?\s*ifversion\b[^%]*-?%\}")
+    IF_TAG_RE = re.compile(r"\{%-?\s*(ifversion|elsif|else|endif)\b[^%]*-?%\}")
     AUTOTITLE_RE = re.compile(r"\[AUTOTITLE\]\((/[^\)]+)\)")
     CALLOUT_START_RE = re.compile(r"\{%-?\s*(tip|note|warning|important)\s*-?%\}")
     CALLOUT_END_RE = re.compile(r"\{%-?\s*end(tip|note|warning|important)\s*-?%\}")
@@ -221,14 +220,66 @@ class LiquidResolver:
     def _get_reusable(self, dotted_path: str):
         if dotted_path in self._reusable_cache:
             return self._reusable_cache[dotted_path]
-        fpath = os.path.join(self.reusables_dir, dotted_path.replace(".", os.sep) + ".md")
-        if os.path.exists(fpath):
+        candidates = [dotted_path]
+        if "+" in dotted_path:
+            candidates.append(dotted_path.split("+", 1)[0])
+        for candidate in candidates:
+            fpath = os.path.join(self.reusables_dir, candidate.replace(".", os.sep) + ".md")
+            if not os.path.exists(fpath):
+                continue
             with open(fpath, encoding="utf-8") as f:
                 content = f.read()
             content = self.resolve(content)
             self._reusable_cache[dotted_path] = content
             return content
         return None
+
+    @classmethod
+    def _extract_first_ifversion_branch(cls, text: str, open_match: re.Match):
+        branch_start = open_match.end()
+        branch_end = None
+        depth = 1
+        pos = open_match.end()
+
+        while depth > 0:
+            tag_match = cls.IF_TAG_RE.search(text, pos)
+            if not tag_match:
+                return None
+            tag = tag_match.group(1)
+            if tag == "ifversion":
+                depth += 1
+            elif tag == "endif":
+                depth -= 1
+                if depth == 0:
+                    if branch_end is None:
+                        branch_end = tag_match.start()
+                    return (text[branch_start:branch_end], tag_match.end())
+            elif depth == 1 and tag in ("elsif", "else") and branch_end is None:
+                branch_end = tag_match.start()
+            pos = tag_match.end()
+
+        return None
+
+    @classmethod
+    def _resolve_ifversion_blocks(cls, text: str) -> str:
+        out = []
+        pos = 0
+
+        while True:
+            open_match = cls.IF_OPEN_RE.search(text, pos)
+            if not open_match:
+                out.append(text[pos:])
+                break
+            out.append(text[pos:open_match.start()])
+            extracted = cls._extract_first_ifversion_branch(text, open_match)
+            if extracted is None:
+                out.append(text[open_match.start():])
+                break
+            branch, next_pos = extracted
+            out.append(branch)
+            pos = next_pos
+
+        return "".join(out)
 
     def resolve(self, text: str, _depth: int = 0) -> str:
         if _depth > 6:
@@ -252,11 +303,12 @@ class LiquidResolver:
                 break
             prev = out
 
-        def ifversion_repl(m):
-            inner = m.group(1)
-            return self.ELSE_SPLIT_RE.split(inner)[0]
-
-        out = self.IFVERSION_RE.sub(ifversion_repl, out)
+        prev_ifversion = None
+        for _ in range(8):
+            out = self._resolve_ifversion_blocks(out)
+            if out == prev_ifversion:
+                break
+            prev_ifversion = out
         out = self.CALLOUT_START_RE.sub("> **Nota:**", out)
         out = self.CALLOUT_END_RE.sub("", out)
 
@@ -329,11 +381,43 @@ class LiquidResolver:
         return f"# {title}\n\n{body}" if title else body
 
 
+DISALLOWED_TEMPLATE_PATTERNS = (
+    re.compile(r"\{%\-?\s*data\s+variables\.[^%]*%\}"),
+    re.compile(r"\{%\-?\s*data\s+reusables\.[^%]*%\}"),
+    re.compile(r"\{%-?\s*(ifversion|elsif|else|endif)\b[^%]*-?%\}"),
+)
+
+
+def _is_allowed_template_reference(rel_path: str) -> bool:
+    normalized = rel_path.replace("\\", "/")
+    return any(fragment in normalized for fragment in ALLOWED_TEMPLATE_REFERENCE_PATH_FRAGMENTS)
+
+
+def validate_output_has_no_templates(output_dir: str) -> list[tuple[str, str]]:
+    violations = []
+    for root, _dirs, files in os.walk(output_dir):
+        for fname in files:
+            if not fname.endswith(".md"):
+                continue
+            fpath = os.path.join(root, fname)
+            rel_path = os.path.relpath(fpath, output_dir)
+            if _is_allowed_template_reference(rel_path):
+                continue
+            with open(fpath, encoding="utf-8") as f:
+                content = f.read()
+            for pattern in DISALLOWED_TEMPLATE_PATTERNS:
+                match = pattern.search(content)
+                if match:
+                    violations.append((rel_path.replace("\\", "/"), match.group(0)))
+                    break
+    return violations
+
+
 # --------------------------------------------------------------------------
 # Pipeline principal
 # --------------------------------------------------------------------------
 
-def run(sections: list[str], output_dir: str, keep_raw: bool):
+def run(sections: list[str], output_dir: str, keep_raw: bool, validate_clean: bool = False):
     workdir = os.path.join(os.getcwd(), ".gh_docs_cache")
     os.makedirs(workdir, exist_ok=True)
 
@@ -383,6 +467,16 @@ def run(sections: list[str], output_dir: str, keep_raw: bool):
                 total_processed += 1
                 print(f"[ok] {section}/{rel_path}")
 
+    if validate_clean:
+        violations = validate_output_has_no_templates(output_dir)
+        if violations:
+            print("\n[erro] Foram encontradas tags Liquid nao resolvidas:")
+            for rel_path, token in violations[:50]:
+                print(f"  - {rel_path}: {token}")
+            if len(violations) > 50:
+                print(f"  ... e mais {len(violations) - 50} ocorrencia(s)")
+            raise RuntimeError("A validacao de templates falhou.")
+
     print(f"\nConcluido: {total_processed} arquivos salvos em:")
     for d in used_output_dirs:
         print(f"  - {d}")
@@ -414,6 +508,11 @@ def main():
         help="Mantem os arquivos brutos baixados em .gh_docs_cache (util para debug)",
     )
     parser.add_argument(
+        "--validate-clean",
+        action="store_true",
+        help="Falha se restarem tags Liquid nao resolvidas no output final",
+    )
+    parser.add_argument(
         "--list",
         action="store_true",
         help="Lista as categorias de nivel superior disponiveis em content/ e sai",
@@ -439,7 +538,7 @@ def main():
         )
 
     sections = [s.strip() for s in args.section.split(",") if s.strip()]
-    run(sections, args.output, args.keep_raw)
+    run(sections, args.output, args.keep_raw, validate_clean=args.validate_clean)
 
 
 if __name__ == "__main__":
