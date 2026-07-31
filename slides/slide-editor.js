@@ -9,14 +9,38 @@
   const UI_ATTR = "data-slide-editor-ui";
   const storageKey = `slide-editor:${window.location.pathname}`;
   const baselineSlidesHtml = slidesRoot.innerHTML;
+  const editableStyleTag = getEditableStyleTag();
+  const baselineCssText = editableStyleTag ? editableStyleTag.textContent : "";
 
   let reveal = null;
   let saveTimer = null;
   let storageEnabled = true;
   let inlineEditing = false;
   let editableSlide = null;
+  let codeMode = null;
+  let codePanel = null;
+  let codeTextarea = null;
+  let panelTitle = null;
   let statusText = null;
   let toggleButton = null;
+  let htmlButton = null;
+  let cssButton = null;
+  let hideControlsButton = null;
+  let showControlsButton = null;
+
+  function getEditableStyleTag() {
+    const styles = Array.from(document.head.querySelectorAll("style"));
+    for (const style of styles) {
+      if (!style.hasAttribute(UI_ATTR)) {
+        return style;
+      }
+    }
+
+    const createdStyle = document.createElement("style");
+    createdStyle.textContent = "/* Edite este CSS com o botao Editar CSS */";
+    document.head.appendChild(createdStyle);
+    return createdStyle;
+  }
 
   function getLeafSlides() {
     const sections = Array.from(slidesRoot.querySelectorAll("section"));
@@ -40,7 +64,12 @@
       return;
     }
     try {
-      window.localStorage.setItem(storageKey, slidesRoot.innerHTML);
+      const payload = JSON.stringify({
+        version: 2,
+        slidesHtml: slidesRoot.innerHTML,
+        cssText: editableStyleTag ? editableStyleTag.textContent : ""
+      });
+      window.localStorage.setItem(storageKey, payload);
     } catch (error) {
       storageEnabled = false;
       console.error("Slide editor: failed to persist slides in localStorage.", error);
@@ -102,6 +131,14 @@
       statusText.textContent = "Sem slide selecionado";
       return;
     }
+    if (codeMode === "html") {
+      statusText.textContent = `${currentSlideLabel(slide)} - edicao de HTML ativa`;
+      return;
+    }
+    if (codeMode === "css") {
+      statusText.textContent = "Edicao de CSS ativa";
+      return;
+    }
     statusText.textContent = inlineEditing
       ? `${currentSlideLabel(slide)} - edicao de texto ativa`
       : currentSlideLabel(slide);
@@ -125,6 +162,64 @@
     editableSlide.setAttribute("spellcheck", "true");
     editableSlide.classList.add("slide-editor-inline-target");
     updateStatus(slide);
+  }
+
+  function setInlineEditing(enabled) {
+    inlineEditing = enabled;
+    toggleButton.textContent = inlineEditing ? "Parar edicao" : "Editar texto";
+    setEditableSlide(getCurrentSlide());
+  }
+
+  function openCodeEditor(mode) {
+    if (!codePanel || !codeTextarea || !panelTitle) {
+      return;
+    }
+
+    setInlineEditing(false);
+    codeMode = mode;
+    codePanel.classList.add("open");
+    htmlButton.classList.toggle("active", mode === "html");
+    cssButton.classList.toggle("active", mode === "css");
+
+    if (mode === "html") {
+      panelTitle.textContent = "Editar HTML do slide atual";
+      const current = getCurrentSlide();
+      codeTextarea.value = current ? current.innerHTML.trim() : "";
+    } else {
+      panelTitle.textContent = "Editar CSS da apresentacao";
+      codeTextarea.value = editableStyleTag ? editableStyleTag.textContent.trim() : "";
+    }
+
+    updateStatus(getCurrentSlide());
+  }
+
+  function closeCodeEditor() {
+    if (!codePanel) {
+      return;
+    }
+    codePanel.classList.remove("open");
+    codeMode = null;
+    htmlButton.classList.remove("active");
+    cssButton.classList.remove("active");
+    updateStatus(getCurrentSlide());
+  }
+
+  function hideControls() {
+    if (!hideControlsButton || !showControlsButton || !codePanel) {
+      return;
+    }
+    hideControlsButton.parentElement.classList.add("hidden");
+    showControlsButton.classList.add("show");
+    closeCodeEditor();
+    setInlineEditing(false);
+  }
+
+  function showControls() {
+    if (!hideControlsButton || !showControlsButton) {
+      return;
+    }
+    hideControlsButton.parentElement.classList.remove("hidden");
+    showControlsButton.classList.remove("show");
   }
 
   function createSlideElement() {
@@ -205,6 +300,9 @@
       return;
     }
     slidesRoot.innerHTML = baselineSlidesHtml;
+    if (editableStyleTag) {
+      editableStyleTag.textContent = baselineCssText;
+    }
     window.localStorage.removeItem(storageKey);
     syncRevealLayout();
     const firstSlide = getLeafSlides()[0] || null;
@@ -212,6 +310,7 @@
       goToSlide(firstSlide);
     }
     setEditableSlide(firstSlide);
+    closeCodeEditor();
   }
 
   function exportSlides() {
@@ -232,10 +331,24 @@
     window.URL.revokeObjectURL(objectUrl);
   }
 
-  function applySavedSlides() {
-    const savedSlides = window.localStorage.getItem(storageKey);
-    if (savedSlides && savedSlides.trim().length > 0) {
-      slidesRoot.innerHTML = savedSlides;
+  function applySavedState() {
+    const raw = window.localStorage.getItem(storageKey);
+    if (!raw || raw.trim().length === 0) {
+      return;
+    }
+
+    try {
+      const parsed = JSON.parse(raw);
+      if (parsed && typeof parsed.slidesHtml === "string" && parsed.slidesHtml.trim().length > 0) {
+        slidesRoot.innerHTML = parsed.slidesHtml;
+      }
+      if (editableStyleTag && typeof parsed.cssText === "string") {
+        editableStyleTag.textContent = parsed.cssText;
+      }
+    } catch (_error) {
+      if (raw.trim().length > 0) {
+        slidesRoot.innerHTML = raw;
+      }
     }
   }
 
@@ -252,6 +365,9 @@
         gap: 8px;
         flex-wrap: wrap;
         max-width: 78vw;
+      }
+      .slide-editor-toolbar.hidden {
+        display: none;
       }
       .slide-editor-status {
         border: 1px solid #30363d;
@@ -273,10 +389,86 @@
       .slide-editor-toolbar button:hover {
         border-color: #6e40c9;
       }
+      .slide-editor-toolbar button.active {
+        border-color: #6e40c9;
+        color: #a371f7;
+      }
+      .slide-editor-show-controls {
+        position: fixed;
+        right: 16px;
+        top: 16px;
+        z-index: 1201;
+        display: none;
+        border: 1px solid #30363d;
+        background: #0d1117;
+        color: #e6edf3;
+        border-radius: 999px;
+        font-size: 12px;
+        padding: 8px 12px;
+        cursor: pointer;
+      }
+      .slide-editor-show-controls.show {
+        display: inline-block;
+      }
       .slide-editor-inline-target {
         outline: 2px dashed #6e40c9;
         outline-offset: 6px;
         cursor: text;
+      }
+      .slide-editor-code-panel {
+        position: fixed;
+        top: 64px;
+        right: 16px;
+        width: min(620px, 92vw);
+        height: min(72vh, 620px);
+        z-index: 1200;
+        border: 1px solid #30363d;
+        border-radius: 10px;
+        background: #0d1117;
+        display: none;
+        flex-direction: column;
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+      }
+      .slide-editor-code-panel.open {
+        display: flex;
+      }
+      .slide-editor-code-panel header {
+        border-bottom: 1px solid #21262d;
+        padding: 10px 12px;
+        font-size: 12px;
+        color: #8b949e;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px;
+      }
+      .slide-editor-code-panel header button {
+        border: 1px solid #30363d;
+        background: #0d1117;
+        color: #e6edf3;
+        border-radius: 999px;
+        font-size: 11px;
+        padding: 6px 10px;
+        cursor: pointer;
+      }
+      .slide-editor-code-panel textarea {
+        flex: 1;
+        width: 100%;
+        resize: none;
+        border: 0;
+        outline: 0;
+        padding: 12px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+        font-size: 12px;
+        line-height: 1.5;
+        color: #e6edf3;
+        background: #0d1117;
+      }
+      .slide-editor-code-panel footer {
+        border-top: 1px solid #21262d;
+        padding: 8px 12px;
+        color: #8b949e;
+        font-size: 11px;
       }
     `;
     document.head.appendChild(style);
@@ -289,9 +481,8 @@
     toggleButton.textContent = "Editar texto";
     toggleButton.type = "button";
     toggleButton.addEventListener("click", () => {
-      inlineEditing = !inlineEditing;
-      toggleButton.textContent = inlineEditing ? "Parar edicao" : "Editar texto";
-      setEditableSlide(getCurrentSlide());
+      closeCodeEditor();
+      setInlineEditing(!inlineEditing);
     });
 
     const addButton = document.createElement("button");
@@ -309,6 +500,28 @@
     closeButton.type = "button";
     closeButton.addEventListener("click", closeCurrentSlide);
 
+    htmlButton = document.createElement("button");
+    htmlButton.textContent = "Editar HTML";
+    htmlButton.type = "button";
+    htmlButton.addEventListener("click", () => {
+      if (codeMode === "html") {
+        closeCodeEditor();
+        return;
+      }
+      openCodeEditor("html");
+    });
+
+    cssButton = document.createElement("button");
+    cssButton.textContent = "Editar CSS";
+    cssButton.type = "button";
+    cssButton.addEventListener("click", () => {
+      if (codeMode === "css") {
+        closeCodeEditor();
+        return;
+      }
+      openCodeEditor("css");
+    });
+
     const exportButton = document.createElement("button");
     exportButton.textContent = "Exportar HTML";
     exportButton.type = "button";
@@ -319,6 +532,11 @@
     resetButton.type = "button";
     resetButton.addEventListener("click", resetSlides);
 
+    hideControlsButton = document.createElement("button");
+    hideControlsButton.textContent = "Esconder botoes";
+    hideControlsButton.type = "button";
+    hideControlsButton.addEventListener("click", hideControls);
+
     statusText = document.createElement("span");
     statusText.className = "slide-editor-status";
 
@@ -327,9 +545,58 @@
     toolbar.appendChild(addButton);
     toolbar.appendChild(duplicateButton);
     toolbar.appendChild(closeButton);
+    toolbar.appendChild(htmlButton);
+    toolbar.appendChild(cssButton);
     toolbar.appendChild(exportButton);
     toolbar.appendChild(resetButton);
+    toolbar.appendChild(hideControlsButton);
     document.body.appendChild(toolbar);
+
+    showControlsButton = document.createElement("button");
+    showControlsButton.type = "button";
+    showControlsButton.textContent = "Mostrar botoes";
+    showControlsButton.className = "slide-editor-show-controls";
+    showControlsButton.setAttribute(UI_ATTR, "true");
+    showControlsButton.addEventListener("click", showControls);
+    document.body.appendChild(showControlsButton);
+
+    codePanel = document.createElement("div");
+    codePanel.className = "slide-editor-code-panel";
+    codePanel.setAttribute(UI_ATTR, "true");
+
+    const panelHeader = document.createElement("header");
+    panelTitle = document.createElement("span");
+    panelTitle.textContent = "Editor";
+    const panelCloseButton = document.createElement("button");
+    panelCloseButton.type = "button";
+    panelCloseButton.textContent = "Fechar";
+    panelCloseButton.addEventListener("click", closeCodeEditor);
+    panelHeader.appendChild(panelTitle);
+    panelHeader.appendChild(panelCloseButton);
+
+    codeTextarea = document.createElement("textarea");
+    codeTextarea.setAttribute("aria-label", "Editor de codigo do slide");
+    codeTextarea.addEventListener("input", () => {
+      if (codeMode === "html") {
+        const current = getCurrentSlide();
+        if (!current) {
+          return;
+        }
+        current.innerHTML = codeTextarea.value;
+        syncRevealLayout();
+      } else if (codeMode === "css" && editableStyleTag) {
+        editableStyleTag.textContent = codeTextarea.value;
+      }
+      queueSave();
+    });
+
+    const panelFooter = document.createElement("footer");
+    panelFooter.textContent = "As alteracoes de HTML/CSS sao salvas automaticamente no navegador.";
+
+    codePanel.appendChild(panelHeader);
+    codePanel.appendChild(codeTextarea);
+    codePanel.appendChild(panelFooter);
+    document.body.appendChild(codePanel);
 
     slidesRoot.addEventListener("input", (event) => {
       if (!inlineEditing || !editableSlide) {
@@ -352,6 +619,12 @@
       }
     }, true);
 
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && codePanel && codePanel.classList.contains("open")) {
+        closeCodeEditor();
+      }
+    });
+
     updateStatus(getCurrentSlide());
   }
 
@@ -360,11 +633,15 @@
     if (reveal && typeof reveal.on === "function") {
       reveal.on("slidechanged", () => {
         setEditableSlide(getCurrentSlide());
+        if (codeMode === "html" && codeTextarea) {
+          const current = getCurrentSlide();
+          codeTextarea.value = current ? current.innerHTML.trim() : "";
+        }
       });
     }
     setEditableSlide(getCurrentSlide());
   };
 
-  applySavedSlides();
+  applySavedState();
   buildUi();
 })();
