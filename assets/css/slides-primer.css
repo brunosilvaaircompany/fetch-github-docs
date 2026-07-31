@@ -1,13 +1,13 @@
 :root {
-  --bg: #ffffff;
-  --surface: #f6f8fa;
-  --border: #d0d7de;
-  --accent: #0969da;
-  --accent-light: #0969da;
-  --text: #1f2328;
-  --text-muted: #59636e;
-  --green: #1a7f37;
-  --amber: #9a6700;
+  --bg: #0d1117;
+  --surface: #161b22;
+  --border: #30363d;
+  --accent: #2f81f7;
+  --accent-light: #58a6ff;
+  --text: #e6edf3;
+  --text-muted: #8b949e;
+  --green: #3fb950;
+  --amber: #d29922;
 }
 
 .reveal-viewport {
@@ -148,6 +148,7 @@
 .cover-logo img {
   width: 96px;
   height: 96px;
+  filter: invert(1);
 }
 
 .cover-subtitle {
@@ -179,6 +180,7 @@
 .gh-footer img {
   width: 18px;
   height: 18px;
+  filter: invert(0.7);
 }
 
 .octocat {
