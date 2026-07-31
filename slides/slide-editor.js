@@ -533,7 +533,9 @@
     resetButton.addEventListener("click", resetSlides);
 
     hideControlsButton = document.createElement("button");
-    hideControlsButton.textContent = "Esconder botoes";
+    hideControlsButton.textContent = "⚙";
+    hideControlsButton.title = "Esconder botoes";
+    hideControlsButton.setAttribute("aria-label", "Esconder botoes");
     hideControlsButton.type = "button";
     hideControlsButton.addEventListener("click", hideControls);
 
