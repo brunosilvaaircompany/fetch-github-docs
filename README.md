@@ -46,6 +46,12 @@ github-docs/                    # Markdown limpo gerado pelo kb_sync.py
 pip install -r requirements.txt
 ```
 
+### Executando os testes automatizados
+
+```bash
+pytest -q
+```
+
 ### Descobrindo o caminho de uma seção
 
 Antes de baixar, use os modos de descoberta para encontrar o caminho exato:
@@ -185,4 +191,3 @@ Ao detectar desatualização, o workflow:
 | `DISCUSSION_CATEGORY_ID` | ID GraphQL da categoria de Discussions (opcional) |
 
 > **Dica:** para descobrir o `DISCUSSION_CATEGORY_ID`, use `gh api graphql` consultando as categorias do repositório.
-
