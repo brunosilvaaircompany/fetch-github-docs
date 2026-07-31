@@ -384,7 +384,7 @@ class LiquidResolver:
 DISALLOWED_TEMPLATE_PATTERNS = (
     re.compile(r"\{%\-?\s*data\s+variables\.[^%]*%\}"),
     re.compile(r"\{%\-?\s*data\s+reusables\.[^%]*%\}"),
-    re.compile(r"\{%-?\s*(ifversion|elsif|else|endif)\b[^%]*-?%\}"),
+    re.compile(r"\{%-?\s*ifversion\b[^%]*-?%\}"),
 )
 
 
