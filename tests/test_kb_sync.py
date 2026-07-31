@@ -198,3 +198,16 @@ def test_validation_allows_reference_docs_but_blocks_other_templates(kb_sync_mod
     violations = kb_sync_module.validate_output_has_no_templates(str(output_dir))
     assert len(violations) == 1
     assert violations[0][0].endswith("content/copilot/concepts/context/mcp.md")
+
+
+def test_validation_does_not_block_generic_liquid_if_tags(kb_sync_module, tmp_path):
+    output_dir = tmp_path / "output"
+    file_path = output_dir / "content" / "rest" / "about-the-rest-api" / "breaking-changes.md"
+    file_path.parent.mkdir(parents=True, exist_ok=True)
+    file_path.write_text(
+        "{% if query.apiVersion == nil %}\nexample\n{% endif %}\n",
+        encoding="utf-8",
+    )
+
+    violations = kb_sync_module.validate_output_has_no_templates(str(output_dir))
+    assert violations == []
