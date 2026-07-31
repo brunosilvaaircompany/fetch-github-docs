@@ -192,12 +192,16 @@ def render_summary(report: dict[str, Any]) -> str:
     lines.append("")
     for item in stale:
         lines.append(f"- **{item['slide']}**")
-        reason = item.get("reason")
-        if reason:
+        reasons = item.get("reasons") or ([item["reason"]] if item.get("reason") else [])
+        for reason in reasons:
             lines.append(f"  - Motivo: {reason}")
         if item.get("changed_sources"):
-            lines.append("  - Fontes alteradas:")
+            lines.append("  - Fontes de documentacao alteradas:")
             for src in item["changed_sources"]:
+                lines.append(f"    - `{src['path']}`")
+        if item.get("changed_hands_on_sources"):
+            lines.append("  - Fontes de hands-on alteradas:")
+            for src in item["changed_hands_on_sources"]:
                 lines.append(f"    - `{src['path']}`")
     return "\n".join(lines) + "\n"
 
@@ -294,11 +298,51 @@ def main() -> int:
                     SourceChange(path=path, previous_hash=prev_hash, current_hash=cur_hash)
                 )
 
-        if previous_source_hash != current_source_hash:
+        # --- hands-on validation ---
+        raw_hands_on = raw_slide.get("hands_on")
+        hands_on_hashes: dict[str, str] = {}
+        changed_hands_on_sources: list[SourceChange] = []
+        hands_on_stale = False
+
+        if raw_hands_on is not None:
+            if not isinstance(raw_hands_on, list) or not raw_hands_on:
+                errors.append(f"Campo 'hands_on' invalido para slide {slide_path}: deve ser lista nao vazia.")
+            else:
+                try:
+                    hands_on_sources = parse_manifest_sources(raw_hands_on)
+                except Exception as exc:
+                    errors.append(f"Manifesto invalido (hands_on) para slide {slide_path}: {exc}")
+                    hands_on_sources = []
+
+                if hands_on_sources:
+                    hands_on_hashes, ho_errors = digest_sources(hands_on_sources)
+                    if ho_errors:
+                        errors.extend([f"{slide_path} (hands_on): {msg}" for msg in ho_errors])
+                    else:
+                        current_ho_hash = combined_hash(hands_on_hashes)
+                        prev_ho_hash = prev_entry.get("hands_on_source_hash")
+                        prev_ho_hashes = prev_entry.get("hands_on_source_hashes", {})
+                        for path, cur_hash in hands_on_hashes.items():
+                            prev_hash = prev_ho_hashes.get(path)
+                            if prev_hash != cur_hash:
+                                changed_hands_on_sources.append(
+                                    SourceChange(path=path, previous_hash=prev_hash, current_hash=cur_hash)
+                                )
+                        if prev_ho_hash != current_ho_hash:
+                            hands_on_stale = True
+
+        docs_stale = previous_source_hash != current_source_hash
+        if docs_stale or hands_on_stale:
+            reasons: list[str] = []
+            if docs_stale:
+                reasons.append("fontes relevantes alteradas")
+            if hands_on_stale:
+                reasons.append("hands-on alterado")
             stale_slides.append(
                 {
                     "slide": slide_path,
-                    "reason": "fontes relevantes alteradas",
+                    "reason": reasons[0] if len(reasons) == 1 else "; ".join(reasons),
+                    "reasons": reasons,
                     "changed_sources": [
                         {
                             "path": c.path,
@@ -307,14 +351,26 @@ def main() -> int:
                         }
                         for c in changed_sources
                     ],
+                    "changed_hands_on_sources": [
+                        {
+                            "path": c.path,
+                            "previous_hash": c.previous_hash,
+                            "current_hash": c.current_hash,
+                        }
+                        for c in changed_hands_on_sources
+                    ],
                 }
             )
 
-        next_state["slides"][slide_path] = {
+        next_state_entry: dict[str, Any] = {
             "source_hash": current_source_hash,
             "source_hashes": source_hashes,
             "checked_at": now_iso,
         }
+        if raw_hands_on is not None and hands_on_hashes:
+            next_state_entry["hands_on_source_hash"] = combined_hash(hands_on_hashes)
+            next_state_entry["hands_on_source_hashes"] = hands_on_hashes
+        next_state["slides"][slide_path] = next_state_entry
 
     report = {
         "checked_count": checked_count,
