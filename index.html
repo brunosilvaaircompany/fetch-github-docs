@@ -66,7 +66,7 @@
     <div class="grid kb-grid" id="slides-grid">
 
       <!-- Copilot CLI -->
-      <a class="card Box p-4 color-shadow-small d-flex flex-column gap-3" href="slides/copilot-cli/index.html"
+      <a class="card Box p-4 color-shadow-small" href="slides/copilot-cli/index.html"
          data-title="github copilot cli"
          data-desc="treinamento completo sobre o agente de terminal do copilot instalação autenticação criação de prs e customização com mcp"
          data-tags="cli reveal.js 60 min"
@@ -85,7 +85,7 @@
       </a>
 
       <!-- Template -->
-      <a class="card template Box p-4 color-shadow-small d-flex flex-column gap-3" href="slides/template.html"
+      <a class="card template Box p-4 color-shadow-small" href="slides/template.html"
          data-title="template de treinamento"
          data-desc="slide base com o tema github copilot copie para criar novas apresentações de 60 minutos com estrutura padronizada"
          data-tags="template reveal.js"
@@ -164,7 +164,7 @@
 
      function createDeckCard(deck) {
        const card = document.createElement('a');
-       card.className = 'card Box p-4 color-shadow-small d-flex flex-column gap-3';
+       card.className = 'card Box p-4 color-shadow-small';
        card.href = store.buildDeckHref(deck);
        card.dataset.title = String(deck.title || '').toLowerCase();
        card.dataset.desc = String(deck.description || '').toLowerCase();
@@ -366,7 +366,7 @@
             tags.includes(activeTag);
 
           const show = matchesText && matchesTag;
-          card.style.display = show ? '' : 'none';
+          card.classList.toggle('kb-hidden', !show);
           if (show) visible++;
         });
 

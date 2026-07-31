@@ -82,6 +82,10 @@ body {
   border-style: dashed;
 }
 
+.kb-hidden {
+  display: none !important;
+}
+
 .card-icon {
   width: 46px;
   height: 46px;
