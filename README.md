@@ -2,6 +2,8 @@
 
 Kit completo para times que treinam e usam **GitHub Copilot**: sincroniza automaticamente a documentação oficial do GitHub como Markdown limpo (pronto para o Copilot Spaces ou NotebookLM) e oferece templates prontos para criar treinamentos de 1 hora com slides e hands-on.
 
+🔗 **[Ver galeria de slides →](https://brunosilvaaircompany.github.io/copilot-knowledge-base/)**
+
 ## O que este repositório entrega
 
 | Pilar | O que faz |
@@ -9,10 +11,13 @@ Kit completo para times que treinam e usam **GitHub Copilot**: sincroniza automa
 | 📥 **Sync de documentação** | Baixa qualquer seção de `docs.github.com`, resolve os templates Liquid internos e entrega arquivos `.md` limpos |
 | 🎨 **Templates de treinamento** | Slides Reveal.js e guia de instrutor para treinamentos de 60 min sobre GitHub Copilot |
 | 🔔 **Detecção de desatualização** | Alerta automaticamente quando os slides ficam defasados em relação à documentação sincronizada |
+| 🌐 **GitHub Pages** | Galeria web com todos os slides disponíveis — acessível via `index.html` na raiz |
 
 ## Estrutura
 
 ```
+index.html                      # GitHub Pages — galeria de slides
+
 scripts/
 ├── kb_sync.py                  # Sync de documentação
 └── check_slides_freshness.py   # Verificação de slides desatualizados
@@ -20,6 +25,7 @@ scripts/
 slides/
 ├── template.md                 # Guia de conteúdo para o instrutor
 ├── template.html               # Apresentação Reveal.js (tema Copilot)
+├── copilot-cli/index.html      # Slide: GitHub Copilot CLI (60 min)
 ├── slide-sources.yml           # Mapeamento slide ↔ fontes Markdown
 └── images/                     # Imagens dos slides
 
