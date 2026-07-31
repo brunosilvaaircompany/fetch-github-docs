@@ -33,6 +33,7 @@ body {
 .kb-logo {
   width: 42px;
   height: 42px;
+  flex-shrink: 0;
   border-radius: 12px;
   box-shadow: 0 0 0 1px rgba(88, 166, 255, 0.25), 0 6px 20px rgba(0, 0, 0, 0.45);
 }
@@ -41,6 +42,22 @@ body {
   width: 24px;
   height: 24px;
   fill: #ffffff;
+}
+
+.kb-header-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.kb-header-text h1 {
+  margin: 0;
+  line-height: 1.25;
+}
+
+.kb-header-text p {
+  margin: 0;
+  line-height: 1.4;
 }
 
 .kb-hero {
