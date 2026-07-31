@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-fetch_github_docs.py
+kb_sync.py
 
 Automatiza o download de qualquer secao da documentacao do GitHub
 (docs.github.com), a partir do repositorio publico github/docs,
@@ -9,10 +9,10 @@ GitHub para gerar o site, e entrega arquivos .md limpos e prontos
 para leitura (ex: upload no GitHub Copilot Spaces, NotebookLM, etc).
 
 USO:
-    python3 fetch_github_docs.py --list
-    python3 fetch_github_docs.py --search webhooks
-    python3 fetch_github_docs.py --section content/github-cli/github-cli
-    python3 fetch_github_docs.py --section content/webhooks --output ./minha-pasta
+    python3 kb_sync.py --list
+    python3 kb_sync.py --search webhooks
+    python3 kb_sync.py --section content/github-cli/github-cli
+    python3 kb_sync.py --section content/webhooks --output ./minha-pasta
 
 DEPENDENCIAS:
     pip install pyyaml requests
@@ -128,7 +128,7 @@ def search_sections(keyword: str):
     print(f"\n{len(matched_dirs)} pasta(s) encontrada(s) contendo '{keyword}':\n")
     for d in matched_dirs:
         print(f"  --section {d}")
-    print("\nCopie um dos caminhos acima e use com: python3 fetch_github_docs.py --section <caminho>")
+    print("\nCopie um dos caminhos acima e use com: python3 kb_sync.py --section <caminho>")
 
 
 # --------------------------------------------------------------------------

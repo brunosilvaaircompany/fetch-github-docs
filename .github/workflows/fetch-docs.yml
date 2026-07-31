@@ -37,7 +37,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Baixar e limpar documentacao
-        run: python3 fetch_github_docs.py --section "$DOCS_SECTION" --output "$DOCS_OUTPUT"
+        run: python3 kb_sync.py --section "$DOCS_SECTION" --output "$DOCS_OUTPUT"
 
       - name: Commit se houver mudancas
         run: |
