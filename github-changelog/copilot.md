@@ -1,7 +1,27 @@
 # GitHub Changelog
 
-> Atualizado em: 2026-07-31 13:52 UTC  
+> Atualizado em: 2026-08-01 09:05 UTC  
 > Fonte: <https://github.blog/changelog/feed/>
+
+---
+
+## [Gemini 2.5 Pro and Gemini 3 Flash deprecated](https://github.blog/changelog/2026-07-31-gemini-2-5-pro-and-gemini-3-flash-deprecated)
+
+**Data:** 2026-07-31  **Categorias:** `Retired`, `copilot`
+
+As of today, July 31, 2026, we have deprecated the following models across all GitHub Copilot experiences (including Copilot Chat, inline edits, ask and agent modes, and code completions). Model&#8230;
+
+The post [Gemini 2.5 Pro and Gemini 3 Flash deprecated](https://github.blog/changelog/2026-07-31-gemini-2-5-pro-and-gemini-3-flash-deprecated) appeared first on [The GitHub Blog](https://github.blog).
+
+---
+
+## [Enterprise teams model policy targeting in public preview](https://github.blog/changelog/2026-07-31-enterprise-teams-model-policy-targeting-in-public-preview)
+
+**Data:** 2026-07-31  **Categorias:** `Improvement`, `copilot`, `enterprise management tools`
+
+You can now take advantage of user-based model policy targeting for GitHub Enterprise customers with Copilot Business or Copilot Enterprise licenses. This feature empowers AI administrators to set a baseline&#8230;
+
+The post [Enterprise teams model policy targeting in public preview](https://github.blog/changelog/2026-07-31-enterprise-teams-model-policy-targeting-in-public-preview) appeared first on [The GitHub Blog](https://github.blog).
 
 ---
 
@@ -42,15 +62,5 @@ The post [GitHub Copilot in Visual Studio Code, July 2026 releases](https://gith
 Copilot code review support for agent skills and MCP servers is now generally available for all Copilot Pro, Pro+, Business, and Enterprise users. Previously announced in public preview, these capabilities&#8230;
 
 The post [Copilot code review: Agent skills and MCP now generally available](https://github.blog/changelog/2026-07-29-copilot-code-review-agent-skills-and-mcp-now-generally-available) appeared first on [The GitHub Blog](https://github.blog).
-
----
-
-## [Default model enablement for Copilot Business and Enterprise](https://github.blog/changelog/2026-07-29-default-model-enablement-for-copilot-business-and-enterprise)
-
-**Data:** 2026-07-29  **Categorias:** `Improvement`, `copilot`
-
-We&#8217;re introducing a global default enablement policy for generally available Copilot models on Copilot Business and Copilot Enterprise plans. Instead of requiring admins to manually turn on each new model&#8230;
-
-The post [Default model enablement for Copilot Business and Enterprise](https://github.blog/changelog/2026-07-29-default-model-enablement-for-copilot-business-and-enterprise) appeared first on [The GitHub Blog](https://github.blog).
 
 ---
