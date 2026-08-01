@@ -59,13 +59,11 @@ When using Claude, input prompts and output completions continue to run through 
 
 Used for:
 
-* Gemini 2.5 Pro
-* Gemini 3 Flash
 * Gemini 3.1 Pro
 * Gemini 3.5 Flash
 * Gemini 3.6 Flash
 
-GitHub Copilot uses Gemini 3.1 Pro, Gemini 3 Flash, and Gemini 2.5 Pro hosted on Google Cloud Platform (GCP). When using Gemini models, prompts and metadata are sent to GCP, which makes the [following data commitment](https://cloud.google.com/vertex-ai/generative-ai/docs/data-governance): _Gemini doesn't use your prompts, or its responses, as data to train its models._
+GitHub Copilot uses Gemini models hosted on Google Cloud Platform (GCP). When using Gemini models, prompts and metadata are sent to GCP, which makes the [following data commitment](https://cloud.google.com/vertex-ai/generative-ai/docs/data-governance): _Gemini doesn't use your prompts, or its responses, as data to train its models._
 
 To provide better service quality and reduce latency, GitHub uses [prompt caching](https://cloud.google.com/vertex-ai/generative-ai/docs/data-governance#customer_data_retention_and_achieving_zero_data_retention).
 

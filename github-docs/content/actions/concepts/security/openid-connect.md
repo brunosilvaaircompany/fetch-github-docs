@@ -74,6 +74,9 @@ The following example OIDC token uses a subject (`sub`) that references a job en
 }
 ```
 
+> [!NOTE]
+> The `sub` claim in this example uses the previous format. Repositories created after July 15, 2026 use an immutable default subject format that includes owner and repository IDs (not available on GitHub Enterprise Server). For more information, see [Oidc](https://docs.github.com/en/actions/reference/security/oidc#immutable-subject-claims).
+
 
 
 ## Establishing OIDC trust with your cloud provider
