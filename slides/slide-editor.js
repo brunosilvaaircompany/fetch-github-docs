@@ -11,6 +11,7 @@
   const baselineSlidesHtml = slidesRoot.innerHTML;
   const editableStyleTag = getEditableStyleTag();
   const baselineCssText = editableStyleTag ? editableStyleTag.textContent : "";
+  const baselineThemeId = store.normalizeThemeId(slidesRoot.parentElement && slidesRoot.parentElement.dataset.themeId);
   const pathKey = store.getCurrentPathKey(window.location.pathname);
   const queryDeckId = new URLSearchParams(window.location.search).get("deck");
 
@@ -19,12 +20,35 @@
     pathKey,
     deckId: queryDeckId,
     baselineSlidesHtml,
-    baselineCssText
+    baselineCssText,
+    baselineThemeId
   });
 
   if (!activeDeck) {
     return;
   }
+
+  function applyDeckTheme(themeId) {
+    const theme = store.getThemeById(themeId) || store.getThemeById(baselineThemeId);
+    const normalized = theme ? theme.id : baselineThemeId;
+    let themeStyle = document.getElementById("slide-editor-theme");
+    if (!themeStyle) {
+      themeStyle = document.createElement("style");
+      themeStyle.id = "slide-editor-theme";
+      themeStyle.setAttribute("data-slide-editor-theme", "true");
+      document.head.insertBefore(themeStyle, editableStyleTag);
+    }
+    themeStyle.textContent = `.reveal { ${Object.keys(theme.vars || {}).map((name) => {
+      return `${name}: ${theme.vars[name]};`;
+    }).join(" ")} }`;
+    const revealRoot = slidesRoot.parentElement;
+    if (revealRoot) {
+      revealRoot.dataset.themeId = normalized;
+    }
+    return normalized;
+  }
+
+  activeDeck.themeId = applyDeckTheme(activeDeck.themeId);
 
   if (typeof activeDeck.slidesHtml === "string" && activeDeck.slidesHtml.trim().length > 0) {
     slidesRoot.innerHTML = activeDeck.slidesHtml;
@@ -64,11 +88,18 @@
   let imageUploadInput = null;
   let imagesButton = null;
   let templatesButton = null;
+  let themesButton = null;
+  let themePanel = null;
+  let themeList = null;
+  let themeNameInput = null;
+  let themeDescriptionInput = null;
+  let selectedThemeId = "";
+  let themeVarInputs = {};
 
   function getEditableStyleTag() {
     const styles = Array.from(document.head.querySelectorAll("style"));
     for (const style of styles) {
-      if (!style.hasAttribute(UI_ATTR)) {
+      if (!style.hasAttribute(UI_ATTR) && style.id !== "slide-editor-theme") {
         return style;
       }
     }
@@ -112,6 +143,20 @@
     if (updated) {
       activeDeck = updated;
     }
+  }
+
+  function themePrompt(currentThemeId, subject) {
+    const themes = store.getThemes();
+    const options = themes.map((theme) => `${theme.id} - ${theme.name}: ${theme.description}`).join("\n");
+    const selected = window.prompt(`Tema visual de ${subject}:\n${options}\n\nInforme o identificador:`, currentThemeId || baselineThemeId);
+    if (selected === null) {
+      return null;
+    }
+    const normalized = store.normalizeThemeId(selected);
+    if (String(selected).trim() !== normalized) {
+      window.alert(`Tema invalido. Usando "${normalized}".`);
+    }
+    return normalized;
   }
 
   function getSanitizedSlidesHtml() {
@@ -274,6 +319,7 @@
 
     closeTemplatePanel();
     closeImagePanel();
+    closeThemePanel();
     setInlineEditing(false);
     codeMode = mode;
     codePanel.classList.add("open");
@@ -311,6 +357,7 @@
     showControlsButton.classList.add("show");
     closeCodeEditor();
     closeTemplatePanel();
+    closeThemePanel();
     closeImagePanel();
     setInlineEditing(false);
   }
@@ -466,18 +513,24 @@
     if (tags === null) {
       return;
     }
+    const themeId = themePrompt(activeDeck.themeId, "deck");
+    if (themeId === null) {
+      return;
+    }
 
     const updated = store.updateDeckMeta(activeDeck.id, {
       title: title,
       description: description,
       tags: tags,
-      sourcePath: pathKey
+      sourcePath: pathKey,
+      themeId
     });
     if (!updated) {
       window.alert("Nao foi possivel atualizar os metadados do deck.");
       return;
     }
     activeDeck = updated;
+    activeDeck.themeId = applyDeckTheme(activeDeck.themeId);
     if (backToHomeButton) {
       backToHomeButton.title = `Voltar para galeria (${activeDeck.title})`;
     }
@@ -521,6 +574,7 @@
     }
     closeCodeEditor();
     closeImagePanel();
+    closeThemePanel();
     templatePanel.classList.add("open");
     if (templatesButton) {
       templatesButton.classList.add("active");
@@ -544,6 +598,7 @@
     }
     closeCodeEditor();
     closeTemplatePanel();
+    closeThemePanel();
     imagePanel.classList.add("open");
     if (imagesButton) {
       imagesButton.classList.add("active");
@@ -706,6 +761,156 @@
       row.appendChild(actions);
       templateList.appendChild(row);
     });
+  }
+
+  function closeThemePanel() {
+    if (themePanel) {
+      themePanel.classList.remove("open");
+    }
+    if (themesButton) {
+      themesButton.classList.remove("active");
+    }
+  }
+
+  function openThemePanel() {
+    closeCodeEditor();
+    closeTemplatePanel();
+    closeImagePanel();
+    themePanel.classList.add("open");
+    themesButton.classList.add("active");
+    selectTheme(selectedThemeId || activeDeck.themeId);
+  }
+
+  function selectTheme(themeId) {
+    const theme = store.getThemeById(themeId);
+    if (!theme) {
+      selectedThemeId = "";
+      return;
+    }
+    selectedThemeId = theme.id;
+    themeNameInput.value = theme.name;
+    themeDescriptionInput.value = theme.description;
+    renderThemeVariables(theme);
+    renderThemeList();
+  }
+
+  function renderThemeVariables(theme) {
+    const vars = theme.vars || {};
+    themeVarInputs = {};
+    const variablesWrap = themePanel.querySelector(".slide-editor-theme-vars");
+    variablesWrap.innerHTML = "";
+    Object.keys(vars).forEach((name) => {
+      const label = document.createElement("label");
+      label.className = "slide-editor-theme-var";
+      label.textContent = name;
+      const input = document.createElement("input");
+      input.type = "text";
+      input.value = String(vars[name] || "");
+      input.setAttribute("aria-label", name);
+      label.appendChild(input);
+      variablesWrap.appendChild(label);
+      themeVarInputs[name] = input;
+    });
+  }
+
+  function renderThemeList() {
+    if (!themeList) {
+      return;
+    }
+    themeList.innerHTML = "";
+    store.getThemes().forEach((theme) => {
+      const row = document.createElement("div");
+      row.className = "slide-editor-list-row";
+      const title = document.createElement("div");
+      title.className = "slide-editor-list-title";
+      title.textContent = theme.builtin ? `${theme.name} (padrao)` : theme.name;
+      const description = document.createElement("div");
+      description.className = "slide-editor-list-description";
+      description.textContent = theme.description || "Sem descricao";
+      const actions = document.createElement("div");
+      actions.className = "slide-editor-list-actions";
+      const useButton = document.createElement("button");
+      useButton.type = "button";
+      useButton.textContent = theme.id === activeDeck.themeId ? "Ativo" : "Usar";
+      useButton.addEventListener("click", () => {
+        const updated = store.updateDeckMeta(activeDeck.id, { themeId: theme.id });
+        if (!updated) {
+          window.alert("Nao foi possivel aplicar o tema ao deck.");
+          return;
+        }
+        activeDeck = updated;
+        applyDeckTheme(activeDeck.themeId);
+        updateStatus(getCurrentSlide());
+        renderThemeList();
+      });
+      const editButton = document.createElement("button");
+      editButton.type = "button";
+      editButton.textContent = "Editar";
+      editButton.addEventListener("click", () => selectTheme(theme.id));
+      actions.appendChild(useButton);
+      actions.appendChild(editButton);
+      if (!theme.builtin) {
+        const deleteButton = document.createElement("button");
+        deleteButton.type = "button";
+        deleteButton.textContent = "Excluir";
+        deleteButton.addEventListener("click", () => {
+          if (!window.confirm(`Excluir o tema "${theme.name}"?`)) {
+            return;
+          }
+          if (!store.deleteCustomTheme(theme.id)) {
+            window.alert("Nao foi possivel excluir o tema.");
+            return;
+          }
+          selectTheme(activeDeck.themeId);
+        });
+        actions.appendChild(deleteButton);
+      }
+      row.appendChild(title);
+      row.appendChild(description);
+      row.appendChild(actions);
+      themeList.appendChild(row);
+    });
+  }
+
+  function saveThemeFromPanel() {
+    const name = String(themeNameInput.value || "").trim();
+    if (!name) {
+      window.alert("Informe um nome para o tema.");
+      return;
+    }
+    const vars = {};
+    Object.keys(themeVarInputs).forEach((name) => {
+      vars[name] = String(themeVarInputs[name].value || "").trim();
+    });
+    const selected = store.getThemeById(selectedThemeId);
+    const saved = store.saveCustomTheme({
+      id: selected && !selected.builtin ? selected.id : "",
+      name,
+      description: String(themeDescriptionInput.value || "").trim(),
+      vars
+    });
+    if (!saved) {
+      window.alert("Nao foi possivel salvar o tema.");
+      return;
+    }
+    selectTheme(saved.id);
+  }
+
+  function applySelectedTheme() {
+    const selected = store.getThemeById(selectedThemeId);
+    if (!selected) {
+      window.alert("Selecione um tema.");
+      return;
+    }
+    const updated = store.updateDeckMeta(activeDeck.id, { themeId: selected.id });
+    if (!updated) {
+      window.alert("Nao foi possivel aplicar o tema ao deck.");
+      return;
+    }
+    activeDeck = updated;
+    applyDeckTheme(activeDeck.themeId);
+    updateStatus(getCurrentSlide());
+    renderThemeList();
   }
 
   function applyImageToSelectedSlide(asset) {
@@ -1032,6 +1237,18 @@
         flex-direction: column;
         gap: 8px;
       }
+      .slide-editor-theme-vars {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 6px;
+      }
+      .slide-editor-theme-var {
+        color: #8b949e;
+        font-size: 11px;
+      }
+      .slide-editor-theme-var input {
+        margin-top: 3px;
+      }
       .slide-editor-form textarea {
         min-height: 190px;
         resize: vertical;
@@ -1126,6 +1343,17 @@
       }
     });
 
+    themesButton = document.createElement("button");
+    themesButton.textContent = "Temas";
+    themesButton.type = "button";
+    themesButton.addEventListener("click", () => {
+      if (themePanel && themePanel.classList.contains("open")) {
+        closeThemePanel();
+      } else {
+        openThemePanel();
+      }
+    });
+
     const duplicateButton = document.createElement("button");
     duplicateButton.textContent = "Duplicar";
     duplicateButton.type = "button";
@@ -1201,6 +1429,7 @@
     toolbar.appendChild(toggleButton);
     toolbar.appendChild(addButton);
     toolbar.appendChild(templatesButton);
+    toolbar.appendChild(themesButton);
     toolbar.appendChild(duplicateButton);
     toolbar.appendChild(closeButton);
     toolbar.appendChild(imagesButton);
@@ -1363,6 +1592,72 @@
     templatePanel.appendChild(templateFooter);
     document.body.appendChild(templatePanel);
 
+    themePanel = document.createElement("div");
+    themePanel.className = "slide-editor-side-panel";
+    themePanel.setAttribute(UI_ATTR, "true");
+    const themeHeader = document.createElement("header");
+    const themeHeaderTitle = document.createElement("span");
+    themeHeaderTitle.textContent = "Temas visuais";
+    const themeCloseButton = document.createElement("button");
+    themeCloseButton.type = "button";
+    themeCloseButton.textContent = "Fechar";
+    themeCloseButton.addEventListener("click", closeThemePanel);
+    themeHeader.appendChild(themeHeaderTitle);
+    themeHeader.appendChild(themeCloseButton);
+
+    const themeBody = document.createElement("div");
+    themeBody.className = "panel-body";
+    themeList = document.createElement("div");
+    themeList.className = "slide-editor-list";
+    const themeForm = document.createElement("div");
+    themeForm.className = "slide-editor-form";
+    themeNameInput = document.createElement("input");
+    themeNameInput.type = "text";
+    themeNameInput.placeholder = "Nome do tema";
+    themeDescriptionInput = document.createElement("input");
+    themeDescriptionInput.type = "text";
+    themeDescriptionInput.placeholder = "Descricao";
+    const themeVars = document.createElement("div");
+    themeVars.className = "slide-editor-theme-vars";
+    themeVars.setAttribute("aria-label", "Variaveis de cor do tema");
+    const themeActions = document.createElement("div");
+    themeActions.className = "slide-editor-panel-actions";
+    const themeSaveButton = document.createElement("button");
+    themeSaveButton.type = "button";
+    themeSaveButton.textContent = "Salvar como tema";
+    themeSaveButton.addEventListener("click", saveThemeFromPanel);
+    const themeNewButton = document.createElement("button");
+    themeNewButton.type = "button";
+    themeNewButton.textContent = "Novo";
+    themeNewButton.addEventListener("click", () => {
+      selectedThemeId = "";
+      themeNameInput.value = "";
+      themeDescriptionInput.value = "";
+      const base = store.getThemeById(baselineThemeId);
+      if (base) {
+        renderThemeVariables(base);
+      }
+    });
+    const themeApplyButton = document.createElement("button");
+    themeApplyButton.type = "button";
+    themeApplyButton.textContent = "Aplicar ao deck";
+    themeApplyButton.addEventListener("click", applySelectedTheme);
+    themeActions.appendChild(themeSaveButton);
+    themeActions.appendChild(themeNewButton);
+    themeActions.appendChild(themeApplyButton);
+    themeForm.appendChild(themeNameInput);
+    themeForm.appendChild(themeDescriptionInput);
+    themeForm.appendChild(themeVars);
+    themeForm.appendChild(themeActions);
+    themeBody.appendChild(themeList);
+    themeBody.appendChild(themeForm);
+    const themeFooter = document.createElement("footer");
+    themeFooter.textContent = "Temas padrao sao somente leitura. Salve uma copia para personalizar.";
+    themePanel.appendChild(themeHeader);
+    themePanel.appendChild(themeBody);
+    themePanel.appendChild(themeFooter);
+    document.body.appendChild(themePanel);
+
     imagePanel = document.createElement("div");
     imagePanel.className = "slide-editor-side-panel";
     imagePanel.setAttribute(UI_ATTR, "true");
@@ -1406,7 +1701,7 @@
         button.classList.add("btn-danger");
       }
     });
-    document.querySelectorAll(".slide-editor-code-panel textarea, .slide-editor-side-panel textarea, .slide-editor-side-panel input").forEach((field) => {
+    document.querySelectorAll(".slide-editor-code-panel textarea, .slide-editor-side-panel textarea, .slide-editor-side-panel input, .slide-editor-side-panel select").forEach((field) => {
       field.classList.add("form-control");
     });
 
@@ -1448,6 +1743,8 @@
         closeTemplatePanel();
       } else if (event.key === "Escape" && imagePanel && imagePanel.classList.contains("open")) {
         closeImagePanel();
+      } else if (event.key === "Escape" && themePanel && themePanel.classList.contains("open")) {
+        closeThemePanel();
       }
     });
 

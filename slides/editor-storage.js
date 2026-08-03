@@ -1,9 +1,11 @@
 (() => {
   "use strict";
 
-  const ROOT_KEY = "slide-editor:v3";
+  const ROOT_KEY = "slide-editor:v4";
+  const LEGACY_ROOT_KEY = "slide-editor:v3";
   const LEGACY_PREFIX = "slide-editor:";
   const DEFAULT_DECK_SOURCE = "slides/template.html";
+  const DEFAULT_THEME_ID = "copilot";
 
   const BUILTIN_TEMPLATES = [
     {
@@ -114,25 +116,60 @@
       .filter((part) => part.length > 0);
   }
 
-  function normalizeDeck(deck) {
+  function normalizeDeck(deck, customThemes) {
     const normalized = Object.assign({}, deck || {});
     normalized.id = String(normalized.id || "");
     normalized.title = String(normalized.title || "Novo deck");
     normalized.description = String(normalized.description || "");
     normalized.tags = parseTags(normalized.tags);
     normalized.sourcePath = String(normalized.sourcePath || DEFAULT_DECK_SOURCE);
+    normalized.themeId = normalizeThemeId(normalized.themeId, customThemes);
     normalized.createdAt = String(normalized.createdAt || nowIso());
     normalized.updatedAt = String(normalized.updatedAt || normalized.createdAt);
     return normalized;
   }
 
+  function builtinThemes() {
+    return Array.isArray(window.SlideDeckThemes) ? window.SlideDeckThemes : [];
+  }
+
+  function normalizeThemeId(value, customThemes) {
+    const candidate = String(value || DEFAULT_THEME_ID).trim();
+    return getTheme(candidate, customThemes) ? candidate : DEFAULT_THEME_ID;
+  }
+
+  function getTheme(id, customThemes) {
+    const candidate = String(id || "");
+    const builtin = builtinThemes().find((theme) => theme && theme.id === candidate);
+    if (builtin) {
+      return builtin;
+    }
+    const custom = customThemes && customThemes[candidate];
+    return custom && typeof custom === "object" ? custom : null;
+  }
+
+  function normalizeTheme(theme, builtin) {
+    const source = theme && typeof theme === "object" ? theme : {};
+    return {
+      id: String(source.id || ""),
+      name: String(source.name || "Tema sem nome"),
+      description: String(source.description || ""),
+      vars: source.vars && typeof source.vars === "object" ? Object.assign({}, source.vars) : {},
+      builtin: Boolean(builtin || source.builtin),
+      createdAt: String(source.createdAt || nowIso()),
+      updatedAt: String(source.updatedAt || source.createdAt || nowIso())
+    };
+  }
+
   function defaultState() {
     const state = {
-      version: 3,
+      version: 4,
       decks: {},
       deckOrder: [],
       templates: {},
       templateOrder: [],
+      customThemes: {},
+      themeOrder: [],
       uploads: {}
     };
 
@@ -145,7 +182,7 @@
         html: template.html,
         builtin: true,
         createdAt,
-        updatedAt: createdAt
+        updatedAt: createdAt,
       };
       state.templateOrder.push(template.id);
     }
@@ -157,11 +194,13 @@
     const safe = state && typeof state === "object" ? state : {};
     const merged = defaultState();
 
-    merged.version = 3;
+    merged.version = 4;
     merged.decks = safe.decks && typeof safe.decks === "object" ? safe.decks : {};
     merged.deckOrder = Array.isArray(safe.deckOrder) ? safe.deckOrder.slice() : [];
     merged.templates = safe.templates && typeof safe.templates === "object" ? safe.templates : merged.templates;
     merged.templateOrder = Array.isArray(safe.templateOrder) ? safe.templateOrder.slice() : Object.keys(merged.templates);
+    merged.customThemes = safe.customThemes && typeof safe.customThemes === "object" ? safe.customThemes : {};
+    merged.themeOrder = Array.isArray(safe.themeOrder) ? safe.themeOrder.slice() : Object.keys(merged.customThemes);
     merged.uploads = safe.uploads && typeof safe.uploads === "object" ? safe.uploads : {};
 
     for (const template of BUILTIN_TEMPLATES) {
@@ -173,7 +212,7 @@
           html: template.html,
           builtin: true,
           createdAt: nowIso(),
-          updatedAt: nowIso()
+          updatedAt: nowIso(),
         };
       } else {
         merged.templates[template.id].builtin = true;
@@ -186,17 +225,23 @@
     merged.templateOrder = merged.templateOrder.filter((id, index) => {
       return typeof id === "string" && id.length > 0 && merged.templates[id] && merged.templateOrder.indexOf(id) === index;
     });
+    Object.keys(merged.customThemes).forEach((id) => {
+      merged.customThemes[id] = normalizeTheme(merged.customThemes[id], false);
+    });
+    merged.themeOrder = merged.themeOrder.filter((id, index) => {
+      return typeof id === "string" && id.length > 0 && merged.customThemes[id] && merged.themeOrder.indexOf(id) === index;
+    });
 
     const orderedDeckIds = [];
     for (const id of merged.deckOrder) {
       if (typeof id === "string" && merged.decks[id] && orderedDeckIds.indexOf(id) < 0) {
-        merged.decks[id] = normalizeDeck(merged.decks[id]);
+        merged.decks[id] = normalizeDeck(merged.decks[id], merged.customThemes);
         orderedDeckIds.push(id);
       }
     }
     for (const id of Object.keys(merged.decks)) {
       if (orderedDeckIds.indexOf(id) < 0) {
-        merged.decks[id] = normalizeDeck(merged.decks[id]);
+        merged.decks[id] = normalizeDeck(merged.decks[id], merged.customThemes);
         orderedDeckIds.push(id);
       }
     }
@@ -219,7 +264,7 @@
   }
 
   function readState() {
-    const raw = window.localStorage.getItem(ROOT_KEY);
+    const raw = window.localStorage.getItem(ROOT_KEY) || window.localStorage.getItem(LEGACY_ROOT_KEY);
     const parsed = parseJson(raw);
     return ensureStateShape(parsed);
   }
@@ -295,8 +340,8 @@
     const requestedDeckId = settings.deckId ? String(settings.deckId) : "";
     const baselineSlidesHtml = typeof settings.baselineSlidesHtml === "string" ? settings.baselineSlidesHtml : "";
     const baselineCssText = typeof settings.baselineCssText === "string" ? settings.baselineCssText : "";
-
     const state = readState();
+    const baselineThemeId = normalizeThemeId(settings.baselineThemeId, state.customThemes);
     let deckId = requestedDeckId;
     let deck = deckId ? state.decks[deckId] : null;
 
@@ -318,9 +363,10 @@
           createdAt,
           updatedAt: createdAt,
           slidesHtml: baselineSlidesHtml,
-          cssText: baselineCssText
+          cssText: baselineCssText,
+          themeId: baselineThemeId
         };
-        state.decks[deckId] = normalizeDeck(deck);
+        state.decks[deckId] = normalizeDeck(deck, state.customThemes);
         state.decks[deckId].slidesHtml = baselineSlidesHtml;
         state.decks[deckId].cssText = baselineCssText;
         state.deckOrder.unshift(deckId);
@@ -328,7 +374,7 @@
     }
 
     deck = state.decks[deckId];
-    deck = normalizeDeck(deck);
+    deck = normalizeDeck(deck, state.customThemes);
     deck.sourcePath = pathKey;
 
     if (typeof deck.slidesHtml !== "string" || deck.slidesHtml.trim().length === 0) {
@@ -336,6 +382,9 @@
     }
     if (typeof deck.cssText !== "string") {
       deck.cssText = baselineCssText;
+    }
+    if (!deck.themeId) {
+      deck.themeId = baselineThemeId;
     }
     deck.updatedAt = nowIso();
     state.decks[deckId] = deck;
@@ -367,6 +416,7 @@
 
   function createDeck(input) {
     const data = input || {};
+    const state = readState();
     const createdAt = nowIso();
     const title = String(data.title || "Novo deck").trim() || "Novo deck";
     const id = makeDeckId(title);
@@ -379,10 +429,10 @@
       createdAt,
       updatedAt: createdAt,
       slidesHtml: typeof data.slidesHtml === "string" ? data.slidesHtml : "",
-      cssText: typeof data.cssText === "string" ? data.cssText : ""
-    });
+      cssText: typeof data.cssText === "string" ? data.cssText : "",
+      themeId: normalizeThemeId(data.themeId, state.customThemes)
+    }, state.customThemes);
 
-    const state = readState();
     state.decks[id] = deck;
     state.deckOrder.unshift(id);
     writeState(state);
@@ -409,8 +459,11 @@
     if (patch && Object.prototype.hasOwnProperty.call(patch, "sourcePath")) {
       current.sourcePath = String(patch.sourcePath || current.sourcePath || DEFAULT_DECK_SOURCE);
     }
+    if (patch && Object.prototype.hasOwnProperty.call(patch, "themeId")) {
+      current.themeId = normalizeThemeId(patch.themeId, state.customThemes);
+    }
     current.updatedAt = nowIso();
-    state.decks[id] = normalizeDeck(current);
+    state.decks[id] = normalizeDeck(current, state.customThemes);
     writeState(state);
     return clone(state.decks[id]);
   }
@@ -447,6 +500,7 @@
     const createdAt = nowIso();
     const newTitle = "Copia de " + (source.title || "deck");
     const id = makeDeckId(newTitle);
+    const state = readState();
     const deck = normalizeDeck({
       id,
       title: newTitle,
@@ -456,9 +510,9 @@
       createdAt,
       updatedAt: createdAt,
       slidesHtml: typeof source.slidesHtml === "string" ? source.slidesHtml : "",
-      cssText: typeof source.cssText === "string" ? source.cssText : ""
-    });
-    const state = readState();
+      cssText: typeof source.cssText === "string" ? source.cssText : "",
+      themeId: normalizeThemeId(source.themeId, state.customThemes)
+    }, state.customThemes);
     state.decks[id] = deck;
     state.decks[id].slidesHtml = deck.slidesHtml;
     state.decks[id].cssText = deck.cssText;
@@ -475,6 +529,54 @@
     }
     delete state.decks[id];
     state.deckOrder = state.deckOrder.filter((deckEntryId) => deckEntryId !== id);
+    writeState(state);
+    return true;
+  }
+
+  function getThemes() {
+    const state = readState();
+    const builtin = builtinThemes().map((theme) => normalizeTheme(theme, true));
+    const custom = state.themeOrder
+      .filter((id) => state.customThemes[id])
+      .map((id) => normalizeTheme(state.customThemes[id], false));
+    return builtin.concat(custom);
+  }
+
+  function getThemeById(themeId) {
+    const state = readState();
+    const theme = getTheme(themeId, state.customThemes);
+    return theme ? clone(normalizeTheme(theme, Boolean(theme.builtin))) : null;
+  }
+
+  function saveCustomTheme(input) {
+    const data = input || {};
+    const state = readState();
+    const requestedId = String(data.id || "").trim();
+    if (requestedId && getTheme(requestedId, builtinThemes().reduce((result, theme) => {
+      result[theme.id] = theme;
+      return result;
+    }, {})) && !state.customThemes[requestedId]) {
+      return null;
+    }
+    const id = requestedId || `theme-${slugify(data.name || "custom")}-${Date.now().toString(36)}`;
+    const current = state.customThemes[id] || {};
+    const theme = normalizeTheme(Object.assign({}, current, data, { id, builtin: false }), false);
+    state.customThemes[id] = theme;
+    if (state.themeOrder.indexOf(id) < 0) {
+      state.themeOrder.push(id);
+    }
+    writeState(state);
+    return clone(theme);
+  }
+
+  function deleteCustomTheme(themeId) {
+    const id = String(themeId || "");
+    const state = readState();
+    if (!state.customThemes[id] || getTheme(id)) {
+      return false;
+    }
+    delete state.customThemes[id];
+    state.themeOrder = state.themeOrder.filter((entryId) => entryId !== id);
     writeState(state);
     return true;
   }
@@ -629,7 +731,12 @@
     updateDeckMeta,
     updateDeckContent,
     deleteDeck,
+    getThemes,
+    getThemeById,
+    saveCustomTheme,
+    deleteCustomTheme,
     listTemplates,
+    normalizeThemeId,
     createTemplate,
     updateTemplate,
     deleteTemplate,

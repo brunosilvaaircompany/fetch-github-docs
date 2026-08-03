@@ -156,7 +156,8 @@ Estrutura padrão de 60 minutos:
 Os decks em `slides/` agora incluem um modo de edição embutido no próprio HTML:
 
 - **Novo deck (na galeria inicial)**: cria um deck local com template inicial, título, descrição e tags.
-- **Deck**: altera os metadados (título, descrição e tags) do deck atual.
+- **Deck**: altera os metadados (título, descrição, tags e tema) do deck atual.
+- **Temas**: seleciona o tema visual do deck, aplica a mudança imediatamente e cria/edita temas personalizados no navegador. Os temas builtin versionados ficam em `slides/themes.js`; decks declarativos usam `data-theme-id` no elemento `.reveal`.
 - **Excluir deck**: remove um deck salvo localmente (decks base não são excluídos).
 - **Editar slide**: ativa a edição inline no slide atual, direto na apresentação.
 - **Editar HTML**: abre o editor de HTML do slide atual.
@@ -170,7 +171,9 @@ Os decks em `slides/` agora incluem um modo de edição embutido no próprio HTM
 - **Resetar deck**: restaura somente o deck atual para o template inicial da página.
 - **Esconder botões**: oculta os controles de edição (com botão para mostrar novamente).
 
-As alterações de conteúdo, HTML, CSS, templates personalizados e uploads de imagem são salvas automaticamente no `localStorage` do navegador (por deck e por dispositivo). Para compartilhar mudanças com outras pessoas, use **Exportar HTML** e versione o arquivo exportado no repositório.
+As alterações de conteúdo, HTML, CSS, temas personalizados e uploads de imagem são salvas automaticamente no `localStorage` do navegador (por deck e por dispositivo). Para compartilhar mudanças com outras pessoas, versione `slides/themes.js` e o HTML do deck no repositório.
+
+Decks antigos sem `themeId` migram automaticamente para `copilot`, que replica exatamente as variáveis visuais originais.
 
 > Limitação: o armazenamento é local ao navegador/dispositivo e sujeito à cota de storage do browser.
 
