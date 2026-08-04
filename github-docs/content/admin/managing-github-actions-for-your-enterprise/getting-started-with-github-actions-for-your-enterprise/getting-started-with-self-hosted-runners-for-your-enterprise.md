@@ -174,8 +174,8 @@ With ARC, you can create runner scale sets that automatically scale based on the
 
 * If you use GitHub Enterprise Server, you can manually sync repositories on GitHub.com containing actions to your enterprise on GitHub Enterprise Server. Alternatively, you can allow members of your enterprise to automatically access actions from GitHub.com by using GitHub Connect. For more information, see the following.
 
-  * [Manually Syncing Actions From Githubcom](https://docs.github.com/en/enterprise-server@latest/admin/github-actions/managing-access-to-actions-from-githubcom/manually-syncing-actions-from-githubcom) in the GitHub Enterprise Server documentation
-  * [Enabling Automatic Access To Githubcom Actions Using GitHub Connect](https://docs.github.com/en/enterprise-server@latest/admin/github-actions/managing-access-to-actions-from-githubcom/enabling-automatic-access-to-githubcom-actions-using-github-connect) in the GitHub Enterprise Server documentation
+  * [Manually Syncing Actions From Githubcom](https://docs.github.com/en/enterprise-server@latest/admin/managing-github-actions-for-your-enterprise/managing-access-to-actions-from-githubcom/manually-syncing-actions-from-githubcom) in the GitHub Enterprise Server documentation
+  * [Enabling Automatic Access To Githubcom Actions Using GitHub Connect](https://docs.github.com/en/enterprise-server@latest/admin/managing-github-actions-for-your-enterprise/managing-access-to-actions-from-githubcom/enabling-automatic-access-to-githubcom-actions-using-github-connect) in the GitHub Enterprise Server documentation
 
 * You can customize the software available on your self-hosted runner machines, or configure your runners to run software similar to GitHub-hosted runners available for customers using GitHub.com. The software that powers runner machines for GitHub Actions is open source. For more information, see the [`actions/runner`](https://github.com/actions/runner) and [`actions/runner-images`](https://github.com/actions/runner-images) repositories.
 

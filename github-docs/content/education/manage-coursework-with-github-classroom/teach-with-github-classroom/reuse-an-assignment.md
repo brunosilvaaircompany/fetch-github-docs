@@ -1,5 +1,9 @@
 # Reuse an assignment
 
+> [!WARNING]
+> **Closing down:** The GitHub Classroom application is closing down and will be retired on August 28, 2026.
+> For more information, see the [GitHub Classroom closing down notice](https://gh.io/classroom-sunset).
+
 ## About reusing assignments
 
 You can reuse an existing individual or group assignment in any other classroom you have access to, including classrooms in a different organization. You can also reuse multiple assignments at once from a classroom. If you choose to reuse an assignment, GitHub Classroom will copy the assignment to the classroom you choose. If the assignment uses a template repository and you choose to reuse it in a classroom from a different organization, GitHub Classroom will create a copy of the repository and its contents in the target organization.

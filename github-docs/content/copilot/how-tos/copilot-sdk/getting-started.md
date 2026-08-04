@@ -2071,6 +2071,7 @@ let mut options = ClientOptions::default();
 options.transport = Transport::External {
     host: "localhost".to_string(),
     port: 4321,
+    connection_token: None,
 };
 let client = Client::start(options).await?;
 
@@ -2182,7 +2183,7 @@ Install with telemetry extras: `pip install copilot-sdk[telemetry]` (provides `o
 
 
 ```golang
-client, err := copilot.NewClient(copilot.ClientOptions{
+client := copilot.NewClient(&copilot.ClientOptions{
     Telemetry: &copilot.TelemetryConfig{
         OTLPEndpoint: "http://localhost:4318",
     },
@@ -2292,7 +2293,7 @@ Trace context is propagated automatically—no manual instrumentation is needed:
 ## Learn more
 
 * [Authenticate](https://docs.github.com/en/copilot/how-tos/copilot-sdk/auth/authenticate) - GitHub OAuth, environment variables, and BYOK
-* [Byok](https://docs.github.com/en/copilot/how-tos/copilot-sdk/auth/byok) - Use your own API keys from Azure AI Foundry, OpenAI, etc.
+* [Byok](https://docs.github.com/en/copilot/how-tos/copilot-sdk/auth/byok) - Use your own API keys from Microsoft Foundry, OpenAI, etc.
 * [Node.js SDK Reference](https://github.com/github/copilot-sdk/tree/main/nodejs/README.md)
 * [Python SDK Reference](https://github.com/github/copilot-sdk/tree/main/python/README.md)
 * [Go SDK Reference](https://github.com/github/copilot-sdk/tree/main/go/README.md)

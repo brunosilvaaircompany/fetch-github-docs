@@ -50,17 +50,8 @@ After you add an existing organization to your enterprise, the organization's re
   * If your enterprise is billed via invoice, contact the app vendor and pay directly.
   * If your enterprise is billed via credit card or PayPal, billing continues automatically.
   To transfer an existing organization with billed apps between enterprise accounts, first remove the billed apps and then re-add the apps after the transfer is complete.
-* **Sponsorships:** Any sponsorships by the organization will be canceled.
+* **Sponsorships:** Any sponsorships by the organization will be canceled. Additionally, if your enterprise uses Azure metered billing, you will need to create a separate "shell" organization to continue using GitHub Sponsors. See [About Sponsorships Fees And Taxes](https://docs.github.com/en/sponsors/sponsoring-open-source-contributors/about-sponsorships-fees-and-taxes#github-sponsors-when-adding-an-organization-to-an-enterprise).
 * **Coupons:** Any coupons will be removed from the organization. To reapply the coupon, [contact our sales team](https://github.com/enterprise/contact).
-
-## Handling GitHub Sponsors with Azure billing
-
-If your organization is added to an enterprise account with Azure metered billing, any active GitHub Sponsors sponsorships will be canceled. While your organization remains under enterprise billing through Azure, you will not be able to reactivate these sponsorships, as sponsoring is not currently supported for organizations billed through Azure.
-
-To continue using GitHub Sponsors, create a new, separate "shell" organization that is not linked to your enterprise account or Azure billing. You can use this shell organization to manage sponsorships independently.
-
-> [!NOTE]
-> After you create a shell organization, update any public references or documentation to point sponsors to the new organization.
 
 ## Creating a new organization
 

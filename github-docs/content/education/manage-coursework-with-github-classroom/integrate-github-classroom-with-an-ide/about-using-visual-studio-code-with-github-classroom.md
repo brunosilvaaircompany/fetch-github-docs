@@ -1,5 +1,9 @@
 # About using Visual Studio Code with GitHub Classroom
 
+> [!WARNING]
+> **Closing down:** The GitHub Classroom application is closing down and will be retired on August 28, 2026.
+> For more information, see the [GitHub Classroom closing down notice](https://gh.io/classroom-sunset).
+
 > [!NOTE]
 > The [GitHub Classroom extension for VS Code](https://aka.ms/classroom-vscode-ext) is no longer in active development. The **Open in VS Code** badge in student repositories still works, but other features of the extension may not function as expected.
 

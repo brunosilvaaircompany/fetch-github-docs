@@ -17,7 +17,7 @@ By default, anyone with admin access to a repository can invite outside collabor
 
 
 
-If your organization is owned by an enterprise account, you may not be able to configure this setting for your organization, if an enterprise owner has set a policy at the enterprise level. For more information, see [Enforcing repository management policies in your enterprise](/admin/policies/enforcing-policies-for-your-enterprise/enforcing-repository-management-policies-in-your-enterprise#enforcing-a-policy-for-inviting-collaborators-to-repositories).
+If your organization is owned by an enterprise account, you may not be able to configure this setting for your organization, if an enterprise owner has set a policy at the enterprise level. For more information, see [Enforcing repository management policies in your enterprise](/admin/enforcing-policies/enforcing-policies-for-your-enterprise/enforcing-repository-management-policies-in-your-enterprise#enforcing-a-policy-for-inviting-outside-collaborators-to-repositories).
 
  Unless you are on a free plan, adding an outside collaborator to a private or internal repository will use one of your paid licenses. For more information, see "[About per-user pricing](/billing/reference/github-license-users)."
 

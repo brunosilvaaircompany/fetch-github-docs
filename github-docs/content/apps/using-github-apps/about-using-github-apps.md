@@ -7,7 +7,7 @@ GitHub Apps are tools that extend GitHub's functionality. GitHub Apps can do thi
 ## Finding GitHub Apps
 
 
-You can discover GitHub Apps on [GitHub Marketplace](https://github.com/marketplace).  You cannot install third-party applications on your enterprise account—they must be owned by your enterprise or an organization in your enterprise.
+You can discover GitHub Apps on [GitHub Marketplace](https://github.com/marketplace). Developers can also share a link to their public app directly, even if it's not in the GitHub Marketplace.  On GitHub.com you can install public apps from any developer on your enterprise, organization, or user account, as long as you trust the developer.
 
 
 >[!NOTE] Apps from GitHub Marketplace are not currently available on GHE.com.

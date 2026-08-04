@@ -63,11 +63,11 @@ If your enterprise does not use Enterprise Managed Users or usage-based billing,
 ## Organizations on GitHub Enterprise Server
 
 * Any active user who has successfully authenticated to your GitHub Enterprise Server instance
-* Dormant users (administrators can suspend dormant users to free licenses, see [Managing dormant users](/enterprise-server@latest/admin/user-management/managing-users-in-your-enterprise/managing-dormant-users) in the GitHub Enterprise Server documentation)
+* Dormant users (administrators can suspend dormant users to free licenses, see [Managing dormant users](/enterprise-server@latest/admin/managing-accounts-and-repositories/managing-users-in-your-enterprise/managing-dormant-users) in the GitHub Enterprise Server documentation)
 
 ### People who don't consume a license
 
-* Suspended users (see [Suspending and unsuspending users](/enterprise-server@latest/admin/user-management/managing-users-in-your-enterprise/suspending-and-unsuspending-users) in the GitHub Enterprise Server documentation)
+* Suspended users (see [Suspending and unsuspending users](/enterprise-server@latest/admin/managing-accounts-and-repositories/managing-users-in-your-enterprise/suspending-and-unsuspending-users) in the GitHub Enterprise Server documentation)
 * If you have enabled SCIM on your GitHub Enterprise Server instance, the built-in setup user you create, provided you use the `scim-admin` username.
 * Users who already consume a license on GitHub Enterprise Cloud, provided you sync license usage between environments. See [Combined Enterprise Use](https://docs.github.com/en/billing/concepts/enterprise-billing/combined-enterprise-use).
 

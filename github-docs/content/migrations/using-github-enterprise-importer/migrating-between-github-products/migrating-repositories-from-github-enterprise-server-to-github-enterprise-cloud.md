@@ -202,7 +202,7 @@ In Azure, create a storage account and make a note of your connection string. Fo
 
 #### Configuring blob storage in the Management Console of your GitHub Enterprise Server instance
 
-After you set up an AWS S3 storage bucket or Azure Blob Storage storage account, configure blob storage in the Management Console of your GitHub Enterprise Server instance. For more information about the Management Console, see [Administering your instance from the Management Console](/enterprise-server@latest/admin/configuration/administering-your-instance-from-the-management-console).
+After you set up an AWS S3 storage bucket or Azure Blob Storage storage account, configure blob storage in the Management Console of your GitHub Enterprise Server instance. For more information about the Management Console, see [Administering your instance from the Management Console](/enterprise-server@latest/admin/administering-your-instance/administering-your-instance-from-the-web-ui).
 
 1. From an administrative account on GitHub Enterprise Server, in the upper-right corner of any page, click {% octicon "rocket" aria-label="Site admin" %}.
 1. If you're not already on the "Site admin" page, in the upper-left corner, click **Site admin**.
@@ -211,7 +211,7 @@ After you set up an AWS S3 storage bucket or Azure Blob Storage storage account,
 1. Log into the Management Console.
 1. In the top navigation bar, click **Settings**.
 1. Under **Migrations**, click **Enable GitHub Migrations**.
-1. Optionally, to import storage settings you configured for GitHub Actions, select **Copy Storage settings from Actions**. For more information see, [Enabling GitHub Actions with Azure Blob storage](/enterprise-server@latest/admin/github-actions/enabling-github-actions-for-github-enterprise-server/enabling-github-actions-with-azure-blob-storage) and [Enabling GitHub Actions with Amazon S3 storage](/enterprise-server@latest/admin/github-actions/enabling-github-actions-for-github-enterprise-server/enabling-github-actions-with-amazon-s3-storage).
+1. Optionally, to import storage settings you configured for GitHub Actions, select **Copy Storage settings from Actions**. For more information see, [Enabling GitHub Actions with Azure Blob storage](/enterprise-server@latest/admin/managing-github-actions-for-your-enterprise/enabling-github-actions-for-github-enterprise-server/enabling-github-actions-with-azure-blob-storage) and [Enabling GitHub Actions with Amazon S3 storage](/enterprise-server@latest/admin/managing-github-actions-for-your-enterprise/enabling-github-actions-for-github-enterprise-server/enabling-github-actions-with-amazon-s3-storage).
 
    > [!NOTE]
    > After copying your storage settings, you may still need to update the configuration of your cloud storage account to work with GitHub Enterprise Importer. In particular, you must ensure that GitHub's IP addresses are allowlisted. For more information, see [Managing Access For A Migration Between GitHub Products](https://docs.github.com/en/migrations/using-github-enterprise-importer/migrating-between-github-products/managing-access-for-a-migration-between-github-products#configuring-ip-allow-lists-for-migrations).
@@ -349,7 +349,7 @@ For more information, see [Get an organization migration status](/rest/migration
 > [!NOTE]
 > If your migration moves to the `failed` state rather than the `exported` state, try starting the migration again. If the migration fails repeatedly, we recommend generating the archives using `ghe-migrator` instead of the API.
 >
->Follow the steps in [Exporting migration data from your enterprise](/enterprise-server@latest/admin/user-management/migrating-data-to-and-from-your-enterprise/exporting-migration-data-from-your-enterprise), adding only one repository to the migration. At the end of the process, you will have a single migration archive with your Git source and metadata, and you can move to step 6 in this article.
+>Follow the steps in [Exporting migration data from your enterprise](/enterprise-server@latest/migrations/using-ghe-migrator/exporting-migration-data-from-github-enterprise-server), adding only one repository to the migration. At the end of the process, you will have a single migration archive with your Git source and metadata, and you can move to step 6 in this article.
 
 After the `state` of a migration moves to `exported`, you can fetch the migration's URL using the "Download an organization migration archive" API.
 
@@ -735,7 +735,7 @@ If you set up blob storage with a **cloud provider** (as opposed to local storag
 > [!NOTE]
 > You only need to configure blob storage in the Management Console if you use GitHub Enterprise Server 3.8 or higher. If you use 3.7 or lower, configure your credentials in the GitHub CLI instead.
 
-After you set up an AWS S3 storage bucket or Azure Blob Storage storage account, configure blob storage in the Management Console of your GitHub Enterprise Server instance. For more information about the Management Console, see [Administering your instance from the Management Console](/enterprise-server@latest/admin/configuration/administering-your-instance-from-the-management-console).
+After you set up an AWS S3 storage bucket or Azure Blob Storage storage account, configure blob storage in the Management Console of your GitHub Enterprise Server instance. For more information about the Management Console, see [Administering your instance from the Management Console](/enterprise-server@latest/admin/administering-your-instance/administering-your-instance-from-the-web-ui).
 
 1. From an administrative account on GitHub Enterprise Server, in the upper-right corner of any page, click {% octicon "rocket" aria-label="Site admin" %}.
 1. If you're not already on the "Site admin" page, in the upper-left corner, click **Site admin**.
@@ -744,7 +744,7 @@ After you set up an AWS S3 storage bucket or Azure Blob Storage storage account,
 1. Log into the Management Console.
 1. In the top navigation bar, click **Settings**.
 1. Under **Migrations**, click **Enable GitHub Migrations**.
-1. Optionally, to import storage settings you configured for GitHub Actions, select **Copy Storage settings from Actions**. For more information see, [Enabling GitHub Actions with Azure Blob storage](/enterprise-server@latest/admin/github-actions/enabling-github-actions-for-github-enterprise-server/enabling-github-actions-with-azure-blob-storage) and [Enabling GitHub Actions with Amazon S3 storage](/enterprise-server@latest/admin/github-actions/enabling-github-actions-for-github-enterprise-server/enabling-github-actions-with-amazon-s3-storage).
+1. Optionally, to import storage settings you configured for GitHub Actions, select **Copy Storage settings from Actions**. For more information see, [Enabling GitHub Actions with Azure Blob storage](/enterprise-server@latest/admin/managing-github-actions-for-your-enterprise/enabling-github-actions-for-github-enterprise-server/enabling-github-actions-with-azure-blob-storage) and [Enabling GitHub Actions with Amazon S3 storage](/enterprise-server@latest/admin/managing-github-actions-for-your-enterprise/enabling-github-actions-for-github-enterprise-server/enabling-github-actions-with-amazon-s3-storage).
 
    > [!NOTE]
    > After copying your storage settings, you may still need to update the configuration of your cloud storage account to work with GitHub Enterprise Importer. In particular, you must ensure that GitHub's IP addresses are allowlisted. For more information, see [Managing Access For A Migration Between GitHub Products](https://docs.github.com/en/migrations/using-github-enterprise-importer/migrating-between-github-products/managing-access-for-a-migration-between-github-products#configuring-ip-allow-lists-for-migrations).

@@ -1,5 +1,9 @@
 # View autograding results
 
+> [!WARNING]
+> **Closing down:** The GitHub Classroom application is closing down and will be retired on August 28, 2026.
+> For more information, see the [GitHub Classroom closing down notice](https://gh.io/classroom-sunset).
+
 ## About autograding
 
 Your teacher can configure tests that automatically check your work when you push to an assignment repository on your GitHub Enterprise Server instance.

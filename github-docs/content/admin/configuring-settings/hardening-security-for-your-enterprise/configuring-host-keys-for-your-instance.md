@@ -20,7 +20,7 @@ By default, your GitHub Enterprise Server instance generates and advertises host
 
 To improve security for clients that connect to your GitHub Enterprise Server instance, you can enable the generation and advertisement of an Ed25519 host key. Ed25519 is immune to some attacks that target older signature algorithms, without sacrificing speed. Older SSH clients may not support Ed25519. By default, GitHub Enterprise Server instances do not generate or advertise an Ed25519 host key. For more information, see [the Ed25519 website](https://ed25519.cr.yp.to).
 
-1. SSH into your GitHub Enterprise Server instance. If your instance comprises multiple nodes, for example if high availability or geo-replication are configured, SSH into the primary node. If you use a cluster, you can SSH into any node. Replace HOSTNAME with the hostname for your instance, or the hostname or IP address of a node. For more information, see [Accessing The Administrative Shell SSH](https://docs.github.com/en/enterprise-server@latest/admin/configuration/configuring-your-enterprise/accessing-the-administrative-shell-ssh).
+1. SSH into your GitHub Enterprise Server instance. If your instance comprises multiple nodes, for example if high availability or geo-replication are configured, SSH into the primary node. If you use a cluster, you can SSH into any node. Replace HOSTNAME with the hostname for your instance, or the hostname or IP address of a node. For more information, see [Accessing The Administrative Shell SSH](https://docs.github.com/en/enterprise-server@latest/admin/administering-your-instance/administering-your-instance-from-the-command-line/accessing-the-administrative-shell-ssh).
 
    ```shell copy
    ssh -p 122 admin@HOSTNAME

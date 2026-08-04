@@ -26,6 +26,7 @@ GitHub Enterprise Importer supports migrations **to** GitHub Enterprise Cloud (G
 * Bitbucket Server and Bitbucket Data Center 5.14+
 * GitHub.com
 * GitHub Enterprise Server (GHES) 3.4.1+
+* GitLab (GitLab.com or [maintained self-hosted versions](https://docs.gitlab.com/policy/maintenance/#maintained-versions))
 
 > [!NOTE]
 > GitHub Enterprise Importer does not currently support migrations **from GHE.com.**

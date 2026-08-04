@@ -76,4 +76,5 @@ Find out more about using the GitHub Copilot app:
 * [Working With Canvas Extensions](https://docs.github.com/en/copilot/how-tos/github-copilot-app/working-with-canvas-extensions)
 * [Managing Issues And Pull Requests](https://docs.github.com/en/copilot/how-tos/github-copilot-app/managing-issues-and-pull-requests)
 * [Using Automations](https://docs.github.com/en/copilot/how-tos/github-copilot-app/using-automations)
-* [Open With Deep Links](https://docs.github.com/en/copilot/how-tos/github-copilot-app/open-with-deep-links)
+* [Slash Commands](https://docs.github.com/en/copilot/reference/github-copilot-app-reference/slash-commands)
+* [Built In Skills](https://docs.github.com/en/copilot/reference/github-copilot-app-reference/built-in-skills)

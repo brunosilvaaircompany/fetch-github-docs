@@ -1,5 +1,9 @@
 # Glossary
 
+> [!WARNING]
+> **Closing down:** The GitHub Classroom application is closing down and will be retired on August 28, 2026.
+> For more information, see the [GitHub Classroom closing down notice](https://gh.io/classroom-sunset).
+
 ## assignment
 
 An assignment is coursework in GitHub Classroom. A teacher can assign an assignment to an individual student or a group of students. Teachers can import starter code for the assignment, assign students, and create a deadline for each assignment. For more information, see the definitions for [individual assignment](#individual-assignment) and [group assignment](#group-assignment).

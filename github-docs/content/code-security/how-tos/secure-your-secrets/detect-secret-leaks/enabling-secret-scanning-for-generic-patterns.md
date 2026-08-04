@@ -20,4 +20,4 @@ For more information about generic patterns, see "[Supported Secret Scanning Pat
 
 ### Enabling detection of generic patterns for an organization
 
-You can enable scanning for generic patterns at the organization level by applying a custom security configuration. For more information, see [Creating A Custom Security Configuration](https://docs.github.com/en/code-security/securing-your-organization/enabling-security-features-in-your-organization/creating-a-custom-security-configuration).
+You can enable scanning for generic patterns at the organization level by applying a custom security configuration. For more information, see [Create Custom Configuration](https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/establish-complete-coverage/create-custom-configuration).

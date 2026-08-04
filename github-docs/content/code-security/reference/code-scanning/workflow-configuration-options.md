@@ -431,10 +431,16 @@ In the workflow file, use the `config-file` parameter of the `init` action to sp
     config-file: ./.github/codeql/codeql-config.yml
 ```
 
-The configuration file can be located within the repository you are analyzing, or in an external repository. Using an external repository allows you to specify configuration options for multiple repositories in a single place. When you reference a configuration file located in an external repository, you can use the _OWNER/REPOSITORY/FILENAME@BRANCH_ syntax. For example, _octo-org/shared/codeql-config.yml@main_.
+The configuration file can be located within the repository you are analyzing, or in an external repository. Using an external repository allows you to specify configuration options for multiple repositories in a single place. When you reference a configuration file located in an external repository, you can use the `remote=OWNER/REPOSITORY@REF:FILEPATH` syntax. For example, `remote=octo-org/shared@main:codeql-config.yml` will use `codeql-config.yml` from the `main` branch of the `octo-org/shared` repository. All components of this syntax, except for the repository name, are optional. For example, `remote=shared` will use `.github/codeql-config.yml` from the `main` branch of the `shared` repository in the same organization as the repository being analyzed.
 
 
-If the configuration file is located in an external private repository, use the `external-repository-token` parameter of the `init` action to specify a token that has access to the private repository.
+
+
+If the configuration file is located in an external private repository and you want to use it for a code scanning default setup analysis, you can set up a _Git Source_ private registry configuration for your organization with credentials that allow access to the private repository containing the configuration file. For information about how to set up a private registry configuration, see [Giving Org Access Private Registries](https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/manage-usage-and-access/giving-org-access-private-registries).
+
+
+
+If the configuration file is located in an external private repository and you are using code scanning advanced setup, use the `external-repository-token` parameter of the `init` action to specify a token that has access to the private repository.
 
 ```yaml copy
 - uses: {% data reusables.actions.action-codeql-action-init %}

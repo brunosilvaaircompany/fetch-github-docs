@@ -1,5 +1,9 @@
 # Connect a learning management system course to a classroom
 
+> [!WARNING]
+> **Closing down:** The GitHub Classroom application is closing down and will be retired on August 28, 2026.
+> For more information, see the [GitHub Classroom closing down notice](https://gh.io/classroom-sunset).
+
 ## About connecting an LMS to your classroom
 
 You can connect a learning management system (LMS) to GitHub Classroom and import a roster of student identifiers from the LMS.

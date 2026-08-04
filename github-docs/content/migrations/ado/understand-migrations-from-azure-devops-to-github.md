@@ -34,6 +34,7 @@ There are limits to what GitHub Enterprise Importer can migrate. Some are due to
 ### Limitations of GitHub
 
 * **2 GiB size limit for a single Git commit:** No single commit in your Git repository can be larger than 2 GiB. If any of your commits are larger than 2 GiB, you will need to split the commit into smaller commits that are each 2 GiB or smaller.
+* **2 GiB size limit for a single push:** No single push can be larger than 2 GiB. Larger pushes fail with a `pack exceeds maximum allowed size` error.
 * **255 byte limit for Git references:** No single Git reference, commonly known as a "ref", can have a name larger than 255 bytes. Usually, this means that your references cannot be more than 255 characters long, but any non-ASCII characters, such as emojis, may consume more than one byte. If any of your Git references are too large, we'll return a clear error message.
 * **100 MiB file size limit:** After you complete your migration, no single file in your Git repository can be larger than 100 MiB. During repository migration this limit is increased to 400 MiB. Consider using Git LFS to store large files.
 

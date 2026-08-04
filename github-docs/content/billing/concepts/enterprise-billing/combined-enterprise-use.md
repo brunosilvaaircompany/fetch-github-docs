@@ -69,5 +69,5 @@ There are two types of GitHub Enterprise (GHE) licensing models, with different 
 * [GitHub License Users](https://docs.github.com/en/billing/reference/github-license-users)
 * [Pricing](https://github.com/pricing)
 * [Billing For Enterprises](https://docs.github.com/en/billing/concepts/enterprise-billing/billing-for-enterprises)
-* [Setting Up A GitHub Enterprise Server Instance](https://docs.github.com/en/enterprise-server@latest/admin/installation/setting-up-a-github-enterprise-server-instance)
+* [Setting Up A GitHub Enterprise Server Instance](https://docs.github.com/en/enterprise-server@latest/admin/installing-your-enterprise-server/setting-up-a-github-enterprise-server-instance)
 * The [GitHub Enterprise Releases](https://enterprise.github.com/releases/) website

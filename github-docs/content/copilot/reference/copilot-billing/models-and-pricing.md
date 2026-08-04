@@ -24,10 +24,12 @@ All prices are **per 1 million tokens**.
 
 > [!NOTE] Models with a **Long context** tier, offer extended capabilities and longer context windows. See [Supported Models](https://docs.github.com/en/copilot/reference/ai-models/supported-models#models-with-extended-capabilities)
 
-| Model | Release status | Category | Tier | Threshold (input tokens) | Input | Cached input | Output |
-| --- | --- | --- | --- | --- | ---: | ---: | ---: |
+GPT-5.6 Sol, GPT-5.6 Terra, and GPT-5.6 Luna include a cache write cost in addition to cached input. Earlier OpenAI models have no cache write cost.
+
+| Model | Release status | Category | Tier | Threshold (input tokens) | Input | Cached input | Cache write | Output |
+| --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
 | {% for entry in tables.copilot.models-and-pricing %}{% if entry.provider == "openai" %} |
-| {{ entry.model }} | {{ entry.release_status }} | {{ entry.category }} | {{ entry.tier }} | {{ entry.threshold }} | {{ entry.input }} | {{ entry.cached_input }} | {{ entry.output }} |
+| {{ entry.model }} | {{ entry.release_status }} | {{ entry.category }} | {{ entry.tier }} | {{ entry.threshold }} | {{ entry.input }} | {{ entry.cached_input }} | {{ entry.cache_write }} | {{ entry.output }} |
 | {% endfor %} |
 
 ### Anthropic

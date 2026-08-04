@@ -129,7 +129,7 @@ To grant the migrator role using the CLI, you must have installed the GEI extens
    gh gei grant-migrator-role --github-org ORGANIZATION --actor ACTOR --actor-type TYPE
    ```
 
-   >[!NOTE] If you're the granting the migrator role for GHE.com, you must also include the target API URL for your enterprise's subdomain. For example: `--target-api-url https://api.octocorp.ghe.com`.
+   >[!NOTE] If you're granting the migrator role for GHE.com, you must also include the target API URL for your enterprise's subdomain. For example: `--target-api-url https://api.octocorp.ghe.com`.
 
 
 ### Granting the migrator role with the GraphQL API

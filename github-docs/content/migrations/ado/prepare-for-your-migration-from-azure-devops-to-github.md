@@ -35,7 +35,7 @@ After migrating to GitHub, you should have only one enterprise account and a sma
 
 If you want to break your migration effort into batches, the new structure can help you determine them. If you have more than one organization in ADO, and each organization's repositories are reasonably sized batches, consider batching by organization.
 
-1. Decide what your new organization structural will be.
+1. Decide what your new organization structure will be.
 1. Decide if you need to break up your migration effort into smaller batches.
 1. If so, decide how you want to break up your migrations.
 

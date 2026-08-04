@@ -38,7 +38,7 @@ For additional information on your preferred funding, please click on any of the
 Alternatively, enterprises and organizations may opt to be billed by recurring invoice. For additional information on billing by invoice, please click on [Paying For GitHub Sponsors By Invoice](https://docs.github.com/en/sponsors/sponsoring-open-source-contributors/paying-for-github-sponsors-by-invoice).
 
 > [!WARNING]
-> As of February 23, 2023, GitHub Sponsors does not support PayPal. While this only affects GitHub Sponsors, please note that it is still possible to fund GitHub Pro, GitHub Copilot, Actions and Packages, Storage, Codespaces and Git LFS Data using PayPal.
+> As of February 23, 2023, GitHub Sponsors does not support PayPal. While this only affects GitHub Sponsors, please note that it is still possible to fund GitHub Pro, GitHub Copilot, Actions, GitHub Packages, Storage, Codespaces and Git LFS Data using PayPal.
 
 
 
@@ -82,3 +82,15 @@ As a sponsor, you acknowledge that we may disclose to the owner of each account 
 This information is necessary to enable payment and reporting of any taxes arising from such sponsorship payments.
 
 Sponsorships are generally not tax deductible but can be in some cases. It's the responsibility of the sponsored open source contributor—not GitHub—to inform sponsors whether the contributions are being made to a tax-exempt entity like a 501(c)(3), and if the sponsorships may be tax-deductible.
+
+
+
+
+## GitHub Sponsors when adding an organization to an enterprise
+
+If you add an organization to an enterprise account with Azure metered billing, any active GitHub Sponsors sponsorships will be canceled. While your organization remains under enterprise billing through Azure, you will not be able to reactivate these sponsorships, as sponsoring is not currently supported for organizations billed through Azure.
+
+To continue using GitHub Sponsors, create a new, separate "shell" organization that is not linked to your enterprise account or Azure billing. You can use this shell organization to manage sponsorships independently. See [Adding Organizations To Your Enterprise](https://docs.github.com/en/admin/managing-accounts-and-repositories/managing-organizations-in-your-enterprise/adding-organizations-to-your-enterprise).
+
+> [!NOTE]
+> After you create a shell organization, update any public references or documentation to point sponsors to the new organization.

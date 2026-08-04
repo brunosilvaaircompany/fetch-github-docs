@@ -1,5 +1,9 @@
 # Using GitHub Codespaces with GitHub Classroom
 
+> [!WARNING]
+> **Closing down:** The GitHub Classroom application is closing down and will be retired on August 28, 2026.
+> For more information, see the [GitHub Classroom closing down notice](https://gh.io/classroom-sunset).
+
 ## About GitHub Codespaces
 
 GitHub Codespaces is an instant, cloud-based development environment that uses a container to provide you with common languages, tools, and utilities for development. GitHub Codespaces is also configurable, allowing you to create a customized development environment that is the same for all users of your project. See [Quickstart](https://docs.github.com/en/codespaces/quickstart).

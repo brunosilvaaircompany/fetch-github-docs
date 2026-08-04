@@ -2,7 +2,7 @@
 
 ## About default setup
 
-Default setup for code scanning is the quickest, easiest, most low-maintenance way to enable code scanning for your repository. Based on the code in your repository, default setup will automatically create a custom code scanning configuration. After enabling default setup, the code written in CodeQL-supported languages in your repository will be scanned using CodeQL:
+Default setup for code scanning is the quickest, easiest, most low-maintenance way to enable code scanning for your repository. Based on the code in your repository, default setup will automatically create a custom code scanning configuration. You can also customize this configuration, including at scale across your organization, without creating or maintaining a workflow file. See [Customization of default setup](#customization-of-default-setup). After enabling default setup, the code written in CodeQL-supported languages in your repository will be scanned using CodeQL:
 
 * On each push to the repository's default branch, or any protected branch. For more information on protected branches, see [About Protected Branches](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches).
 * When creating or committing to a pull request based against the repository's default branch, or any protected branch, excluding pull requests from forks.
@@ -31,6 +31,13 @@ If your codebase depends on a library or framework that is not recognized by the
 
 
 
+You can also apply a custom CodeQL configuration file to default setup across your organization at once, or for a single repository, by setting the `github-codeql-config-file` repository property. A custom configuration file applied using the `github-codeql-config-file` property is merged with the configuration that code scanning default setup generates automatically. Code scanning default setup allows you to customize some analysis settings in the user interface, such as which threat models or CodeQL model packs to use. These selections are kept in the merged configuration: the threat models selected in the default setup UI are combined with any threat models specified in the configuration file, and model packs configured in the UI are kept.
+ This lets you meet customization needs that previously required advanced setup, while keeping the low-maintenance benefits of default setup. See [Repository Properties](https://docs.github.com/en/code-security/concepts/code-scanning/repository-properties#custom-configuration-files) and [Edit Default Setup](https://docs.github.com/en/code-security/how-tos/find-and-fix-code-vulnerabilities/manage-your-configuration/edit-default-setup#customizing-default-setup-with-a-configuration-file).
+
+
+
+
+
 Additional configuration options that are shared between all code scanning setup types are available. See [Repository Properties](https://docs.github.com/en/code-security/concepts/code-scanning/repository-properties).
 
 
@@ -49,7 +56,7 @@ Unless you have a specific use case, we recommend that you only assign runners w
 
 ## About advanced setup
 
-If you need more granular control over your code scanning configuration, you should instead configure advanced setup. Advanced setup for code scanning is helpful when you need to customize your code scanning. You can set up code scanning with GitHub Actions or an external continuous integration or continuous delivery/deployment (CI/CD) system.
+If the customization options available for default setup, including a custom configuration file, don't meet your needs, you should instead configure advanced setup. Advanced setup for code scanning is helpful when you need to define your own GitHub Actions workflow, for example to build compiled languages, use a matrix build, or change the analysis schedule. You can set up code scanning with GitHub Actions or an external continuous integration or continuous delivery/deployment (CI/CD) system.
 
 If you run code scanning using multiple configurations, an alert will sometimes have multiple analysis origins. If an alert has multiple analysis origins, you can view the status of the alert for each analysis origin on the alert page. For more information, see [Code Scanning Alerts](https://docs.github.com/en/code-security/concepts/code-scanning/code-scanning-alerts#about-alerts-from-multiple-configurations).
 

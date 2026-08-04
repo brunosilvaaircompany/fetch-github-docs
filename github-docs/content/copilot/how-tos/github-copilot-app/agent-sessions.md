@@ -12,6 +12,8 @@ Each session in the GitHub Copilot app runs in its own isolated workspace, so yo
 
 The agent starts working. Your active sessions appear in the sidebar grouped by repository—click any session to switch to it.
 
+For a list of commands you can use in the prompt box, see [Slash Commands](https://docs.github.com/en/copilot/reference/github-copilot-app-reference/slash-commands).
+
 ## Choosing a session mode
 
 The session mode controls how much autonomy the agent has. You can set the mode from the dropdown below the prompt field and change it at any time.

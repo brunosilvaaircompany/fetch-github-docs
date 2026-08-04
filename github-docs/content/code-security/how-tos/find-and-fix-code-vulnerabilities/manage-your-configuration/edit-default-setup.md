@@ -1,6 +1,6 @@
 # Editing your configuration of default setup
 
-After running an initial analysis of your code with default setup, you can make changes to your configuration to better meet your needs. See [Setup Types](https://docs.github.com/en/code-security/concepts/code-scanning/setup-types) and [Repository Properties](https://docs.github.com/en/code-security/concepts/code-scanning/repository-properties).
+After running an initial analysis of your code with default setup, you can make changes to your configuration to better meet your needs. You can customize your configuration in the user interface, or using repository properties to add custom queries or apply a custom configuration file. See [Setup Types](https://docs.github.com/en/code-security/concepts/code-scanning/setup-types) and [Repository Properties](https://docs.github.com/en/code-security/concepts/code-scanning/repository-properties).
 
 ## Customizing your existing configuration of default setup
 
@@ -87,6 +87,41 @@ For more information about CodeQL model packs and writing your own, see [Use The
     ![Screenshot of the "Expand CodeQL analysis" view" in the settings for an organization.](/assets/images/help/security/enable-codeql-org-model-packs.png)
 
 1. The model packs will be automatically detected and used when code scanning runs on any repository in the organization with default setup enabled.
+
+
+
+## Customizing default setup with a configuration file
+
+You can further customize default setup by applying a CodeQL configuration file, using the `github-codeql-config-file` repository property. The configuration in the file is merged with the configuration default setup generates automatically, so you can, for example, add extra queries or exclude paths without needing to switch to advanced setup. For more information about what you can configure in a CodeQL configuration file, and how it's merged with default setup, see [Repository Properties](https://docs.github.com/en/code-security/concepts/code-scanning/repository-properties#custom-configuration-files).
+
+### Applying a configuration file to all repositories in an organization
+
+The recommended way to customize default setup at scale is to set an organization-wide default value for the `github-codeql-config-file` repository property, so that you don't need to update individual repositories as you add more of them to your organization.
+
+1. Create a CodeQL configuration file in a central repository. You can either create a new repository for this purpose or add the file to an existing one. Your organization-wide configuration can then be maintained in one place. For information about the format of the configuration files, see [Workflow Configuration Options](https://docs.github.com/en/code-security/reference/code-scanning/workflow-configuration-options#custom-configuration-files).
+
+   If the configuration file is stored in a private repository other than the one being analyzed, you also need to set up a _Git Source_ private registry configuration so that default setup can access it from other repositories. See [Giving Org Access Private Registries](https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/manage-usage-and-access/giving-org-access-private-registries).
+
+
+1. Create a `github-codeql-config-file` repository property for your organization and set its default value to the path of the configuration file. For example, if you have committed your configuration file as `codeql.yml` to the `main` branch of `octo-org/config`, you would set the value of the repository property to `remote=octo-org/config@main:codeql.yml`.
+
+   We recommend testing the configuration file on a single repository before setting the organization-wide default. See [Repository Properties](https://docs.github.com/en/code-security/concepts/code-scanning/repository-properties#testing-changes-before-applying-them).
+
+1. The configuration file will be automatically detected and merged with the configuration default setup generates the next time code scanning runs on each repository in the organization. Repositories that already have an explicit value set for the `github-codeql-config-file` property continue to use that value instead of the organization-wide default. For more information about how default and explicit repository property values interact, see [Managing Custom Properties For Repositories In Your Organization](https://docs.github.com/en/organizations/managing-organization-settings/managing-custom-properties-for-repositories-in-your-organization#adding-custom-properties).
+
+### Applying a configuration file to a repository
+
+If you only need to customize default setup for a single repository, or to test a configuration before rolling it out to your organization, you can set the property directly on that repository instead.
+
+1. Create a CodeQL configuration file. This can be a file within the repository being analyzed, or a file in a separate repository. For information about the format of the configuration files, see [Workflow Configuration Options](https://docs.github.com/en/code-security/reference/code-scanning/workflow-configuration-options#custom-configuration-files).
+
+   If the configuration file is stored in a private repository other than the one being analyzed, you also need to set up a _Git Source_ private registry configuration so that default setup can access it from other repositories. See [Giving Org Access Private Registries](https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/manage-usage-and-access/giving-org-access-private-registries).
+
+
+1. Set the `github-codeql-config-file` repository property for the repository to the local or remote path of the configuration file. See [Repository Properties](https://docs.github.com/en/code-security/concepts/code-scanning/repository-properties#custom-configuration-files) for more information about acceptable values for this property, and [Managing Custom Properties For Repositories In Your Organization](https://docs.github.com/en/organizations/managing-organization-settings/managing-custom-properties-for-repositories-in-your-organization#setting-values-for-repositories-in-your-organization) for how to set a repository property value.
+1. The configuration file will be automatically detected and merged with the configuration default setup generates the next time code scanning runs on the repository.
+
+
 
 
 

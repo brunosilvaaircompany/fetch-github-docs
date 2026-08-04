@@ -69,7 +69,7 @@ await client.stop()
 
 
 > [!NOTE]
-> The Go SDK does not bundle the CLI. You must install the CLI separately or set `Connection` to point to an existing binary. See [Local CLI](https://docs.github.com/en/copilot/how-tos/copilot-sdk/setup/local-cli) for details.
+> Unlike Node.js, Python, and .NET, the Go SDK does not include a CLI as an automatic dependency. With no explicit path, `NewClient(nil)` uses an embedded CLI when available, then falls back to `copilot` on `PATH`. To embed a CLI, run the [bundler tool](https://github.com/github/copilot-sdk/tree/main/go/README.md#distributing-your-application-with-an-embedded-github-copilot-cli) at build time. You can also set `COPILOT_CLI_PATH` or point a `Connection` at an existing binary. See [Local CLI](https://docs.github.com/en/copilot/how-tos/copilot-sdk/setup/local-cli) for details.
 
 ```golang
 package main
@@ -133,7 +133,7 @@ Console.WriteLine(response?.Data.Content);
 
 
 > [!NOTE]
-> The Java SDK does not bundle or embed the Copilot CLI. You must install the CLI separately and configure its path via `Connection` or the `COPILOT_CLI_PATH` environment variable.
+> The Java SDK does not bundle or embed the Copilot CLI. Install the CLI separately and either make `copilot` available on your `PATH` or set its location with `setCliPath(...)` (or connect to a running CLI server with `setCliUrl(...)`).
 
 ```java
 import com.github.copilot.CopilotClient;

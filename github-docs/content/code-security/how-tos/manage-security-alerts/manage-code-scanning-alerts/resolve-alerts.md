@@ -158,7 +158,7 @@ You may have multiple code scanning configurations on a single repository. When 
 
 1. Once you have removed any unwanted configurations and confirmed the expected configurations are displayed, click **Save changes**.
 
-   If you save your changes after accidentally deleting a configuration, re-run the configuration to update the alert. For more information on re-running configurations that use GitHub Actions, see [Re Running Workflows And Jobs](https://docs.github.com/en/actions/managing-workflow-runs/re-running-workflows-and-jobs#re-running-all-the-jobs-in-a-workflow).
+   If you save your changes after accidentally deleting a configuration, re-run the configuration to update the alert. For more information on re-running configurations that use GitHub Actions, see [Re Run Workflows And Jobs](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/re-run-workflows-and-jobs#re-running-all-the-jobs-in-a-workflow).
 
 > [!NOTE]
 > * If you remove all code scanning configurations for the default branch of your repository, the default branch will remain in the "Affected branches" sidebar, but it will not be analyzed by any configurations.
@@ -167,5 +167,5 @@ You may have multiple code scanning configurations on a single repository. When 
 ## Further reading
 
 * [Triage Alerts In Pull Requests](https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-code-scanning-alerts/triage-alerts-in-pull-requests)
-* [Configuring Default Setup For Code Scanning](https://docs.github.com/en/code-security/code-scanning/enabling-code-scanning/configuring-default-setup-for-code-scanning)
-* [About Integration With Code Scanning](https://docs.github.com/en/code-security/code-scanning/integrating-with-code-scanning/about-integration-with-code-scanning)
+* [Configure Code Scanning](https://docs.github.com/en/code-security/how-tos/find-and-fix-code-vulnerabilities/configure-code-scanning/configure-code-scanning)
+* [Integration With Code Scanning](https://docs.github.com/en/code-security/concepts/code-scanning/integration-with-code-scanning)

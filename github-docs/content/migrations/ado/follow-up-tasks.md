@@ -62,6 +62,7 @@ After you run a migration with GitHub Enterprise Importer or Enterprise Live Mig
 If you added the IP ranges for GitHub Enterprise Importer to the IP allow list for your destination organization, you can remove those entries. If you disabled your identity provider's IP allow list restrictions for your destination enterprise, you can re-enable them now.
 
 
+
 ## Configure Azure Pipelines and Azure Boards
 
 If you used Azure Pipelines or Azure Boards previously and want to continue using them with your repositories now they are hosted on GitHub, you can follow these guides on Microsoft Learn to configure the relevant extension.

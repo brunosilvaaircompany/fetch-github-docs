@@ -1,5 +1,9 @@
 # About using MakeCode Arcade with GitHub Classroom
 
+> [!WARNING]
+> **Closing down:** The GitHub Classroom application is closing down and will be retired on August 28, 2026.
+> For more information, see the [GitHub Classroom closing down notice](https://gh.io/classroom-sunset).
+
 ## About MakeCode Arcade
 
 MakeCode Arcade is an online integrated development environment (IDE) for developing retro arcade games using drag-and-drop block programming and JavaScript. Students can write, edit, run, test, and debug code in a browser with MakeCode Arcade. For more information about IDEs and GitHub Classroom, see [Integrate GitHub Classroom With An Ide](https://docs.github.com/en/education/manage-coursework-with-github-classroom/integrate-github-classroom-with-an-ide/integrate-github-classroom-with-an-ide).

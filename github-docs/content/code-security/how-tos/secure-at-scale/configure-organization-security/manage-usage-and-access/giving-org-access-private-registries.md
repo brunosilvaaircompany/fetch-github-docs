@@ -18,6 +18,12 @@ Code scanning default setup supports the following registry types:
 | Go | GOPROXY server, Git Source |
 | Java | Maven Repository |
 
+
+
+Additionally, _Git Source_ registries are supported for granting code scanning access to configuration files in private repositories. For more information about customizing code scanning using custom configuration files, see [Workflow Configuration Options](https://docs.github.com/en/code-security/reference/code-scanning/workflow-configuration-options#custom-configuration-files).
+
+
+
 > [!TIP]
 > You can define one of each type of registry for each organization. If the codebases in your organization use more than one registry of a given type, you should set up a unified access point or define access to the most important registry for the codebases in that organization.
 

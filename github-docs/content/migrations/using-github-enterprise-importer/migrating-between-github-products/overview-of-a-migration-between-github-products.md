@@ -108,7 +108,7 @@ Even if you change your organizational structure, you can still prepare a script
 > [!NOTE]
 > You can run multiple batches simultaneously. For example, if you're batching by teams, you could run the migrations for multiple teams in the same time window.
 
-1. Decide what your new organization structural will be.
+1. Decide what your new organization structure will be.
 1. Decide if you need to break up your migration effort into smaller batches.
 1. If so, decide how you want to break up your migrations.
 

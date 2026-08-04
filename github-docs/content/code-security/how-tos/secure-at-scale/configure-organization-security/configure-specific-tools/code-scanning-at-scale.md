@@ -21,6 +21,12 @@ You can enable default setup for all eligible repositories in your organization.
 
 Through your organization's security settings page, you can customize default setup for all eligible repositories, such as extending coverage using model packs. See [Edit Default Setup](https://docs.github.com/en/code-security/how-tos/find-and-fix-code-vulnerabilities/manage-your-configuration/edit-default-setup).
 
+
+
+You can also apply a custom CodeQL configuration file across your organization by requiring the `github-codeql-config-file` repository property for your organization and setting its default value. This lets you customize analysis at scale without maintaining workflow files. See [Edit Default Setup](https://docs.github.com/en/code-security/how-tos/find-and-fix-code-vulnerabilities/manage-your-configuration/edit-default-setup#applying-a-configuration-file-to-all-repositories-in-an-organization) for step-by-step instructions.
+
+
+
 ## Configuring default setup for a subset of repositories in an organization
 
 You can filter for specific repositories you would like to configure default setup for. For more information, see [Apply Custom Configuration](https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/establish-complete-coverage/apply-custom-configuration).

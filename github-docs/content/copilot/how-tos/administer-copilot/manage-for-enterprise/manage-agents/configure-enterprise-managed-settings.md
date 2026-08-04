@@ -1,6 +1,6 @@
 # Configuring enterprise-managed settings
 
-With enterprise managed settings, enterprise owners can centrally define and distribute configuration settings to supported clients for users on your enterprise's Copilot plan, ensuring every member works within the same guardrails.
+With enterprise managed settings, enterprise owners can centrally define and distribute configuration settings to supported clients for users on your enterprise's Copilot plan, ensuring every member works within the guardrails you define, while letting teams tailor the settings you allow.
 
 The following clients are supported, although not every client supports every property:
 
@@ -9,13 +9,15 @@ The following clients are supported, although not every client supports every pr
 * The GitHub Copilot app
 * Copilot cloud agent
 
-These settings apply enterprise-wide, with no organization-level override. For each supported key, the `managed-settings.json` value takes precedence over any file-based configuration a user sets in their client.
+These settings apply enterprise-wide and enterprises can customize specific keys to enterprise teams. For each supported key, the `managed-settings.json` value takes precedence over any file-based configuration a user sets in their client.
 
 Managed settings are loaded locally when the client starts, even if the device has no network connection. This means controls such as suppressing the `allow-all` permission options and restricting plugin configuration still apply before sign in or any server round trip, and remain active when users switch accounts.
 
 ## Defining settings
 
 For detailed information on the available properties and syntax, see [Enterprise Managed Settings Reference](https://docs.github.com/en/copilot/reference/enterprise-managed-settings-reference).
+
+Use `copilot/team-mappings.json` and the `copilot/teams/` directory when you need one or more enterprise teams to use settings that differ from the defaults in `copilot/managed-settings.json`. For more information, see [Configure Enterprise Managed Settings](https://docs.github.com/en/copilot/how-tos/administer-copilot/manage-for-enterprise/manage-agents/configure-enterprise-managed-settings#overriding-settings-for-specific-teams).
 
 ## Choosing a deployment method
 
@@ -34,6 +36,47 @@ There are additional considerations if you use a dedicated enterprise for Copilo
 1. Add your enterprise policy keys and values in JSON format.
 1. Commit and push your changes to the default branch.
 1. Confirm that enterprise users are running a supported client. Updated settings are applied automatically within about an hour, or immediately after the client restarts or the user signs in again.
+
+## Overriding settings for specific teams
+
+For server-managed deployments, use `copilot/team-mappings.json` and the `copilot/teams/` directory when one or more enterprise teams should use settings that differ from your default `copilot/managed-settings.json` values. `enabledPlugins` and `extraKnownMarketplaces` work additively. The enterprise `managed-settings.json` sets a baseline, and an enterprise team file can add more plugins and marketplaces on top of it.
+
+1. In your enterprise's `copilot/managed-settings.json` file, mark each key you want to make eligible for override using the `{ "overridable": <VALUE> }` syntax. The `json` files you map to teams can only send different values for keys you mark overridable. An `overridable` value you provide in `managed-settings.json` is the default when teams files do not declare a different value for a given key. 
+For example, to defer both `model` and `disableBypassPermissionsMode`:
+
+    ```json
+    {
+      "model": { "overridable": "auto" },
+      "permissions": {
+        "disableBypassPermissionsMode": { "overridable": "disable" }
+      }
+    }
+    ```
+   
+1. In your enterprise's `.github-private` repository, create `copilot/team-mappings.json`. Map each team settings file to one or more enterprise team slugs. The key is the settings file name and the value is an array of team slugs, so you can apply one file across multiple teams.
+    
+    ```json
+    {
+      "devs.json": ["developers-all", "finops-dev"],
+      "ai-users.json": ["ai-baseline-trained"],
+      "frontier.json": ["ai-pioneers"]
+    }
+    ```
+  
+1. Create the team settings file under `copilot/teams/`. Include only the keys you marked as overridable. Every other key stays governed by your enterprise default.
+
+   ```json
+   {
+     "model": "unmanaged",
+     "permissions": {
+       "disableBypassPermissionsMode": "unmanaged"
+     }
+   }
+   ```
+
+1. Commit and push your changes to the default branch.
+
+GitHub evaluates enterprise team membership and applies matching settings for each person. If a user belongs to multiple teams, their team files are combined using the least restrictive value for each key, then applied beneath the enterprise settings, where platform decisions always win.
 
 ## Deploying MDM-managed settings
 
@@ -55,7 +98,9 @@ There are additional considerations if you use a dedicated enterprise for Copilo
 
 ## Verifying the configuration has applied
 
-Once the configuration is committed, users on a supported client see the specified settings within about an hour, since clients periodically check the server for updated configuration. Restarting the client or signing in again applies the latest settings immediately.
+Once the configuration is committed, users on a supported client see the specified settings within about an hour, since clients periodically check the server for updated configuration. For server-managed deployments, this includes `copilot/managed-settings.json`, `copilot/team-mappings.json`, and files in `copilot/teams/`.
+
+ Restarting the client or signing in again applies the latest settings immediately.
 
 If a user does not see these settings, ensure they receive access to Copilot through your enterprise or one of its organizations. If a user receives a license from multiple billing entities, ensure they have selected your enterprise in the "Usage billed to" dropdown in their [personal Copilot settings](https://github.com/settings/copilot/features).
 

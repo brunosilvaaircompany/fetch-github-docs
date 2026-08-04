@@ -25,7 +25,7 @@ You can configure the cipher suites used for TLS 1.2 and TLS 1.3 connections.
 
 ### Listing available TLS cipher suites
 
-1. SSH into your target GitHub Enterprise Server instance. For more information, see [Accessing The Administrative Shell SSH](https://docs.github.com/en/enterprise-server@latest/admin/configuration/configuring-your-enterprise/accessing-the-administrative-shell-ssh).
+1. SSH into your target GitHub Enterprise Server instance. For more information, see [Accessing The Administrative Shell SSH](https://docs.github.com/en/enterprise-server@latest/admin/administering-your-instance/administering-your-instance-from-the-command-line/accessing-the-administrative-shell-ssh).
 
    ```shell
    ssh -p 122 admin@HOSTNAME
@@ -46,7 +46,7 @@ You can configure the cipher suites used for TLS 1.2 and TLS 1.3 connections.
 
 ### Viewing current cipher configuration
 
-1. SSH into your target GitHub Enterprise Server instance. For more information, see [Accessing The Administrative Shell SSH](https://docs.github.com/en/enterprise-server@latest/admin/configuration/configuring-your-enterprise/accessing-the-administrative-shell-ssh).
+1. SSH into your target GitHub Enterprise Server instance. For more information, see [Accessing The Administrative Shell SSH](https://docs.github.com/en/enterprise-server@latest/admin/administering-your-instance/administering-your-instance-from-the-command-line/accessing-the-administrative-shell-ssh).
 
    ```shell
    ssh -p 122 admin@HOSTNAME
@@ -69,7 +69,7 @@ You can configure the cipher suites used for TLS 1.2 and TLS 1.3 connections.
 
 ### Setting TLS 1.2 cipher suites
 
-1. SSH into your target GitHub Enterprise Server instance. For more information, see [Accessing The Administrative Shell SSH](https://docs.github.com/en/enterprise-server@latest/admin/configuration/configuring-your-enterprise/accessing-the-administrative-shell-ssh).
+1. SSH into your target GitHub Enterprise Server instance. For more information, see [Accessing The Administrative Shell SSH](https://docs.github.com/en/enterprise-server@latest/admin/administering-your-instance/administering-your-instance-from-the-command-line/accessing-the-administrative-shell-ssh).
 
    ```shell
    ssh -p 122 admin@HOSTNAME
@@ -122,7 +122,7 @@ You can configure the cipher suites used for TLS 1.2 and TLS 1.3 connections.
 
 ### Setting TLS 1.3 cipher suites
 
-1. SSH into your target GitHub Enterprise Server instance. For more information, see [Accessing The Administrative Shell SSH](https://docs.github.com/en/enterprise-server@latest/admin/configuration/configuring-your-enterprise/accessing-the-administrative-shell-ssh).
+1. SSH into your target GitHub Enterprise Server instance. For more information, see [Accessing The Administrative Shell SSH](https://docs.github.com/en/enterprise-server@latest/admin/administering-your-instance/administering-your-instance-from-the-command-line/accessing-the-administrative-shell-ssh).
 
    ```shell
    ssh -p 122 admin@HOSTNAME
@@ -179,7 +179,7 @@ You can configure the cryptographic algorithms used for SSH connections on port 
 
 ### Listing available SSH algorithms
 
-1. SSH into your target GitHub Enterprise Server instance. For more information, see [Accessing The Administrative Shell SSH](https://docs.github.com/en/enterprise-server@latest/admin/configuration/configuring-your-enterprise/accessing-the-administrative-shell-ssh).
+1. SSH into your target GitHub Enterprise Server instance. For more information, see [Accessing The Administrative Shell SSH](https://docs.github.com/en/enterprise-server@latest/admin/administering-your-instance/administering-your-instance-from-the-command-line/accessing-the-administrative-shell-ssh).
 
    ```shell
    ssh -p 122 admin@HOSTNAME
@@ -212,7 +212,7 @@ You can configure the cryptographic algorithms used for SSH connections on port 
 
 ### Viewing current SSH configuration
 
-1. SSH into your target GitHub Enterprise Server instance. For more information, see [Accessing The Administrative Shell SSH](https://docs.github.com/en/enterprise-server@latest/admin/configuration/configuring-your-enterprise/accessing-the-administrative-shell-ssh).
+1. SSH into your target GitHub Enterprise Server instance. For more information, see [Accessing The Administrative Shell SSH](https://docs.github.com/en/enterprise-server@latest/admin/administering-your-instance/administering-your-instance-from-the-command-line/accessing-the-administrative-shell-ssh).
 
    ```shell
    ssh -p 122 admin@HOSTNAME
@@ -247,7 +247,7 @@ You can configure the cryptographic algorithms used for SSH connections on port 
 
 ### Setting SSH ciphers
 
-1. SSH into your target GitHub Enterprise Server instance. For more information, see [Accessing The Administrative Shell SSH](https://docs.github.com/en/enterprise-server@latest/admin/configuration/configuring-your-enterprise/accessing-the-administrative-shell-ssh).
+1. SSH into your target GitHub Enterprise Server instance. For more information, see [Accessing The Administrative Shell SSH](https://docs.github.com/en/enterprise-server@latest/admin/administering-your-instance/administering-your-instance-from-the-command-line/accessing-the-administrative-shell-ssh).
 
    ```shell
    ssh -p 122 admin@HOSTNAME
@@ -300,7 +300,7 @@ You can configure the cryptographic algorithms used for SSH connections on port 
 
 ### Setting SSH MAC algorithms
 
-1. SSH into your target GitHub Enterprise Server instance. For more information, see [Accessing The Administrative Shell SSH](https://docs.github.com/en/enterprise-server@latest/admin/configuration/configuring-your-enterprise/accessing-the-administrative-shell-ssh).
+1. SSH into your target GitHub Enterprise Server instance. For more information, see [Accessing The Administrative Shell SSH](https://docs.github.com/en/enterprise-server@latest/admin/administering-your-instance/administering-your-instance-from-the-command-line/accessing-the-administrative-shell-ssh).
 
    ```shell
    ssh -p 122 admin@HOSTNAME
@@ -353,7 +353,7 @@ You can configure the cryptographic algorithms used for SSH connections on port 
 
 ### Setting SSH key exchange algorithms
 
-1. SSH into your target GitHub Enterprise Server instance. For more information, see [Accessing The Administrative Shell SSH](https://docs.github.com/en/enterprise-server@latest/admin/configuration/configuring-your-enterprise/accessing-the-administrative-shell-ssh).
+1. SSH into your target GitHub Enterprise Server instance. For more information, see [Accessing The Administrative Shell SSH](https://docs.github.com/en/enterprise-server@latest/admin/administering-your-instance/administering-your-instance-from-the-command-line/accessing-the-administrative-shell-ssh).
 
    ```shell
    ssh -p 122 admin@HOSTNAME
@@ -406,7 +406,7 @@ You can configure the cryptographic algorithms used for SSH connections on port 
 
 ### Setting SSH signature types
 
-1. SSH into your target GitHub Enterprise Server instance. For more information, see [Accessing The Administrative Shell SSH](https://docs.github.com/en/enterprise-server@latest/admin/configuration/configuring-your-enterprise/accessing-the-administrative-shell-ssh).
+1. SSH into your target GitHub Enterprise Server instance. For more information, see [Accessing The Administrative Shell SSH](https://docs.github.com/en/enterprise-server@latest/admin/administering-your-instance/administering-your-instance-from-the-command-line/accessing-the-administrative-shell-ssh).
 
    ```shell
    ssh -p 122 admin@HOSTNAME
@@ -471,7 +471,7 @@ If clients cannot connect to your GitHub Enterprise Server instance after changi
 
 To restore the default secure cipher suites or algorithms, unset the configuration value.
 
-1. SSH into your target GitHub Enterprise Server instance. For more information, see [Accessing The Administrative Shell SSH](https://docs.github.com/en/enterprise-server@latest/admin/configuration/configuring-your-enterprise/accessing-the-administrative-shell-ssh).
+1. SSH into your target GitHub Enterprise Server instance. For more information, see [Accessing The Administrative Shell SSH](https://docs.github.com/en/enterprise-server@latest/admin/administering-your-instance/administering-your-instance-from-the-command-line/accessing-the-administrative-shell-ssh).
 
    ```shell
    ssh -p 122 admin@HOSTNAME

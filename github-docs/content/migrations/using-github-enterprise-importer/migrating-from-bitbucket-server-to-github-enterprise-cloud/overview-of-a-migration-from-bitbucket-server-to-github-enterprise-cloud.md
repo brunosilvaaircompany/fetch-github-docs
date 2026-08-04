@@ -72,7 +72,7 @@ Each migrated repository will be owned by one of these organizations, which may 
 
 If you want to break your migration effort into batches, consider batching by organization.
 
-1. Decide what your new organization structural will be.
+1. Decide what your new organization structure will be.
 1. Decide if you need to break up your migration effort into smaller batches.
 1. If so, decide how you want to break up your migrations.
 

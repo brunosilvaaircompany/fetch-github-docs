@@ -124,7 +124,7 @@ To migrate existing data to your new enterprise on GHE.com, you can use GitHub's
 
 Optionally, you can migrate data to GHE.com during your trial. However, migrated organizations will count towards the limit of three new organizations during the trial.
 
-* If you're migrating from GitHub.com, GitHub Enterprise Server, Azure DevOps, or Bitbucket Server, you can migrate source code history and metadata with GitHub Enterprise Importer. See [About GitHub Enterprise Importer](https://docs.github.com/en/migrations/using-github-enterprise-importer/understanding-github-enterprise-importer/about-github-enterprise-importer).
+* If you're migrating from GitHub.com, GitHub Enterprise Server, Azure DevOps, Bitbucket Server, or GitLab, you can migrate source code history and metadata with GitHub Enterprise Importer. See [About GitHub Enterprise Importer](https://docs.github.com/en/migrations/using-github-enterprise-importer/understanding-github-enterprise-importer/about-github-enterprise-importer).
 * For migrations from GitHub Enterprise Server 3.17 and later, you can use Enterprise Live Migrations. This offers less downtime and better support for complex monorepos. See [About Live Migrations](https://docs.github.com/en/migrations/elm/about-live-migrations).
 * If you're migrating from a different platform, see [Migration Paths To GitHub](https://docs.github.com/en/migrations/overview/migration-paths-to-github#migrations-to-ghecom).
 

@@ -16,7 +16,7 @@ If you decide to enable issues again in the future, any issues that were previou
 
     In personal repositories, a collaborator is anyone who has been invited to the repository. For more information, see [Permission Levels For A Personal Account Repository](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/repository-access-and-collaboration/permission-levels-for-a-personal-account-repository#collaborator-access-for-a-repository-owned-by-a-personal-account).
 
-    In organization repositories, a collaborator is a user who has been granted the write, maintain, or admin role for the repository. For more information about organization roles, see [Repository Roles For An Organization](https://docs.github.com/en/organizations/managing-user-access-to-your-organizations-repositories/managing-repository-roles/repository-roles-for-an-organization#repository-roles-for-organizations).
+    In organization repositories, a collaborator is a user who has been granted the triage, write, maintain, or admin role for the repository. For more information about organization roles, see [Repository Roles For An Organization](https://docs.github.com/en/organizations/managing-user-access-to-your-organizations-repositories/managing-repository-roles/repository-roles-for-an-organization#repository-roles-for-organizations).
 
 
 

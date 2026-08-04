@@ -1,5 +1,9 @@
 # Register a learning management system with GitHub Classroom
 
+> [!WARNING]
+> **Closing down:** The GitHub Classroom application is closing down and will be retired on August 28, 2026.
+> For more information, see the [GitHub Classroom closing down notice](https://gh.io/classroom-sunset).
+
 ## About registering an LMS to your classroom
 
 Before you can connect your LMS to a classroom, an administrator for your LMS instance needs to configure your LMS to allow GitHub Classroom and then register your LMS with GitHub Classroom to initiate the OAuth handshake. An admin only needs to do this registration process once, then any teacher who uses their LMS instance may sync their LMS courses to classrooms. For more information on connecting an LMS course to a classroom, see [Connect A Learning Management System Course To A Classroom](https://docs.github.com/en/education/manage-coursework-with-github-classroom/teach-with-github-classroom/connect-a-learning-management-system-course-to-a-classroom).

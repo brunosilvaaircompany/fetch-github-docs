@@ -3,7 +3,7 @@
 
 
 
-**Use when:** You need to pin a specific CLI version, or work with the Go SDK (which does not bundle a CLI).
+**Use when:** You need to pin a specific CLI version, or work with the Go SDK (which does not include a CLI automatically).
 
 ## How it works
 
@@ -71,7 +71,7 @@ await client.stop()
 
 
 > [!NOTE]
-> The Go SDK does not bundle a CLI, so you must always provide `Connection`.
+> The Go SDK does not ship a CLI automatically. Install `copilot` on `PATH`, set the `COPILOT_CLI_PATH` environment variable, embed a CLI with the [bundler tool](https://github.com/github/copilot-sdk/tree/main/go/README.md#distributing-your-application-with-an-embedded-github-copilot-cli), or point `StdioConnection.Path` at an installed binary.
 
 ```golang
 package main

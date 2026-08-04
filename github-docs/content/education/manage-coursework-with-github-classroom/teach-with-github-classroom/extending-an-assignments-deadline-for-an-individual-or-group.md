@@ -1,5 +1,9 @@
 # Extending an assignment's deadline for an individual or group
 
+> [!WARNING]
+> **Closing down:** The GitHub Classroom application is closing down and will be retired on August 28, 2026.
+> For more information, see the [GitHub Classroom closing down notice](https://gh.io/classroom-sunset).
+
 ## About extending assignment deadlines
 
 If you set a cutoff date for an assignment in GitHub Classroom, individual students and groups will lose write access to their assignment repositories once that date has passed. To extend access to assignment repositories for specific students or groups, you can grant those students or groups an extension for that assignment. Extensions extend the cutoff date indefinitely, allowing students to submit an assignment at any time. For more information on setting a cutoff date, see [Create An Individual Assignment](https://docs.github.com/en/education/manage-coursework-with-github-classroom/teach-with-github-classroom/create-an-individual-assignment#assigning-a-deadline-for-an-assignment) and [Create A Group Assignment](https://docs.github.com/en/education/manage-coursework-with-github-classroom/teach-with-github-classroom/create-a-group-assignment#assigning-a-deadline-for-an-assignment).

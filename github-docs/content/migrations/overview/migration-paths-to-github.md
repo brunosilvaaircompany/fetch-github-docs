@@ -99,11 +99,7 @@ Migrations from GitHub.com include GitHub Enterprise Cloud. This path includes a
 
 * **Scope:** Source, history, and metadata
 * **Tooling:** GitHub Enterprise Importer
-* **More information:** [GitHub Expert Services](https://github.com/services/) website
-* **Caveats:**
-  * If you want to migrate GitLab repositories to GitHub using GitHub Enterprise Importer, please contact our GitHub Expert Services team.
-  * If an expert-led migration isn't right for you, you can perform a "source and history" migration of the affected repositories instead. For more information, see [Migrations from any Git repository to GitHub.com](#any-git-repository-to-githubcom).
-
+* **More information:** [Migrate From Gitlab](https://docs.github.com/en/free-pro-team@latest/migrations/using-github-enterprise-importer/migrate-from-gitlab)
 
 ### Any Git repository to GitHub.com
 
@@ -238,11 +234,8 @@ Follow a link below to review the scope and tooling for your migration to GHE.co
 ### GitLab to GHE.com
 
 * **Scope:** Source, history, and metadata
-* **Tooling:** Contact GitHub Expert Services
-* **More information:** [GitHub Expert Services](https://github.com/services/) website
-* **Caveats:**
-  * If an expert-led migration isn't right for you, you can perform a "source and history" migration of the affected repositories instead. For more information, see [Migrations from any Git repository to GHE.com](#any-git-repository-to-ghecom).
-
+* **Tooling:** GitHub Enterprise Importer
+* **More information:** [Migrate From Gitlab](https://docs.github.com/en/free-pro-team@latest/migrations/using-github-enterprise-importer/migrate-from-gitlab)
 
 ### Any Git repository to GHE.com
 

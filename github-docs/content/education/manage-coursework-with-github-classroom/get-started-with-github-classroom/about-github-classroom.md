@@ -1,5 +1,9 @@
 # About GitHub Classroom
 
+> [!WARNING]
+> **Closing down:** The GitHub Classroom application is closing down and will be retired on August 28, 2026.
+> For more information, see the [GitHub Classroom closing down notice](https://gh.io/classroom-sunset).
+
 ## About GitHub Classroom
 
 GitHub Classroom is a teaching tool that lets teachers and school administrators create and manage digital classrooms and assignments. You can create assignments for individual students or groups of students, set due dates, and track assignments on your teacher dashboard. Additionally, GitHub Classroom has many features that simplify tasks like providing feedback, grading assignments, and integrating your existing teaching tools.

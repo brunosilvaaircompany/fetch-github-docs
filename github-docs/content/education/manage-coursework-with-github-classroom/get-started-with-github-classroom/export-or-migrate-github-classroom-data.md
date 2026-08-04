@@ -1,5 +1,9 @@
 # Export or migrate GitHub Classroom data
 
+> [!WARNING]
+> **Closing down:** The GitHub Classroom application is closing down and will be retired on August 28, 2026.
+> For more information, see the [GitHub Classroom closing down notice](https://gh.io/classroom-sunset).
+
 Use the GitHub command line interface to export your Classroom data or migrate to a partner platform.
 
 ## Export your Classroom data to local files

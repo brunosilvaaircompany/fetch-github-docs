@@ -1,5 +1,9 @@
 # Run student code in an IDE
 
+> [!WARNING]
+> **Closing down:** The GitHub Classroom application is closing down and will be retired on August 28, 2026.
+> For more information, see the [GitHub Classroom closing down notice](https://gh.io/classroom-sunset).
+
 ## About student code and IDEs
 
 If you configure an integrated development environment (IDE) for an assignment, you can run the code within the IDE. You don't need to clone the assignment repository to your computer.

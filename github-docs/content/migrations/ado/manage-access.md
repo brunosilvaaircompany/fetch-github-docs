@@ -20,9 +20,9 @@ Next, you will need to create a personal access token (classic) which the ADO2GH
 Task | Organization owner | Migrator
 ---- | -------- | ----- |
 Assigning the migrator role for repository migrations | `admin:org` | {% octicon "dash" aria-label="Not applicable" %}
-Running a repository migration (destination organization) | `repo`, `admin:org`, `workflow` | `repo`, `read:org`, `workflow`
-Downloading a migration log | `repo`, `admin:org`, `workflow` | `repo`, `read:org`, `workflow`
-Reclaiming mannequins | `repo`, `admin:org`, `workflow` | {% octicon "dash" aria-label="Not applicable" %}
+Running a repository migration (destination organization) | `repo`, `workflow`, `admin:org` | `repo`, `workflow`, `read:org`
+Downloading a migration log | `repo`, `workflow`, `admin:org` | `repo`, `workflow`, `read:org`
+Reclaiming mannequins | `repo`, `workflow`, `admin:org` | {% octicon "dash" aria-label="Not applicable" %}
 
 
 To learn how to create the token, see [Managing Your Personal Access Tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic).

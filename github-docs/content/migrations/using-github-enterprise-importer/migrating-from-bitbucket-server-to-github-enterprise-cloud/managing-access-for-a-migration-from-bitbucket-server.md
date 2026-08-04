@@ -59,9 +59,9 @@ The scopes that are required for your GitHub personal access token (classic) dep
 Task | Organization owner | Migrator
 ---- | -------- | ----- |
 Assigning the migrator role for repository migrations | `admin:org` | {% octicon "dash" aria-label="Not applicable" %}
-Running a repository migration (destination organization) | `repo`, `admin:org`, `workflow` | `repo`, `read:org`, `workflow`
-Downloading a migration log | `repo`, `admin:org`, `workflow` | `repo`, `read:org`, `workflow`
-Reclaiming mannequins | `repo`, `admin:org`, `workflow` | {% octicon "dash" aria-label="Not applicable" %}
+Running a repository migration (destination organization) | `repo`, `workflow`, `admin:org` | `repo`, `workflow`, `read:org`
+Downloading a migration log | `repo`, `workflow`, `admin:org` | `repo`, `workflow`, `read:org`
+Reclaiming mannequins | `repo`, `workflow`, `admin:org` | {% octicon "dash" aria-label="Not applicable" %}
 
 
 ## Required permissions for Bitbucket Server
@@ -131,7 +131,7 @@ To grant the migrator role using the CLI, you must have installed the BBS2GH ext
    gh bbs2gh grant-migrator-role --github-org ORGANIZATION --actor ACTOR --actor-type TYPE
    ```
 
-   >[!NOTE] If you're the granting the migrator role for GHE.com, you must also include the target API URL for your enterprise's subdomain. For example: `--target-api-url https://api.octocorp.ghe.com`.
+   >[!NOTE] If you're granting the migrator role for GHE.com, you must also include the target API URL for your enterprise's subdomain. For example: `--target-api-url https://api.octocorp.ghe.com`.
 
 
 ### Granting the migrator role with the GraphQL API
